@@ -18,15 +18,17 @@ COPY lib/ ./lib/
 # creates an empty directory, users can mount their own via compose.
 COPY tools/ ./tools/
 
-# Ship the demo catalog as the default data/catalog.json so the container
-# works out of the box. Users can mount their own data/ to override.
-COPY data/catalog.demo.json ./data/catalog.demo.json
-COPY data/catalog.demo.json ./data/catalog.json
+# Ship the real catalog.json so the container serves actual shows.
+# Users can mount their own data/ to override via compose.
+COPY data/catalog.json ./data/catalog.json
 
 # ---- Runtime stage ----
 FROM node:22-alpine AS runtime
 
 WORKDIR /app
+
+# Copy from builder
+COPY --from=builder /app .
 
 # Use existing node user (uid 1000 already exists in node:22-alpine)
 RUN mkdir -p data videos covers && \

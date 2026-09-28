@@ -3,7 +3,7 @@
 .gitignore
 
 # User data (large, personal, regenerated)
-data/catalog.json
+# data/catalog.json  (commented: real catalog is shipped in image)
 data/shows.json
 data/*.backup.json
 data/catalog.concerts.json
