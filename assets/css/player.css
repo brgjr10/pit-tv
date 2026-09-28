@@ -125,6 +125,19 @@ body.player-fullscreen .modal-close {
   inset: 0;
 }
 
+/* An iframe carries no intrinsic dimensions, so unlike <video> — which sizes
+   the stage from the media's own aspect — it collapses the stage to a ~150px
+   sliver. Pin the aspect and cap the width by the height budget so the stage
+   stays a true 16:9 and still fits beside the info panel. Fullscreen
+   overrides both further down. */
+.stage[data-kind="embed"] {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: min(72vh, 72dvh);
+  max-width: min(100%, calc(min(72vh, 72dvh) * 16 / 9));
+  margin-inline: auto;
+}
+
 /* Poster stays visible until the first frame is painted */
 .stage video[data-poster="true"] {
   background-size: cover;
