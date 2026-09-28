@@ -28,3 +28,6 @@ Thumbs.db
 e2e_test.md
 QA_REPORT.md
 instructions.md
+
+# Kilo agent config
+.kilo/
