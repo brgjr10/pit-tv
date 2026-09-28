@@ -1,0 +1,3476 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - heading "PIT TV" [level=1] [ref=e6]:
+          - generic [ref=e7]: PIT
+          - generic [ref=e8]: TV
+        - generic [ref=e9]:
+          - searchbox "Search the archive" [ref=e10]
+          - generic:
+            - generic: /
+        - button "Hide filters" [pressed] [ref=e11] [cursor=pointer]: Filters
+        - button "Settings" [ref=e12] [cursor=pointer]
+        - button "Edit" [ref=e13] [cursor=pointer]
+        - button "Keys" [ref=e14] [cursor=pointer]
+      - generic [ref=e15]:
+        - group "View mode" [ref=e16]:
+          - button "Grid" [pressed] [ref=e17] [cursor=pointer]
+          - button "List" [ref=e18] [cursor=pointer]
+          - button "Artist" [ref=e19] [cursor=pointer]
+          - button "Timeline" [ref=e20] [cursor=pointer]
+        - button "Descending" [ref=e21] [cursor=pointer]: ↓
+        - combobox "Sort by" [ref=e22] [cursor=pointer]:
+          - option "Date" [selected]
+          - option "Artist"
+          - option "Song"
+          - option "Venue"
+          - option "Album"
+          - option "Duration"
+        - generic [ref=e23]:
+          - strong [ref=e24]: "205"
+          - text: of 205
+    - generic [ref=e25]:
+      - complementary "Filters" [ref=e26]:
+        - group [ref=e27]:
+          - generic "▾ Date range" [ref=e28] [cursor=pointer]: ▾ Date range
+        - group [ref=e29]:
+          - generic "▾ Artist" [ref=e30] [cursor=pointer]: ▾ Artist
+          - generic [ref=e31]:
+            - generic [ref=e32] [cursor=pointer]:
+              - checkbox "$uicideboy$ 18"
+              - generic [ref=e34]: $uicideboy$
+              - generic [ref=e35]: "18"
+            - generic [ref=e36] [cursor=pointer]:
+              - checkbox "Avril Lavigne 1"
+              - generic [ref=e38]: Avril Lavigne
+              - generic [ref=e39]: "1"
+            - generic [ref=e40] [cursor=pointer]:
+              - checkbox "Blink-182 1"
+              - generic [ref=e42]: Blink-182
+              - generic [ref=e43]: "1"
+            - generic [ref=e44] [cursor=pointer]:
+              - checkbox "Bring Me the Horizon 5"
+              - generic [ref=e46]: Bring Me the Horizon
+              - generic [ref=e47]: "5"
+            - generic [ref=e48] [cursor=pointer]:
+              - checkbox "City Morgue 3"
+              - generic [ref=e50]: City Morgue
+              - generic [ref=e51]: "3"
+            - generic [ref=e52] [cursor=pointer]:
+              - checkbox "Deftones 13"
+              - generic [ref=e54]: Deftones
+              - generic [ref=e55]: "13"
+            - generic [ref=e56] [cursor=pointer]:
+              - checkbox "Fall Out Boy 3"
+              - generic [ref=e58]: Fall Out Boy
+              - generic [ref=e59]: "3"
+            - generic [ref=e60] [cursor=pointer]:
+              - checkbox "G-Eazy 4"
+              - generic [ref=e62]: G-Eazy
+              - generic [ref=e63]: "4"
+            - generic [ref=e64] [cursor=pointer]:
+              - checkbox "Ghostemane 3"
+              - generic [ref=e66]: Ghostemane
+              - generic [ref=e67]: "3"
+            - generic [ref=e68] [cursor=pointer]:
+              - checkbox "Grandson 2"
+              - generic [ref=e70]: Grandson
+              - generic [ref=e71]: "2"
+            - generic [ref=e72] [cursor=pointer]:
+              - checkbox "Halsey 4"
+              - generic [ref=e74]: Halsey
+              - generic [ref=e75]: "4"
+            - generic [ref=e76] [cursor=pointer]:
+              - checkbox "Korn 23"
+              - generic [ref=e78]: Korn
+              - generic [ref=e79]: "23"
+            - generic [ref=e80] [cursor=pointer]:
+              - checkbox "Lil Wayne 5"
+              - generic [ref=e82]: Lil Wayne
+              - generic [ref=e83]: "5"
+            - generic [ref=e84] [cursor=pointer]:
+              - checkbox "Logic 14"
+              - generic [ref=e86]: Logic
+              - generic [ref=e87]: "14"
+            - generic [ref=e88] [cursor=pointer]:
+              - checkbox "Machine Gun Kelly 78"
+              - generic [ref=e90]: Machine Gun Kelly
+              - generic [ref=e91]: "78"
+            - generic [ref=e92] [cursor=pointer]:
+              - checkbox "Ramirez 2"
+              - generic [ref=e94]: Ramirez
+              - generic [ref=e95]: "2"
+            - generic [ref=e96] [cursor=pointer]:
+              - checkbox "Shinedown 4"
+              - generic [ref=e98]: Shinedown
+              - generic [ref=e99]: "4"
+            - generic [ref=e100] [cursor=pointer]:
+              - checkbox "Ski Mask The Slump God 3"
+              - generic [ref=e102]: Ski Mask The Slump God
+              - generic [ref=e103]: "3"
+            - generic [ref=e104] [cursor=pointer]:
+              - checkbox "Tee Grizzley 2"
+              - generic [ref=e106]: Tee Grizzley
+              - generic [ref=e107]: "2"
+            - generic [ref=e108] [cursor=pointer]:
+              - checkbox "Three 6 Mafia 1"
+              - generic [ref=e110]: Three 6 Mafia
+              - generic [ref=e111]: "1"
+            - generic [ref=e112] [cursor=pointer]:
+              - checkbox "Three Days Grace 5"
+              - generic [ref=e114]: Three Days Grace
+              - generic [ref=e115]: "5"
+            - generic [ref=e116] [cursor=pointer]:
+              - checkbox "Three Doors Down 8"
+              - generic [ref=e118]: Three Doors Down
+              - generic [ref=e119]: "8"
+            - generic [ref=e120] [cursor=pointer]:
+              - checkbox "Trippie Redd 2"
+              - generic [ref=e122]: Trippie Redd
+              - generic [ref=e123]: "2"
+            - generic [ref=e124] [cursor=pointer]:
+              - checkbox "ZillaKami 1"
+              - generic [ref=e126]: ZillaKami
+              - generic [ref=e127]: "1"
+        - group [ref=e128]:
+          - generic "▾ Venue" [ref=e129] [cursor=pointer]: ▾ Venue
+          - generic [ref=e131] [cursor=pointer]:
+            - checkbox "Unknown venue 205"
+            - generic [ref=e133]: Unknown venue
+            - generic [ref=e134]: "205"
+        - group [ref=e135]:
+          - generic "▾ Tags" [ref=e136] [cursor=pointer]: ▾ Tags
+          - generic [ref=e137]:
+            - generic [ref=e138] [cursor=pointer]:
+              - checkbox "2016 8"
+              - generic [ref=e140]: "2016"
+              - generic [ref=e141]: "8"
+            - generic [ref=e142] [cursor=pointer]:
+              - checkbox "2017 28"
+              - generic [ref=e144]: "2017"
+              - generic [ref=e145]: "28"
+            - generic [ref=e146] [cursor=pointer]:
+              - checkbox "2018 66"
+              - generic [ref=e148]: "2018"
+              - generic [ref=e149]: "66"
+            - generic [ref=e150] [cursor=pointer]:
+              - checkbox "2019 8"
+              - generic [ref=e152]: "2019"
+              - generic [ref=e153]: "8"
+            - generic [ref=e154] [cursor=pointer]:
+              - checkbox "2021 2"
+              - generic [ref=e156]: "2021"
+              - generic [ref=e157]: "2"
+            - generic [ref=e158] [cursor=pointer]:
+              - checkbox "2022 22"
+              - generic [ref=e160]: "2022"
+              - generic [ref=e161]: "22"
+            - generic [ref=e162] [cursor=pointer]:
+              - checkbox "2023 36"
+              - generic [ref=e164]: "2023"
+              - generic [ref=e165]: "36"
+            - generic [ref=e166] [cursor=pointer]:
+              - checkbox "2024 9"
+              - generic [ref=e168]: "2024"
+              - generic [ref=e169]: "9"
+            - generic [ref=e170] [cursor=pointer]:
+              - checkbox "2025 19"
+              - generic [ref=e172]: "2025"
+              - generic [ref=e173]: "19"
+            - generic [ref=e174] [cursor=pointer]:
+              - checkbox "2026 7"
+              - generic [ref=e176]: "2026"
+              - generic [ref=e177]: "7"
+            - generic [ref=e178] [cursor=pointer]:
+              - checkbox "annual 77"
+              - generic [ref=e180]: annual
+              - generic [ref=e181]: "77"
+            - generic [ref=e182] [cursor=pointer]:
+              - checkbox "festival 91"
+              - generic [ref=e184]: festival
+              - generic [ref=e185]: "91"
+            - generic [ref=e186] [cursor=pointer]:
+              - checkbox "grey day tour 30"
+              - generic [ref=e188]: grey day tour
+              - generic [ref=e189]: "30"
+            - generic [ref=e190] [cursor=pointer]:
+              - checkbox "headline 4"
+              - generic [ref=e192]: headline
+              - generic [ref=e193]: "4"
+            - generic [ref=e194] [cursor=pointer]:
+              - checkbox "holiday show 54"
+              - generic [ref=e196]: holiday show
+              - generic [ref=e197]: "54"
+            - generic [ref=e198] [cursor=pointer]:
+              - checkbox "lost americana 12"
+              - generic [ref=e200]: lost americana
+              - generic [ref=e201]: "12"
+            - generic [ref=e202] [cursor=pointer]:
+              - checkbox "mgk day 17"
+              - generic [ref=e204]: mgk day
+              - generic [ref=e205]: "17"
+            - generic [ref=e206] [cursor=pointer]:
+              - checkbox "mgk xmas 54"
+              - generic [ref=e208]: mgk xmas
+              - generic [ref=e209]: "54"
+            - generic [ref=e210] [cursor=pointer]:
+              - checkbox "missed 8"
+              - generic [ref=e212]: missed
+              - generic [ref=e213]: "8"
+            - generic [ref=e214] [cursor=pointer]:
+              - checkbox "tour 120"
+              - generic [ref=e216]: tour
+              - generic [ref=e217]: "120"
+            - generic [ref=e218] [cursor=pointer]:
+              - checkbox "w/ $not 11"
+              - generic [ref=e220]: w/ $not
+              - generic [ref=e221]: "11"
+            - generic [ref=e222] [cursor=pointer]:
+              - checkbox "w/ avril lavigne 7"
+              - generic [ref=e224]: w/ avril lavigne
+              - generic [ref=e225]: "7"
+            - generic [ref=e226] [cursor=pointer]:
+              - checkbox "w/ barlowln 2"
+              - generic [ref=e228]: w/ barlowln
+              - generic [ref=e229]: "2"
+            - generic [ref=e230] [cursor=pointer]:
+              - checkbox "w/ bring me the horizon 8"
+              - generic [ref=e232]: w/ bring me the horizon
+              - generic [ref=e233]: "8"
+            - generic [ref=e234] [cursor=pointer]:
+              - checkbox "w/ carr 8"
+              - generic [ref=e236]: w/ carr
+              - generic [ref=e237]: "8"
+            - generic [ref=e238] [cursor=pointer]:
+              - checkbox "w/ city morgue 19"
+              - generic [ref=e240]: w/ city morgue
+              - generic [ref=e241]: "19"
+            - generic [ref=e242] [cursor=pointer]:
+              - checkbox "w/ code orange 11"
+              - generic [ref=e244]: w/ code orange
+              - generic [ref=e245]: "11"
+            - generic [ref=e246] [cursor=pointer]:
+              - checkbox "w/ ded 23"
+              - generic [ref=e248]: w/ ded
+              - generic [ref=e249]: "23"
+            - generic [ref=e250] [cursor=pointer]:
+              - checkbox "w/ des rocs 2"
+              - generic [ref=e252]: w/ des rocs
+              - generic [ref=e253]: "2"
+            - generic [ref=e254] [cursor=pointer]:
+              - checkbox "w/ from ashes to new 9"
+              - generic [ref=e256]: w/ from ashes to new
+              - generic [ref=e257]: "9"
+            - generic [ref=e258] [cursor=pointer]:
+              - checkbox "w/ ghostemane 19"
+              - generic [ref=e260]: w/ ghostemane
+              - generic [ref=e261]: "19"
+            - generic [ref=e262] [cursor=pointer]:
+              - checkbox "w/ idles 13"
+              - generic [ref=e264]: w/ idles
+              - generic [ref=e265]: "13"
+            - generic [ref=e266] [cursor=pointer]:
+              - checkbox "w/ jpegmafia 11"
+              - generic [ref=e268]: w/ jpegmafia
+              - generic [ref=e269]: "11"
+            - generic [ref=e270] [cursor=pointer]:
+              - checkbox "w/ knocked loose 11"
+              - generic [ref=e272]: w/ knocked loose
+              - generic [ref=e273]: "11"
+            - generic [ref=e274] [cursor=pointer]:
+              - checkbox "w/ kyle 19"
+              - generic [ref=e276]: w/ kyle
+              - generic [ref=e277]: "19"
+            - generic [ref=e278] [cursor=pointer]:
+              - checkbox "w/ lil wayne 6"
+              - generic [ref=e280]: w/ lil wayne
+              - generic [ref=e281]: "6"
+            - generic [ref=e282] [cursor=pointer]:
+              - checkbox "w/ maxo kream 11"
+              - generic [ref=e284]: w/ maxo kream
+              - generic [ref=e285]: "11"
+            - generic [ref=e286] [cursor=pointer]:
+              - checkbox "w/ neck deep 6"
+              - generic [ref=e288]: w/ neck deep
+              - generic [ref=e289]: "6"
+            - generic [ref=e290] [cursor=pointer]:
+              - checkbox "w/ nf 19"
+              - generic [ref=e292]: w/ nf
+              - generic [ref=e293]: "19"
+            - generic [ref=e294] [cursor=pointer]:
+              - checkbox "w/ pop evil 8"
+              - generic [ref=e296]: w/ pop evil
+              - generic [ref=e297]: "8"
+            - generic [ref=e298] [cursor=pointer]:
+              - checkbox "w/ ramirez 19"
+              - generic [ref=e300]: w/ ramirez
+              - generic [ref=e301]: "19"
+            - generic [ref=e302] [cursor=pointer]:
+              - checkbox "w/ red sun rising 8"
+              - generic [ref=e304]: w/ red sun rising
+              - generic [ref=e305]: "8"
+            - generic [ref=e306] [cursor=pointer]:
+              - checkbox "w/ royal and the serpent 8"
+              - generic [ref=e308]: w/ royal and the serpent
+              - generic [ref=e309]: "8"
+            - generic [ref=e310] [cursor=pointer]:
+              - checkbox "w/ sematary 19"
+              - generic [ref=e312]: w/ sematary
+              - generic [ref=e313]: "19"
+            - generic [ref=e314] [cursor=pointer]:
+              - checkbox "w/ ski mask the slump god 11"
+              - generic [ref=e316]: w/ ski mask the slump god
+              - generic [ref=e317]: "11"
+            - generic [ref=e318] [cursor=pointer]:
+              - checkbox "w/ skillet 23"
+              - generic [ref=e320]: w/ skillet
+              - generic [ref=e321]: "23"
+            - generic [ref=e322] [cursor=pointer]:
+              - checkbox "w/ stone sour 23"
+              - generic [ref=e324]: w/ stone sour
+              - generic [ref=e325]: "23"
+            - generic [ref=e326] [cursor=pointer]:
+              - checkbox "w/ the barbarians of california 13"
+              - generic [ref=e328]: w/ the barbarians of california
+              - generic [ref=e329]: "13"
+            - generic [ref=e330] [cursor=pointer]:
+              - checkbox "w/ three days grace 9"
+              - generic [ref=e332]: w/ three days grace
+              - generic [ref=e333]: "9"
+            - generic [ref=e334] [cursor=pointer]:
+              - checkbox "w/ travis barker 7"
+              - generic [ref=e336]: w/ travis barker
+              - generic [ref=e337]: "7"
+            - generic [ref=e338] [cursor=pointer]:
+              - checkbox "w/ trippie redd 7"
+              - generic [ref=e340]: w/ trippie redd
+              - generic [ref=e341]: "7"
+            - generic [ref=e342] [cursor=pointer]:
+              - checkbox "w/ willow 7"
+              - generic [ref=e344]: w/ willow
+              - generic [ref=e345]: "7"
+            - generic [ref=e346] [cursor=pointer]:
+              - checkbox "w/ yellawolf 23"
+              - generic [ref=e348]: w/ yellawolf
+              - generic [ref=e349]: "23"
+            - generic [ref=e350] [cursor=pointer]:
+              - checkbox "warped tour 6"
+              - generic [ref=e352]: warped tour
+              - generic [ref=e353]: "6"
+            - generic [ref=e354] [cursor=pointer]:
+              - checkbox "xxcon 6"
+              - generic [ref=e356]: xxcon
+              - generic [ref=e357]: "6"
+        - group [ref=e358]:
+          - generic "▾ Quality" [ref=e359] [cursor=pointer]: ▾ Quality
+          - generic [ref=e360]:
+            - generic [ref=e361] [cursor=pointer]:
+              - checkbox "1080p 18"
+              - generic [ref=e363]: 1080p
+              - generic [ref=e364]: "18"
+            - generic [ref=e365] [cursor=pointer]:
+              - checkbox "720p 46"
+              - generic [ref=e367]: 720p
+              - generic [ref=e368]: "46"
+            - generic [ref=e369] [cursor=pointer]:
+              - checkbox "480p 141"
+              - generic [ref=e371]: 480p
+              - generic [ref=e372]: "141"
+        - group [ref=e373]:
+          - generic "▾ Source" [ref=e374] [cursor=pointer]: ▾ Source
+          - generic [ref=e376] [cursor=pointer]:
+            - checkbox "audience 205"
+            - generic [ref=e378]: audience
+            - generic [ref=e379]: "205"
+        - group [ref=e380]:
+          - generic "▾ Video type" [ref=e381] [cursor=pointer]: ▾ Video type
+          - generic [ref=e383] [cursor=pointer]:
+            - checkbox "local 205"
+            - generic [ref=e385]: local
+            - generic [ref=e386]: "205"
+      - main [ref=e387]:
+        - region "Grid view" [ref=e389]:
+          - button "Machine Gun Kelly — I Think I'm OKAY (Audio) ft. Yungblud, Travis Barker, Jan 1, 2026" [ref=e390] [cursor=pointer]:
+            - generic [ref=e391]:
+              - button [ref=e392]:
+                - img [ref=e393]
+              - generic [ref=e395]: 0:15
+            - generic [ref=e396]:
+              - generic [ref=e398]: I Think I'm OKAY (Audio) ft. Yungblud, Travis Barker
+              - generic [ref=e399]: Machine Gun Kelly
+              - generic [ref=e400]:
+                - generic [ref=e401]: Jan 1, 2026
+                - generic [ref=e402]: ·
+                - generic [ref=e403]: Unknown venue
+              - generic [ref=e404]:
+                - generic [ref=e405]: 480p
+                - generic [ref=e406]: audience
+                - generic [ref=e407]: Hotel Diablo
+          - button "Machine Gun Kelly — , Jan 1, 2026" [ref=e408] [cursor=pointer]:
+            - generic [ref=e409]:
+              - button [ref=e410]:
+                - img [ref=e411]
+              - generic [ref=e413]: 0:05
+            - generic [ref=e414]:
+              - generic [ref=e415]: Machine Gun Kelly
+              - generic [ref=e416]:
+                - generic [ref=e417]: Jan 1, 2026
+                - generic [ref=e418]: ·
+                - generic [ref=e419]: Unknown venue
+              - generic [ref=e420]:
+                - generic [ref=e421]: 480p
+                - generic [ref=e422]: audience
+          - button "Machine Gun Kelly — starman, Jan 1, 2026" [ref=e423] [cursor=pointer]:
+            - generic [ref=e424]:
+              - button [ref=e425]:
+                - img [ref=e426]
+              - generic [ref=e428]: 1:30
+            - generic [ref=e429]:
+              - generic [ref=e431]: starman
+              - generic [ref=e432]: Machine Gun Kelly
+              - generic [ref=e433]:
+                - generic [ref=e434]: Jan 1, 2026
+                - generic [ref=e435]: ·
+                - generic [ref=e436]: Unknown venue
+              - generic [ref=e437]:
+                - generic [ref=e438]: 720p
+                - generic [ref=e439]: audience
+                - generic [ref=e440]: lost americana
+          - button "Machine Gun Kelly — Mind of a Stoner ft. Wiz Khalifa, Jan 1, 2026" [ref=e441] [cursor=pointer]:
+            - generic [ref=e442]:
+              - button [ref=e443]:
+                - img [ref=e444]
+              - generic [ref=e446]: 1:13
+            - generic [ref=e447]:
+              - generic [ref=e449]: Mind of a Stoner ft. Wiz Khalifa
+              - generic [ref=e450]: Machine Gun Kelly
+              - generic [ref=e451]:
+                - generic [ref=e452]: Jan 1, 2026
+                - generic [ref=e453]: ·
+                - generic [ref=e454]: Unknown venue
+              - generic [ref=e455]:
+                - generic [ref=e456]: 720p
+                - generic [ref=e457]: audience
+                - generic [ref=e458]: Black Flag
+          - button "Machine Gun Kelly — Bad Mother F*cker (feat. Kid Rock), Jan 1, 2026" [ref=e459] [cursor=pointer]:
+            - generic [ref=e460]:
+              - button [ref=e461]:
+                - img [ref=e462]
+              - generic [ref=e464]: 0:34
+            - generic [ref=e465]:
+              - generic [ref=e467]: Bad Mother F*cker (feat. Kid Rock)
+              - generic [ref=e468]: Machine Gun Kelly
+              - generic [ref=e469]:
+                - generic [ref=e470]: Jan 1, 2026
+                - generic [ref=e471]: ·
+                - generic [ref=e472]: Unknown venue
+              - generic [ref=e473]:
+                - generic [ref=e474]: 480p
+                - generic [ref=e475]: audience
+                - generic [ref=e476]: General Admission
+          - button "Machine Gun Kelly — Free Fallin' (Cover), Jan 1, 2026" [ref=e477] [cursor=pointer]:
+            - generic [ref=e478]:
+              - button [ref=e479]:
+                - img [ref=e480]
+              - generic [ref=e482]: 0:17
+            - generic [ref=e483]:
+              - generic [ref=e485]: Free Fallin' (Cover)
+              - generic [ref=e486]: Machine Gun Kelly
+              - generic [ref=e487]:
+                - generic [ref=e488]: Jan 1, 2026
+                - generic [ref=e489]: ·
+                - generic [ref=e490]: Unknown venue
+              - generic [ref=e491]:
+                - generic [ref=e492]: 480p
+                - generic [ref=e493]: audience
+          - button "Machine Gun Kelly — Lonely Road (with Jelly Roll), Jan 1, 2026" [ref=e494] [cursor=pointer]:
+            - generic [ref=e495]:
+              - button [ref=e496]:
+                - img [ref=e497]
+              - generic [ref=e499]: 1:18
+            - generic [ref=e500]:
+              - generic [ref=e502]: Lonely Road (with Jelly Roll)
+              - generic [ref=e503]: Machine Gun Kelly
+              - generic [ref=e504]:
+                - generic [ref=e505]: Jan 1, 2026
+                - generic [ref=e506]: ·
+                - generic [ref=e507]: Unknown venue
+              - generic [ref=e508]:
+                - generic [ref=e509]: 720p
+                - generic [ref=e510]: audience
+                - generic [ref=e511]: Lonely Road
+          - button "Deftones — Be Quiet and Drive (Far Away), Jan 1, 2025" [ref=e512] [cursor=pointer]:
+            - generic [ref=e513]:
+              - button [ref=e514]:
+                - img [ref=e515]
+              - generic [ref=e517]: 1:39
+            - generic [ref=e518]:
+              - generic [ref=e520]: Be Quiet and Drive (Far Away)
+              - generic [ref=e521]: Deftones
+              - generic [ref=e522]:
+                - generic [ref=e523]: Jan 1, 2025
+                - generic [ref=e524]: ·
+                - generic [ref=e525]: Unknown venue
+              - generic [ref=e526]:
+                - generic [ref=e527]: 720p
+                - generic [ref=e528]: audience
+                - generic [ref=e529]: Around the Fur
+          - button "Deftones — My Own Summer (Shove It), Jan 1, 2025" [ref=e530] [cursor=pointer]:
+            - generic [ref=e531]:
+              - button [ref=e532]:
+                - img [ref=e533]
+              - generic [ref=e535]: 0:08
+            - generic [ref=e536]:
+              - generic [ref=e538]: My Own Summer (Shove It)
+              - generic [ref=e539]: Deftones
+              - generic [ref=e540]:
+                - generic [ref=e541]: Jan 1, 2025
+                - generic [ref=e542]: ·
+                - generic [ref=e543]: Unknown venue
+              - generic [ref=e544]:
+                - generic [ref=e545]: 480p
+                - generic [ref=e546]: audience
+                - generic [ref=e547]: Around the Fur
+          - button "Deftones — My Own Summer (Shove It), Jan 1, 2025" [ref=e548] [cursor=pointer]:
+            - generic [ref=e549]:
+              - button [ref=e550]:
+                - img [ref=e551]
+              - generic [ref=e553]: 0:27
+            - generic [ref=e554]:
+              - generic [ref=e556]: My Own Summer (Shove It)
+              - generic [ref=e557]: Deftones
+              - generic [ref=e558]:
+                - generic [ref=e559]: Jan 1, 2025
+                - generic [ref=e560]: ·
+                - generic [ref=e561]: Unknown venue
+              - generic [ref=e562]:
+                - generic [ref=e563]: 480p
+                - generic [ref=e564]: audience
+                - generic [ref=e565]: Around the Fur
+          - button "Deftones — My Own Summer (Shove It), Jan 1, 2025" [ref=e566] [cursor=pointer]:
+            - generic [ref=e567]:
+              - button [ref=e568]:
+                - img [ref=e569]
+              - generic [ref=e571]: 0:28
+            - generic [ref=e572]:
+              - generic [ref=e574]: My Own Summer (Shove It)
+              - generic [ref=e575]: Deftones
+              - generic [ref=e576]:
+                - generic [ref=e577]: Jan 1, 2025
+                - generic [ref=e578]: ·
+                - generic [ref=e579]: Unknown venue
+              - generic [ref=e580]:
+                - generic [ref=e581]: 720p
+                - generic [ref=e582]: audience
+                - generic [ref=e583]: Around the Fur
+          - button "Deftones — my mind is a mountain, Jan 1, 2025" [ref=e584] [cursor=pointer]:
+            - generic [ref=e585]:
+              - button [ref=e586]:
+                - img [ref=e587]
+              - generic [ref=e589]: 1:24
+            - generic [ref=e590]:
+              - generic [ref=e592]: my mind is a mountain
+              - generic [ref=e593]: Deftones
+              - generic [ref=e594]:
+                - generic [ref=e595]: Jan 1, 2025
+                - generic [ref=e596]: ·
+                - generic [ref=e597]: Unknown venue
+              - generic [ref=e598]:
+                - generic [ref=e599]: 720p
+                - generic [ref=e600]: audience
+                - generic [ref=e601]: Private Music
+          - button "Deftones — Diamond Eyes, Jan 1, 2025" [ref=e602] [cursor=pointer]:
+            - generic [ref=e603]:
+              - button [ref=e604]:
+                - img [ref=e605]
+              - generic [ref=e607]: 0:48
+            - generic [ref=e608]:
+              - generic [ref=e610]: Diamond Eyes
+              - generic [ref=e611]: Deftones
+              - generic [ref=e612]:
+                - generic [ref=e613]: Jan 1, 2025
+                - generic [ref=e614]: ·
+                - generic [ref=e615]: Unknown venue
+              - generic [ref=e616]:
+                - generic [ref=e617]: 1080p
+                - generic [ref=e618]: audience
+                - generic [ref=e619]: Diamond Eyes
+          - button "Deftones — Tempest, Jan 1, 2025" [ref=e620] [cursor=pointer]:
+            - generic [ref=e621]:
+              - button [ref=e622]:
+                - img [ref=e623]
+              - generic [ref=e625]: 0:56
+            - generic [ref=e626]:
+              - generic [ref=e628]: Tempest
+              - generic [ref=e629]: Deftones
+              - generic [ref=e630]:
+                - generic [ref=e631]: Jan 1, 2025
+                - generic [ref=e632]: ·
+                - generic [ref=e633]: Unknown venue
+              - generic [ref=e634]:
+                - generic [ref=e635]: 720p
+                - generic [ref=e636]: audience
+                - generic [ref=e637]: Koi No Yokan
+          - button "Deftones — Sextape, Jan 1, 2025" [ref=e638] [cursor=pointer]:
+            - generic [ref=e639]:
+              - button [ref=e640]:
+                - img [ref=e641]
+              - generic [ref=e643]: 2:00
+            - generic [ref=e644]:
+              - generic [ref=e646]: Sextape
+              - generic [ref=e647]: Deftones
+              - generic [ref=e648]:
+                - generic [ref=e649]: Jan 1, 2025
+                - generic [ref=e650]: ·
+                - generic [ref=e651]: Unknown venue
+              - generic [ref=e652]:
+                - generic [ref=e653]: 1080p
+                - generic [ref=e654]: audience
+                - generic [ref=e655]: Diamond Eyes
+          - button "Deftones — Entombed, Jan 1, 2025" [ref=e656] [cursor=pointer]:
+            - generic [ref=e657]:
+              - button [ref=e658]:
+                - img [ref=e659]
+              - generic [ref=e661]: 1:21
+            - generic [ref=e662]:
+              - generic [ref=e664]: Entombed
+              - generic [ref=e665]: Deftones
+              - generic [ref=e666]:
+                - generic [ref=e667]: Jan 1, 2025
+                - generic [ref=e668]: ·
+                - generic [ref=e669]: Unknown venue
+              - generic [ref=e670]:
+                - generic [ref=e671]: 720p
+                - generic [ref=e672]: audience
+                - generic [ref=e673]: Koi No Yokan
+          - button "Deftones — Hole in the Earth, Jan 1, 2025" [ref=e674] [cursor=pointer]:
+            - generic [ref=e675]:
+              - button [ref=e676]:
+                - img [ref=e677]
+              - generic [ref=e679]: 0:51
+            - generic [ref=e680]:
+              - generic [ref=e682]: Hole in the Earth
+              - generic [ref=e683]: Deftones
+              - generic [ref=e684]:
+                - generic [ref=e685]: Jan 1, 2025
+                - generic [ref=e686]: ·
+                - generic [ref=e687]: Unknown venue
+              - generic [ref=e688]:
+                - generic [ref=e689]: 720p
+                - generic [ref=e690]: audience
+                - generic [ref=e691]: Saturday Night Wrist
+          - button "Deftones — Change, Jan 1, 2025" [ref=e692] [cursor=pointer]:
+            - generic [ref=e693]:
+              - button [ref=e694]:
+                - img [ref=e695]
+              - generic [ref=e697]: 1:11
+            - generic [ref=e698]:
+              - generic [ref=e700]: Change
+              - generic [ref=e701]: Deftones
+              - generic [ref=e702]:
+                - generic [ref=e703]: Jan 1, 2025
+                - generic [ref=e704]: ·
+                - generic [ref=e705]: Unknown venue
+              - generic [ref=e706]:
+                - generic [ref=e707]: 720p
+                - generic [ref=e708]: audience
+                - generic [ref=e709]: White Pony
+          - button "Deftones — , Jan 1, 2025" [ref=e710] [cursor=pointer]:
+            - generic [ref=e711]:
+              - button [ref=e712]:
+                - img [ref=e713]
+              - generic [ref=e715]: 0:40
+            - generic [ref=e716]:
+              - generic [ref=e717]: Deftones
+              - generic [ref=e718]:
+                - generic [ref=e719]: Jan 1, 2025
+                - generic [ref=e720]: ·
+                - generic [ref=e721]: Unknown venue
+              - generic [ref=e722]:
+                - generic [ref=e723]: 480p
+                - generic [ref=e724]: audience
+          - button "Deftones — Cherry Waves, Jan 1, 2025" [ref=e725] [cursor=pointer]:
+            - generic [ref=e726]:
+              - button [ref=e727]:
+                - img [ref=e728]
+              - generic [ref=e730]: 1:31
+            - generic [ref=e731]:
+              - generic [ref=e733]: Cherry Waves
+              - generic [ref=e734]: Deftones
+              - generic [ref=e735]:
+                - generic [ref=e736]: Jan 1, 2025
+                - generic [ref=e737]: ·
+                - generic [ref=e738]: Unknown venue
+              - generic [ref=e739]:
+                - generic [ref=e740]: 720p
+                - generic [ref=e741]: audience
+                - generic [ref=e742]: Saturday Night Wrist
+          - button "Machine Gun Kelly — Peso Ft. Pusha T & Meek Mill, Jan 1, 2025" [ref=e743] [cursor=pointer]:
+            - generic [ref=e744]:
+              - button [ref=e745]:
+                - img [ref=e746]
+              - generic [ref=e748]: 0:15
+            - generic [ref=e749]:
+              - generic [ref=e751]: Peso Ft. Pusha T & Meek Mill
+              - generic [ref=e752]: Machine Gun Kelly
+              - generic [ref=e753]:
+                - generic [ref=e754]: Jan 1, 2025
+                - generic [ref=e755]: ·
+                - generic [ref=e756]: Unknown venue
+              - generic [ref=e757]:
+                - generic [ref=e758]: 480p
+                - generic [ref=e759]: audience
+                - generic [ref=e760]: Black Flag
+          - button "Machine Gun Kelly — starman, Jan 1, 2025" [ref=e761] [cursor=pointer]:
+            - generic [ref=e762]:
+              - button [ref=e763]:
+                - img [ref=e764]
+              - generic [ref=e766]: 0:13
+            - generic [ref=e767]:
+              - generic [ref=e769]: starman
+              - generic [ref=e770]: Machine Gun Kelly
+              - generic [ref=e771]:
+                - generic [ref=e772]: Jan 1, 2025
+                - generic [ref=e773]: ·
+                - generic [ref=e774]: Unknown venue
+              - generic [ref=e775]:
+                - generic [ref=e776]: 1080p
+                - generic [ref=e777]: audience
+                - generic [ref=e778]: lost americana
+          - button "Machine Gun Kelly — starman, Jan 1, 2025" [ref=e779] [cursor=pointer]:
+            - generic [ref=e780]:
+              - button [ref=e781]:
+                - img [ref=e782]
+              - generic [ref=e784]: 0:19
+            - generic [ref=e785]:
+              - generic [ref=e787]: starman
+              - generic [ref=e788]: Machine Gun Kelly
+              - generic [ref=e789]:
+                - generic [ref=e790]: Jan 1, 2025
+                - generic [ref=e791]: ·
+                - generic [ref=e792]: Unknown venue
+              - generic [ref=e793]:
+                - generic [ref=e794]: 1080p
+                - generic [ref=e795]: audience
+                - generic [ref=e796]: lost americana
+          - button "Machine Gun Kelly — outlaw overture, Jan 1, 2025" [ref=e797] [cursor=pointer]:
+            - generic [ref=e798]:
+              - button [ref=e799]:
+                - img [ref=e800]
+              - generic [ref=e802]: 0:25
+            - generic [ref=e803]:
+              - generic [ref=e805]: outlaw overture
+              - generic [ref=e806]: Machine Gun Kelly
+              - generic [ref=e807]:
+                - generic [ref=e808]: Jan 1, 2025
+                - generic [ref=e809]: ·
+                - generic [ref=e810]: Unknown venue
+              - generic [ref=e811]:
+                - generic [ref=e812]: 480p
+                - generic [ref=e813]: audience
+                - generic [ref=e814]: lost americana
+          - button "Machine Gun Kelly — , Jan 1, 2025" [ref=e815] [cursor=pointer]:
+            - generic [ref=e816]:
+              - button [ref=e817]:
+                - img [ref=e818]
+              - generic [ref=e820]: 1:03
+            - generic [ref=e821]:
+              - generic [ref=e822]: Machine Gun Kelly
+              - generic [ref=e823]:
+                - generic [ref=e824]: Jan 1, 2025
+                - generic [ref=e825]: ·
+                - generic [ref=e826]: Unknown venue
+              - generic [ref=e827]:
+                - generic [ref=e828]: 1080p
+                - generic [ref=e829]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2025" [ref=e830] [cursor=pointer]:
+            - generic [ref=e831]:
+              - button [ref=e832]:
+                - img [ref=e833]
+              - generic [ref=e835]: 2:25
+            - generic [ref=e836]:
+              - generic [ref=e837]: Machine Gun Kelly
+              - generic [ref=e838]:
+                - generic [ref=e839]: Jan 1, 2025
+                - generic [ref=e840]: ·
+                - generic [ref=e841]: Unknown venue
+              - generic [ref=e842]:
+                - generic [ref=e843]: 1080p
+                - generic [ref=e844]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2024" [ref=e845] [cursor=pointer]:
+            - generic [ref=e846]:
+              - button [ref=e847]:
+                - img [ref=e848]
+              - generic [ref=e850]: 0:08
+            - generic [ref=e851]:
+              - generic [ref=e852]: Machine Gun Kelly
+              - generic [ref=e853]:
+                - generic [ref=e854]: Jan 1, 2024
+                - generic [ref=e855]: ·
+                - generic [ref=e856]: Unknown venue
+              - generic [ref=e857]:
+                - generic [ref=e858]: 480p
+                - generic [ref=e859]: audience
+          - button "Machine Gun Kelly — El Pistolero, Jan 1, 2024" [ref=e860] [cursor=pointer]:
+            - generic [ref=e861]:
+              - button [ref=e862]:
+                - img [ref=e863]
+              - generic [ref=e865]: 1:12
+            - generic [ref=e866]:
+              - generic [ref=e868]: El Pistolero
+              - generic [ref=e869]: Machine Gun Kelly
+              - generic [ref=e870]:
+                - generic [ref=e871]: Jan 1, 2024
+                - generic [ref=e872]: ·
+                - generic [ref=e873]: Unknown venue
+              - generic [ref=e874]:
+                - generic [ref=e875]: 720p
+                - generic [ref=e876]: audience
+                - generic [ref=e877]: Hotel Diablo
+          - button "Tee Grizzley — First Day Out, Jan 1, 2024" [ref=e878] [cursor=pointer]:
+            - generic [ref=e879]:
+              - button [ref=e880]:
+                - img [ref=e881]
+              - generic [ref=e883]: 1:41
+            - generic [ref=e884]:
+              - generic [ref=e886]: First Day Out
+              - generic [ref=e887]: Tee Grizzley
+              - generic [ref=e888]:
+                - generic [ref=e889]: Jan 1, 2024
+                - generic [ref=e890]: ·
+                - generic [ref=e891]: Unknown venue
+              - generic [ref=e892]:
+                - generic [ref=e893]: 720p
+                - generic [ref=e894]: audience
+                - generic [ref=e895]: My Moment
+          - button "Tee Grizzley — First Day Out, Jan 1, 2024" [ref=e896] [cursor=pointer]:
+            - generic [ref=e897]:
+              - button [ref=e898]:
+                - img [ref=e899]
+              - generic [ref=e901]: 0:34
+            - generic [ref=e902]:
+              - generic [ref=e904]: First Day Out
+              - generic [ref=e905]: Tee Grizzley
+              - generic [ref=e906]:
+                - generic [ref=e907]: Jan 1, 2024
+                - generic [ref=e908]: ·
+                - generic [ref=e909]: Unknown venue
+              - generic [ref=e910]:
+                - generic [ref=e911]: 480p
+                - generic [ref=e912]: audience
+                - generic [ref=e913]: My Moment
+          - button "Machine Gun Kelly — Lonely Road (with Jelly Roll), Jan 1, 2024" [ref=e914] [cursor=pointer]:
+            - generic [ref=e915]:
+              - button [ref=e916]:
+                - img [ref=e917]
+              - generic [ref=e919]: 0:54
+            - generic [ref=e920]:
+              - generic [ref=e922]: Lonely Road (with Jelly Roll)
+              - generic [ref=e923]: Machine Gun Kelly
+              - generic [ref=e924]:
+                - generic [ref=e925]: Jan 1, 2024
+                - generic [ref=e926]: ·
+                - generic [ref=e927]: Unknown venue
+              - generic [ref=e928]:
+                - generic [ref=e929]: 720p
+                - generic [ref=e930]: audience
+                - generic [ref=e931]: Lonely Road
+          - button "Machine Gun Kelly — Lonely Road (with Jelly Roll), Jan 1, 2024" [ref=e932] [cursor=pointer]:
+            - generic [ref=e933]:
+              - button [ref=e934]:
+                - img [ref=e935]
+              - generic [ref=e937]: 0:31
+            - generic [ref=e938]:
+              - generic [ref=e940]: Lonely Road (with Jelly Roll)
+              - generic [ref=e941]: Machine Gun Kelly
+              - generic [ref=e942]:
+                - generic [ref=e943]: Jan 1, 2024
+                - generic [ref=e944]: ·
+                - generic [ref=e945]: Unknown venue
+              - generic [ref=e946]:
+                - generic [ref=e947]: 480p
+                - generic [ref=e948]: audience
+                - generic [ref=e949]: Lonely Road
+          - button "Machine Gun Kelly — Till I Die, Jan 1, 2024" [ref=e950] [cursor=pointer]:
+            - generic [ref=e951]:
+              - button [ref=e952]:
+                - img [ref=e953]
+              - generic [ref=e955]: 2:06
+            - generic [ref=e956]:
+              - generic [ref=e958]: Till I Die
+              - generic [ref=e959]: Machine Gun Kelly
+              - generic [ref=e960]:
+                - generic [ref=e961]: Jan 1, 2024
+                - generic [ref=e962]: ·
+                - generic [ref=e963]: Unknown venue
+              - generic [ref=e964]:
+                - generic [ref=e965]: 1080p
+                - generic [ref=e966]: audience
+                - generic [ref=e967]: General Admission
+          - button "Machine Gun Kelly — Till I Die, Jan 1, 2024" [ref=e968] [cursor=pointer]:
+            - generic [ref=e969]:
+              - button [ref=e970]:
+                - img [ref=e971]
+              - generic [ref=e973]: 0:30
+            - generic [ref=e974]:
+              - generic [ref=e976]: Till I Die
+              - generic [ref=e977]: Machine Gun Kelly
+              - generic [ref=e978]:
+                - generic [ref=e979]: Jan 1, 2024
+                - generic [ref=e980]: ·
+                - generic [ref=e981]: Unknown venue
+              - generic [ref=e982]:
+                - generic [ref=e983]: 480p
+                - generic [ref=e984]: audience
+                - generic [ref=e985]: General Admission
+          - button "Machine Gun Kelly — Lonely Road (with Jelly Roll), Jan 1, 2024" [ref=e986] [cursor=pointer]:
+            - generic [ref=e987]:
+              - button [ref=e988]:
+                - img [ref=e989]
+              - generic [ref=e991]: 0:09
+            - generic [ref=e992]:
+              - generic [ref=e994]: Lonely Road (with Jelly Roll)
+              - generic [ref=e995]: Machine Gun Kelly
+              - generic [ref=e996]:
+                - generic [ref=e997]: Jan 1, 2024
+                - generic [ref=e998]: ·
+                - generic [ref=e999]: Unknown venue
+              - generic [ref=e1000]:
+                - generic [ref=e1001]: 480p
+                - generic [ref=e1002]: audience
+                - generic [ref=e1003]: Lonely Road
+          - button "Bring Me the Horizon — Oli Sykes Screaming, Jan 1, 2023" [ref=e1004] [cursor=pointer]:
+            - generic [ref=e1005]:
+              - button [ref=e1006]:
+                - img [ref=e1007]
+              - generic [ref=e1009]: 0:04
+            - generic [ref=e1010]:
+              - generic [ref=e1012]: Oli Sykes Screaming
+              - generic [ref=e1013]: Bring Me the Horizon
+              - generic [ref=e1014]:
+                - generic [ref=e1015]: Jan 1, 2023
+                - generic [ref=e1016]: ·
+                - generic [ref=e1017]: Unknown venue
+              - generic [ref=e1018]:
+                - generic [ref=e1019]: 480p
+                - generic [ref=e1020]: audience
+          - button "Bring Me the Horizon — Oli Sykes Wants a Moshpit, Jan 1, 2023" [ref=e1021] [cursor=pointer]:
+            - generic [ref=e1022]:
+              - button [ref=e1023]:
+                - img [ref=e1024]
+              - generic [ref=e1026]: 0:15
+            - generic [ref=e1027]:
+              - generic [ref=e1029]: Oli Sykes Wants a Moshpit
+              - generic [ref=e1030]: Bring Me the Horizon
+              - generic [ref=e1031]:
+                - generic [ref=e1032]: Jan 1, 2023
+                - generic [ref=e1033]: ·
+                - generic [ref=e1034]: Unknown venue
+              - generic [ref=e1035]:
+                - generic [ref=e1036]: 480p
+                - generic [ref=e1037]: audience
+          - button "Bring Me the Horizon — Happy Song, Jan 1, 2023" [ref=e1038] [cursor=pointer]:
+            - generic [ref=e1039]:
+              - button [ref=e1040]:
+                - img [ref=e1041]
+              - generic [ref=e1043]: 0:15
+            - generic [ref=e1044]:
+              - generic [ref=e1046]: Happy Song
+              - generic [ref=e1047]: Bring Me the Horizon
+              - generic [ref=e1048]:
+                - generic [ref=e1049]: Jan 1, 2023
+                - generic [ref=e1050]: ·
+                - generic [ref=e1051]: Unknown venue
+              - generic [ref=e1052]:
+                - generic [ref=e1053]: 480p
+                - generic [ref=e1054]: audience
+                - generic [ref=e1055]: That's the Spirit
+          - button "Bring Me the Horizon — Can You Feel My Heart, Jan 1, 2023" [ref=e1056] [cursor=pointer]:
+            - generic [ref=e1057]:
+              - button [ref=e1058]:
+                - img [ref=e1059]
+              - generic [ref=e1061]: 0:27
+            - generic [ref=e1062]:
+              - generic [ref=e1064]: Can You Feel My Heart
+              - generic [ref=e1065]: Bring Me the Horizon
+              - generic [ref=e1066]:
+                - generic [ref=e1067]: Jan 1, 2023
+                - generic [ref=e1068]: ·
+                - generic [ref=e1069]: Unknown venue
+              - generic [ref=e1070]:
+                - generic [ref=e1071]: 1080p
+                - generic [ref=e1072]: audience
+                - generic [ref=e1073]: Sempiternal
+          - button "Bring Me the Horizon — Can You Feel My Heart, Jan 1, 2023" [ref=e1074] [cursor=pointer]:
+            - generic [ref=e1075]:
+              - button [ref=e1076]:
+                - img [ref=e1077]
+              - generic [ref=e1079]: 1:56
+            - generic [ref=e1080]:
+              - generic [ref=e1082]: Can You Feel My Heart
+              - generic [ref=e1083]: Bring Me the Horizon
+              - generic [ref=e1084]:
+                - generic [ref=e1085]: Jan 1, 2023
+                - generic [ref=e1086]: ·
+                - generic [ref=e1087]: Unknown venue
+              - generic [ref=e1088]:
+                - generic [ref=e1089]: 1080p
+                - generic [ref=e1090]: audience
+                - generic [ref=e1091]: Sempiternal
+          - button "Fall Out Boy — Sugar, We’re Goin Down, Jan 1, 2023" [ref=e1092] [cursor=pointer]:
+            - generic [ref=e1093]:
+              - button [ref=e1094]:
+                - img [ref=e1095]
+              - generic [ref=e1097]: 0:14
+            - generic [ref=e1098]:
+              - generic [ref=e1100]: Sugar, We’re Goin Down
+              - generic [ref=e1101]: Fall Out Boy
+              - generic [ref=e1102]:
+                - generic [ref=e1103]: Jan 1, 2023
+                - generic [ref=e1104]: ·
+                - generic [ref=e1105]: Unknown venue
+              - generic [ref=e1106]:
+                - generic [ref=e1107]: 480p
+                - generic [ref=e1108]: audience
+                - generic [ref=e1109]: From Under the Cork Tree
+          - button "Fall Out Boy — Sugar, We’re Goin Down, Jan 1, 2023" [ref=e1110] [cursor=pointer]:
+            - generic [ref=e1111]:
+              - button [ref=e1112]:
+                - img [ref=e1113]
+              - generic [ref=e1115]: 0:17
+            - generic [ref=e1116]:
+              - generic [ref=e1118]: Sugar, We’re Goin Down
+              - generic [ref=e1119]: Fall Out Boy
+              - generic [ref=e1120]:
+                - generic [ref=e1121]: Jan 1, 2023
+                - generic [ref=e1122]: ·
+                - generic [ref=e1123]: Unknown venue
+              - generic [ref=e1124]:
+                - generic [ref=e1125]: 480p
+                - generic [ref=e1126]: audience
+                - generic [ref=e1127]: From Under the Cork Tree
+          - button "Fall Out Boy — Sugar, We’re Goin Down, Jan 1, 2023" [ref=e1128] [cursor=pointer]:
+            - generic [ref=e1129]:
+              - button [ref=e1130]:
+                - img [ref=e1131]
+              - generic [ref=e1133]: 0:21
+            - generic [ref=e1134]:
+              - generic [ref=e1136]: Sugar, We’re Goin Down
+              - generic [ref=e1137]: Fall Out Boy
+              - generic [ref=e1138]:
+                - generic [ref=e1139]: Jan 1, 2023
+                - generic [ref=e1140]: ·
+                - generic [ref=e1141]: Unknown venue
+              - generic [ref=e1142]:
+                - generic [ref=e1143]: 480p
+                - generic [ref=e1144]: audience
+                - generic [ref=e1145]: From Under the Cork Tree
+          - button "Three Days Grace — So Called Life, Jan 1, 2023" [ref=e1146] [cursor=pointer]:
+            - generic [ref=e1147]:
+              - button [ref=e1148]:
+                - img [ref=e1149]
+              - generic [ref=e1151]: 0:55
+            - generic [ref=e1152]:
+              - generic [ref=e1154]: So Called Life
+              - generic [ref=e1155]: Three Days Grace
+              - generic [ref=e1156]:
+                - generic [ref=e1157]: Jan 1, 2023
+                - generic [ref=e1158]: ·
+                - generic [ref=e1159]: Unknown venue
+              - generic [ref=e1160]:
+                - generic [ref=e1161]: 720p
+                - generic [ref=e1162]: audience
+                - generic [ref=e1163]: Explosions
+          - button "Three Days Grace — Animal I Have Become, Jan 1, 2023" [ref=e1164] [cursor=pointer]:
+            - generic [ref=e1165]:
+              - button [ref=e1166]:
+                - img [ref=e1167]
+              - generic [ref=e1169]: 0:59
+            - generic [ref=e1170]:
+              - generic [ref=e1172]: Animal I Have Become
+              - generic [ref=e1173]: Three Days Grace
+              - generic [ref=e1174]:
+                - generic [ref=e1175]: Jan 1, 2023
+                - generic [ref=e1176]: ·
+                - generic [ref=e1177]: Unknown venue
+              - generic [ref=e1178]:
+                - generic [ref=e1179]: 720p
+                - generic [ref=e1180]: audience
+                - generic [ref=e1181]: One-X
+          - button "Three Days Grace — Break, Jan 1, 2023" [ref=e1182] [cursor=pointer]:
+            - generic [ref=e1183]:
+              - button [ref=e1184]:
+                - img [ref=e1185]
+              - generic [ref=e1187]: 0:48
+            - generic [ref=e1188]:
+              - generic [ref=e1190]: Break
+              - generic [ref=e1191]: Three Days Grace
+              - generic [ref=e1192]:
+                - generic [ref=e1193]: Jan 1, 2023
+                - generic [ref=e1194]: ·
+                - generic [ref=e1195]: Unknown venue
+              - generic [ref=e1196]:
+                - generic [ref=e1197]: 720p
+                - generic [ref=e1198]: audience
+                - generic [ref=e1199]: Life Starts Now
+          - button "Three Days Grace — Never Too Late, Jan 1, 2023" [ref=e1200] [cursor=pointer]:
+            - generic [ref=e1201]:
+              - button [ref=e1202]:
+                - img [ref=e1203]
+              - generic [ref=e1205]: 2:00
+            - generic [ref=e1206]:
+              - generic [ref=e1208]: Never Too Late
+              - generic [ref=e1209]: Three Days Grace
+              - generic [ref=e1210]:
+                - generic [ref=e1211]: Jan 1, 2023
+                - generic [ref=e1212]: ·
+                - generic [ref=e1213]: Unknown venue
+              - generic [ref=e1214]:
+                - generic [ref=e1215]: 1080p
+                - generic [ref=e1216]: audience
+                - generic [ref=e1217]: One-X
+          - button "Three Days Grace — Riot, Jan 1, 2023" [ref=e1218] [cursor=pointer]:
+            - generic [ref=e1219]:
+              - button [ref=e1220]:
+                - img [ref=e1221]
+              - generic [ref=e1223]: 1:16
+            - generic [ref=e1224]:
+              - generic [ref=e1226]: Riot
+              - generic [ref=e1227]: Three Days Grace
+              - generic [ref=e1228]:
+                - generic [ref=e1229]: Jan 1, 2023
+                - generic [ref=e1230]: ·
+                - generic [ref=e1231]: Unknown venue
+              - generic [ref=e1232]:
+                - generic [ref=e1233]: 720p
+                - generic [ref=e1234]: audience
+                - generic [ref=e1235]: One-X
+          - button "Shinedown — Bully, Jan 1, 2023" [ref=e1236] [cursor=pointer]:
+            - generic [ref=e1237]:
+              - button [ref=e1238]:
+                - img [ref=e1239]
+              - generic [ref=e1241]: 1:03
+            - generic [ref=e1242]:
+              - generic [ref=e1244]: Bully
+              - generic [ref=e1245]: Shinedown
+              - generic [ref=e1246]:
+                - generic [ref=e1247]: Jan 1, 2023
+                - generic [ref=e1248]: ·
+                - generic [ref=e1249]: Unknown venue
+              - generic [ref=e1250]:
+                - generic [ref=e1251]: 720p
+                - generic [ref=e1252]: audience
+                - generic [ref=e1253]: Amaryllis
+          - button "Shinedown — Enemies, Jan 1, 2023" [ref=e1254] [cursor=pointer]:
+            - generic [ref=e1255]:
+              - button [ref=e1256]:
+                - img [ref=e1257]
+              - generic [ref=e1259]: 0:58
+            - generic [ref=e1260]:
+              - generic [ref=e1262]: Enemies
+              - generic [ref=e1263]: Shinedown
+              - generic [ref=e1264]:
+                - generic [ref=e1265]: Jan 1, 2023
+                - generic [ref=e1266]: ·
+                - generic [ref=e1267]: Unknown venue
+              - generic [ref=e1268]:
+                - generic [ref=e1269]: 720p
+                - generic [ref=e1270]: audience
+                - generic [ref=e1271]: Amaryllis
+          - button "Shinedown — Enemies, Jan 1, 2023" [ref=e1272] [cursor=pointer]:
+            - generic [ref=e1273]:
+              - button [ref=e1274]:
+                - img [ref=e1275]
+              - generic [ref=e1277]: 0:10
+            - generic [ref=e1278]:
+              - generic [ref=e1280]: Enemies
+              - generic [ref=e1281]: Shinedown
+              - generic [ref=e1282]:
+                - generic [ref=e1283]: Jan 1, 2023
+                - generic [ref=e1284]: ·
+                - generic [ref=e1285]: Unknown venue
+              - generic [ref=e1286]:
+                - generic [ref=e1287]: 480p
+                - generic [ref=e1288]: audience
+                - generic [ref=e1289]: Amaryllis
+          - button "Shinedown — DEVIL, Jan 1, 2023" [ref=e1290] [cursor=pointer]:
+            - generic [ref=e1291]:
+              - button [ref=e1292]:
+                - img [ref=e1293]
+              - generic [ref=e1295]: 0:43
+            - generic [ref=e1296]:
+              - generic [ref=e1298]: DEVIL
+              - generic [ref=e1299]: Shinedown
+              - generic [ref=e1300]:
+                - generic [ref=e1301]: Jan 1, 2023
+                - generic [ref=e1302]: ·
+                - generic [ref=e1303]: Unknown venue
+              - generic [ref=e1304]:
+                - generic [ref=e1305]: 480p
+                - generic [ref=e1306]: audience
+                - generic [ref=e1307]: Attention Attention
+          - button "$uicideboy$ — , Jan 1, 2023" [ref=e1308] [cursor=pointer]:
+            - generic [ref=e1309]:
+              - button [ref=e1310]:
+                - img [ref=e1311]
+              - generic [ref=e1313]: 0:18
+            - generic [ref=e1314]:
+              - generic [ref=e1315]: $uicideboy$
+              - generic [ref=e1316]:
+                - generic [ref=e1317]: Jan 1, 2023
+                - generic [ref=e1318]: ·
+                - generic [ref=e1319]: Unknown venue
+              - generic [ref=e1320]:
+                - generic [ref=e1321]: 480p
+                - generic [ref=e1322]: audience
+          - button "Ramirez — Na Na Na Na Na (Caught Slippin), Jan 1, 2023" [ref=e1323] [cursor=pointer]:
+            - generic [ref=e1324]:
+              - button [ref=e1325]:
+                - img [ref=e1326]
+              - generic [ref=e1328]: 1:01
+            - generic [ref=e1329]:
+              - generic [ref=e1331]: Na Na Na Na Na (Caught Slippin)
+              - generic [ref=e1332]: Ramirez
+              - generic [ref=e1333]:
+                - generic [ref=e1334]: Jan 1, 2023
+                - generic [ref=e1335]: ·
+                - generic [ref=e1336]: Unknown venue
+              - generic [ref=e1337]:
+                - generic [ref=e1338]: 720p
+                - generic [ref=e1339]: audience
+                - generic [ref=e1340]: The Grey Gorilla
+          - button "Ramirez — THE FO FIVE, Jan 1, 2023" [ref=e1341] [cursor=pointer]:
+            - generic [ref=e1342]:
+              - button [ref=e1343]:
+                - img [ref=e1344]
+              - generic [ref=e1346]: 0:18
+            - generic [ref=e1347]:
+              - generic [ref=e1349]: THE FO FIVE
+              - generic [ref=e1350]: Ramirez
+              - generic [ref=e1351]:
+                - generic [ref=e1352]: Jan 1, 2023
+                - generic [ref=e1353]: ·
+                - generic [ref=e1354]: Unknown venue
+              - generic [ref=e1355]:
+                - generic [ref=e1356]: 480p
+                - generic [ref=e1357]: audience
+                - generic [ref=e1358]: THA PLAYA$ MANUAL
+          - button "City Morgue — HURTWORLD '99, Jan 1, 2023" [ref=e1359] [cursor=pointer]:
+            - generic [ref=e1360]:
+              - button [ref=e1361]:
+                - img [ref=e1362]
+              - generic [ref=e1364]: 0:05
+            - generic [ref=e1365]:
+              - generic [ref=e1367]: HURTWORLD '99
+              - generic [ref=e1368]: City Morgue
+              - generic [ref=e1369]:
+                - generic [ref=e1370]: Jan 1, 2023
+                - generic [ref=e1371]: ·
+                - generic [ref=e1372]: Unknown venue
+              - generic [ref=e1373]:
+                - generic [ref=e1374]: 480p
+                - generic [ref=e1375]: audience
+                - generic [ref=e1376]: Toxic Boogaloo
+          - button "City Morgue — THE ELECTRIC EXPERIENCE, Jan 1, 2023" [ref=e1377] [cursor=pointer]:
+            - generic [ref=e1378]:
+              - button [ref=e1379]:
+                - img [ref=e1380]
+              - generic [ref=e1382]: 0:18
+            - generic [ref=e1383]:
+              - generic [ref=e1385]: THE ELECTRIC EXPERIENCE
+              - generic [ref=e1386]: City Morgue
+              - generic [ref=e1387]:
+                - generic [ref=e1388]: Jan 1, 2023
+                - generic [ref=e1389]: ·
+                - generic [ref=e1390]: Unknown venue
+              - generic [ref=e1391]:
+                - generic [ref=e1392]: 480p
+                - generic [ref=e1393]: audience
+                - generic [ref=e1394]: Toxic Boogaloo
+          - button "ZillaKami — Space Cowboy, Jan 1, 2023" [ref=e1395] [cursor=pointer]:
+            - generic [ref=e1396]:
+              - button [ref=e1397]:
+                - img [ref=e1398]
+              - generic [ref=e1400]: 0:35
+            - generic [ref=e1401]:
+              - generic [ref=e1403]: Space Cowboy
+              - generic [ref=e1404]: ZillaKami
+              - generic [ref=e1405]:
+                - generic [ref=e1406]: Jan 1, 2023
+                - generic [ref=e1407]: ·
+                - generic [ref=e1408]: Unknown venue
+              - generic [ref=e1409]:
+                - generic [ref=e1410]: 480p
+                - generic [ref=e1411]: audience
+                - generic [ref=e1412]: DOG BOY
+          - button "City Morgue — DRAINO, Jan 1, 2023" [ref=e1413] [cursor=pointer]:
+            - generic [ref=e1414]:
+              - button [ref=e1415]:
+                - img [ref=e1416]
+              - generic [ref=e1418]: 0:54
+            - generic [ref=e1419]:
+              - generic [ref=e1421]: DRAINO
+              - generic [ref=e1422]: City Morgue
+              - generic [ref=e1423]:
+                - generic [ref=e1424]: Jan 1, 2023
+                - generic [ref=e1425]: ·
+                - generic [ref=e1426]: Unknown venue
+              - generic [ref=e1427]:
+                - generic [ref=e1428]: 720p
+                - generic [ref=e1429]: audience
+                - generic [ref=e1430]: "City Morgue Vol 2: As Good as Dead"
+          - button "Ghostemane — Flesh, Jan 1, 2023" [ref=e1431] [cursor=pointer]:
+            - generic [ref=e1432]:
+              - button [ref=e1433]:
+                - img [ref=e1434]
+              - generic [ref=e1436]: 1:32
+            - generic [ref=e1437]:
+              - generic [ref=e1439]: Flesh
+              - generic [ref=e1440]: Ghostemane
+              - generic [ref=e1441]:
+                - generic [ref=e1442]: Jan 1, 2023
+                - generic [ref=e1443]: ·
+                - generic [ref=e1444]: Unknown venue
+              - generic [ref=e1445]:
+                - generic [ref=e1446]: 720p
+                - generic [ref=e1447]: audience
+                - generic [ref=e1448]: N/O/I/S/E
+          - button "$uicideboy$ — , Jan 1, 2023" [ref=e1449] [cursor=pointer]:
+            - generic [ref=e1450]:
+              - button [ref=e1451]:
+                - img [ref=e1452]
+              - generic [ref=e1454]: 0:14
+            - generic [ref=e1455]:
+              - generic [ref=e1456]: $uicideboy$
+              - generic [ref=e1457]:
+                - generic [ref=e1458]: Jan 1, 2023
+                - generic [ref=e1459]: ·
+                - generic [ref=e1460]: Unknown venue
+              - generic [ref=e1461]:
+                - generic [ref=e1462]: 480p
+                - generic [ref=e1463]: audience
+          - button "$uicideboy$ — , Jan 1, 2023" [ref=e1464] [cursor=pointer]:
+            - generic [ref=e1465]:
+              - button [ref=e1466]:
+                - img [ref=e1467]
+              - generic [ref=e1469]: 0:27
+            - generic [ref=e1470]:
+              - generic [ref=e1471]: $uicideboy$
+              - generic [ref=e1472]:
+                - generic [ref=e1473]: Jan 1, 2023
+                - generic [ref=e1474]: ·
+                - generic [ref=e1475]: Unknown venue
+              - generic [ref=e1476]:
+                - generic [ref=e1477]: 480p
+                - generic [ref=e1478]: audience
+          - button "Ghostemane — To Whom It May Concern, Jan 1, 2023" [ref=e1479] [cursor=pointer]:
+            - generic [ref=e1480]:
+              - button [ref=e1481]:
+                - img [ref=e1482]
+              - generic [ref=e1484]: 0:49
+            - generic [ref=e1485]:
+              - generic [ref=e1487]: To Whom It May Concern
+              - generic [ref=e1488]: Ghostemane
+              - generic [ref=e1489]:
+                - generic [ref=e1490]: Jan 1, 2023
+                - generic [ref=e1491]: ·
+                - generic [ref=e1492]: Unknown venue
+              - generic [ref=e1493]:
+                - generic [ref=e1494]: 720p
+                - generic [ref=e1495]: audience
+                - generic [ref=e1496]: Human Err0r
+          - button "$uicideboy$ — Not Even Ghosts Are This Empty, Jan 1, 2023" [ref=e1497] [cursor=pointer]:
+            - generic [ref=e1498]:
+              - button [ref=e1499]:
+                - img [ref=e1500]
+              - generic [ref=e1502]: 0:23
+            - generic [ref=e1503]:
+              - generic [ref=e1505]: Not Even Ghosts Are This Empty
+              - generic [ref=e1506]: $uicideboy$
+              - generic [ref=e1507]:
+                - generic [ref=e1508]: Jan 1, 2023
+                - generic [ref=e1509]: ·
+                - generic [ref=e1510]: Unknown venue
+              - generic [ref=e1511]:
+                - generic [ref=e1512]: 480p
+                - generic [ref=e1513]: audience
+                - generic [ref=e1514]: I No Longer Fear The Razor Guarding My Heel (V)
+          - button "$uicideboy$ — Matte Black, Jan 1, 2023" [ref=e1515] [cursor=pointer]:
+            - generic [ref=e1516]:
+              - button [ref=e1517]:
+                - img [ref=e1518]
+              - generic [ref=e1520]: 0:29
+            - generic [ref=e1521]:
+              - generic [ref=e1523]: Matte Black
+              - generic [ref=e1524]: $uicideboy$
+              - generic [ref=e1525]:
+                - generic [ref=e1526]: Jan 1, 2023
+                - generic [ref=e1527]: ·
+                - generic [ref=e1528]: Unknown venue
+              - generic [ref=e1529]:
+                - generic [ref=e1530]: 480p
+                - generic [ref=e1531]: audience
+                - generic [ref=e1532]: Sing Me a Lullaby, My Sweet Temptation
+          - button "$uicideboy$ — Finding Shelter In My Larynx, Jan 1, 2023" [ref=e1533] [cursor=pointer]:
+            - generic [ref=e1534]:
+              - button [ref=e1535]:
+                - img [ref=e1536]
+              - generic [ref=e1538]: 0:17
+            - generic [ref=e1539]:
+              - generic [ref=e1541]: Finding Shelter In My Larynx
+              - generic [ref=e1542]: $uicideboy$
+              - generic [ref=e1543]:
+                - generic [ref=e1544]: Jan 1, 2023
+                - generic [ref=e1545]: ·
+                - generic [ref=e1546]: Unknown venue
+              - generic [ref=e1547]:
+                - generic [ref=e1548]: 480p
+                - generic [ref=e1549]: audience
+                - generic [ref=e1550]: I No Longer Fear The Razor Guarding My Heel (V)
+          - button "$uicideboy$ — Kill Yourself (Part III), Jan 1, 2023" [ref=e1551] [cursor=pointer]:
+            - generic [ref=e1552]:
+              - button [ref=e1553]:
+                - img [ref=e1554]
+              - generic [ref=e1556]: 0:40
+            - generic [ref=e1557]:
+              - generic [ref=e1559]: Kill Yourself (Part III)
+              - generic [ref=e1560]: $uicideboy$
+              - generic [ref=e1561]:
+                - generic [ref=e1562]: Jan 1, 2023
+                - generic [ref=e1563]: ·
+                - generic [ref=e1564]: Unknown venue
+              - generic [ref=e1565]:
+                - generic [ref=e1566]: 480p
+                - generic [ref=e1567]: audience
+                - generic [ref=e1568]: My Liver Will Handle What My Heart Can't
+          - button "$uicideboy$ — Antarctica, Jan 1, 2023" [ref=e1569] [cursor=pointer]:
+            - generic [ref=e1570]:
+              - button [ref=e1571]:
+                - img [ref=e1572]
+              - generic [ref=e1574]: 1:15
+            - generic [ref=e1575]:
+              - generic [ref=e1577]: Antarctica
+              - generic [ref=e1578]: $uicideboy$
+              - generic [ref=e1579]:
+                - generic [ref=e1580]: Jan 1, 2023
+                - generic [ref=e1581]: ·
+                - generic [ref=e1582]: Unknown venue
+              - generic [ref=e1583]:
+                - generic [ref=e1584]: 720p
+                - generic [ref=e1585]: audience
+                - generic [ref=e1586]: Dark Side of the Clouds
+          - button "$uicideboy$ — ...And to Those I Love, Thanks for Sticking Around, Jan 1, 2023" [ref=e1587] [cursor=pointer]:
+            - generic [ref=e1588]:
+              - button [ref=e1589]:
+                - img [ref=e1590]
+              - generic [ref=e1592]: 0:24
+            - generic [ref=e1593]:
+              - generic [ref=e1595]: ...And to Those I Love, Thanks for Sticking Around
+              - generic [ref=e1596]: $uicideboy$
+              - generic [ref=e1597]:
+                - generic [ref=e1598]: Jan 1, 2023
+                - generic [ref=e1599]: ·
+                - generic [ref=e1600]: Unknown venue
+              - generic [ref=e1601]:
+                - generic [ref=e1602]: 480p
+                - generic [ref=e1603]: audience
+                - generic [ref=e1604]: Stop Staring at the Shadows
+          - button "$uicideboy$ — , Jan 1, 2023" [ref=e1605] [cursor=pointer]:
+            - generic [ref=e1606]:
+              - button [ref=e1607]:
+                - img [ref=e1608]
+              - generic [ref=e1610]: 0:39
+            - generic [ref=e1611]:
+              - generic [ref=e1612]: $uicideboy$
+              - generic [ref=e1613]:
+                - generic [ref=e1614]: Jan 1, 2023
+                - generic [ref=e1615]: ·
+                - generic [ref=e1616]: Unknown venue
+              - generic [ref=e1617]:
+                - generic [ref=e1618]: 720p
+                - generic [ref=e1619]: audience
+          - button "Ghostemane — Sacrilege, Jan 1, 2023" [ref=e1620] [cursor=pointer]:
+            - generic [ref=e1621]:
+              - button [ref=e1622]:
+                - img [ref=e1623]
+              - generic [ref=e1625]: 0:06
+            - generic [ref=e1626]:
+              - generic [ref=e1628]: Sacrilege
+              - generic [ref=e1629]: Ghostemane
+              - generic [ref=e1630]:
+                - generic [ref=e1631]: Jan 1, 2023
+                - generic [ref=e1632]: ·
+                - generic [ref=e1633]: Unknown venue
+              - generic [ref=e1634]:
+                - generic [ref=e1635]: 480p
+                - generic [ref=e1636]: audience
+                - generic [ref=e1637]: ANTI-ICON
+          - button "Halsey — , Jan 1, 2022" [ref=e1638] [cursor=pointer]:
+            - generic [ref=e1639]:
+              - button [ref=e1640]:
+                - img [ref=e1641]
+              - generic [ref=e1643]: 0:05
+            - generic [ref=e1644]:
+              - generic [ref=e1645]: Halsey
+              - generic [ref=e1646]:
+                - generic [ref=e1647]: Jan 1, 2022
+                - generic [ref=e1648]: ·
+                - generic [ref=e1649]: Unknown venue
+              - generic [ref=e1650]:
+                - generic [ref=e1651]: 480p
+                - generic [ref=e1652]: audience
+          - button "Halsey — 3am, Jan 1, 2022" [ref=e1653] [cursor=pointer]:
+            - generic [ref=e1654]:
+              - button [ref=e1655]:
+                - img [ref=e1656]
+              - generic [ref=e1658]: 0:15
+            - generic [ref=e1659]:
+              - generic [ref=e1661]: 3am
+              - generic [ref=e1662]: Halsey
+              - generic [ref=e1663]:
+                - generic [ref=e1664]: Jan 1, 2022
+                - generic [ref=e1665]: ·
+                - generic [ref=e1666]: Unknown venue
+              - generic [ref=e1667]:
+                - generic [ref=e1668]: 720p
+                - generic [ref=e1669]: audience
+                - generic [ref=e1670]: Manic
+          - button "Halsey — 3am, Jan 1, 2022" [ref=e1671] [cursor=pointer]:
+            - generic [ref=e1672]:
+              - button [ref=e1673]:
+                - img [ref=e1674]
+              - generic [ref=e1676]: 0:10
+            - generic [ref=e1677]:
+              - generic [ref=e1679]: 3am
+              - generic [ref=e1680]: Halsey
+              - generic [ref=e1681]:
+                - generic [ref=e1682]: Jan 1, 2022
+                - generic [ref=e1683]: ·
+                - generic [ref=e1684]: Unknown venue
+              - generic [ref=e1685]:
+                - generic [ref=e1686]: 720p
+                - generic [ref=e1687]: audience
+                - generic [ref=e1688]: Manic
+          - button "Halsey — Gasoline, Jan 1, 2022" [ref=e1689] [cursor=pointer]:
+            - generic [ref=e1690]:
+              - button [ref=e1691]:
+                - img [ref=e1692]
+              - generic [ref=e1694]: 0:29
+            - generic [ref=e1695]:
+              - generic [ref=e1697]: Gasoline
+              - generic [ref=e1698]: Halsey
+              - generic [ref=e1699]:
+                - generic [ref=e1700]: Jan 1, 2022
+                - generic [ref=e1701]: ·
+                - generic [ref=e1702]: Unknown venue
+              - generic [ref=e1703]:
+                - generic [ref=e1704]: 1080p
+                - generic [ref=e1705]: audience
+                - generic [ref=e1706]: Badlands
+          - button "Avril Lavigne — Complicated, Jan 1, 2022" [ref=e1707] [cursor=pointer]:
+            - generic [ref=e1708]:
+              - button [ref=e1709]:
+                - img [ref=e1710]
+              - generic [ref=e1712]: 0:21
+            - generic [ref=e1713]:
+              - generic [ref=e1715]: Complicated
+              - generic [ref=e1716]: Avril Lavigne
+              - generic [ref=e1717]:
+                - generic [ref=e1718]: Jan 1, 2022
+                - generic [ref=e1719]: ·
+                - generic [ref=e1720]: Unknown venue
+              - generic [ref=e1721]:
+                - generic [ref=e1722]: 720p
+                - generic [ref=e1723]: audience
+                - generic [ref=e1724]: Let Go
+          - button "Trippie Redd — Dark Knight Dummo, Jan 1, 2022" [ref=e1725] [cursor=pointer]:
+            - generic [ref=e1726]:
+              - button [ref=e1727]:
+                - img [ref=e1728]
+              - generic [ref=e1730]: 0:12
+            - generic [ref=e1731]:
+              - generic [ref=e1733]: Dark Knight Dummo
+              - generic [ref=e1734]: Trippie Redd
+              - generic [ref=e1735]:
+                - generic [ref=e1736]: Jan 1, 2022
+                - generic [ref=e1737]: ·
+                - generic [ref=e1738]: Unknown venue
+              - generic [ref=e1739]:
+                - generic [ref=e1740]: 480p
+                - generic [ref=e1741]: audience
+                - generic [ref=e1742]: Life's a Trip
+          - button "Trippie Redd — 1400 / 999 Freestyle (feat. Juice WRLD), Jan 1, 2022" [ref=e1743] [cursor=pointer]:
+            - generic [ref=e1744]:
+              - button [ref=e1745]:
+                - img [ref=e1746]
+              - generic [ref=e1748]: 0:17
+            - generic [ref=e1749]:
+              - generic [ref=e1751]: 1400 / 999 Freestyle (feat. Juice WRLD)
+              - generic [ref=e1752]: Trippie Redd
+              - generic [ref=e1753]:
+                - generic [ref=e1754]: Jan 1, 2022
+                - generic [ref=e1755]: ·
+                - generic [ref=e1756]: Unknown venue
+              - generic [ref=e1757]:
+                - generic [ref=e1758]: 720p
+                - generic [ref=e1759]: audience
+                - generic [ref=e1760]: A Love Letter to You 3
+          - button "Machine Gun Kelly — Till I Die, Jan 1, 2022" [ref=e1761] [cursor=pointer]:
+            - generic [ref=e1762]:
+              - button [ref=e1763]:
+                - img [ref=e1764]
+              - generic [ref=e1766]: 0:17
+            - generic [ref=e1767]:
+              - generic [ref=e1769]: Till I Die
+              - generic [ref=e1770]: Machine Gun Kelly
+              - generic [ref=e1771]:
+                - generic [ref=e1772]: Jan 1, 2022
+                - generic [ref=e1773]: ·
+                - generic [ref=e1774]: Unknown venue
+              - generic [ref=e1775]:
+                - generic [ref=e1776]: 480p
+                - generic [ref=e1777]: audience
+                - generic [ref=e1778]: General Admission
+          - button "Machine Gun Kelly — Till I Die, Jan 1, 2022" [ref=e1779] [cursor=pointer]:
+            - generic [ref=e1780]:
+              - button [ref=e1781]:
+                - img [ref=e1782]
+              - generic [ref=e1784]: 0:14
+            - generic [ref=e1785]:
+              - generic [ref=e1787]: Till I Die
+              - generic [ref=e1788]: Machine Gun Kelly
+              - generic [ref=e1789]:
+                - generic [ref=e1790]: Jan 1, 2022
+                - generic [ref=e1791]: ·
+                - generic [ref=e1792]: Unknown venue
+              - generic [ref=e1793]:
+                - generic [ref=e1794]: 480p
+                - generic [ref=e1795]: audience
+                - generic [ref=e1796]: General Admission
+          - button "Machine Gun Kelly — Glass House, Jan 1, 2022" [ref=e1797] [cursor=pointer]:
+            - generic [ref=e1798]:
+              - button [ref=e1799]:
+                - img [ref=e1800]
+              - generic [ref=e1802]: 0:20
+            - generic [ref=e1803]:
+              - generic [ref=e1805]: Glass House
+              - generic [ref=e1806]: Machine Gun Kelly
+              - generic [ref=e1807]:
+                - generic [ref=e1808]: Jan 1, 2022
+                - generic [ref=e1809]: ·
+                - generic [ref=e1810]: Unknown venue
+              - generic [ref=e1811]:
+                - generic [ref=e1812]: 480p
+                - generic [ref=e1813]: audience
+                - generic [ref=e1814]: Hotel Diablo
+          - button "Machine Gun Kelly — , Jan 1, 2022" [ref=e1815] [cursor=pointer]:
+            - generic [ref=e1816]:
+              - button [ref=e1817]:
+                - img [ref=e1818]
+              - generic [ref=e1820]: 0:38
+            - generic [ref=e1821]:
+              - generic [ref=e1822]: Machine Gun Kelly
+              - generic [ref=e1823]:
+                - generic [ref=e1824]: Jan 1, 2022
+                - generic [ref=e1825]: ·
+                - generic [ref=e1826]: Unknown venue
+              - generic [ref=e1827]:
+                - generic [ref=e1828]: 480p
+                - generic [ref=e1829]: audience
+          - button "Ski Mask The Slump God — RIP Roach (Cover), Jan 1, 2022" [ref=e1830] [cursor=pointer]:
+            - generic [ref=e1831]:
+              - button [ref=e1832]:
+                - img [ref=e1833]
+              - generic [ref=e1835]: 0:16
+            - generic [ref=e1836]:
+              - generic [ref=e1838]: RIP Roach (Cover)
+              - generic [ref=e1839]: Ski Mask The Slump God
+              - generic [ref=e1840]:
+                - generic [ref=e1841]: Jan 1, 2022
+                - generic [ref=e1842]: ·
+                - generic [ref=e1843]: Unknown venue
+              - generic [ref=e1844]:
+                - generic [ref=e1845]: 480p
+                - generic [ref=e1846]: audience
+                - generic [ref=e1847]: Revenge
+          - button "$uicideboy$ — , Jan 1, 2022" [ref=e1848] [cursor=pointer]:
+            - generic [ref=e1849]:
+              - button [ref=e1850]:
+                - img [ref=e1851]
+              - generic [ref=e1853]: 0:22
+            - generic [ref=e1854]:
+              - generic [ref=e1855]: $uicideboy$
+              - generic [ref=e1856]:
+                - generic [ref=e1857]: Jan 1, 2022
+                - generic [ref=e1858]: ·
+                - generic [ref=e1859]: Unknown venue
+              - generic [ref=e1860]:
+                - generic [ref=e1861]: 480p
+                - generic [ref=e1862]: audience
+          - button "Ski Mask The Slump God — H2O, Jan 1, 2022" [ref=e1863] [cursor=pointer]:
+            - generic [ref=e1864]:
+              - button [ref=e1865]:
+                - img [ref=e1866]
+              - generic [ref=e1868]: 0:47
+            - generic [ref=e1869]:
+              - generic [ref=e1871]: H2O
+              - generic [ref=e1872]: Ski Mask The Slump God
+              - generic [ref=e1873]:
+                - generic [ref=e1874]: Jan 1, 2022
+                - generic [ref=e1875]: ·
+                - generic [ref=e1876]: Unknown venue
+              - generic [ref=e1877]:
+                - generic [ref=e1878]: 720p
+                - generic [ref=e1879]: audience
+                - generic [ref=e1880]: You Will Regret (Reloaded)
+          - button "Ski Mask The Slump God — Jocelyn Flores (Tribute), Jan 1, 2022" [ref=e1881] [cursor=pointer]:
+            - generic [ref=e1882]:
+              - button [ref=e1883]:
+                - img [ref=e1884]
+              - generic [ref=e1886]: 0:13
+            - generic [ref=e1887]:
+              - generic [ref=e1889]: Jocelyn Flores (Tribute)
+              - generic [ref=e1890]: Ski Mask The Slump God
+              - generic [ref=e1891]:
+                - generic [ref=e1892]: Jan 1, 2022
+                - generic [ref=e1893]: ·
+                - generic [ref=e1894]: Unknown venue
+              - generic [ref=e1895]:
+                - generic [ref=e1896]: 480p
+                - generic [ref=e1897]: audience
+                - generic [ref=e1898]: "17"
+          - button "$uicideboy$ — Escape from BABYLON, Jan 1, 2022" [ref=e1899] [cursor=pointer]:
+            - generic [ref=e1900]:
+              - button [ref=e1901]:
+                - img [ref=e1902]
+              - generic [ref=e1904]: 0:21
+            - generic [ref=e1905]:
+              - generic [ref=e1907]: Escape from BABYLON
+              - generic [ref=e1908]: $uicideboy$
+              - generic [ref=e1909]:
+                - generic [ref=e1910]: Jan 1, 2022
+                - generic [ref=e1911]: ·
+                - generic [ref=e1912]: Unknown venue
+              - generic [ref=e1913]:
+                - generic [ref=e1914]: 480p
+                - generic [ref=e1915]: audience
+                - generic [ref=e1916]: Sing Me a Lullaby, My Sweet Temptation
+          - button "$uicideboy$ — Resistance Is Useless, Jan 1, 2022" [ref=e1917] [cursor=pointer]:
+            - generic [ref=e1918]:
+              - button [ref=e1919]:
+                - img [ref=e1920]
+              - generic [ref=e1922]: 0:19
+            - generic [ref=e1923]:
+              - generic [ref=e1925]: Resistance Is Useless
+              - generic [ref=e1926]: $uicideboy$
+              - generic [ref=e1927]:
+                - generic [ref=e1928]: Jan 1, 2022
+                - generic [ref=e1929]: ·
+                - generic [ref=e1930]: Unknown venue
+              - generic [ref=e1931]:
+                - generic [ref=e1932]: 720p
+                - generic [ref=e1933]: audience
+                - generic [ref=e1934]: Sing Me a Lullaby, My Sweet Temptation
+          - button "$uicideboy$ — Ugliest, Jan 1, 2022" [ref=e1935] [cursor=pointer]:
+            - generic [ref=e1936]:
+              - button [ref=e1937]:
+                - img [ref=e1938]
+              - generic [ref=e1940]: 0:28
+            - generic [ref=e1941]:
+              - generic [ref=e1943]: Ugliest
+              - generic [ref=e1944]: $uicideboy$
+              - generic [ref=e1945]:
+                - generic [ref=e1946]: Jan 1, 2022
+                - generic [ref=e1947]: ·
+                - generic [ref=e1948]: Unknown venue
+              - generic [ref=e1949]:
+                - generic [ref=e1950]: 480p
+                - generic [ref=e1951]: audience
+                - generic [ref=e1952]: Long Term Effects of SUFFERING
+          - button "$uicideboy$ — Ugliest, Jan 1, 2022" [ref=e1953] [cursor=pointer]:
+            - generic [ref=e1954]:
+              - button [ref=e1955]:
+                - img [ref=e1956]
+              - generic [ref=e1958]: 0:11
+            - generic [ref=e1959]:
+              - generic [ref=e1961]: Ugliest
+              - generic [ref=e1962]: $uicideboy$
+              - generic [ref=e1963]:
+                - generic [ref=e1964]: Jan 1, 2022
+                - generic [ref=e1965]: ·
+                - generic [ref=e1966]: Unknown venue
+              - generic [ref=e1967]:
+                - generic [ref=e1968]: 480p
+                - generic [ref=e1969]: audience
+                - generic [ref=e1970]: Long Term Effects of SUFFERING
+          - button "$uicideboy$ — NOW I'M UP TO MY NECK WITH OFFERS, Jan 1, 2022" [ref=e1971] [cursor=pointer]:
+            - generic [ref=e1972]:
+              - button [ref=e1973]:
+                - img [ref=e1974]
+              - generic [ref=e1976]: 0:15
+            - generic [ref=e1977]:
+              - generic [ref=e1979]: NOW I'M UP TO MY NECK WITH OFFERS
+              - generic [ref=e1980]: $uicideboy$
+              - generic [ref=e1981]:
+                - generic [ref=e1982]: Jan 1, 2022
+                - generic [ref=e1983]: ·
+                - generic [ref=e1984]: Unknown venue
+              - generic [ref=e1985]:
+                - generic [ref=e1986]: 480p
+                - generic [ref=e1987]: audience
+                - generic [ref=e1988]: "KILL YOURSELF Part XX: The Infinity Saga"
+          - button "$uicideboy$ — Paris, Jan 1, 2022" [ref=e1989] [cursor=pointer]:
+            - generic [ref=e1990]:
+              - button [ref=e1991]:
+                - img [ref=e1992]
+              - generic [ref=e1994]: 0:41
+            - generic [ref=e1995]:
+              - generic [ref=e1997]: Paris
+              - generic [ref=e1998]: $uicideboy$
+              - generic [ref=e1999]:
+                - generic [ref=e2000]: Jan 1, 2022
+                - generic [ref=e2001]: ·
+                - generic [ref=e2002]: Unknown venue
+              - generic [ref=e2003]:
+                - generic [ref=e2004]: 480p
+                - generic [ref=e2005]: audience
+                - generic [ref=e2006]: Now the Moon's Rising
+          - button "$uicideboy$ — Paris, Jan 1, 2022" [ref=e2007] [cursor=pointer]:
+            - generic [ref=e2008]:
+              - button [ref=e2009]:
+                - img [ref=e2010]
+              - generic [ref=e2012]: 0:16
+            - generic [ref=e2013]:
+              - generic [ref=e2015]: Paris
+              - generic [ref=e2016]: $uicideboy$
+              - generic [ref=e2017]:
+                - generic [ref=e2018]: Jan 1, 2022
+                - generic [ref=e2019]: ·
+                - generic [ref=e2020]: Unknown venue
+              - generic [ref=e2021]:
+                - generic [ref=e2022]: 480p
+                - generic [ref=e2023]: audience
+                - generic [ref=e2024]: Now the Moon's Rising
+          - button "Machine Gun Kelly — Machine Gun Kelly ft. CORPSE, Jan 1, 2021" [ref=e2025] [cursor=pointer]:
+            - generic [ref=e2026]:
+              - button [ref=e2027]:
+                - img [ref=e2028]
+              - generic [ref=e2030]: 0:10
+            - generic [ref=e2031]:
+              - generic [ref=e2033]: Machine Gun Kelly ft. CORPSE
+              - generic [ref=e2034]: Machine Gun Kelly
+              - generic [ref=e2035]:
+                - generic [ref=e2036]: Jan 1, 2021
+                - generic [ref=e2037]: ·
+                - generic [ref=e2038]: Unknown venue
+              - generic [ref=e2039]:
+                - generic [ref=e2040]: 480p
+                - generic [ref=e2041]: audience
+          - button "Machine Gun Kelly — Till I Die, Jan 1, 2021" [ref=e2042] [cursor=pointer]:
+            - generic [ref=e2043]:
+              - button [ref=e2044]:
+                - img [ref=e2045]
+              - generic [ref=e2047]: 0:06
+            - generic [ref=e2048]:
+              - generic [ref=e2050]: Till I Die
+              - generic [ref=e2051]: Machine Gun Kelly
+              - generic [ref=e2052]:
+                - generic [ref=e2053]: Jan 1, 2021
+                - generic [ref=e2054]: ·
+                - generic [ref=e2055]: Unknown venue
+              - generic [ref=e2056]:
+                - generic [ref=e2057]: 480p
+                - generic [ref=e2058]: audience
+                - generic [ref=e2059]: General Admission
+          - button "Lil Wayne — Mona Lisa, Jan 1, 2019" [ref=e2060] [cursor=pointer]:
+            - generic [ref=e2061]:
+              - button [ref=e2062]:
+                - img [ref=e2063]
+              - generic [ref=e2065]: 0:02
+            - generic [ref=e2066]:
+              - generic [ref=e2068]: Mona Lisa
+              - generic [ref=e2069]: Lil Wayne
+              - generic [ref=e2070]:
+                - generic [ref=e2071]: Jan 1, 2019
+                - generic [ref=e2072]: ·
+                - generic [ref=e2073]: Unknown venue
+              - generic [ref=e2074]:
+                - generic [ref=e2075]: 480p
+                - generic [ref=e2076]: audience
+                - generic [ref=e2077]: Tha Carter V
+          - button "Lil Wayne — Mona Lisa, Jan 1, 2019" [ref=e2078] [cursor=pointer]:
+            - generic [ref=e2079]:
+              - button [ref=e2080]:
+                - img [ref=e2081]
+              - generic [ref=e2083]: 0:10
+            - generic [ref=e2084]:
+              - generic [ref=e2086]: Mona Lisa
+              - generic [ref=e2087]: Lil Wayne
+              - generic [ref=e2088]:
+                - generic [ref=e2089]: Jan 1, 2019
+                - generic [ref=e2090]: ·
+                - generic [ref=e2091]: Unknown venue
+              - generic [ref=e2092]:
+                - generic [ref=e2093]: 480p
+                - generic [ref=e2094]: audience
+                - generic [ref=e2095]: Tha Carter V
+          - button "Blink-182 — , Jan 1, 2019" [ref=e2096] [cursor=pointer]:
+            - generic [ref=e2097]:
+              - button [ref=e2098]:
+                - img [ref=e2099]
+              - generic [ref=e2101]: 0:04
+            - generic [ref=e2102]:
+              - generic [ref=e2103]: Blink-182
+              - generic [ref=e2104]:
+                - generic [ref=e2105]: Jan 1, 2019
+                - generic [ref=e2106]: ·
+                - generic [ref=e2107]: Unknown venue
+              - generic [ref=e2108]:
+                - generic [ref=e2109]: 480p
+                - generic [ref=e2110]: audience
+          - button "Lil Wayne — Mona Lisa, Jan 1, 2019" [ref=e2111] [cursor=pointer]:
+            - generic [ref=e2112]:
+              - button [ref=e2113]:
+                - img [ref=e2114]
+              - generic [ref=e2116]: 0:10
+            - generic [ref=e2117]:
+              - generic [ref=e2119]: Mona Lisa
+              - generic [ref=e2120]: Lil Wayne
+              - generic [ref=e2121]:
+                - generic [ref=e2122]: Jan 1, 2019
+                - generic [ref=e2123]: ·
+                - generic [ref=e2124]: Unknown venue
+              - generic [ref=e2125]:
+                - generic [ref=e2126]: 480p
+                - generic [ref=e2127]: audience
+                - generic [ref=e2128]: Tha Carter V
+          - button "Lil Wayne — 6 Foot 7 Foot, Jan 1, 2019" [ref=e2129] [cursor=pointer]:
+            - generic [ref=e2130]:
+              - button [ref=e2131]:
+                - img [ref=e2132]
+              - generic [ref=e2134]: 0:10
+            - generic [ref=e2135]:
+              - generic [ref=e2137]: 6 Foot 7 Foot
+              - generic [ref=e2138]: Lil Wayne
+              - generic [ref=e2139]:
+                - generic [ref=e2140]: Jan 1, 2019
+                - generic [ref=e2141]: ·
+                - generic [ref=e2142]: Unknown venue
+              - generic [ref=e2143]:
+                - generic [ref=e2144]: 480p
+                - generic [ref=e2145]: audience
+                - generic [ref=e2146]: Tha Carter IV
+          - button "Lil Wayne — Mona Lisa, Jan 1, 2019" [ref=e2147] [cursor=pointer]:
+            - generic [ref=e2148]:
+              - button [ref=e2149]:
+                - img [ref=e2150]
+              - generic [ref=e2152]: 0:10
+            - generic [ref=e2153]:
+              - generic [ref=e2155]: Mona Lisa
+              - generic [ref=e2156]: Lil Wayne
+              - generic [ref=e2157]:
+                - generic [ref=e2158]: Jan 1, 2019
+                - generic [ref=e2159]: ·
+                - generic [ref=e2160]: Unknown venue
+              - generic [ref=e2161]:
+                - generic [ref=e2162]: 480p
+                - generic [ref=e2163]: audience
+                - generic [ref=e2164]: Tha Carter V
+          - button "Grandson — Blood // Water, Jan 1, 2019" [ref=e2165] [cursor=pointer]:
+            - generic [ref=e2166]:
+              - button [ref=e2167]:
+                - img [ref=e2168]
+              - generic [ref=e2170]: 0:10
+            - generic [ref=e2171]:
+              - generic [ref=e2173]: Blood // Water
+              - generic [ref=e2174]: Grandson
+              - generic [ref=e2175]:
+                - generic [ref=e2176]: Jan 1, 2019
+                - generic [ref=e2177]: ·
+                - generic [ref=e2178]: Unknown venue
+              - generic [ref=e2179]:
+                - generic [ref=e2180]: 480p
+                - generic [ref=e2181]: audience
+                - generic [ref=e2182]: A Modern Tragedy Vol. 1
+          - button "Grandson — Blood // Water, Jan 1, 2019" [ref=e2183] [cursor=pointer]:
+            - generic [ref=e2184]:
+              - button [ref=e2185]:
+                - img [ref=e2186]
+              - generic [ref=e2188]: 0:10
+            - generic [ref=e2189]:
+              - generic [ref=e2191]: Blood // Water
+              - generic [ref=e2192]: Grandson
+              - generic [ref=e2193]:
+                - generic [ref=e2194]: Jan 1, 2019
+                - generic [ref=e2195]: ·
+                - generic [ref=e2196]: Unknown venue
+              - generic [ref=e2197]:
+                - generic [ref=e2198]: 480p
+                - generic [ref=e2199]: audience
+                - generic [ref=e2200]: A Modern Tragedy Vol. 1
+          - button "Three 6 Mafia — Stay Fly, Jan 1, 2018" [ref=e2201] [cursor=pointer]:
+            - generic [ref=e2202]:
+              - button [ref=e2203]:
+                - img [ref=e2204]
+              - generic [ref=e2206]: 1:21
+            - generic [ref=e2207]:
+              - generic [ref=e2209]: Stay Fly
+              - generic [ref=e2210]: Three 6 Mafia
+              - generic [ref=e2211]:
+                - generic [ref=e2212]: Jan 1, 2018
+                - generic [ref=e2213]: ·
+                - generic [ref=e2214]: Unknown venue
+              - generic [ref=e2215]:
+                - generic [ref=e2216]: 720p
+                - generic [ref=e2217]: audience
+                - generic [ref=e2218]: Most Known Unknown
+          - button "Logic — Contact, Jan 1, 2018" [ref=e2219] [cursor=pointer]:
+            - generic [ref=e2220]:
+              - button [ref=e2221]:
+                - img [ref=e2222]
+              - generic [ref=e2224]: 1:58
+            - generic [ref=e2225]:
+              - generic [ref=e2227]: Contact
+              - generic [ref=e2228]: Logic
+              - generic [ref=e2229]:
+                - generic [ref=e2230]: Jan 1, 2018
+                - generic [ref=e2231]: ·
+                - generic [ref=e2232]: Unknown venue
+              - generic [ref=e2233]:
+                - generic [ref=e2234]: 1080p
+                - generic [ref=e2235]: audience
+                - generic [ref=e2236]: The Incredible True Story
+          - button "Logic — Soul Food, Jan 1, 2018" [ref=e2237] [cursor=pointer]:
+            - generic [ref=e2238]:
+              - button [ref=e2239]:
+                - img [ref=e2240]
+              - generic [ref=e2242]: 0:44
+            - generic [ref=e2243]:
+              - generic [ref=e2245]: Soul Food
+              - generic [ref=e2246]: Logic
+              - generic [ref=e2247]:
+                - generic [ref=e2248]: Jan 1, 2018
+                - generic [ref=e2249]: ·
+                - generic [ref=e2250]: Unknown venue
+              - generic [ref=e2251]:
+                - generic [ref=e2252]: 480p
+                - generic [ref=e2253]: audience
+                - generic [ref=e2254]: Under Pressure
+          - button "Logic — Everybody, Jan 1, 2018" [ref=e2255] [cursor=pointer]:
+            - generic [ref=e2256]:
+              - button [ref=e2257]:
+                - img [ref=e2258]
+              - generic [ref=e2260]: 0:53
+            - generic [ref=e2261]:
+              - generic [ref=e2263]: Everybody
+              - generic [ref=e2264]: Logic
+              - generic [ref=e2265]:
+                - generic [ref=e2266]: Jan 1, 2018
+                - generic [ref=e2267]: ·
+                - generic [ref=e2268]: Unknown venue
+              - generic [ref=e2269]:
+                - generic [ref=e2270]: 720p
+                - generic [ref=e2271]: audience
+                - generic [ref=e2272]: Everybody
+          - button "Logic — Upgrade, Jan 1, 2018" [ref=e2273] [cursor=pointer]:
+            - generic [ref=e2274]:
+              - button [ref=e2275]:
+                - img [ref=e2276]
+              - generic [ref=e2278]: 0:47
+            - generic [ref=e2279]:
+              - generic [ref=e2281]: Upgrade
+              - generic [ref=e2282]: Logic
+              - generic [ref=e2283]:
+                - generic [ref=e2284]: Jan 1, 2018
+                - generic [ref=e2285]: ·
+                - generic [ref=e2286]: Unknown venue
+              - generic [ref=e2287]:
+                - generic [ref=e2288]: 720p
+                - generic [ref=e2289]: audience
+                - generic [ref=e2290]: The Incredible True Story
+          - button "Logic — Like Woah, Jan 1, 2018" [ref=e2291] [cursor=pointer]:
+            - generic [ref=e2292]:
+              - button [ref=e2293]:
+                - img [ref=e2294]
+              - generic [ref=e2296]: 0:41
+            - generic [ref=e2297]:
+              - generic [ref=e2299]: Like Woah
+              - generic [ref=e2300]: Logic
+              - generic [ref=e2301]:
+                - generic [ref=e2302]: Jan 1, 2018
+                - generic [ref=e2303]: ·
+                - generic [ref=e2304]: Unknown venue
+              - generic [ref=e2305]:
+                - generic [ref=e2306]: 480p
+                - generic [ref=e2307]: audience
+                - generic [ref=e2308]: The Incredible True Story
+          - button "Logic — I'm Gone, Jan 1, 2018" [ref=e2309] [cursor=pointer]:
+            - generic [ref=e2310]:
+              - button [ref=e2311]:
+                - img [ref=e2312]
+              - generic [ref=e2314]: 1:46
+            - generic [ref=e2315]:
+              - generic [ref=e2317]: I'm Gone
+              - generic [ref=e2318]: Logic
+              - generic [ref=e2319]:
+                - generic [ref=e2320]: Jan 1, 2018
+                - generic [ref=e2321]: ·
+                - generic [ref=e2322]: Unknown venue
+              - generic [ref=e2323]:
+                - generic [ref=e2324]: 720p
+                - generic [ref=e2325]: audience
+                - generic [ref=e2326]: Under Pressure
+          - button "Logic — Metropolis, Jan 1, 2018" [ref=e2327] [cursor=pointer]:
+            - generic [ref=e2328]:
+              - button [ref=e2329]:
+                - img [ref=e2330]
+              - generic [ref=e2332]: 1:06
+            - generic [ref=e2333]:
+              - generic [ref=e2335]: Metropolis
+              - generic [ref=e2336]: Logic
+              - generic [ref=e2337]:
+                - generic [ref=e2338]: Jan 1, 2018
+                - generic [ref=e2339]: ·
+                - generic [ref=e2340]: Unknown venue
+              - generic [ref=e2341]:
+                - generic [ref=e2342]: 720p
+                - generic [ref=e2343]: audience
+                - generic [ref=e2344]: Under Pressure
+          - button "Logic — 5 A.M., Jan 1, 2018" [ref=e2345] [cursor=pointer]:
+            - generic [ref=e2346]:
+              - button [ref=e2347]:
+                - img [ref=e2348]
+              - generic [ref=e2350]: 0:51
+            - generic [ref=e2351]:
+              - generic [ref=e2353]: 5 A.M.
+              - generic [ref=e2354]: Logic
+              - generic [ref=e2355]:
+                - generic [ref=e2356]: Jan 1, 2018
+                - generic [ref=e2357]: ·
+                - generic [ref=e2358]: Unknown venue
+              - generic [ref=e2359]:
+                - generic [ref=e2360]: 720p
+                - generic [ref=e2361]: audience
+                - generic [ref=e2362]: "Young Sinatra: Welcome to Forever"
+          - button "Logic — Flexicution, Jan 1, 2018" [ref=e2363] [cursor=pointer]:
+            - generic [ref=e2364]:
+              - button [ref=e2365]:
+                - img [ref=e2366]
+              - generic [ref=e2368]: 0:13
+            - generic [ref=e2369]:
+              - generic [ref=e2371]: Flexicution
+              - generic [ref=e2372]: Logic
+              - generic [ref=e2373]:
+                - generic [ref=e2374]: Jan 1, 2018
+                - generic [ref=e2375]: ·
+                - generic [ref=e2376]: Unknown venue
+              - generic [ref=e2377]:
+                - generic [ref=e2378]: 480p
+                - generic [ref=e2379]: audience
+                - generic [ref=e2380]: Bobby Tarantino
+          - button "Logic — Flexicution, Jan 1, 2018" [ref=e2381] [cursor=pointer]:
+            - generic [ref=e2382]:
+              - button [ref=e2383]:
+                - img [ref=e2384]
+              - generic [ref=e2386]: 0:55
+            - generic [ref=e2387]:
+              - generic [ref=e2389]: Flexicution
+              - generic [ref=e2390]: Logic
+              - generic [ref=e2391]:
+                - generic [ref=e2392]: Jan 1, 2018
+                - generic [ref=e2393]: ·
+                - generic [ref=e2394]: Unknown venue
+              - generic [ref=e2395]:
+                - generic [ref=e2396]: 720p
+                - generic [ref=e2397]: audience
+                - generic [ref=e2398]: Bobby Tarantino
+          - button "Logic — Under Pressure, Jan 1, 2018" [ref=e2399] [cursor=pointer]:
+            - generic [ref=e2400]:
+              - button [ref=e2401]:
+                - img [ref=e2402]
+              - generic [ref=e2404]: 1:22
+            - generic [ref=e2405]:
+              - generic [ref=e2407]: Under Pressure
+              - generic [ref=e2408]: Logic
+              - generic [ref=e2409]:
+                - generic [ref=e2410]: Jan 1, 2018
+                - generic [ref=e2411]: ·
+                - generic [ref=e2412]: Unknown venue
+              - generic [ref=e2413]:
+                - generic [ref=e2414]: 720p
+                - generic [ref=e2415]: audience
+                - generic [ref=e2416]: Under Pressure
+          - button "Logic — City of Stars, Jan 1, 2018" [ref=e2417] [cursor=pointer]:
+            - generic [ref=e2418]:
+              - button [ref=e2419]:
+                - img [ref=e2420]
+              - generic [ref=e2422]: 2:13
+            - generic [ref=e2423]:
+              - generic [ref=e2425]: City of Stars
+              - generic [ref=e2426]: Logic
+              - generic [ref=e2427]:
+                - generic [ref=e2428]: Jan 1, 2018
+                - generic [ref=e2429]: ·
+                - generic [ref=e2430]: Unknown venue
+              - generic [ref=e2431]:
+                - generic [ref=e2432]: 1080p
+                - generic [ref=e2433]: audience
+                - generic [ref=e2434]: The Incredible True Story
+          - button "Logic — Fade Away, Jan 1, 2018" [ref=e2435] [cursor=pointer]:
+            - generic [ref=e2436]:
+              - button [ref=e2437]:
+                - img [ref=e2438]
+              - generic [ref=e2440]: 1:38
+            - generic [ref=e2441]:
+              - generic [ref=e2443]: Fade Away
+              - generic [ref=e2444]: Logic
+              - generic [ref=e2445]:
+                - generic [ref=e2446]: Jan 1, 2018
+                - generic [ref=e2447]: ·
+                - generic [ref=e2448]: Unknown venue
+              - generic [ref=e2449]:
+                - generic [ref=e2450]: 720p
+                - generic [ref=e2451]: audience
+                - generic [ref=e2452]: The Incredible True Story
+          - button "Logic — , Jan 1, 2018" [ref=e2453] [cursor=pointer]:
+            - generic [ref=e2454]:
+              - button [ref=e2455]:
+                - img [ref=e2456]
+              - generic [ref=e2458]: 2:24
+            - generic [ref=e2459]:
+              - generic [ref=e2460]: Logic
+              - generic [ref=e2461]:
+                - generic [ref=e2462]: Jan 1, 2018
+                - generic [ref=e2463]: ·
+                - generic [ref=e2464]: Unknown venue
+              - generic [ref=e2465]:
+                - generic [ref=e2466]: 1080p
+                - generic [ref=e2467]: audience
+          - button "G-Eazy — No Limit, Jan 1, 2018" [ref=e2468] [cursor=pointer]:
+            - generic [ref=e2469]:
+              - button [ref=e2470]:
+                - img [ref=e2471]
+              - generic [ref=e2473]: 1:39
+            - generic [ref=e2474]:
+              - generic [ref=e2476]: No Limit
+              - generic [ref=e2477]: G-Eazy
+              - generic [ref=e2478]:
+                - generic [ref=e2479]: Jan 1, 2018
+                - generic [ref=e2480]: ·
+                - generic [ref=e2481]: Unknown venue
+              - generic [ref=e2482]:
+                - generic [ref=e2483]: 720p
+                - generic [ref=e2484]: audience
+                - generic [ref=e2485]: The Beautiful & Damned
+          - button "G-Eazy — Eazy, Jan 1, 2018" [ref=e2486] [cursor=pointer]:
+            - generic [ref=e2487]:
+              - button [ref=e2488]:
+                - img [ref=e2489]
+              - generic [ref=e2491]: 2:15
+            - generic [ref=e2492]:
+              - generic [ref=e2494]: Eazy
+              - generic [ref=e2495]: G-Eazy
+              - generic [ref=e2496]:
+                - generic [ref=e2497]: Jan 1, 2018
+                - generic [ref=e2498]: ·
+                - generic [ref=e2499]: Unknown venue
+              - generic [ref=e2500]:
+                - generic [ref=e2501]: 1080p
+                - generic [ref=e2502]: audience
+                - generic [ref=e2503]: The Beautiful & Damned
+          - button "G-Eazy — Him & I, Jan 1, 2018" [ref=e2504] [cursor=pointer]:
+            - generic [ref=e2505]:
+              - button [ref=e2506]:
+                - img [ref=e2507]
+              - generic [ref=e2509]: 0:47
+            - generic [ref=e2510]:
+              - generic [ref=e2512]: Him & I
+              - generic [ref=e2513]: G-Eazy
+              - generic [ref=e2514]:
+                - generic [ref=e2515]: Jan 1, 2018
+                - generic [ref=e2516]: ·
+                - generic [ref=e2517]: Unknown venue
+              - generic [ref=e2518]:
+                - generic [ref=e2519]: 720p
+                - generic [ref=e2520]: audience
+                - generic [ref=e2521]: The Beautiful & Damned
+          - button "G-Eazy — Me, Myself & I, Jan 1, 2018" [ref=e2522] [cursor=pointer]:
+            - generic [ref=e2523]:
+              - button [ref=e2524]:
+                - img [ref=e2525]
+              - generic [ref=e2527]: 1:33
+            - generic [ref=e2528]:
+              - generic [ref=e2530]: Me, Myself & I
+              - generic [ref=e2531]: G-Eazy
+              - generic [ref=e2532]:
+                - generic [ref=e2533]: Jan 1, 2018
+                - generic [ref=e2534]: ·
+                - generic [ref=e2535]: Unknown venue
+              - generic [ref=e2536]:
+                - generic [ref=e2537]: 720p
+                - generic [ref=e2538]: audience
+                - generic [ref=e2539]: When It's Dark Out
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2540] [cursor=pointer]:
+            - generic [ref=e2541]:
+              - button [ref=e2542]:
+                - img [ref=e2543]
+              - generic [ref=e2545]: 0:10
+            - generic [ref=e2546]:
+              - generic [ref=e2547]: Machine Gun Kelly
+              - generic [ref=e2548]:
+                - generic [ref=e2549]: Jan 1, 2018
+                - generic [ref=e2550]: ·
+                - generic [ref=e2551]: Unknown venue
+              - generic [ref=e2552]:
+                - generic [ref=e2553]: 480p
+                - generic [ref=e2554]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2555] [cursor=pointer]:
+            - generic [ref=e2556]:
+              - button [ref=e2557]:
+                - img [ref=e2558]
+              - generic [ref=e2560]: 0:05
+            - generic [ref=e2561]:
+              - generic [ref=e2562]: Machine Gun Kelly
+              - generic [ref=e2563]:
+                - generic [ref=e2564]: Jan 1, 2018
+                - generic [ref=e2565]: ·
+                - generic [ref=e2566]: Unknown venue
+              - generic [ref=e2567]:
+                - generic [ref=e2568]: 480p
+                - generic [ref=e2569]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2570] [cursor=pointer]:
+            - generic [ref=e2571]:
+              - button [ref=e2572]:
+                - img [ref=e2573]
+              - generic [ref=e2575]: 0:09
+            - generic [ref=e2576]:
+              - generic [ref=e2577]: Machine Gun Kelly
+              - generic [ref=e2578]:
+                - generic [ref=e2579]: Jan 1, 2018
+                - generic [ref=e2580]: ·
+                - generic [ref=e2581]: Unknown venue
+              - generic [ref=e2582]:
+                - generic [ref=e2583]: 480p
+                - generic [ref=e2584]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2585] [cursor=pointer]:
+            - generic [ref=e2586]:
+              - button [ref=e2587]:
+                - img [ref=e2588]
+              - generic [ref=e2590]: 0:10
+            - generic [ref=e2591]:
+              - generic [ref=e2592]: Machine Gun Kelly
+              - generic [ref=e2593]:
+                - generic [ref=e2594]: Jan 1, 2018
+                - generic [ref=e2595]: ·
+                - generic [ref=e2596]: Unknown venue
+              - generic [ref=e2597]:
+                - generic [ref=e2598]: 480p
+                - generic [ref=e2599]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2600] [cursor=pointer]:
+            - generic [ref=e2601]:
+              - button [ref=e2602]:
+                - img [ref=e2603]
+              - generic [ref=e2605]: 0:09
+            - generic [ref=e2606]:
+              - generic [ref=e2607]: Machine Gun Kelly
+              - generic [ref=e2608]:
+                - generic [ref=e2609]: Jan 1, 2018
+                - generic [ref=e2610]: ·
+                - generic [ref=e2611]: Unknown venue
+              - generic [ref=e2612]:
+                - generic [ref=e2613]: 480p
+                - generic [ref=e2614]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2615] [cursor=pointer]:
+            - generic [ref=e2616]:
+              - button [ref=e2617]:
+                - img [ref=e2618]
+              - generic [ref=e2620]: 0:02
+            - generic [ref=e2621]:
+              - generic [ref=e2622]: Machine Gun Kelly
+              - generic [ref=e2623]:
+                - generic [ref=e2624]: Jan 1, 2018
+                - generic [ref=e2625]: ·
+                - generic [ref=e2626]: Unknown venue
+              - generic [ref=e2627]:
+                - generic [ref=e2628]: 480p
+                - generic [ref=e2629]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2630] [cursor=pointer]:
+            - generic [ref=e2631]:
+              - button [ref=e2632]:
+                - img [ref=e2633]
+              - generic [ref=e2635]: 0:09
+            - generic [ref=e2636]:
+              - generic [ref=e2637]: Machine Gun Kelly
+              - generic [ref=e2638]:
+                - generic [ref=e2639]: Jan 1, 2018
+                - generic [ref=e2640]: ·
+                - generic [ref=e2641]: Unknown venue
+              - generic [ref=e2642]:
+                - generic [ref=e2643]: 480p
+                - generic [ref=e2644]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2645] [cursor=pointer]:
+            - generic [ref=e2646]:
+              - button [ref=e2647]:
+                - img [ref=e2648]
+              - generic [ref=e2650]: 0:10
+            - generic [ref=e2651]:
+              - generic [ref=e2652]: Machine Gun Kelly
+              - generic [ref=e2653]:
+                - generic [ref=e2654]: Jan 1, 2018
+                - generic [ref=e2655]: ·
+                - generic [ref=e2656]: Unknown venue
+              - generic [ref=e2657]:
+                - generic [ref=e2658]: 480p
+                - generic [ref=e2659]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2660] [cursor=pointer]:
+            - generic [ref=e2661]:
+              - button [ref=e2662]:
+                - img [ref=e2663]
+              - generic [ref=e2665]: 0:10
+            - generic [ref=e2666]:
+              - generic [ref=e2667]: Machine Gun Kelly
+              - generic [ref=e2668]:
+                - generic [ref=e2669]: Jan 1, 2018
+                - generic [ref=e2670]: ·
+                - generic [ref=e2671]: Unknown venue
+              - generic [ref=e2672]:
+                - generic [ref=e2673]: 480p
+                - generic [ref=e2674]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2675] [cursor=pointer]:
+            - generic [ref=e2676]:
+              - button [ref=e2677]:
+                - img [ref=e2678]
+              - generic [ref=e2680]: 0:10
+            - generic [ref=e2681]:
+              - generic [ref=e2682]: Machine Gun Kelly
+              - generic [ref=e2683]:
+                - generic [ref=e2684]: Jan 1, 2018
+                - generic [ref=e2685]: ·
+                - generic [ref=e2686]: Unknown venue
+              - generic [ref=e2687]:
+                - generic [ref=e2688]: 480p
+                - generic [ref=e2689]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2690] [cursor=pointer]:
+            - generic [ref=e2691]:
+              - button [ref=e2692]:
+                - img [ref=e2693]
+              - generic [ref=e2695]: 0:10
+            - generic [ref=e2696]:
+              - generic [ref=e2697]: Machine Gun Kelly
+              - generic [ref=e2698]:
+                - generic [ref=e2699]: Jan 1, 2018
+                - generic [ref=e2700]: ·
+                - generic [ref=e2701]: Unknown venue
+              - generic [ref=e2702]:
+                - generic [ref=e2703]: 480p
+                - generic [ref=e2704]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2705] [cursor=pointer]:
+            - generic [ref=e2706]:
+              - button [ref=e2707]:
+                - img [ref=e2708]
+              - generic [ref=e2710]: 0:10
+            - generic [ref=e2711]:
+              - generic [ref=e2712]: Machine Gun Kelly
+              - generic [ref=e2713]:
+                - generic [ref=e2714]: Jan 1, 2018
+                - generic [ref=e2715]: ·
+                - generic [ref=e2716]: Unknown venue
+              - generic [ref=e2717]:
+                - generic [ref=e2718]: 480p
+                - generic [ref=e2719]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2720] [cursor=pointer]:
+            - generic [ref=e2721]:
+              - button [ref=e2722]:
+                - img [ref=e2723]
+              - generic [ref=e2725]: 0:10
+            - generic [ref=e2726]:
+              - generic [ref=e2727]: Machine Gun Kelly
+              - generic [ref=e2728]:
+                - generic [ref=e2729]: Jan 1, 2018
+                - generic [ref=e2730]: ·
+                - generic [ref=e2731]: Unknown venue
+              - generic [ref=e2732]:
+                - generic [ref=e2733]: 480p
+                - generic [ref=e2734]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2735] [cursor=pointer]:
+            - generic [ref=e2736]:
+              - button [ref=e2737]:
+                - img [ref=e2738]
+              - generic [ref=e2740]: 0:10
+            - generic [ref=e2741]:
+              - generic [ref=e2742]: Machine Gun Kelly
+              - generic [ref=e2743]:
+                - generic [ref=e2744]: Jan 1, 2018
+                - generic [ref=e2745]: ·
+                - generic [ref=e2746]: Unknown venue
+              - generic [ref=e2747]:
+                - generic [ref=e2748]: 480p
+                - generic [ref=e2749]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2750] [cursor=pointer]:
+            - generic [ref=e2751]:
+              - button [ref=e2752]:
+                - img [ref=e2753]
+              - generic [ref=e2755]: 0:10
+            - generic [ref=e2756]:
+              - generic [ref=e2757]: Machine Gun Kelly
+              - generic [ref=e2758]:
+                - generic [ref=e2759]: Jan 1, 2018
+                - generic [ref=e2760]: ·
+                - generic [ref=e2761]: Unknown venue
+              - generic [ref=e2762]:
+                - generic [ref=e2763]: 480p
+                - generic [ref=e2764]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2765] [cursor=pointer]:
+            - generic [ref=e2766]:
+              - button [ref=e2767]:
+                - img [ref=e2768]
+              - generic [ref=e2770]: 0:10
+            - generic [ref=e2771]:
+              - generic [ref=e2772]: Machine Gun Kelly
+              - generic [ref=e2773]:
+                - generic [ref=e2774]: Jan 1, 2018
+                - generic [ref=e2775]: ·
+                - generic [ref=e2776]: Unknown venue
+              - generic [ref=e2777]:
+                - generic [ref=e2778]: 480p
+                - generic [ref=e2779]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2780] [cursor=pointer]:
+            - generic [ref=e2781]:
+              - button [ref=e2782]:
+                - img [ref=e2783]
+              - generic [ref=e2785]: 0:11
+            - generic [ref=e2786]:
+              - generic [ref=e2787]: Machine Gun Kelly
+              - generic [ref=e2788]:
+                - generic [ref=e2789]: Jan 1, 2018
+                - generic [ref=e2790]: ·
+                - generic [ref=e2791]: Unknown venue
+              - generic [ref=e2792]:
+                - generic [ref=e2793]: 480p
+                - generic [ref=e2794]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2795] [cursor=pointer]:
+            - generic [ref=e2796]:
+              - button [ref=e2797]:
+                - img [ref=e2798]
+              - generic [ref=e2800]: 0:10
+            - generic [ref=e2801]:
+              - generic [ref=e2802]: Machine Gun Kelly
+              - generic [ref=e2803]:
+                - generic [ref=e2804]: Jan 1, 2018
+                - generic [ref=e2805]: ·
+                - generic [ref=e2806]: Unknown venue
+              - generic [ref=e2807]:
+                - generic [ref=e2808]: 480p
+                - generic [ref=e2809]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2810] [cursor=pointer]:
+            - generic [ref=e2811]:
+              - button [ref=e2812]:
+                - img [ref=e2813]
+              - generic [ref=e2815]: 0:10
+            - generic [ref=e2816]:
+              - generic [ref=e2817]: Machine Gun Kelly
+              - generic [ref=e2818]:
+                - generic [ref=e2819]: Jan 1, 2018
+                - generic [ref=e2820]: ·
+                - generic [ref=e2821]: Unknown venue
+              - generic [ref=e2822]:
+                - generic [ref=e2823]: 480p
+                - generic [ref=e2824]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2825] [cursor=pointer]:
+            - generic [ref=e2826]:
+              - button [ref=e2827]:
+                - img [ref=e2828]
+              - generic [ref=e2830]: 0:10
+            - generic [ref=e2831]:
+              - generic [ref=e2832]: Machine Gun Kelly
+              - generic [ref=e2833]:
+                - generic [ref=e2834]: Jan 1, 2018
+                - generic [ref=e2835]: ·
+                - generic [ref=e2836]: Unknown venue
+              - generic [ref=e2837]:
+                - generic [ref=e2838]: 480p
+                - generic [ref=e2839]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2840] [cursor=pointer]:
+            - generic [ref=e2841]:
+              - button [ref=e2842]:
+                - img [ref=e2843]
+              - generic [ref=e2845]: 0:11
+            - generic [ref=e2846]:
+              - generic [ref=e2847]: Machine Gun Kelly
+              - generic [ref=e2848]:
+                - generic [ref=e2849]: Jan 1, 2018
+                - generic [ref=e2850]: ·
+                - generic [ref=e2851]: Unknown venue
+              - generic [ref=e2852]:
+                - generic [ref=e2853]: 480p
+                - generic [ref=e2854]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2855] [cursor=pointer]:
+            - generic [ref=e2856]:
+              - button [ref=e2857]:
+                - img [ref=e2858]
+              - generic [ref=e2860]: 0:08
+            - generic [ref=e2861]:
+              - generic [ref=e2862]: Machine Gun Kelly
+              - generic [ref=e2863]:
+                - generic [ref=e2864]: Jan 1, 2018
+                - generic [ref=e2865]: ·
+                - generic [ref=e2866]: Unknown venue
+              - generic [ref=e2867]:
+                - generic [ref=e2868]: 480p
+                - generic [ref=e2869]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2870] [cursor=pointer]:
+            - generic [ref=e2871]:
+              - button [ref=e2872]:
+                - img [ref=e2873]
+              - generic [ref=e2875]: 0:10
+            - generic [ref=e2876]:
+              - generic [ref=e2877]: Machine Gun Kelly
+              - generic [ref=e2878]:
+                - generic [ref=e2879]: Jan 1, 2018
+                - generic [ref=e2880]: ·
+                - generic [ref=e2881]: Unknown venue
+              - generic [ref=e2882]:
+                - generic [ref=e2883]: 480p
+                - generic [ref=e2884]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2885] [cursor=pointer]:
+            - generic [ref=e2886]:
+              - button [ref=e2887]:
+                - img [ref=e2888]
+              - generic [ref=e2890]: 0:10
+            - generic [ref=e2891]:
+              - generic [ref=e2892]: Machine Gun Kelly
+              - generic [ref=e2893]:
+                - generic [ref=e2894]: Jan 1, 2018
+                - generic [ref=e2895]: ·
+                - generic [ref=e2896]: Unknown venue
+              - generic [ref=e2897]:
+                - generic [ref=e2898]: 480p
+                - generic [ref=e2899]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2900] [cursor=pointer]:
+            - generic [ref=e2901]:
+              - button [ref=e2902]:
+                - img [ref=e2903]
+              - generic [ref=e2905]: 0:10
+            - generic [ref=e2906]:
+              - generic [ref=e2907]: Machine Gun Kelly
+              - generic [ref=e2908]:
+                - generic [ref=e2909]: Jan 1, 2018
+                - generic [ref=e2910]: ·
+                - generic [ref=e2911]: Unknown venue
+              - generic [ref=e2912]:
+                - generic [ref=e2913]: 480p
+                - generic [ref=e2914]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2915] [cursor=pointer]:
+            - generic [ref=e2916]:
+              - button [ref=e2917]:
+                - img [ref=e2918]
+              - generic [ref=e2920]: 0:06
+            - generic [ref=e2921]:
+              - generic [ref=e2922]: Machine Gun Kelly
+              - generic [ref=e2923]:
+                - generic [ref=e2924]: Jan 1, 2018
+                - generic [ref=e2925]: ·
+                - generic [ref=e2926]: Unknown venue
+              - generic [ref=e2927]:
+                - generic [ref=e2928]: 480p
+                - generic [ref=e2929]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2930] [cursor=pointer]:
+            - generic [ref=e2931]:
+              - button [ref=e2932]:
+                - img [ref=e2933]
+              - generic [ref=e2935]: 0:01
+            - generic [ref=e2936]:
+              - generic [ref=e2937]: Machine Gun Kelly
+              - generic [ref=e2938]:
+                - generic [ref=e2939]: Jan 1, 2018
+                - generic [ref=e2940]: ·
+                - generic [ref=e2941]: Unknown venue
+              - generic [ref=e2942]:
+                - generic [ref=e2943]: 480p
+                - generic [ref=e2944]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2945] [cursor=pointer]:
+            - generic [ref=e2946]:
+              - button [ref=e2947]:
+                - img [ref=e2948]
+              - generic [ref=e2950]: 0:10
+            - generic [ref=e2951]:
+              - generic [ref=e2952]: Machine Gun Kelly
+              - generic [ref=e2953]:
+                - generic [ref=e2954]: Jan 1, 2018
+                - generic [ref=e2955]: ·
+                - generic [ref=e2956]: Unknown venue
+              - generic [ref=e2957]:
+                - generic [ref=e2958]: 480p
+                - generic [ref=e2959]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2960] [cursor=pointer]:
+            - generic [ref=e2961]:
+              - button [ref=e2962]:
+                - img [ref=e2963]
+              - generic [ref=e2965]: 0:04
+            - generic [ref=e2966]:
+              - generic [ref=e2967]: Machine Gun Kelly
+              - generic [ref=e2968]:
+                - generic [ref=e2969]: Jan 1, 2018
+                - generic [ref=e2970]: ·
+                - generic [ref=e2971]: Unknown venue
+              - generic [ref=e2972]:
+                - generic [ref=e2973]: 480p
+                - generic [ref=e2974]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2975] [cursor=pointer]:
+            - generic [ref=e2976]:
+              - button [ref=e2977]:
+                - img [ref=e2978]
+              - generic [ref=e2980]: 0:09
+            - generic [ref=e2981]:
+              - generic [ref=e2982]: Machine Gun Kelly
+              - generic [ref=e2983]:
+                - generic [ref=e2984]: Jan 1, 2018
+                - generic [ref=e2985]: ·
+                - generic [ref=e2986]: Unknown venue
+              - generic [ref=e2987]:
+                - generic [ref=e2988]: 480p
+                - generic [ref=e2989]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e2990] [cursor=pointer]:
+            - generic [ref=e2991]:
+              - button [ref=e2992]:
+                - img [ref=e2993]
+              - generic [ref=e2995]: 0:09
+            - generic [ref=e2996]:
+              - generic [ref=e2997]: Machine Gun Kelly
+              - generic [ref=e2998]:
+                - generic [ref=e2999]: Jan 1, 2018
+                - generic [ref=e3000]: ·
+                - generic [ref=e3001]: Unknown venue
+              - generic [ref=e3002]:
+                - generic [ref=e3003]: 480p
+                - generic [ref=e3004]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3005] [cursor=pointer]:
+            - generic [ref=e3006]:
+              - button [ref=e3007]:
+                - img [ref=e3008]
+              - generic [ref=e3010]: 0:09
+            - generic [ref=e3011]:
+              - generic [ref=e3012]: Machine Gun Kelly
+              - generic [ref=e3013]:
+                - generic [ref=e3014]: Jan 1, 2018
+                - generic [ref=e3015]: ·
+                - generic [ref=e3016]: Unknown venue
+              - generic [ref=e3017]:
+                - generic [ref=e3018]: 480p
+                - generic [ref=e3019]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3020] [cursor=pointer]:
+            - generic [ref=e3021]:
+              - button [ref=e3022]:
+                - img [ref=e3023]
+              - generic [ref=e3025]: 0:10
+            - generic [ref=e3026]:
+              - generic [ref=e3027]: Machine Gun Kelly
+              - generic [ref=e3028]:
+                - generic [ref=e3029]: Jan 1, 2018
+                - generic [ref=e3030]: ·
+                - generic [ref=e3031]: Unknown venue
+              - generic [ref=e3032]:
+                - generic [ref=e3033]: 480p
+                - generic [ref=e3034]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3035] [cursor=pointer]:
+            - generic [ref=e3036]:
+              - button [ref=e3037]:
+                - img [ref=e3038]
+              - generic [ref=e3040]: 0:10
+            - generic [ref=e3041]:
+              - generic [ref=e3042]: Machine Gun Kelly
+              - generic [ref=e3043]:
+                - generic [ref=e3044]: Jan 1, 2018
+                - generic [ref=e3045]: ·
+                - generic [ref=e3046]: Unknown venue
+              - generic [ref=e3047]:
+                - generic [ref=e3048]: 480p
+                - generic [ref=e3049]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3050] [cursor=pointer]:
+            - generic [ref=e3051]:
+              - button [ref=e3052]:
+                - img [ref=e3053]
+              - generic [ref=e3055]: 0:10
+            - generic [ref=e3056]:
+              - generic [ref=e3057]: Machine Gun Kelly
+              - generic [ref=e3058]:
+                - generic [ref=e3059]: Jan 1, 2018
+                - generic [ref=e3060]: ·
+                - generic [ref=e3061]: Unknown venue
+              - generic [ref=e3062]:
+                - generic [ref=e3063]: 480p
+                - generic [ref=e3064]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3065] [cursor=pointer]:
+            - generic [ref=e3066]:
+              - button [ref=e3067]:
+                - img [ref=e3068]
+              - generic [ref=e3070]: 0:10
+            - generic [ref=e3071]:
+              - generic [ref=e3072]: Machine Gun Kelly
+              - generic [ref=e3073]:
+                - generic [ref=e3074]: Jan 1, 2018
+                - generic [ref=e3075]: ·
+                - generic [ref=e3076]: Unknown venue
+              - generic [ref=e3077]:
+                - generic [ref=e3078]: 480p
+                - generic [ref=e3079]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3080] [cursor=pointer]:
+            - generic [ref=e3081]:
+              - button [ref=e3082]:
+                - img [ref=e3083]
+              - generic [ref=e3085]: 0:19
+            - generic [ref=e3086]:
+              - generic [ref=e3087]: Machine Gun Kelly
+              - generic [ref=e3088]:
+                - generic [ref=e3089]: Jan 1, 2018
+                - generic [ref=e3090]: ·
+                - generic [ref=e3091]: Unknown venue
+              - generic [ref=e3092]:
+                - generic [ref=e3093]: 480p
+                - generic [ref=e3094]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3095] [cursor=pointer]:
+            - generic [ref=e3096]:
+              - button [ref=e3097]:
+                - img [ref=e3098]
+              - generic [ref=e3100]: 0:11
+            - generic [ref=e3101]:
+              - generic [ref=e3102]: Machine Gun Kelly
+              - generic [ref=e3103]:
+                - generic [ref=e3104]: Jan 1, 2018
+                - generic [ref=e3105]: ·
+                - generic [ref=e3106]: Unknown venue
+              - generic [ref=e3107]:
+                - generic [ref=e3108]: 480p
+                - generic [ref=e3109]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3110] [cursor=pointer]:
+            - generic [ref=e3111]:
+              - button [ref=e3112]:
+                - img [ref=e3113]
+              - generic [ref=e3115]: 0:09
+            - generic [ref=e3116]:
+              - generic [ref=e3117]: Machine Gun Kelly
+              - generic [ref=e3118]:
+                - generic [ref=e3119]: Jan 1, 2018
+                - generic [ref=e3120]: ·
+                - generic [ref=e3121]: Unknown venue
+              - generic [ref=e3122]:
+                - generic [ref=e3123]: 480p
+                - generic [ref=e3124]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3125] [cursor=pointer]:
+            - generic [ref=e3126]:
+              - button [ref=e3127]:
+                - img [ref=e3128]
+              - generic [ref=e3130]: 0:10
+            - generic [ref=e3131]:
+              - generic [ref=e3132]: Machine Gun Kelly
+              - generic [ref=e3133]:
+                - generic [ref=e3134]: Jan 1, 2018
+                - generic [ref=e3135]: ·
+                - generic [ref=e3136]: Unknown venue
+              - generic [ref=e3137]:
+                - generic [ref=e3138]: 480p
+                - generic [ref=e3139]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3140] [cursor=pointer]:
+            - generic [ref=e3141]:
+              - button [ref=e3142]:
+                - img [ref=e3143]
+              - generic [ref=e3145]: 0:22
+            - generic [ref=e3146]:
+              - generic [ref=e3147]: Machine Gun Kelly
+              - generic [ref=e3148]:
+                - generic [ref=e3149]: Jan 1, 2018
+                - generic [ref=e3150]: ·
+                - generic [ref=e3151]: Unknown venue
+              - generic [ref=e3152]:
+                - generic [ref=e3153]: 480p
+                - generic [ref=e3154]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3155] [cursor=pointer]:
+            - generic [ref=e3156]:
+              - button [ref=e3157]:
+                - img [ref=e3158]
+              - generic [ref=e3160]: 0:11
+            - generic [ref=e3161]:
+              - generic [ref=e3162]: Machine Gun Kelly
+              - generic [ref=e3163]:
+                - generic [ref=e3164]: Jan 1, 2018
+                - generic [ref=e3165]: ·
+                - generic [ref=e3166]: Unknown venue
+              - generic [ref=e3167]:
+                - generic [ref=e3168]: 480p
+                - generic [ref=e3169]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3170] [cursor=pointer]:
+            - generic [ref=e3171]:
+              - button [ref=e3172]:
+                - img [ref=e3173]
+              - generic [ref=e3175]: 0:11
+            - generic [ref=e3176]:
+              - generic [ref=e3177]: Machine Gun Kelly
+              - generic [ref=e3178]:
+                - generic [ref=e3179]: Jan 1, 2018
+                - generic [ref=e3180]: ·
+                - generic [ref=e3181]: Unknown venue
+              - generic [ref=e3182]:
+                - generic [ref=e3183]: 480p
+                - generic [ref=e3184]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3185] [cursor=pointer]:
+            - generic [ref=e3186]:
+              - button [ref=e3187]:
+                - img [ref=e3188]
+              - generic [ref=e3190]: 0:10
+            - generic [ref=e3191]:
+              - generic [ref=e3192]: Machine Gun Kelly
+              - generic [ref=e3193]:
+                - generic [ref=e3194]: Jan 1, 2018
+                - generic [ref=e3195]: ·
+                - generic [ref=e3196]: Unknown venue
+              - generic [ref=e3197]:
+                - generic [ref=e3198]: 480p
+                - generic [ref=e3199]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3200] [cursor=pointer]:
+            - generic [ref=e3201]:
+              - button [ref=e3202]:
+                - img [ref=e3203]
+              - generic [ref=e3205]: 0:10
+            - generic [ref=e3206]:
+              - generic [ref=e3207]: Machine Gun Kelly
+              - generic [ref=e3208]:
+                - generic [ref=e3209]: Jan 1, 2018
+                - generic [ref=e3210]: ·
+                - generic [ref=e3211]: Unknown venue
+              - generic [ref=e3212]:
+                - generic [ref=e3213]: 480p
+                - generic [ref=e3214]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3215] [cursor=pointer]:
+            - generic [ref=e3216]:
+              - button [ref=e3217]:
+                - img [ref=e3218]
+              - generic [ref=e3220]: 0:10
+            - generic [ref=e3221]:
+              - generic [ref=e3222]: Machine Gun Kelly
+              - generic [ref=e3223]:
+                - generic [ref=e3224]: Jan 1, 2018
+                - generic [ref=e3225]: ·
+                - generic [ref=e3226]: Unknown venue
+              - generic [ref=e3227]:
+                - generic [ref=e3228]: 480p
+                - generic [ref=e3229]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2018" [ref=e3230] [cursor=pointer]:
+            - generic [ref=e3231]:
+              - button [ref=e3232]:
+                - img [ref=e3233]
+              - generic [ref=e3235]: 0:09
+            - generic [ref=e3236]:
+              - generic [ref=e3237]: Machine Gun Kelly
+              - generic [ref=e3238]:
+                - generic [ref=e3239]: Jan 1, 2018
+                - generic [ref=e3240]: ·
+                - generic [ref=e3241]: Unknown venue
+              - generic [ref=e3242]:
+                - generic [ref=e3243]: 480p
+                - generic [ref=e3244]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3245] [cursor=pointer]:
+            - generic [ref=e3246]:
+              - button [ref=e3247]:
+                - img [ref=e3248]
+              - generic [ref=e3250]: 0:39
+            - generic [ref=e3251]:
+              - generic [ref=e3252]: Korn
+              - generic [ref=e3253]:
+                - generic [ref=e3254]: Jan 1, 2017
+                - generic [ref=e3255]: ·
+                - generic [ref=e3256]: Unknown venue
+              - generic [ref=e3257]:
+                - generic [ref=e3258]: 720p
+                - generic [ref=e3259]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3260] [cursor=pointer]:
+            - generic [ref=e3261]:
+              - button [ref=e3262]:
+                - img [ref=e3263]
+              - generic [ref=e3265]: 0:06
+            - generic [ref=e3266]:
+              - generic [ref=e3267]: Korn
+              - generic [ref=e3268]:
+                - generic [ref=e3269]: Jan 1, 2017
+                - generic [ref=e3270]: ·
+                - generic [ref=e3271]: Unknown venue
+              - generic [ref=e3272]:
+                - generic [ref=e3273]: 480p
+                - generic [ref=e3274]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3275] [cursor=pointer]:
+            - generic [ref=e3276]:
+              - button [ref=e3277]:
+                - img [ref=e3278]
+              - generic [ref=e3280]: 0:10
+            - generic [ref=e3281]:
+              - generic [ref=e3282]: Korn
+              - generic [ref=e3283]:
+                - generic [ref=e3284]: Jan 1, 2017
+                - generic [ref=e3285]: ·
+                - generic [ref=e3286]: Unknown venue
+              - generic [ref=e3287]:
+                - generic [ref=e3288]: 480p
+                - generic [ref=e3289]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3290] [cursor=pointer]:
+            - generic [ref=e3291]:
+              - button [ref=e3292]:
+                - img [ref=e3293]
+              - generic [ref=e3295]: 0:10
+            - generic [ref=e3296]:
+              - generic [ref=e3297]: Korn
+              - generic [ref=e3298]:
+                - generic [ref=e3299]: Jan 1, 2017
+                - generic [ref=e3300]: ·
+                - generic [ref=e3301]: Unknown venue
+              - generic [ref=e3302]:
+                - generic [ref=e3303]: 480p
+                - generic [ref=e3304]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3305] [cursor=pointer]:
+            - generic [ref=e3306]:
+              - button [ref=e3307]:
+                - img [ref=e3308]
+              - generic [ref=e3310]: 0:10
+            - generic [ref=e3311]:
+              - generic [ref=e3312]: Korn
+              - generic [ref=e3313]:
+                - generic [ref=e3314]: Jan 1, 2017
+                - generic [ref=e3315]: ·
+                - generic [ref=e3316]: Unknown venue
+              - generic [ref=e3317]:
+                - generic [ref=e3318]: 480p
+                - generic [ref=e3319]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3320] [cursor=pointer]:
+            - generic [ref=e3321]:
+              - button [ref=e3322]:
+                - img [ref=e3323]
+              - generic [ref=e3325]: 0:10
+            - generic [ref=e3326]:
+              - generic [ref=e3327]: Korn
+              - generic [ref=e3328]:
+                - generic [ref=e3329]: Jan 1, 2017
+                - generic [ref=e3330]: ·
+                - generic [ref=e3331]: Unknown venue
+              - generic [ref=e3332]:
+                - generic [ref=e3333]: 480p
+                - generic [ref=e3334]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3335] [cursor=pointer]:
+            - generic [ref=e3336]:
+              - button [ref=e3337]:
+                - img [ref=e3338]
+              - generic [ref=e3340]: 0:10
+            - generic [ref=e3341]:
+              - generic [ref=e3342]: Korn
+              - generic [ref=e3343]:
+                - generic [ref=e3344]: Jan 1, 2017
+                - generic [ref=e3345]: ·
+                - generic [ref=e3346]: Unknown venue
+              - generic [ref=e3347]:
+                - generic [ref=e3348]: 480p
+                - generic [ref=e3349]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3350] [cursor=pointer]:
+            - generic [ref=e3351]:
+              - button [ref=e3352]:
+                - img [ref=e3353]
+              - generic [ref=e3355]: 0:10
+            - generic [ref=e3356]:
+              - generic [ref=e3357]: Korn
+              - generic [ref=e3358]:
+                - generic [ref=e3359]: Jan 1, 2017
+                - generic [ref=e3360]: ·
+                - generic [ref=e3361]: Unknown venue
+              - generic [ref=e3362]:
+                - generic [ref=e3363]: 480p
+                - generic [ref=e3364]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3365] [cursor=pointer]:
+            - generic [ref=e3366]:
+              - button [ref=e3367]:
+                - img [ref=e3368]
+              - generic [ref=e3370]: 0:10
+            - generic [ref=e3371]:
+              - generic [ref=e3372]: Korn
+              - generic [ref=e3373]:
+                - generic [ref=e3374]: Jan 1, 2017
+                - generic [ref=e3375]: ·
+                - generic [ref=e3376]: Unknown venue
+              - generic [ref=e3377]:
+                - generic [ref=e3378]: 480p
+                - generic [ref=e3379]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3380] [cursor=pointer]:
+            - generic [ref=e3381]:
+              - button [ref=e3382]:
+                - img [ref=e3383]
+              - generic [ref=e3385]: 0:06
+            - generic [ref=e3386]:
+              - generic [ref=e3387]: Korn
+              - generic [ref=e3388]:
+                - generic [ref=e3389]: Jan 1, 2017
+                - generic [ref=e3390]: ·
+                - generic [ref=e3391]: Unknown venue
+              - generic [ref=e3392]:
+                - generic [ref=e3393]: 480p
+                - generic [ref=e3394]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3395] [cursor=pointer]:
+            - generic [ref=e3396]:
+              - button [ref=e3397]:
+                - img [ref=e3398]
+              - generic [ref=e3400]: 0:10
+            - generic [ref=e3401]:
+              - generic [ref=e3402]: Korn
+              - generic [ref=e3403]:
+                - generic [ref=e3404]: Jan 1, 2017
+                - generic [ref=e3405]: ·
+                - generic [ref=e3406]: Unknown venue
+              - generic [ref=e3407]:
+                - generic [ref=e3408]: 480p
+                - generic [ref=e3409]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3410] [cursor=pointer]:
+            - generic [ref=e3411]:
+              - button [ref=e3412]:
+                - img [ref=e3413]
+              - generic [ref=e3415]: 0:07
+            - generic [ref=e3416]:
+              - generic [ref=e3417]: Korn
+              - generic [ref=e3418]:
+                - generic [ref=e3419]: Jan 1, 2017
+                - generic [ref=e3420]: ·
+                - generic [ref=e3421]: Unknown venue
+              - generic [ref=e3422]:
+                - generic [ref=e3423]: 480p
+                - generic [ref=e3424]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3425] [cursor=pointer]:
+            - generic [ref=e3426]:
+              - button [ref=e3427]:
+                - img [ref=e3428]
+              - generic [ref=e3430]: 0:10
+            - generic [ref=e3431]:
+              - generic [ref=e3432]: Korn
+              - generic [ref=e3433]:
+                - generic [ref=e3434]: Jan 1, 2017
+                - generic [ref=e3435]: ·
+                - generic [ref=e3436]: Unknown venue
+              - generic [ref=e3437]:
+                - generic [ref=e3438]: 480p
+                - generic [ref=e3439]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3440] [cursor=pointer]:
+            - generic [ref=e3441]:
+              - button [ref=e3442]:
+                - img [ref=e3443]
+              - generic [ref=e3445]: 0:10
+            - generic [ref=e3446]:
+              - generic [ref=e3447]: Korn
+              - generic [ref=e3448]:
+                - generic [ref=e3449]: Jan 1, 2017
+                - generic [ref=e3450]: ·
+                - generic [ref=e3451]: Unknown venue
+              - generic [ref=e3452]:
+                - generic [ref=e3453]: 480p
+                - generic [ref=e3454]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3455] [cursor=pointer]:
+            - generic [ref=e3456]:
+              - button [ref=e3457]:
+                - img [ref=e3458]
+              - generic [ref=e3460]: 0:10
+            - generic [ref=e3461]:
+              - generic [ref=e3462]: Korn
+              - generic [ref=e3463]:
+                - generic [ref=e3464]: Jan 1, 2017
+                - generic [ref=e3465]: ·
+                - generic [ref=e3466]: Unknown venue
+              - generic [ref=e3467]:
+                - generic [ref=e3468]: 480p
+                - generic [ref=e3469]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3470] [cursor=pointer]:
+            - generic [ref=e3471]:
+              - button [ref=e3472]:
+                - img [ref=e3473]
+              - generic [ref=e3475]: 0:10
+            - generic [ref=e3476]:
+              - generic [ref=e3477]: Korn
+              - generic [ref=e3478]:
+                - generic [ref=e3479]: Jan 1, 2017
+                - generic [ref=e3480]: ·
+                - generic [ref=e3481]: Unknown venue
+              - generic [ref=e3482]:
+                - generic [ref=e3483]: 480p
+                - generic [ref=e3484]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3485] [cursor=pointer]:
+            - generic [ref=e3486]:
+              - button [ref=e3487]:
+                - img [ref=e3488]
+              - generic [ref=e3490]: 0:10
+            - generic [ref=e3491]:
+              - generic [ref=e3492]: Korn
+              - generic [ref=e3493]:
+                - generic [ref=e3494]: Jan 1, 2017
+                - generic [ref=e3495]: ·
+                - generic [ref=e3496]: Unknown venue
+              - generic [ref=e3497]:
+                - generic [ref=e3498]: 480p
+                - generic [ref=e3499]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3500] [cursor=pointer]:
+            - generic [ref=e3501]:
+              - button [ref=e3502]:
+                - img [ref=e3503]
+              - generic [ref=e3505]: 0:10
+            - generic [ref=e3506]:
+              - generic [ref=e3507]: Korn
+              - generic [ref=e3508]:
+                - generic [ref=e3509]: Jan 1, 2017
+                - generic [ref=e3510]: ·
+                - generic [ref=e3511]: Unknown venue
+              - generic [ref=e3512]:
+                - generic [ref=e3513]: 480p
+                - generic [ref=e3514]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3515] [cursor=pointer]:
+            - generic [ref=e3516]:
+              - button [ref=e3517]:
+                - img [ref=e3518]
+              - generic [ref=e3520]: 0:09
+            - generic [ref=e3521]:
+              - generic [ref=e3522]: Korn
+              - generic [ref=e3523]:
+                - generic [ref=e3524]: Jan 1, 2017
+                - generic [ref=e3525]: ·
+                - generic [ref=e3526]: Unknown venue
+              - generic [ref=e3527]:
+                - generic [ref=e3528]: 480p
+                - generic [ref=e3529]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3530] [cursor=pointer]:
+            - generic [ref=e3531]:
+              - button [ref=e3532]:
+                - img [ref=e3533]
+              - generic [ref=e3535]: 0:10
+            - generic [ref=e3536]:
+              - generic [ref=e3537]: Korn
+              - generic [ref=e3538]:
+                - generic [ref=e3539]: Jan 1, 2017
+                - generic [ref=e3540]: ·
+                - generic [ref=e3541]: Unknown venue
+              - generic [ref=e3542]:
+                - generic [ref=e3543]: 480p
+                - generic [ref=e3544]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3545] [cursor=pointer]:
+            - generic [ref=e3546]:
+              - button [ref=e3547]:
+                - img [ref=e3548]
+              - generic [ref=e3550]: 0:10
+            - generic [ref=e3551]:
+              - generic [ref=e3552]: Korn
+              - generic [ref=e3553]:
+                - generic [ref=e3554]: Jan 1, 2017
+                - generic [ref=e3555]: ·
+                - generic [ref=e3556]: Unknown venue
+              - generic [ref=e3557]:
+                - generic [ref=e3558]: 480p
+                - generic [ref=e3559]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3560] [cursor=pointer]:
+            - generic [ref=e3561]:
+              - button [ref=e3562]:
+                - img [ref=e3563]
+              - generic [ref=e3565]: 0:10
+            - generic [ref=e3566]:
+              - generic [ref=e3567]: Korn
+              - generic [ref=e3568]:
+                - generic [ref=e3569]: Jan 1, 2017
+                - generic [ref=e3570]: ·
+                - generic [ref=e3571]: Unknown venue
+              - generic [ref=e3572]:
+                - generic [ref=e3573]: 480p
+                - generic [ref=e3574]: audience
+          - button "Korn — , Jan 1, 2017" [ref=e3575] [cursor=pointer]:
+            - generic [ref=e3576]:
+              - button [ref=e3577]:
+                - img [ref=e3578]
+              - generic [ref=e3580]: 0:10
+            - generic [ref=e3581]:
+              - generic [ref=e3582]: Korn
+              - generic [ref=e3583]:
+                - generic [ref=e3584]: Jan 1, 2017
+                - generic [ref=e3585]: ·
+                - generic [ref=e3586]: Unknown venue
+              - generic [ref=e3587]:
+                - generic [ref=e3588]: 480p
+                - generic [ref=e3589]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2017" [ref=e3590] [cursor=pointer]:
+            - generic [ref=e3591]:
+              - button [ref=e3592]:
+                - img [ref=e3593]
+              - generic [ref=e3595]: 2:57
+            - generic [ref=e3596]:
+              - generic [ref=e3597]: Machine Gun Kelly
+              - generic [ref=e3598]:
+                - generic [ref=e3599]: Jan 1, 2017
+                - generic [ref=e3600]: ·
+                - generic [ref=e3601]: Unknown venue
+              - generic [ref=e3602]:
+                - generic [ref=e3603]: 1080p
+                - generic [ref=e3604]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2017" [ref=e3605] [cursor=pointer]:
+            - generic [ref=e3606]:
+              - button [ref=e3607]:
+                - img [ref=e3608]
+              - generic [ref=e3610]: 1:21
+            - generic [ref=e3611]:
+              - generic [ref=e3612]: Machine Gun Kelly
+              - generic [ref=e3613]:
+                - generic [ref=e3614]: Jan 1, 2017
+                - generic [ref=e3615]: ·
+                - generic [ref=e3616]: Unknown venue
+              - generic [ref=e3617]:
+                - generic [ref=e3618]: 720p
+                - generic [ref=e3619]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2017" [ref=e3620] [cursor=pointer]:
+            - generic [ref=e3621]:
+              - button [ref=e3622]:
+                - img [ref=e3623]
+              - generic [ref=e3625]: 1:36
+            - generic [ref=e3626]:
+              - generic [ref=e3627]: Machine Gun Kelly
+              - generic [ref=e3628]:
+                - generic [ref=e3629]: Jan 1, 2017
+                - generic [ref=e3630]: ·
+                - generic [ref=e3631]: Unknown venue
+              - generic [ref=e3632]:
+                - generic [ref=e3633]: 1080p
+                - generic [ref=e3634]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2017" [ref=e3635] [cursor=pointer]:
+            - generic [ref=e3636]:
+              - button [ref=e3637]:
+                - img [ref=e3638]
+              - generic [ref=e3640]: 3:16
+            - generic [ref=e3641]:
+              - generic [ref=e3642]: Machine Gun Kelly
+              - generic [ref=e3643]:
+                - generic [ref=e3644]: Jan 1, 2017
+                - generic [ref=e3645]: ·
+                - generic [ref=e3646]: Unknown venue
+              - generic [ref=e3647]:
+                - generic [ref=e3648]: 1080p
+                - generic [ref=e3649]: audience
+          - button "Machine Gun Kelly — , Jan 1, 2017" [ref=e3650] [cursor=pointer]:
+            - generic [ref=e3651]:
+              - button [ref=e3652]:
+                - img [ref=e3653]
+              - generic [ref=e3655]: 0:36
+            - generic [ref=e3656]:
+              - generic [ref=e3657]: Machine Gun Kelly
+              - generic [ref=e3658]:
+                - generic [ref=e3659]: Jan 1, 2017
+                - generic [ref=e3660]: ·
+                - generic [ref=e3661]: Unknown venue
+              - generic [ref=e3662]:
+                - generic [ref=e3663]: 480p
+                - generic [ref=e3664]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3665] [cursor=pointer]:
+            - generic [ref=e3666]:
+              - button [ref=e3667]:
+                - img [ref=e3668]
+              - generic [ref=e3670]: 0:09
+            - generic [ref=e3671]:
+              - generic [ref=e3672]: Three Doors Down
+              - generic [ref=e3673]:
+                - generic [ref=e3674]: Jan 1, 2016
+                - generic [ref=e3675]: ·
+                - generic [ref=e3676]: Unknown venue
+              - generic [ref=e3677]:
+                - generic [ref=e3678]: 480p
+                - generic [ref=e3679]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3680] [cursor=pointer]:
+            - generic [ref=e3681]:
+              - button [ref=e3682]:
+                - img [ref=e3683]
+              - generic [ref=e3685]: 0:04
+            - generic [ref=e3686]:
+              - generic [ref=e3687]: Three Doors Down
+              - generic [ref=e3688]:
+                - generic [ref=e3689]: Jan 1, 2016
+                - generic [ref=e3690]: ·
+                - generic [ref=e3691]: Unknown venue
+              - generic [ref=e3692]:
+                - generic [ref=e3693]: 480p
+                - generic [ref=e3694]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3695] [cursor=pointer]:
+            - generic [ref=e3696]:
+              - button [ref=e3697]:
+                - img [ref=e3698]
+              - generic [ref=e3700]: 0:05
+            - generic [ref=e3701]:
+              - generic [ref=e3702]: Three Doors Down
+              - generic [ref=e3703]:
+                - generic [ref=e3704]: Jan 1, 2016
+                - generic [ref=e3705]: ·
+                - generic [ref=e3706]: Unknown venue
+              - generic [ref=e3707]:
+                - generic [ref=e3708]: 480p
+                - generic [ref=e3709]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3710] [cursor=pointer]:
+            - generic [ref=e3711]:
+              - button [ref=e3712]:
+                - img [ref=e3713]
+              - generic [ref=e3715]: 0:09
+            - generic [ref=e3716]:
+              - generic [ref=e3717]: Three Doors Down
+              - generic [ref=e3718]:
+                - generic [ref=e3719]: Jan 1, 2016
+                - generic [ref=e3720]: ·
+                - generic [ref=e3721]: Unknown venue
+              - generic [ref=e3722]:
+                - generic [ref=e3723]: 480p
+                - generic [ref=e3724]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3725] [cursor=pointer]:
+            - generic [ref=e3726]:
+              - button [ref=e3727]:
+                - img [ref=e3728]
+              - generic [ref=e3730]: 0:04
+            - generic [ref=e3731]:
+              - generic [ref=e3732]: Three Doors Down
+              - generic [ref=e3733]:
+                - generic [ref=e3734]: Jan 1, 2016
+                - generic [ref=e3735]: ·
+                - generic [ref=e3736]: Unknown venue
+              - generic [ref=e3737]:
+                - generic [ref=e3738]: 480p
+                - generic [ref=e3739]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3740] [cursor=pointer]:
+            - generic [ref=e3741]:
+              - button [ref=e3742]:
+                - img [ref=e3743]
+              - generic [ref=e3745]: 0:09
+            - generic [ref=e3746]:
+              - generic [ref=e3747]: Three Doors Down
+              - generic [ref=e3748]:
+                - generic [ref=e3749]: Jan 1, 2016
+                - generic [ref=e3750]: ·
+                - generic [ref=e3751]: Unknown venue
+              - generic [ref=e3752]:
+                - generic [ref=e3753]: 480p
+                - generic [ref=e3754]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3755] [cursor=pointer]:
+            - generic [ref=e3756]:
+              - button [ref=e3757]:
+                - img [ref=e3758]
+              - generic [ref=e3760]: 0:10
+            - generic [ref=e3761]:
+              - generic [ref=e3762]: Three Doors Down
+              - generic [ref=e3763]:
+                - generic [ref=e3764]: Jan 1, 2016
+                - generic [ref=e3765]: ·
+                - generic [ref=e3766]: Unknown venue
+              - generic [ref=e3767]:
+                - generic [ref=e3768]: 480p
+                - generic [ref=e3769]: audience
+          - button "Three Doors Down — , Jan 1, 2016" [ref=e3770] [cursor=pointer]:
+            - generic [ref=e3771]:
+              - button [ref=e3772]:
+                - img [ref=e3773]
+              - generic [ref=e3775]: 0:10
+            - generic [ref=e3776]:
+              - generic [ref=e3777]: Three Doors Down
+              - generic [ref=e3778]:
+                - generic [ref=e3779]: Jan 1, 2016
+                - generic [ref=e3780]: ·
+                - generic [ref=e3781]: Unknown venue
+              - generic [ref=e3782]:
+                - generic [ref=e3783]: 480p
+                - generic [ref=e3784]: audience
+  - generic [ref=e3785]: "Catalog loaded: 205 entries"

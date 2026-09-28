@@ -1,0 +1,8 @@
+# Local video files are large and may be copyrighted.
+videos/*
+!videos/README.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp

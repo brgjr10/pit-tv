@@ -1,0 +1,19 @@
+{
+  "name": "PIT TV — Concert Video Archive",
+  "short_name": "PIT TV",
+  "description": "A personal library of live concert video, themed to the album art of whatever is playing.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

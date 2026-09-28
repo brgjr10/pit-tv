@@ -1,0 +1,5 @@
+[     399ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8126/catalog.json:0
+[     399ms] [ERROR] [catalog] load failed SyntaxError: Failed to execute 'json' on 'Response': Unexpected end of JSON input
+    at fetchJson (http://localhost:8126/assets/js/catalog.js:272:14)
+    at async loadCatalog (http://localhost:8126/assets/js/catalog.js:279:11)
+    at async start (http://localhost:8126/assets/js/ui.js:1218:37) @ http://localhost:8126/assets/js/ui.js:1226

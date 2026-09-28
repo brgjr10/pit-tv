@@ -1,0 +1,6198 @@
+[
+  {
+    "id": "tdd-2016-01",
+    "artist": "Three Doors Down",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-1230300889920486692.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/three-doors-down.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-02",
+    "artist": "Pop Evil",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-1887970080065626168.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 4
+    },
+    "songs": [],
+    "albumArt": "covers/artists/pop-evil.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-04",
+    "artist": "Three Doors Down",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-2861653783867410111.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/three-doors-down.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-05",
+    "artist": "Red Sun Rising",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-5001785738633716669.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 4
+    },
+    "songs": [],
+    "albumArt": "covers/artists/red-sun-rising.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-06",
+    "artist": "Red Sun Rising",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-6108433365502423276.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/red-sun-rising.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-07",
+    "artist": "Red Sun Rising",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-7562829111575243769.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/red-sun-rising.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "tdd-2016-08",
+    "artist": "Three Doors Down",
+    "song": "",
+    "album": "",
+    "venue": "Goodyear Theater",
+    "date": "2016-08-28",
+    "dateRaw": "2016-08-28",
+    "datePrecision": "day",
+    "location": "Akron, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Three Doors Down w Red Sun Rising & Pop Evil/Snapchat-7642244297451179863.mp4",
+      "poster": "covers/tdd-2016.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/three-doors-down.jpg",
+    "tags": [
+      "tour",
+      "w/ red sun rising",
+      "w/ pop evil"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-01",
+    "artist": "Skillet",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/0802171910.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 39
+    },
+    "songs": [],
+    "albumArt": "covers/artists/skillet.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-02",
+    "artist": "Korn",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1010620622.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 6
+    },
+    "songs": [],
+    "albumArt": "covers/artists/korn.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-03",
+    "artist": "Korn",
+    "song": "Take Me",
+    "album": "Untouchables",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1096900330.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/korn-untouchables.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-04",
+    "artist": "Skillet",
+    "song": "Hero",
+    "album": "Awake",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1325182388.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-awake.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-05",
+    "artist": "Korn",
+    "song": "Falling Away from Me",
+    "album": "Issues",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1527143642.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/korn-issues.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-06",
+    "artist": "Skillet",
+    "song": "Back from the Dead",
+    "album": "Unleashed",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1683237369.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-unleashed.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-07",
+    "artist": "Korn",
+    "song": "Falling Away from Me",
+    "album": "Issues",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1705998764.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/korn-issues.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-08",
+    "artist": "Ded",
+    "song": "Rope",
+    "album": "Mis•an•thrope",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1730763617.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ded-mis-an-thrope.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-09",
+    "artist": "Korn",
+    "song": "Falling Away from Me",
+    "album": "Issues",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1874184780.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/korn-issues.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-10",
+    "artist": "Skillet",
+    "song": "Feel Invincible",
+    "album": "Unleashed",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-1918084984.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 6
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-unleashed.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-11",
+    "artist": "Stone Sour",
+    "song": "Through Glass",
+    "album": "Come What(ever) May",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-196751284.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/stone-sour-come-what-ever-may.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-12",
+    "artist": "Stone Sour",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-2035548538.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 7
+    },
+    "songs": [],
+    "albumArt": "covers/artists/stone-sour.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-13",
+    "artist": "Skillet",
+    "song": "Monster",
+    "album": "Awake",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-24777127.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-awake.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-14",
+    "artist": "Stone Sour",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-283966086.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/stone-sour.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-15",
+    "artist": "Stone Sour",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-459942532.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/stone-sour.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-16",
+    "artist": "Skillet",
+    "song": "Feel Invincible",
+    "album": "Unleashed",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-640865343.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-unleashed.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-17",
+    "artist": "Korn",
+    "song": "Blind",
+    "album": "Korn",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-694644572.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/korn-korn.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-18",
+    "artist": "Skillet",
+    "song": "Hero",
+    "album": "Awake",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-767786148.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/skillet-awake.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-19",
+    "artist": "Korn",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-770032419.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/korn.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-20",
+    "artist": "Skillet",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-776101937.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/skillet.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-21",
+    "artist": "Korn",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-784026325.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/korn.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-22",
+    "artist": "Ded",
+    "song": "Anti-Everything",
+    "album": "Mis•an•thrope",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-900009204.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ded-mis-an-thrope.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "korn-2017-23",
+    "artist": "Skillet",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2017-08-02",
+    "dateRaw": "2017-08-02",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Korn w Yellawolf, DED, Skillet, and Stone Sour/Snapchat-989426202.mp4",
+      "poster": "covers/korn-2017.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/skillet.jpg",
+    "tags": [
+      "tour",
+      "w/ yellawolf",
+      "w/ ded",
+      "w/ skillet",
+      "w/ stone sour"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2017-01",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2017-12-22",
+    "dateRaw": "2017-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 1/1222172054.mp4",
+      "poster": "covers/mgk-xmas-2017.svg",
+      "duration": 177
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2017-02",
+    "artist": "Machine Gun Kelly",
+    "song": "At My Best",
+    "album": "Bloom",
+    "venue": "Wolstein Center",
+    "date": "2017-12-22",
+    "dateRaw": "2017-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 1/1222172109.mp4",
+      "poster": "covers/mgk-xmas-2017.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-bloom.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2017-03",
+    "artist": "Machine Gun Kelly",
+    "song": "Home",
+    "album": "Bloom",
+    "venue": "Wolstein Center",
+    "date": "2017-12-22",
+    "dateRaw": "2017-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 1/1222172114.mp4",
+      "poster": "covers/mgk-xmas-2017.svg",
+      "duration": 96
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-bloom.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2017-04",
+    "artist": "Machine Gun Kelly",
+    "song": "Numb (Cover)",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2017-12-22",
+    "dateRaw": "2017-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 1/1222172118.mp4",
+      "poster": "covers/mgk-xmas-2017.svg",
+      "duration": 196
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2017-05",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2017-12-22",
+    "dateRaw": "2017-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 1/1222172230.mp4",
+      "poster": "covers/mgk-xmas-2017.svg",
+      "duration": 36
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-01",
+    "artist": "Three 6 Mafia",
+    "song": "Stay Fly",
+    "album": "Most Known Unknown",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5784.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-6-mafia-most-known-unknown.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-02",
+    "artist": "Logic",
+    "song": "Contact",
+    "album": "The Incredible True Story",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5786.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 118
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-the-incredible-true-story.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-03",
+    "artist": "Logic",
+    "song": "Soul Food",
+    "album": "Under Pressure",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5787.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 44
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-under-pressure.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-04",
+    "artist": "Logic",
+    "song": "Everybody",
+    "album": "Everybody",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5788.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 53
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-everybody.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-05",
+    "artist": "Logic",
+    "song": "Upgrade",
+    "album": "The Incredible True Story",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5789.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 47
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-the-incredible-true-story.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-06",
+    "artist": "Logic",
+    "song": "Like Woah",
+    "album": "The Incredible True Story",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5790.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 41
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-the-incredible-true-story.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-07",
+    "artist": "Logic",
+    "song": "I'm Gone",
+    "album": "Under Pressure",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5791.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 106
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-under-pressure.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-08",
+    "artist": "Logic",
+    "song": "Metropolis",
+    "album": "Under Pressure",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5792.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 66
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-under-pressure.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-09",
+    "artist": "Logic",
+    "song": "5 A.M.",
+    "album": "Young Sinatra: Welcome to Forever",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5793.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 51
+    },
+    "songs": [],
+    "albumArt": "covers/artists/logic.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-10",
+    "artist": "Logic",
+    "song": "Flexicution",
+    "album": "Bobby Tarantino",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5794.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 13
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-bobby-tarantino.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-11",
+    "artist": "Logic",
+    "song": "Flexicution",
+    "album": "Bobby Tarantino",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5795.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 55
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-bobby-tarantino.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-12",
+    "artist": "Logic",
+    "song": "Under Pressure",
+    "album": "Under Pressure",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5796.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 82
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-under-pressure.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-13",
+    "artist": "Logic",
+    "song": "City of Stars",
+    "album": "The Incredible True Story",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5797.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 133
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-the-incredible-true-story.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-14",
+    "artist": "Logic",
+    "song": "Fade Away",
+    "album": "The Incredible True Story",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5798.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 98
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-the-incredible-true-story.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-15",
+    "artist": "Logic",
+    "song": "Gang Related",
+    "album": "Under Pressure",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5799.MOV",
+      "poster": "covers/logic-2018.svg",
+      "duration": 144
+    },
+    "songs": [],
+    "albumArt": "covers/albums/logic-under-pressure.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-16",
+    "artist": "G-Eazy",
+    "song": "No Limit",
+    "album": "The Beautiful & Damned",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5800.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 99
+    },
+    "songs": [],
+    "albumArt": "covers/albums/g-eazy-the-beautiful-damned.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-17",
+    "artist": "G-Eazy",
+    "song": "Eazy",
+    "album": "The Beautiful & Damned",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5801.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 135
+    },
+    "songs": [],
+    "albumArt": "covers/albums/g-eazy-the-beautiful-damned.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-18",
+    "artist": "G-Eazy",
+    "song": "Him & I",
+    "album": "The Beautiful & Damned",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5802.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 47
+    },
+    "songs": [],
+    "albumArt": "covers/albums/g-eazy-the-beautiful-damned.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-19",
+    "artist": "G-Eazy",
+    "song": "Me, Myself & I",
+    "album": "When It's Dark Out",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5803.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 93
+    },
+    "songs": [],
+    "albumArt": "covers/albums/g-eazy-when-it-s-dark-out.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-01",
+    "artist": "Machine Gun Kelly",
+    "song": "Sail",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/036758E2-4BD6-4115-9283-63A4BD27CA40.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-03",
+    "artist": "Machine Gun Kelly",
+    "song": "Sail",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/0EDE03B4-CD9B-427D-98B9-F847BFC53758.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-04",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/11380D87-6098-4CE8-9B74-0B5470EA0C10.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-05",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/1220585C-B0F9-445F-BA0C-A4B686283E81.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-07",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/2BADEEE0-D281-4FFF-B8C2-B6AFD1CE4302.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-08",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/2F2B7CC3-615B-480A-8720-480B6AB46330.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-10",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/35C375D0-282D-49C5-9F09-972465E13918.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-12",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/38FE7731-EDEF-4E41-AFD1-385242F22309.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-13",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/45BAA664-FE15-4B80-9919-468F8A7FCFD2.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-14",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/4CDB3E54-D6FA-4664-93FD-2EB153C02360.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-15",
+    "artist": "Machine Gun Kelly",
+    "song": "27",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/5148E838-E739-438C-95B5-BC070F057BF7.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-16",
+    "artist": "Machine Gun Kelly",
+    "song": "27",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/5252E720-2286-4A53-A81F-95350653D07D.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-17",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/63950330-5CD7-4A85-9FBB-D969D0D63942.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 11
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-18",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/63C7E319-03F8-4B2F-B250-07A0A89CF695.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-19",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/6B87CD4A-9193-419A-BF78-295538337F12.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-20",
+    "artist": "Machine Gun Kelly",
+    "song": "27",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/6C341791-26E5-4232-9F8D-2CB875BAA557.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-22",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/7926EA40-63A2-42D9-B129-1BDE35DD68A8.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 8
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-23",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/7A5C4CD6-05E0-480F-B7D6-945F080B1C7C.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-24",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/8106219F-10D6-43DD-A51B-8560723F5E3F.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-25",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/85A1C1B9-30D3-441A-9F66-09C2C87C75A1.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-28",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/963EE65E-C719-437D-A1A3-B4CB3F86B7AC.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-29",
+    "artist": "Machine Gun Kelly",
+    "song": "27",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/A20465DC-3B8B-4065-9EBD-2FAFF9F76D98.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 4
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-30",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/A66F3248-50AC-4DB4-9797-F73F92BA656B.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-31",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/ADB9020F-F224-4E75-A5DC-7C7012C5623B.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-32",
+    "artist": "Machine Gun Kelly",
+    "song": "27",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/B1FEA9C7-9828-4EEE-A9FB-6E8EEA8E6429.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-33",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/B6A4E597-2C4D-4FF8-8497-5263C974755B.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-34",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/B860BE45-46B5-46ED-BA58-34A9E844B32B.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-36",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/BCD5DAC9-ABDB-4CC9-AD0D-C34C5ECD5547.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-37",
+    "artist": "Machine Gun Kelly",
+    "song": "Rap Devil",
+    "album": "Binge",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/BD127957-E43D-49A3-9544-7BDFD68B6DD1.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 19
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-binge.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-38",
+    "artist": "Machine Gun Kelly",
+    "song": "Numb (Cover)",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/BE45A94B-C412-4A93-A5BD-0C7CC6CF63C7.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 11
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-39",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/D29392C9-3097-447B-85A1-B0FB288E3A22.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-40",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/D6F3907C-8CAB-467B-8F58-45A0DA8EF964.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-41",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/D772AA4C-BF6F-47F2-B10C-4E1411F5E082.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 22
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-42",
+    "artist": "Machine Gun Kelly",
+    "song": "At My Best",
+    "album": "Bloom",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/DEF56D80-37BA-4769-9654-A73E58D88796.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 11
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-bloom.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-43",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/EA98F7EC-3AF4-4DEF-972D-7F8A83B79BF9.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 11
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-44",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/ED016F9C-8C4F-4C5E-9979-F8E277988E27.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-45",
+    "artist": "Machine Gun Kelly",
+    "song": "Golden God",
+    "album": "General Admission",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/EE39D9F4-04C2-4851-B049-949E877A0EB8.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-46",
+    "artist": "Machine Gun Kelly",
+    "song": "Wild Boy",
+    "album": "Lace Up",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/EFC72E64-0F31-42D0-8445-64B1A84CA380.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lace-up.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2018-47",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "Wolstein Center",
+    "date": "2018-12-22",
+    "dateRaw": "2018-12-22",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 2/recorded-8843366132241.mp4",
+      "poster": "covers/mgk-xmas-2018.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "grandson-2019-01",
+    "artist": "Grandson",
+    "song": "Blood // Water",
+    "album": "A Modern Tragedy Vol. 1",
+    "venue": "Grog Shop",
+    "date": "2019-03-13",
+    "dateRaw": "2019-03-13",
+    "datePrecision": "day",
+    "location": "Cleveland Heights, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Grandson w BarlowLN & Des Rocs/2EA686E2-D94D-4330-9F07-E4AB9B29E02D.mp4",
+      "poster": "covers/grandson-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/grandson-a-modern-tragedy-vol-1.jpg",
+    "tags": [
+      "tour",
+      "w/ barlowln",
+      "w/ des rocs"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "grandson-2019-02",
+    "artist": "Grandson",
+    "song": "Blood // Water",
+    "album": "A Modern Tragedy Vol. 1",
+    "venue": "Grog Shop",
+    "date": "2019-03-13",
+    "dateRaw": "2019-03-13",
+    "datePrecision": "day",
+    "location": "Cleveland Heights, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Grandson w BarlowLN & Des Rocs/E7121FCD-572A-45DF-9EA7-7E3A539B8F25.mp4",
+      "poster": "covers/grandson-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/grandson-a-modern-tragedy-vol-1.jpg",
+    "tags": [
+      "tour",
+      "w/ barlowln",
+      "w/ des rocs"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-01",
+    "artist": "Lil Wayne",
+    "song": "Mona Lisa",
+    "album": "Tha Carter V",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/09682E89-2EE6-41B9-B938-66D0024784BE.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 2
+    },
+    "songs": [],
+    "albumArt": "covers/albums/lil-wayne-tha-carter-v.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-02",
+    "artist": "Lil Wayne",
+    "song": "Mona Lisa",
+    "album": "Tha Carter V",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/136DBBC8-883D-4C80-9C98-5FFA9E28F6DF.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/lil-wayne-tha-carter-v.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-03",
+    "artist": "Lil Wayne",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/3A869A69-8982-46A3-B9DB-B64A80837BA6.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 4
+    },
+    "songs": [],
+    "albumArt": "covers/artists/lil-wayne.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-04",
+    "artist": "Lil Wayne",
+    "song": "Mona Lisa",
+    "album": "Tha Carter V",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/7A12586B-77CA-428E-ABF1-FD00CE576BE8.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/lil-wayne-tha-carter-v.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-05",
+    "artist": "Lil Wayne",
+    "song": "6 Foot 7 Foot",
+    "album": "Tha Carter IV",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/B7C32BE0-04C2-4F10-AEF2-026E85E7039B.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/lil-wayne-tha-carter-iv.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "blink-182-2019-06",
+    "artist": "Lil Wayne",
+    "song": "Mona Lisa",
+    "album": "Tha Carter V",
+    "venue": "Blossom Music Center",
+    "date": "2019-07-16",
+    "dateRaw": "2019-07-16",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Blink-182 w Neck Deep & Lil Wayne/F859F849-53D2-4699-8839-21FD7C392502.mp4",
+      "poster": "covers/blink-182-2019.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/lil-wayne-tha-carter-v.jpg",
+    "tags": [
+      "tour",
+      "festival",
+      "warped tour",
+      "w/ neck deep",
+      "w/ lil wayne"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2021-01",
+    "artist": "Machine Gun Kelly",
+    "song": "Machine Gun Kelly ft. CORPSE",
+    "album": "Tickets to My Downfall",
+    "venue": "Rocket Mortgage FieldHouse",
+    "date": "2021-12-18",
+    "dateRaw": "2021-12-18",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 4/6D2DC7A6-69EC-4D6C-967B-6CAF518DAA10.mp4",
+      "poster": "covers/mgk-xmas-2021.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-tickets-to-my-downfall.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xmas-2021-02",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "Rocket Mortgage FieldHouse",
+    "date": "2021-12-18",
+    "dateRaw": "2021-12-18",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK'S XXMAS Year 4/7D5812CE-61E9-4ADB-AB70-5D31C6219C10.mp4",
+      "poster": "covers/mgk-xmas-2021.svg",
+      "duration": 6
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk xmas",
+      "holiday show"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "halsey-2022-01",
+    "artist": "Halsey",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2022-06-03",
+    "dateRaw": "2022-06-03",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Halsey/IMG_2517.MOV",
+      "poster": "covers/halsey-2022.svg",
+      "duration": 5
+    },
+    "songs": [],
+    "albumArt": "covers/artists/halsey.jpg",
+    "tags": [
+      "tour",
+      "headline"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "halsey-2022-02",
+    "artist": "Halsey",
+    "song": "3am",
+    "album": "Manic",
+    "venue": "Blossom Music Center",
+    "date": "2022-06-03",
+    "dateRaw": "2022-06-03",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Halsey/IMG_2520.MOV",
+      "poster": "covers/halsey-2022.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/halsey-manic.jpg",
+    "tags": [
+      "tour",
+      "headline"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "halsey-2022-03",
+    "artist": "Halsey",
+    "song": "3am",
+    "album": "Manic",
+    "venue": "Blossom Music Center",
+    "date": "2022-06-03",
+    "dateRaw": "2022-06-03",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Halsey/IMG_2521.MOV",
+      "poster": "covers/halsey-2022.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/halsey-manic.jpg",
+    "tags": [
+      "tour",
+      "headline"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "halsey-2022-04",
+    "artist": "Halsey",
+    "song": "Gasoline",
+    "album": "Badlands",
+    "venue": "Blossom Music Center",
+    "date": "2022-06-03",
+    "dateRaw": "2022-06-03",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Halsey/IMG_2522.MOV",
+      "poster": "covers/halsey-2022.svg",
+      "duration": 29
+    },
+    "songs": [],
+    "albumArt": "covers/albums/halsey-badlands.jpg",
+    "tags": [
+      "tour",
+      "headline"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-01",
+    "artist": "Avril Lavigne",
+    "song": "Complicated",
+    "album": "Let Go",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5128.MOV",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 21
+    },
+    "songs": [],
+    "albumArt": "covers/albums/avril-lavigne-let-go.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-02",
+    "artist": "Trippie Redd",
+    "song": "Dark Knight Dummo",
+    "album": "Life's a Trip",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5132.MOV",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 12
+    },
+    "songs": [],
+    "albumArt": "covers/albums/trippie-redd-life-s-a-trip.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-03",
+    "artist": "Trippie Redd",
+    "song": "1400 / 999 Freestyle (feat. Juice WRLD)",
+    "album": "A Love Letter to You 3",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5133.MOV",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 17
+    },
+    "songs": [],
+    "albumArt": "covers/albums/trippie-redd-a-love-letter-to-you-3.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-05",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5138.MP4",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 17
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-06",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5139.MP4",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 14
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-07",
+    "artist": "Machine Gun Kelly",
+    "song": "Glass House",
+    "album": "Hotel Diablo",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5141.MP4",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 20
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-hotel-diablo.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2022-08",
+    "artist": "Machine Gun Kelly",
+    "song": "",
+    "album": "",
+    "venue": "FirstEnergy Stadium",
+    "date": "2022-08-13",
+    "dateRaw": "2022-08-13",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK w Avril Lavigne, Travis Barker, Willow and Trippie Redd (MGK Day Year 1)/IMG_5143.MP4",
+      "poster": "covers/mgk-day-2022.svg",
+      "duration": 38
+    },
+    "songs": [],
+    "albumArt": "covers/artists/machine-gun-kelly.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day",
+      "w/ avril lavigne",
+      "w/ travis barker",
+      "w/ willow",
+      "w/ trippie redd"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-01",
+    "artist": "Ski Mask The Slump God",
+    "song": "RIP Roach",
+    "album": "Revenge",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/5EECCC10-F035-4D05-BAF1-0A0A0610DB29.mp4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 16
+    },
+    "songs": [],
+    "albumArt": "covers/artists/ski-mask-the-slump-god.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-02",
+    "artist": "Knocked Loose",
+    "song": "",
+    "album": "",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6038.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 22
+    },
+    "songs": [],
+    "albumArt": "covers/artists/knocked-loose.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-03",
+    "artist": "Ski Mask The Slump God",
+    "song": "H2O",
+    "album": "You Will Regret (Reloaded)",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6043.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 47
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ski-mask-the-slump-god-you-will-regret-reloaded.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-04",
+    "artist": "Ski Mask The Slump God",
+    "song": "Jocelyn Flores (Tribute)",
+    "album": "17",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6044.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 13
+    },
+    "songs": [],
+    "albumArt": "covers/artists/ski-mask-the-slump-god.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-05",
+    "artist": "$uicideboy$",
+    "song": "Escape from BABYLON",
+    "album": "Sing Me a Lullaby, My Sweet Temptation",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6045.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 21
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-sing-me-a-lullaby-my-sweet-temptation.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-06",
+    "artist": "$uicideboy$",
+    "song": "Resistance Is Useless",
+    "album": "Sing Me a Lullaby, My Sweet Temptation",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6046.MOV",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 19
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-sing-me-a-lullaby-my-sweet-temptation.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-07",
+    "artist": "$uicideboy$",
+    "song": "Ugliest",
+    "album": "Long Term Effects of SUFFERING",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6047.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 28
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-long-term-effects-of-suffering.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-08",
+    "artist": "$uicideboy$",
+    "song": "Ugliest",
+    "album": "Long Term Effects of SUFFERING",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6048.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 11
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-long-term-effects-of-suffering.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-09",
+    "artist": "$uicideboy$",
+    "song": "NOW I'M UP TO MY NECK WITH OFFERS",
+    "album": "KILL YOURSELF Part XX: The Infinity Saga",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6049.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-kill-yourself-part-xx-the-infinity-saga.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-10",
+    "artist": "$uicideboy$",
+    "song": "Paris",
+    "album": "Now the Moon's Rising",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6050.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 41
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-now-the-moon-s-rising.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2022-11",
+    "artist": "$uicideboy$",
+    "song": "Paris",
+    "album": "Now the Moon's Rising",
+    "venue": "Blossom Music Center",
+    "date": "2022-09-10",
+    "dateRaw": "2022-09-10",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2022 $uicideboy$ Grey Day Tour w JPEGMAFIA, Knocked Loose, Code Orange, Maxo Kream, Ski Mask The Slump God, and $NOT/IMG_6051.MP4",
+      "poster": "covers/suicide-grey-day-2022.svg",
+      "duration": 16
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-now-the-moon-s-rising.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ jpegmafia",
+      "w/ knocked loose",
+      "w/ code orange",
+      "w/ maxo kream",
+      "w/ ski mask the slump god",
+      "w/ $not"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-01",
+    "artist": "Three Days Grace",
+    "song": "So Called Life",
+    "album": "Explosions",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1913.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 55
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-days-grace-explosions.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-02",
+    "artist": "Three Days Grace",
+    "song": "Animal I Have Become",
+    "album": "One-X",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1914.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 59
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-days-grace-one-x.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-03",
+    "artist": "Three Days Grace",
+    "song": "Break",
+    "album": "Life Starts Now",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1918.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 48
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-days-grace-life-starts-now.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-04",
+    "artist": "Three Days Grace",
+    "song": "Never Too Late",
+    "album": "One-X",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1919.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 120
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-days-grace-one-x.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-05",
+    "artist": "Three Days Grace",
+    "song": "Riot",
+    "album": "One-X",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1920.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 76
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-days-grace-one-x.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-06",
+    "artist": "Shinedown",
+    "song": "Bully",
+    "album": "Amaryllis",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1927.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 63
+    },
+    "songs": [],
+    "albumArt": "covers/albums/shinedown-amaryllis.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-07",
+    "artist": "Shinedown",
+    "song": "Enemies",
+    "album": "Amaryllis",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1928.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 58
+    },
+    "songs": [],
+    "albumArt": "covers/albums/shinedown-amaryllis.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-08",
+    "artist": "Shinedown",
+    "song": "Enemies",
+    "album": "Amaryllis",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1929.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 10
+    },
+    "songs": [],
+    "albumArt": "covers/albums/shinedown-amaryllis.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "shinedown-2023-09",
+    "artist": "Shinedown",
+    "song": "DEVIL",
+    "album": "Attention Attention",
+    "venue": "Bryce Jordan Center",
+    "date": "2023-04-08",
+    "dateRaw": "2023-04-08",
+    "datePrecision": "day",
+    "location": "State College, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Shinedown w Three Days Grace, and From Ashes to New/IMG_1930.MP4",
+      "poster": "covers/shinedown-2023.svg",
+      "duration": 43
+    },
+    "songs": [],
+    "albumArt": "covers/albums/shinedown-attention-attention.jpg",
+    "tags": [
+      "tour",
+      "w/ three days grace",
+      "w/ from ashes to new"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-01",
+    "artist": "Bring Me the Horizon",
+    "song": "Oli Sykes Screaming",
+    "album": "That's the Spirit",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4839.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 4
+    },
+    "songs": [],
+    "albumArt": "covers/albums/bring-me-the-horizon-that-s-the-spirit.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-02",
+    "artist": "Bring Me the Horizon",
+    "song": "Oli Sykes Wants a Moshpit",
+    "album": "That's the Spirit",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4840.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/bring-me-the-horizon-that-s-the-spirit.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-03",
+    "artist": "Bring Me the Horizon",
+    "song": "Happy Song",
+    "album": "That's the Spirit",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4841.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/bring-me-the-horizon-that-s-the-spirit.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-04",
+    "artist": "Bring Me the Horizon",
+    "song": "Can You Feel My Heart",
+    "album": "Sempiternal",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4842.MOV",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 27
+    },
+    "songs": [],
+    "albumArt": "covers/albums/bring-me-the-horizon-sempiternal.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-05",
+    "artist": "Bring Me the Horizon",
+    "song": "Can You Feel My Heart",
+    "album": "Sempiternal",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4842.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 116
+    },
+    "songs": [],
+    "albumArt": "covers/albums/bring-me-the-horizon-sempiternal.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-06",
+    "artist": "Fall Out Boy",
+    "song": "Sugar, We’re Goin Down",
+    "album": "From Under the Cork Tree",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4843.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 14
+    },
+    "songs": [],
+    "albumArt": "covers/albums/fall-out-boy-from-under-the-cork-tree.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-07",
+    "artist": "Fall Out Boy",
+    "song": "Sugar, We’re Goin Down",
+    "album": "From Under the Cork Tree",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4844.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 17
+    },
+    "songs": [],
+    "albumArt": "covers/albums/fall-out-boy-from-under-the-cork-tree.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "fall-out-boy-2023-08",
+    "artist": "Fall Out Boy",
+    "song": "Sugar, We’re Goin Down",
+    "album": "From Under the Cork Tree",
+    "venue": "Blossom Music Center",
+    "date": "2023-07-18",
+    "dateRaw": "2023-07-18",
+    "datePrecision": "day",
+    "location": "Cuyahoga Falls, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Fall Out Boy w Bring Me The Horizon, Royal and The Serpent, and Carr/IMG_4845.MP4",
+      "poster": "covers/fall-out-boy-2023.svg",
+      "duration": 21
+    },
+    "songs": [],
+    "albumArt": "covers/albums/fall-out-boy-from-under-the-cork-tree.jpg",
+    "tags": [
+      "festival",
+      "missed",
+      "w/ bring me the horizon",
+      "w/ royal and the serpent",
+      "w/ carr"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-01",
+    "artist": "Ramirez",
+    "song": "",
+    "album": "",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6372.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 18
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ramirez-the-grey-gorilla.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-02",
+    "artist": "Ramirez",
+    "song": "Na Na Na Na Na (Caught Slippin)",
+    "album": "The Grey Gorilla",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6373.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 61
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ramirez-the-grey-gorilla.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-03",
+    "artist": "Ramirez",
+    "song": "THE FO FIVE",
+    "album": "THA PLAYA$ MANUAL",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6374.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 18
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ramirez-tha-playa-manual.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-05",
+    "artist": "City Morgue",
+    "song": "HURTWORLD '99",
+    "album": "Toxic Boogaloo",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6379.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 5
+    },
+    "songs": [],
+    "albumArt": "covers/albums/city-morgue-toxic-boogaloo.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-06",
+    "artist": "City Morgue",
+    "song": "THE ELECTRIC EXPERIENCE",
+    "album": "Toxic Boogaloo",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6380.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 18
+    },
+    "songs": [],
+    "albumArt": "covers/albums/city-morgue-toxic-boogaloo.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-07",
+    "artist": "ZillaKami",
+    "song": "Space Cowboy",
+    "album": "DOG BOY",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6381.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 35
+    },
+    "songs": [],
+    "albumArt": "covers/albums/zillakami-dog-boy.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-08",
+    "artist": "City Morgue",
+    "song": "DRAINO",
+    "album": "City Morgue Vol 2: As Good as Dead",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6382.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 54
+    },
+    "songs": [],
+    "albumArt": "covers/albums/city-morgue-city-morgue-vol-2-as-good-as-dead.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-09",
+    "artist": "Ghostemane",
+    "song": "Flesh",
+    "album": "N/O/I/S/E",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6383.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 92
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ghostemane-n-o-i-s-e.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-10",
+    "artist": "Ghostemane",
+    "song": "",
+    "album": "",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6384.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 14
+    },
+    "songs": [],
+    "albumArt": "covers/artists/ghostemane.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-11",
+    "artist": "Ghostemane",
+    "song": "",
+    "album": "",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6387.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 27
+    },
+    "songs": [],
+    "albumArt": "covers/artists/ghostemane.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-12",
+    "artist": "Ghostemane",
+    "song": "To Whom It May Concern",
+    "album": "Human Err0r",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6388.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 49
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ghostemane-human-err0r.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-13",
+    "artist": "$uicideboy$",
+    "song": "Not Even Ghosts Are This Empty",
+    "album": "I No Longer Fear The Razor Guarding My Heel (V)",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6389.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 23
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-i-no-longer-fear-the-razor-guarding-my-heel-v.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-14",
+    "artist": "$uicideboy$",
+    "song": "Matte Black",
+    "album": "Sing Me a Lullaby, My Sweet Temptation",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6393.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 29
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-sing-me-a-lullaby-my-sweet-temptation.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-15",
+    "artist": "$uicideboy$",
+    "song": "Finding Shelter In My Larynx",
+    "album": "I No Longer Fear The Razor Guarding My Heel (V)",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6394.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 17
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-i-no-longer-fear-the-razor-guarding-my-heel-v.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-16",
+    "artist": "$uicideboy$",
+    "song": "Kill Yourself (Part III)",
+    "album": "My Liver Will Handle What My Heart Can't",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6396.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 40
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-my-liver-will-handle-what-my-heart-can-t.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-17",
+    "artist": "$uicideboy$",
+    "song": "Antarctica",
+    "album": "Dark Side of the Clouds",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6397.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 75
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-dark-side-of-the-clouds.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-18",
+    "artist": "$uicideboy$",
+    "song": "...And to Those I Love, Thanks for Sticking Around",
+    "album": "Stop Staring at the Shadows",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/IMG_6398.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 24
+    },
+    "songs": [],
+    "albumArt": "covers/albums/uicideboy-stop-staring-at-the-shadows.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-19",
+    "artist": "Ghostemane",
+    "song": "Bonesaw",
+    "album": "N/O/I/S/E",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/filtered-246BB330-DC6E-4C27-89F2-09F7A50C3233.mp4",
+      "poster": "",
+      "duration": 39
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ghostemane-n-o-i-s-e.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "suicide-grey-day-2023-21",
+    "artist": "Ghostemane",
+    "song": "Sacrilege",
+    "album": "ANTI-ICON",
+    "venue": "PPG Paints Arena",
+    "date": "2023-09-16",
+    "dateRaw": "2023-09-16",
+    "datePrecision": "day",
+    "location": "Pittsburgh, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/$uicideboy$/2023 $uicideboy$ Grey Day Tour w Ghostemane, Ramirez, City Morgue, Sematary/recorded-28245775085036.MP4",
+      "poster": "covers/suicide-grey-day-2023.svg",
+      "duration": 6
+    },
+    "songs": [],
+    "albumArt": "covers/albums/ghostemane-anti-icon.jpg",
+    "tags": [
+      "tour",
+      "grey day tour",
+      "w/ ghostemane",
+      "w/ ramirez",
+      "w/ city morgue",
+      "w/ sematary"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-02",
+    "artist": "Machine Gun Kelly",
+    "song": "El Pistolero",
+    "album": "Hotel Diablo",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0166.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 72
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-hotel-diablo.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-03",
+    "artist": "Tee Grizzley",
+    "song": "First Day Out",
+    "album": "My Moment",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0170.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 101
+    },
+    "songs": [],
+    "albumArt": "covers/albums/tee-grizzley-my-moment.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-04",
+    "artist": "Tee Grizzley",
+    "song": "First Day Out",
+    "album": "My Moment",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0171.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 34
+    },
+    "songs": [],
+    "albumArt": "covers/albums/tee-grizzley-my-moment.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-05",
+    "artist": "Machine Gun Kelly",
+    "song": "Lonely Road (with Jelly Roll)",
+    "album": "Lonely Road",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0173.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 54
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lonely-road.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-06",
+    "artist": "Machine Gun Kelly",
+    "song": "Lonely Road (with Jelly Roll)",
+    "album": "Lonely Road",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0174.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 31
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lonely-road.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-07",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0180.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 126
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-08",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0181.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 30
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2024-09",
+    "artist": "Machine Gun Kelly",
+    "song": "Lonely Road (with Jelly Roll)",
+    "album": "Lonely Road",
+    "venue": "Mall C",
+    "date": "2024-08-10",
+    "dateRaw": "2024-08-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 3/IMG_0862.MP4",
+      "poster": "covers/mgk-day-2024.svg",
+      "duration": 9
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lonely-road.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-01",
+    "artist": "Machine Gun Kelly",
+    "song": "Peso Ft. Pusha T & Meek Mill",
+    "album": "Black Flag",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2867.MP4",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-black-flag.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-02",
+    "artist": "Machine Gun Kelly",
+    "song": "starman",
+    "album": "lost americana",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2868.MOV",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 13
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lost-americana.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-03",
+    "artist": "Machine Gun Kelly",
+    "song": "starman",
+    "album": "lost americana",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2872.MOV",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 19
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lost-americana.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-04",
+    "artist": "Machine Gun Kelly",
+    "song": "outlaw overture",
+    "album": "lost americana",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2874.MP4",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 25
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lost-americana.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-05",
+    "artist": "Machine Gun Kelly",
+    "song": "Sun to Me",
+    "album": "Mainstream Sellout",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2876.MOV",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 63
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-mainstream-sellout.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-xxcon-2025-06",
+    "artist": "Machine Gun Kelly",
+    "song": "Smoke & Drive",
+    "album": "Bloom",
+    "venue": "Jacobs Pavilion",
+    "date": "2025-08-08",
+    "dateRaw": "2025-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/XXcon - MGK Lost Americana Release/IMG_2878.MOV",
+      "poster": "covers/mgk-xxcon-2025.svg",
+      "duration": 145
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-bloom.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "xxcon",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-01",
+    "artist": "Deftones",
+    "song": "Be Quiet and Drive (Far Away)",
+    "album": "Around the Fur",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3059.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 99
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-around-the-fur.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-02",
+    "artist": "Deftones",
+    "song": "My Own Summer (Shove It)",
+    "album": "Around the Fur",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3060.MOV",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 8
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-around-the-fur.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-03",
+    "artist": "Deftones",
+    "song": "My Own Summer (Shove It)",
+    "album": "Around the Fur",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3061.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 27
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-around-the-fur.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-04",
+    "artist": "Deftones",
+    "song": "My Own Summer (Shove It)",
+    "album": "Around the Fur",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3062.MOV",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 28
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-around-the-fur.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-05",
+    "artist": "Deftones",
+    "song": "my mind is a mountain",
+    "album": "Private Music",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3064.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 84
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-private-music.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-06",
+    "artist": "Deftones",
+    "song": "Diamond Eyes",
+    "album": "Diamond Eyes",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3070.MOV",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 48
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-diamond-eyes.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-07",
+    "artist": "Deftones",
+    "song": "Tempest",
+    "album": "Koi No Yokan",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3071.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 56
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-koi-no-yokan.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-08",
+    "artist": "Deftones",
+    "song": "Sextape",
+    "album": "Diamond Eyes",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3090.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 120
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-diamond-eyes.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "1080p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-09",
+    "artist": "Deftones",
+    "song": "Entombed",
+    "album": "Koi No Yokan",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3091.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-koi-no-yokan.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-10",
+    "artist": "Deftones",
+    "song": "Hole in the Earth",
+    "album": "Saturday Night Wrist",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3092.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 51
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-saturday-night-wrist.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-11",
+    "artist": "Deftones",
+    "song": "Change",
+    "album": "White Pony",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3093.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 71
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-white-pony.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-12",
+    "artist": "Deftones",
+    "song": "",
+    "album": "",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3094.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 40
+    },
+    "songs": [],
+    "albumArt": "covers/artists/deftones.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "deftones-2025-13",
+    "artist": "Deftones",
+    "song": "Cherry Waves",
+    "album": "Saturday Night Wrist",
+    "venue": "Rocket Arena",
+    "date": "2025-09-10",
+    "dateRaw": "2025-09-10",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/Deftones w IDLES & The Barbarians of California/IMG_3095.MP4",
+      "poster": "covers/deftones-2025.svg",
+      "duration": 91
+    },
+    "songs": [],
+    "albumArt": "covers/albums/deftones-saturday-night-wrist.jpg",
+    "tags": [
+      "tour",
+      "w/ idles",
+      "w/ the barbarians of california"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-01",
+    "artist": "Machine Gun Kelly",
+    "song": "Till I Die",
+    "album": "General Admission",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5239.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 5
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-02",
+    "artist": "Machine Gun Kelly",
+    "song": "starman",
+    "album": "lost americana",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5240.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 90
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lost-americana.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-03",
+    "artist": "Machine Gun Kelly",
+    "song": "Mind of a Stoner ft. Wiz Khalifa",
+    "album": "Black Flag",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5241.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 73
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-black-flag.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-04",
+    "artist": "Machine Gun Kelly",
+    "song": "Bad Mother F*cker (feat. Kid Rock)",
+    "album": "General Admission",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5242.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 34
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-general-admission.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-05",
+    "artist": "Machine Gun Kelly",
+    "song": "Free Fallin' (Cover)",
+    "album": "Bloom",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5244.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 17
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-bloom.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-lost-americana-2026-06",
+    "artist": "Machine Gun Kelly",
+    "song": "Lonely Road (with Jelly Roll)",
+    "album": "Lonely Road",
+    "venue": "The Pavilion at Star Lake",
+    "date": "2026-06-10",
+    "dateRaw": "2026-06-10",
+    "datePrecision": "day",
+    "location": "Burgettstown, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Lost Americana/IMG_5245.MP4",
+      "poster": "covers/mgk-lost-americana-2026.svg",
+      "duration": 78
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-lonely-road.jpg",
+    "tags": [
+      "tour",
+      "lost americana"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "mgk-day-2026-01",
+    "artist": "Machine Gun Kelly",
+    "song": "I Think I'm OKAY (Audio) ft. Yungblud, Travis Barker",
+    "album": "Hotel Diablo",
+    "venue": "North Coast Yard",
+    "date": "2026-08-08",
+    "dateRaw": "2026-08-08",
+    "datePrecision": "day",
+    "location": "Cleveland, OH",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/MGK/MGK Day Festival Year 5/9035D1C3-62A7-4DE5-8863-01CB29771B1E.MP4",
+      "poster": "covers/mgk-day-2026.svg",
+      "duration": 15
+    },
+    "songs": [],
+    "albumArt": "covers/albums/machine-gun-kelly-hotel-diablo.jpg",
+    "tags": [
+      "festival",
+      "annual",
+      "mgk day"
+    ],
+    "metadata": {
+      "quality": "480p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-42",
+    "artist": "Three 6 Mafia",
+    "song": "Half On a Sack",
+    "album": "Most Known Unknown",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5781.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/albums/three-6-mafia-most-known-unknown.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-43",
+    "artist": "Juicy J",
+    "song": "Bounce It",
+    "album": "Stay Trippy",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5782.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/albums/juicy-j-stay-trippy.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  },
+  {
+    "id": "logic-2018-44",
+    "artist": "Juicy J",
+    "song": "Dark Horse",
+    "album": "Prism",
+    "venue": "TD Pavilion at Highmark Mann",
+    "date": "2026-10-01",
+    "dateRaw": "2026-10-01",
+    "datePrecision": "day",
+    "location": "Philadelphia, PA",
+    "video": {
+      "type": "local",
+      "src": "videos/catalog/G-Eazy w Juicy J and Logic/IMG_5783.MP4",
+      "poster": "covers/logic-2018.svg",
+      "duration": 81
+    },
+    "songs": [],
+    "albumArt": "covers/artists/juicy-j.jpg",
+    "tags": [
+      "tour",
+      "w/ kyle",
+      "w/ nf"
+    ],
+    "metadata": {
+      "quality": "720p",
+      "source": "",
+      "audio": ""
+    },
+    "chapters": []
+  }
+]

@@ -1,0 +1,768 @@
+/* player.css — modal shell, custom video controls, chapter rail */
+
+/* The overlay itself: a fixed, centred layer that the backdrop and the panel
+   both sit inside. Without this the panel falls into normal document flow and
+   renders below the fold. */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-1);
+}
+
+.player-modal {
+  position: relative;
+  z-index: 2;
+  width: min(1600px, 96vw);
+  max-height: 96vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  will-change: transform, opacity;
+}
+
+/* Vertical videos: constrain by height so they fill the viewport */
+.modal[data-tall="true"] .player-modal {
+  width: auto;
+  max-width: min(56vh, 90vw);
+  max-height: min(94vh, 94dvh);
+  margin: 4px auto;
+  box-shadow: 0 0 0 1px var(--border-strong), 0 0 40px rgba(0,0,0,0.55);
+}
+
+.modal[data-tall="true"] .stage {
+  aspect-ratio: auto;
+  height: min(92vh, 92dvh);
+}
+
+/* Fullscreen: body class approach to override tall-mode constraints */
+body.player-fullscreen .modal {
+  background: #000 !important;
+}
+
+body.player-fullscreen .modal-backdrop {
+  display: none !important;
+}
+
+body.player-fullscreen .player-modal {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+body.player-fullscreen .stage {
+  aspect-ratio: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  flex: 1 1 auto !important;
+  background: #000 !important;
+  border-radius: 0 !important;
+}
+
+body.player-fullscreen .stage video {
+  aspect-ratio: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+body.player-fullscreen .player-info {
+  display: none !important;
+}
+
+body.player-fullscreen .modal-close {
+  display: none !important;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(1, 4, 9, 0.74);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  will-change: opacity;
+}
+
+/* ---------- Stage (video / embed swap) ---------- */
+
+.stage {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+  background: #010409;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.stage video,
+.stage iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  object-fit: contain;
+}
+
+.stage iframe {
+  position: absolute;
+  inset: 0;
+}
+
+/* Poster stays visible until the first frame is painted */
+.stage video[data-poster="true"] {
+  background-size: cover;
+  background-position: center;
+}
+
+.stage-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+.stage-message .spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--theme-primary);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.stage-message[data-kind="error"] {
+  color: var(--danger);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Big center play affordance before playback starts */
+.stage-play {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(13, 17, 23, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: transform var(--dur) var(--ease-out-expo), background var(--dur), opacity var(--dur);
+}
+
+.stage-play:hover {
+  transform: scale(1.08);
+  background: var(--theme-glow);
+}
+
+/* ---------- Control bar ---------- */
+
+.controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 26px 12px 10px;
+  background: linear-gradient(180deg, transparent, rgba(1, 4, 9, 0.88) 42%);
+  opacity: 1;
+  transition: opacity var(--dur) var(--ease-out-expo);
+}
+
+.controls[data-idle="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Scrubber with buffered + played ranges and chapter ticks */
+.scrub {
+  position: relative;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.scrub-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(230, 237, 243, 0.2);
+  overflow: hidden;
+  transition: height var(--dur) var(--ease-out-expo);
+}
+
+.scrub:hover .scrub-track {
+  height: 6px;
+}
+
+.scrub-buffered,
+.scrub-played {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: inherit;
+}
+
+.scrub-buffered {
+  background: rgba(230, 237, 243, 0.28);
+}
+
+.scrub-played {
+  background: var(--theme-primary);
+}
+
+.scrub-knob {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  transform: scale(0);
+  transition: transform var(--dur) var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.scrub:hover .scrub-knob,
+.scrub:focus-visible .scrub-knob,
+.scrub[data-scrubbing="true"] .scrub-knob {
+  transform: scale(1);
+}
+
+.scrub-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scrub-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(13, 17, 23, 0.85);
+  pointer-events: none;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ctrl {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #e6edf3;
+  border-radius: var(--radius-sm);
+  transition: background var(--dur), color var(--dur), transform var(--dur) var(--ease-out-expo);
+}
+
+.ctrl:hover {
+  background: rgba(230, 237, 243, 0.14);
+}
+
+.ctrl:active {
+  transform: scale(0.94);
+}
+
+.ctrl svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.ctrl[aria-pressed="true"] {
+  color: var(--theme-primary);
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  color: #cdd9e5;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.time .sep {
+  color: var(--text-dim);
+  margin: 0 3px;
+}
+
+.control-row .spacer {
+  flex: 1 1 auto;
+}
+
+/* Volume: slider expands on hover */
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.volume-slider {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: width var(--dur) var(--ease-out-expo), opacity var(--dur);
+}
+
+.volume:hover .volume-slider,
+.volume:focus-within .volume-slider {
+  width: 74px;
+  opacity: 1;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(230, 237, 243, 0.26);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.rate-btn {
+  width: auto;
+  padding: 0 9px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.rate-menu {
+  position: absolute;
+  right: 8px;
+  bottom: 46px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  background: rgba(13, 17, 23, 0.94);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.rate-menu[hidden] {
+  display: none;
+}
+
+.rate-menu button {
+  padding: 5px 14px;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  text-align: left;
+  transition: background var(--dur), color var(--dur);
+}
+
+.rate-menu button:hover {
+  background: var(--theme-glow);
+  color: var(--text);
+}
+
+.rate-menu button[aria-checked="true"] {
+  color: var(--theme-primary);
+}
+
+/* ---------- Chapter rail ---------- */
+
+.chapter-rail {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 2px 0 4px;
+  scrollbar-width: none;
+}
+
+.chapter-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.chapter-rail[hidden] {
+  display: none;
+}
+
+.chapter-rail button {
+  flex: 0 0 auto;
+  padding: 3px 10px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  background: rgba(230, 237, 243, 0.08);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: color var(--dur), background var(--dur), border-color var(--dur);
+}
+
+.chapter-rail button:hover {
+  color: var(--text);
+  background: rgba(230, 237, 243, 0.16);
+}
+
+.chapter-rail button[aria-current="true"] {
+  color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  background: var(--theme-gradient);
+}
+
+/* ---------- Info panel below the stage ---------- */
+
+.player-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+
+.player-info .headline {
+  min-width: 0;
+}
+
+.player-info h2 {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.player-info .byline {
+  font-size: var(--fs-md);
+  color: var(--theme-primary);
+  font-weight: 500;
+}
+
+.player-info .facts {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--sp-1);
+}
+
+.fact {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  background: rgba(110, 118, 129, 0.12);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+.fact .k {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  /* Muted, not dimmed: --text-muted still clears 4.5:1 on the fact chip's
+     translucent background, which --text-ddim does not. */
+  color: var(--text-muted);
+}
+
+.fact .v {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.player-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text);
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--dur), background var(--dur), transform var(--dur) var(--ease-out-expo);
+}
+
+.btn:hover {
+  border-color: var(--theme-primary);
+  background: var(--theme-gradient);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  color: #010409;
+  background: var(--theme-primary);
+  border-color: var(--theme-primary);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  background: var(--theme-primary);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text);
+  background: rgba(13, 17, 23, 0.7);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  transition: background var(--dur), border-color var(--dur), transform var(--dur) var(--ease-out-expo);
+}
+
+.modal-close:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  transform: rotate(90deg);
+}
+
+/* ---------- Setlist ---------- */
+
+.setlist h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+.setlist .sl-count {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--theme-primary);
+  text-transform: none;
+}
+
+.setlist-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+  /* A 30-song bill must not push the panel open; scroll it instead. */
+  max-height: 264px;
+  overflow-y: auto;
+}
+
+.setlist-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: 7px 10px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: background var(--dur), border-color var(--dur);
+}
+
+.setlist-item:hover {
+  background: var(--card-hover);
+  border-color: var(--border);
+}
+
+.setlist-item[aria-current="true"] {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  border-left-color: var(--theme-primary);
+}
+
+.setlist-item[aria-current="true"] .sl-title {
+  color: var(--theme-primary);
+  font-weight: 600;
+}
+
+.setlist-item[aria-current="true"] .sl-num::before {
+  content: "▶";
+  font-size: 9px;
+}
+
+.sl-num {
+  flex: 0 0 22px;
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.sl-title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sl-title mark {
+  color: inherit;
+  background: var(--theme-glow);
+  border-radius: 2px;
+}
+
+.sl-dur {
+  flex: 0 0 auto;
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Up-next strip ---------- */
+
+.queue {
+  grid-column: 1 / -1;
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+
+.queue h3 {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--sp-2);
+}
+
+.queue-list {
+  display: flex;
+  gap: var(--sp-2);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.queue-item {
+  flex: 0 0 190px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px;
+  text-align: left;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--dur), background var(--dur);
+}
+
+.queue-item:hover {
+  border-color: var(--theme-primary);
+  background: var(--card-hover);
+}
+
+.queue-item img {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.queue-item .qt {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.queue-item .qa {
+  font-size: var(--fs-xs);
+  color: var(--theme-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .player-info {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .player-actions {
+    justify-content: flex-start;
+  }
+}
