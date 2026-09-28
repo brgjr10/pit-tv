@@ -20,3 +20,8 @@ data/*.tmp
 .DS_Store
 Thumbs.db
 *.swp
+
+# Bug testing artifacts
+e2e_test.md
+QA_REPORT.md
+instructions.md
