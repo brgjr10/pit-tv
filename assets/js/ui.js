@@ -603,6 +603,11 @@ export function initUI() {
     </div>`;
   }
 
+  /** True when the sidebar is an overlay drawer rather than an in-flow panel. */
+  function isDrawerOverlay() {
+    return window.matchMedia("(max-width: 900px)").matches;
+  }
+
   /* ---------- filter sidebar ---------- */
 
   function renderFilters() {
@@ -1023,6 +1028,14 @@ export function initUI() {
         toggleShortcuts();
         break;
       case "Escape":
+        // An open drawer is an overlay below the drawer breakpoint, so Escape has
+        // to dismiss it first — otherwise pressing it to close the overlay also
+        // wipes the active search or every filter the user has set.
+        if (state.settings.sidebarOpen && isDrawerOverlay()) {
+          e.preventDefault();
+          setSetting("sidebarOpen", false);
+          break;
+        }
         if (state.searchQuery) {
           dom.search.value = "";
           setSearchQuery("");
@@ -1219,7 +1232,7 @@ export function initUI() {
     // Below the drawer breakpoint a restored `sidebarOpen: true` would cover the
     // grid on first paint. Mutating in memory (not setSetting) keeps the stored
     // preference intact for desktop, and any later toggle this session sticks.
-    if (window.matchMedia("(max-width: 900px)").matches) state.settings.sidebarOpen = false;
+    if (isDrawerOverlay()) state.settings.sidebarOpen = false;
     syncControls();
     try {
       const { entries, problems, skipped = 0, sync } = await loadCatalog();
