@@ -1,5 +1,0 @@
-[  513116ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8126/assets/css/edit.css:0
-[  513123ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8126/manifest.webmanifest:0
-[  513145ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8126/assets/js/edit.js:0
-[  513158ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8126/manifest.webmanifest:0
-[  513159ms] [ERROR] Failed to load resource: net::ERR_FAILED @ http://localhost:8126/favicon.svg:0
