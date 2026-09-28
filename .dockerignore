@@ -9,6 +9,7 @@ data/*.backup.json
 data/catalog.concerts.json
 data/*.tmp
 videos/
+covers/
 
 # Playwright MCP artifacts
 .playwright-mcp/

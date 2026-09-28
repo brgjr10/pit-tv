@@ -47,8 +47,9 @@ Then open <http://localhost:3000/>.
 
 `docker-compose.yml` mounts `./videos` as a volume — drop your video files into
 `videos/` on the host and they're served by the container. To use your own
-`data/catalog.json` / `data/shows.json` instead of the demo, uncomment the
-`./data` volume line in `docker-compose.yml`.
+`data/catalog.json` / `data/shows.json` instead of the demo, or to add custom
+album art, uncomment the `./data` and `./covers` volume lines in
+`docker-compose.yml`.
 
 The image runs as a non-root user and exposes port `3000` (override with `PORT`).
 
@@ -280,7 +281,7 @@ pit-tv/
 ├── data/
 │   ├── catalog.json           the catalog (the concert list)
 │   └── catalog.demo.json      the original sample catalog
-├── covers/                    sample album art (generated)
+├── covers/                    album art (gitignored — generate with `node tools/make-covers.mjs`)
 ├── videos/                    drop local video files here
 ├── assets/
 │   ├── css/

@@ -13,6 +13,9 @@ data/*.tmp
 # Playwright MCP debug artifacts (logs, screenshots, page snapshots)
 .playwright-mcp/
 
+# Cover art - personal images / regenerated placeholders
+covers/
+
 # Docker CLI config (NOT the Dockerfile or .dockerignore)
 .docker/
 

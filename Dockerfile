@@ -14,7 +14,8 @@ RUN echo '{"type":"module","private":true}' > package.json
 COPY index.html sw.js manifest.webmanifest favicon.svg ./
 COPY assets/ ./assets/
 COPY lib/ ./lib/
-COPY covers/ ./covers/
+# covers/ are gitignored (personal/regenerated); the runtime stage
+# creates an empty directory, users can mount their own via compose.
 COPY tools/ ./tools/
 
 # Ship the demo catalog as the default data/catalog.json so the container
@@ -35,7 +36,7 @@ RUN addgroup -g 1000 -S appgroup && \
 COPY --from=builder /app .
 
 # Create writable directories for user data / videos
-RUN mkdir -p data videos && \
+RUN mkdir -p data videos covers && \
     chown -R appuser:appgroup /app
 
 USER appuser
