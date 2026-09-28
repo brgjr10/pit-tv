@@ -3,7 +3,7 @@ services:
     build: .
     container_name: pit-tv
     ports:
-      - "3000:3000"
+      - "3500:3000"
     volumes:
       # Mount your local video files so the catalog can find them
       - ./videos:/app/videos

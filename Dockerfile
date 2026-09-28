@@ -28,18 +28,11 @@ FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
-# Create non-root user
-RUN addgroup -g 1000 -S appgroup && \
-    adduser -u 1000 -S appuser -G appgroup
-
-# Copy from builder
-COPY --from=builder /app .
-
-# Create writable directories for user data / videos
+# Use existing node user (uid 1000 already exists in node:22-alpine)
 RUN mkdir -p data videos covers && \
-    chown -R appuser:appgroup /app
+    chown -R node:node /app
 
-USER appuser
+USER node
 
 EXPOSE 3000
 
