@@ -248,13 +248,31 @@ kbd {
   padding: var(--sp-4) var(--sp-3) var(--sp-6) var(--sp-5);
   border-right: 1px solid var(--theme-border);
   background: rgba(13, 17, 23, 0.35);
-  transition: transform var(--dur) var(--ease-out-expo), border-color var(--dur-slow) var(--ease-out-expo);
+  transition: transform var(--dur) var(--ease-out-expo), width var(--dur) var(--ease-out-expo),
+    padding var(--dur) var(--ease-out-expo), border-color var(--dur-slow) var(--ease-out-expo),
+    visibility 0s;
 }
 
-.sidebar[hidden] {
-  display: block;
+/* Collapsed is the class ui.js toggles from the `sidebarOpen` setting. On desktop
+   the sidebar is still a flex child, so it is collapsed to zero width to give the
+   grid the space back, and `visibility` is delayed by --dur so the slide-out is
+   actually seen before the element stops painting. */
+.sidebar.collapsed {
+  flex-basis: 0;
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
   transform: translateX(-100%);
   visibility: hidden;
+  transition: transform var(--dur) var(--ease-out-expo), width var(--dur) var(--ease-out-expo),
+    padding var(--dur) var(--ease-out-expo), border-color var(--dur-slow) var(--ease-out-expo),
+    visibility 0s linear var(--dur);
+}
+
+/* Drawer scrim. Rendered as a sibling of the sidebar but only ever displayed by
+   the <= 900px block below, so it can never intercept input on desktop. */
+.sidebar-scrim {
+  display: none;
 }
 
 .main {
@@ -602,6 +620,30 @@ kbd {
     background: var(--bg-elevated);
     box-shadow: var(--shadow-lg);
     padding-top: var(--sp-5);
+  }
+
+  /* A fixed drawer cannot reclaim flex space, so it keeps its full width and is
+     pushed off-canvas instead. */
+  .sidebar.collapsed {
+    width: var(--sidebar-w);
+    padding-left: var(--sp-5);
+    padding-right: var(--sp-3);
+    transform: translateX(-100%);
+  }
+
+  /* Sits under the drawer (60) and over the content, so tapping outside dismisses
+     the drawer instead of hitting the grid behind it. */
+  .sidebar-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(1, 4, 9, 0.6);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .sidebar-scrim:not([hidden]) {
+    display: block;
   }
 
   .list-head {

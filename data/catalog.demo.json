@@ -9,7 +9,7 @@
     "location": "Barcelona, Spain",
     "video": {
       "type": "cloud",
-      "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "src": "https://mdn.github.io/shared-assets/videos/flower.mp4",
       "duration": 342
     },
     "albumArt": "covers/kid-a.svg",
@@ -30,9 +30,10 @@
     "location": "Inglewood, CA",
     "video": {
       "type": "cloud",
-      "src": "https://www.youtube.com/watch?v=1z_tLwF4R0c",
-      "duration": 366
+      "src": "https://www.youtube.com/watch?v=svwJTnZOaco",
+      "duration": 309
     },
+    "note": "Placeholder source: the original pro-shot was taken down. Points at Radiohead's own official YouTube channel (Idioteque, Kid A) so the YouTube embed path stays exercised with a guaranteed-playable ID.",
     "albumArt": "covers/kid-a.svg",
     "tags": ["tour-2019", "pro-shot"],
     "metadata": {
@@ -164,9 +165,10 @@
     "location": "Las Vegas, NV",
     "video": {
       "type": "cloud",
-      "src": "https://vimeo.com/840944213",
+      "src": "https://vimeo.com/76979871",
       "duration": 552
     },
+    "note": "Placeholder source: the original Fear Inoculum clip 404s on Vimeo. Vimeo 76979871 is Vimeo's own long-lived embed demo video, used here purely to exercise the Vimeo embed path — its API (vimeo.com/api/v2/video/76979871.json) and player.vimeo.com embed both return 200.",
     "albumArt": "covers/fear-inoculum.svg",
     "tags": ["fear-inoculum", "audience"],
     "metadata": {
@@ -188,7 +190,7 @@
         "title": "Tangled Up in Blue",
         "video": {
           "type": "cloud",
-          "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+          "src": "https://mdn.github.io/shared-assets/videos/friday.mp4",
           "duration": 401
         }
       },
@@ -196,7 +198,7 @@
         "title": "The Weight",
         "video": {
           "type": "cloud",
-          "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+          "src": "https://mdn.github.io/shared-assets/videos/flower.mp4",
           "duration": 264
         }
       },
@@ -204,7 +206,7 @@
         "title": "Rainy Day Women",
         "video": {
           "type": "cloud",
-          "src": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "src": "https://cdn.jsdelivr.net/gh/mediaelement/mediaelement-files@master/echo-hereweare.mp4",
           "duration": 318
         }
       }
@@ -227,9 +229,10 @@
     "location": "Pasadena, CA",
     "video": {
       "type": "cloud",
-      "src": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "src": "https://vjs.zencdn.net/v/oceans.mp4",
       "duration": 323
     },
+    "note": "DASH is NOT exercised here, by design: player.js only resolves .mpd to { kind: 'dash' } when window.dashjs exists, and no dash.js build is vendored in lib/ or loaded by index.html, so a .mpd entry always falls through to kind 'direct' and dies with MEDIA_ERR_SRC_NOT_SUPPORTED in Chrome. Point this at a .mpd only after dash.js is actually shipped. This entry therefore carries a CORS-permissive progressive MP4 (Accept-Ranges: bytes, verified 206) so the direct-file path stays covered.",
     "albumArt": "covers/greatest-hits.svg",
     "tags": ["fall-2015", "audience"],
     "metadata": {
@@ -248,9 +251,10 @@
     "location": "New York, NY",
     "video": {
       "type": "cloud",
-      "src": "https://www.youtube.com/watch?v=4x5P4H2KJdI",
+      "src": "https://www.youtube.com/watch?v=bXXQNtsBXYU",
       "duration": 296
     },
+    "note": "Placeholder source: the original 1979 Palladium pro-shot is gone. Points at Patti Smith's own official YouTube channel (Gloria: In Excelsis Deo, Horses) so the YouTube embed path stays exercised with a guaranteed-playable ID.",
     "albumArt": "covers/wave.svg",
     "tags": ["wave-tour", "festival", "pro-shot"],
     "metadata": {
@@ -269,7 +273,7 @@
     "location": "George, WA",
     "video": {
       "type": "cloud",
-      "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm",
+      "src": "https://mdn.github.io/shared-assets/videos/flower.webm",
       "duration": 318
     },
     "albumArt": "covers/ten.svg",
@@ -316,7 +320,7 @@
     "location": "Toronto, Canada",
     "video": {
       "type": "cloud",
-      "src": "https://www.w3schools.com/html/movie.mp4",
+      "src": "https://cdn.jsdelivr.net/gh/mediaelement/mediaelement-files@master/big_buck_bunny.mp4",
       "duration": 294
     },
     "albumArt": "covers/rumours.svg",
@@ -337,7 +341,7 @@
     "location": "Boston, MA",
     "video": {
       "type": "cloud",
-      "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
+      "src": "https://mdn.github.io/shared-assets/videos/friday.mp4",
       "duration": 262
     },
     "albumArt": "covers/rumours.svg",

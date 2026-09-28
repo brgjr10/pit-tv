@@ -121,6 +121,19 @@ const SORTERS = {
   album: (a, b) => collator.compare(a.album, b.album) || collator.compare(a.song, b.song),
 };
 
+// Artist is sortable but has no list-header button, and that is deliberate.
+//
+// The list row renders the artist as the `.sub` under the song title inside the
+// primary cell — it is not a column of its own — so there is no header cell to
+// wire a `data-sort` button to. The header buttons map 1:1 onto row columns
+// (Song -> .title, Venue -> .venue, Date -> .date, Album -> .album,
+// Length -> .num), and artist has no such column. Sorting by artist is still
+// available through the sort dropdown, which is enough.
+//
+// The comparator reads `entry.artist`, and `normaliseEntry` sets that field from
+// `raw.artist` (catalog.js), so the UI key ("artist") and the field compared are
+// the same — artist sort is not a no-op. Verified against the 198-entry catalog:
+// ascending runs $uicideboy$ -> ZillaKami and descending is the exact reverse.
 export const SORT_FIELDS = [
   { field: "date", label: "Date" },
   { field: "artist", label: "Artist" },

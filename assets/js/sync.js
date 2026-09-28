@@ -31,7 +31,10 @@ export function reconcileShows(catalog, existingShowsDoc) {
     const existing = existingShowsDoc.shows;
     if (existing && typeof existing === "object") {
       for (const [key, row] of Object.entries(existing)) {
-        if (!row || typeof row === "object" && !Array.isArray(row)) {
+        // A null row is corruption, not a partial row: { ...null } would revive it
+        // as {} and let the computed fields below redecorate it, so drop the key
+        // and let the catalog rebuild it (or leave it absent) instead.
+        if (row && typeof row === "object" && !Array.isArray(row)) {
           shows[key] = { ...row };
         }
       }

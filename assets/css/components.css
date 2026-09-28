@@ -6,12 +6,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  /* The card is a <button>, so the UA's center alignment and flex-start
+     cross-axis have to be undone or the art stops filling the card. */
+  align-items: stretch;
+  text-align: left;
   overflow: hidden;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   cursor: pointer;
-  text-align: left;
   will-change: transform, opacity;
   transition: border-color var(--dur) var(--ease-out-expo), box-shadow var(--dur) var(--ease-out-expo), background var(--dur) var(--ease-out-expo);
   box-shadow: var(--shadow-sm);
@@ -222,6 +225,8 @@
   grid-template-columns: 42px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
   gap: var(--sp-3);
   align-items: center;
+  /* Same UA-button reset as the card: keep the columns left-aligned. */
+  text-align: left;
   padding: 7px var(--sp-3);
   border: 1px solid transparent;
   border-radius: var(--radius-sm);

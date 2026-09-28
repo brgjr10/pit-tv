@@ -18,18 +18,22 @@ The app needs an HTTP origin. ES modules, `fetch()` of the catalog, and the
 service worker are all blocked over `file://`.
 
 ```bash
-# zero-dependency server included in the repo (recommended)
 node tools/serve.js 3000
-
-# or anything else you already have
-npx serve . -p 3000
-python -m http.server 3000
 ```
 
 Then open <http://localhost:3000/>.
 
-`tools/serve.js` also supports HTTP range requests, so seeking works inside large
-local video files, and it refuses to serve anything outside the project folder.
+**Use `tools/serve.js` for anything beyond a quick look.** It is the only server
+in this repo that implements the `/api/*` routes the app calls, it supports HTTP
+range requests so seeking works inside large local video files, it sets
+`Service-Worker-Allowed` so the service worker can claim the whole origin, and it
+refuses to serve anything outside the project folder.
+
+Any other static server (`npx serve`, `python -m http.server`, a web-server GUI)
+will render the app but silently fail the routes above, which surfaces as a flood
+of red console errors that look like application bugs. If the console shows
+`501 Unsupported method ('POST')` or a `404` on `/api/*`, you are on the wrong
+server — start `tools/serve.js` instead.
 
 ---
 

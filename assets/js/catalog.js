@@ -26,14 +26,23 @@ const toInt = (v, fallback = 0) => {
   return Number.isFinite(n) && n >= 0 ? Math.floor(n) : fallback;
 };
 
+const isDigits = (s) => /^\d+$/.test(s);
+
 /** Accepts "3:45", "1:02:03" or a number of seconds. */
 export function parseDuration(value) {
   if (typeof value === "number") return Math.max(0, Math.floor(value));
   if (!isNonEmptyString(value)) return 0;
   if (/^\d+$/.test(value.trim())) return toInt(value.trim());
-  const parts = value.trim().split(":").map((p) => toInt(p, 0));
-  if (parts.some((n) => Number.isNaN(n))) return 0;
-  return parts.reduce((acc, n) => acc * 60 + n, 0);
+  const parts = value.trim().split(":");
+  // Every component must be a plain run of digits — toInt silently coerces
+  // non-numeric input to 0, which would mask bad values.  Cap at 3 parts so
+  // "1:2:3:4" is rejected instead of reduced into a nonsense value.
+  if (parts.length > 3 || !parts.every(isDigits)) return 0;
+  // Every component after the first (minutes, seconds) must be 0-59.
+  for (let i = 1; i < parts.length; i += 1) {
+    if (Number(parts[i]) > 59) return 0;
+  }
+  return parts.reduce((acc, p) => acc * 60 + Number(p), 0);
 }
 
 export function formatDuration(seconds) {
@@ -58,6 +67,18 @@ export function formatDate(iso, precision = "day") {
   return d.toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" });
 }
 
+// The Date constructor silently rolls 2016-02-31 to March 2, so a regex match
+// is not enough — we must confirm the components survive a UTC round-trip
+// unchanged.  This rejects impossible calendar dates without inventing one.
+const dateRoundTrips = (y, m, d) => {
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return (
+    date.getUTCFullYear() === y &&
+    date.getUTCMonth() === m - 1 &&
+    date.getUTCDate() === d
+  );
+};
+
 /**
  * Parse a catalog date into a sortable key plus its precision.
  *
@@ -71,7 +92,17 @@ export function parseDate(value) {
   const year = raw.match(/^(\d{4})$/);
   if (year) return { iso: `${year[1]}-01-01`, precision: "year" };
   const day = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  return day ? { iso: `${day[1]}-${day[2]}-${day[3]}`, precision: "day" } : { iso: "", precision: "" };
+  if (!day) return { iso: "", precision: "" };
+  const y = +day[1];
+  const m = +day[2];
+  const d = +day[3];
+  // Month 1-12 and day 1-31 are necessary but not sufficient — February has
+  // no 30th, and leap years must be respected — so the round-trip check above
+  // rejects 2016-02-31, 2023-02-29, etc.
+  if (m < 1 || m > 12 || d < 1 || d > 31 || !dateRoundTrips(y, m, d)) {
+    return { iso: "", precision: "" };
+  }
+  return { iso: `${day[1]}-${day[2]}-${day[3]}`, precision: "day" };
 }
 
 function slugify(value, fallback) {
@@ -429,8 +460,10 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL }
   // covers: the server runs fetch-album-art.mjs in the background, which fills
   // what it can and rewrites catalog.json. Both are fire-and-forget — the page
   // renders from what it already has, and a later refresh picks up the results.
-  triggerServerSync().catch(() => {});
-  triggerCoverFetch().catch(() => {});
+  // They are guarded so a repeat loadCatalog (e.g. on re-render) can't pile up
+  // duplicate in-flight requests.
+  triggerServerSync();
+  triggerCoverFetch();
 
   setStatus("ready");
   setCatalog(entries);
@@ -438,24 +471,41 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL }
   return { entries, problems, skipped, url: usedUrl, sync: syncResult };
 }
 
+// Session-level guards for the fire-and-forget background syncs: a static-file
+// deployment will fail these endpoints, but re-issuing them on every reload or
+// render just multiplies the same expected error.  Once one has succeeded (or
+// been confirmed unnecessary) it is not retried; the in-flight flag prevents
+// concurrent duplicates from overlapping loadCatalog calls.
+let syncInFlight = false;
+let syncSucceeded = false;
+let coverFetchInFlight = false;
+let coverFetchSucceeded = false;
+
 /**
  * Ask the server to re-run tools/set-locations.mjs so shows.json matches the
  * catalog on disk. The server reads the catalog itself, so this is the single
  * place that needs to know about the tool.
  */
 async function triggerServerSync() {
+  if (syncInFlight || syncSucceeded) return;
+  syncInFlight = true;
   try {
     const res = await fetch("/api/sync-shows", { method: "POST" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const result = await res.json();
     if (result.ok && result.stdout) {
       console.info("[sync] shows.json refreshed from catalog");
+      syncSucceeded = true;
     } else {
-      console.warn("[sync] server sync reported an issue:", (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
+      console.warn(`[sync] /api/sync-shows responded ${res.status} but reported an issue:`, (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
     }
   } catch (err) {
     // Not fatal — the client-side reconcile above already kept the UI honest.
-    console.debug("[sync] server sync unavailable:", err.message);
+    // /api/sync-shows is only served by tools/serve.js; a plain static server
+    // won't implement it, so this is expected there, not a bug in the app.
+    console.warn(`[sync] /api/sync-shows failed (${err.message}); served only by \`node tools/serve.js\`, static-file deployments are fine — shows.json on disk is used as-is`);
+  } finally {
+    syncInFlight = false;
   }
 }
 
@@ -468,29 +518,34 @@ async function triggerServerSync() {
  * archive costs one cheap status check and nothing else.
  */
 async function triggerCoverFetch() {
-  let status;
+  if (coverFetchInFlight || coverFetchSucceeded) return;
+  coverFetchInFlight = true;
   try {
     const res = await fetch("/api/fetch-status");
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    status = await res.json();
-  } catch (err) {
-    console.debug("[covers] fetch status unavailable:", err.message);
-    return;
-  }
+    const status = await res.json();
 
-  if (!status || !status.missing) return;
+    if (!status || !status.missing) {
+      // No missing covers — nothing to do, and don't retry the check.
+      coverFetchSucceeded = true;
+      return;
+    }
 
-  try {
-    const res = await fetch("/api/fetch-covers", { method: "POST" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const result = await res.json();
+    const res2 = await fetch("/api/fetch-covers", { method: "POST" });
+    if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
+    const result = await res2.json();
     if (result.ok) {
       console.info(`[covers] background fetch started for ${status.missing} entr${status.missing === 1 ? "y" : "ies"}`);
+      coverFetchSucceeded = true;
     } else {
-      console.warn("[covers] fetch failed:", (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
+      console.warn(`[covers] /api/fetch-covers responded ${res2.status} but reported an issue:`, (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
     }
   } catch (err) {
-    console.debug("[covers] could not start fetch:", err.message);
+    // /api/fetch-status and /api/fetch-covers are only served by tools/serve.js;
+    // a plain static server won't implement them, so this is expected there.
+    console.warn(`[covers] /api/fetch-status or /api/fetch-covers failed (${err.message}); served only by \`node tools/serve.js\`, static-file deployments are fine`);
+  } finally {
+    coverFetchInFlight = false;
   }
 }
 

@@ -72,6 +72,7 @@ export function initUI() {
       artist: q("[data-view-artist]"),
       timeline: q("[data-view-timeline]"),
       sidebar: q("[data-sidebar]"),
+      scrim: q("[data-sidebar-scrim]"),
       filters: q("[data-filters]"),
       chips: q("[data-chips]"),
       search: q("[data-search]"),
@@ -109,7 +110,7 @@ export function initUI() {
   function assertDOM(dom) {
     const required = [
       "grid", "list", "listHead", "artist", "timeline",
-      "sidebar", "filters", "chips", "search", "resultCount",
+      "sidebar", "scrim", "filters", "chips", "search", "resultCount",
       "sortField", "sortDir", "modal", "modalBackdrop", "modalClose",
       "modalTitle", "modalByline", "modalFacts", "queue", "toasts",
       "shortcuts", "shortcutsPanel", "showShortcuts", "settingsBtn",
@@ -287,46 +288,40 @@ export function initUI() {
   /* ---- grid card ---- */
 
   function renderCard(entry, container) {
-    const node = el("article", "video-card");
+    // A native button gives the card its accessible name from the visible text
+    // and Enter/Space activation for free. Children are phrasing content
+    // because a button may not contain flow or interactive content.
+    const node = el("button", "video-card");
+    node.type = "button";
     node.dataset.id = entry.id;
     node.dataset.entry = entry.id;
-    node.tabIndex = 0;
-    node.setAttribute("role", "button");
-    node.setAttribute("aria-label", cardLabel(entry));
 
     const duration = entry.video.duration;
     const position = readPosition(entry.id);
     const songCount = (entry.songs || []).length;
 
     node.innerHTML = `
-      <div class="card-art" data-missing="${!entry.albumArt}" data-fallback="${escapeHtml(initials(entry.artist))}">
+      <span class="card-art" data-missing="${!entry.albumArt}" data-fallback="${escapeHtml(initials(entry.artist))}">
         ${entry.albumArt ? artImg(entry) : ""}
-        <button class="card-play" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+        <span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="card-duration" data-songs="${songCount}">${songCount ? `${songCount} songs` : duration ? formatDuration(duration) : "--:--"}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-song">${editableTitle(entry)}</div>
-        <div class="card-artist">${highlight(entry.artist, state.searchQuery)}</div>
-        <div class="card-meta">
+      </span>
+      <span class="card-body">
+        <span class="card-song">${editableTitle(entry)}</span>
+        <span class="card-artist">${highlight(entry.artist, state.searchQuery)}</span>
+        <span class="card-meta">
           <span>${escapeHtml(formatDate(entry.date, entry.datePrecision))}</span>
           <span class="dot"></span>
           <span>${highlight(entry.venue, state.searchQuery)}</span>
-        </div>
+        </span>
         ${tagBadges(entry)}
-      </div>
+      </span>
       ${position && duration ? `<span class="card-progress" style="transform:scaleX(${position / duration})"></span>` : ""}
     `;
 
     attachOpen(node, entry);
     container.appendChild(node);
     return node;
-  }
-
-  /** Screen-reader text for a card or row: a show says how many videos it holds. */
-  function cardLabel(entry) {
-    const when = formatDate(entry.date, entry.datePrecision);
-    const count = (entry.songs || []).length;
-    return `${entry.artist} — ${entry.song}, ${when}${count ? `, ${count} songs` : ""}`;
   }
 
   /** The right-hand column of a list row: a song count, or a duration. */
@@ -346,25 +341,25 @@ export function initUI() {
   /* ---- list row ---- */
 
   function renderRow(entry, container) {
-    const node = el("div", "row");
+    // Native button for the same reason as the card: the accessible name comes
+    // from the visible columns, so no aria-label can drift out of sync with them.
+    const node = el("button", "row");
+    node.type = "button";
     node.dataset.id = entry.id;
     node.dataset.entry = entry.id;
-    node.tabIndex = 0;
-    node.setAttribute("role", "button");
-    node.setAttribute("aria-label", cardLabel(entry));
 
     node.innerHTML = `
-      <div class="thumb">${entry.albumArt ? artImg(entry) : ""}</div>
-      <div class="primary">
+      <span class="thumb">${entry.albumArt ? artImg(entry) : ""}</span>
+      <span class="primary">
         <span class="title">${editableTitle(entry)}</span>
         <span class="sub">${highlight(entry.artist, state.searchQuery)}</span>
-      </div>
-      <div class="venue col-optional">${highlight(entry.venue, state.searchQuery)}</div>
-      <div class="date">${escapeHtml(formatDate(entry.date, entry.datePrecision))}</div>
-      <div class="album">${entry.album ? `<span title="${escapeHtml(entry.album)}">${highlight(entry.album, state.searchQuery)}</span>` : ""}</div>
-      <div class="quality col-optional">${entry.metadata.quality ? qualityBadge(entry) : `<span class="badge">${escapeHtml(entry.video.type)}</span>`}</div>
-      <div class="col-optional">${locationCell(entry)}</div>
-      <div class="num">${lengthCell(entry)}</div>
+      </span>
+      <span class="venue col-optional">${highlight(entry.venue, state.searchQuery)}</span>
+      <span class="date">${escapeHtml(formatDate(entry.date, entry.datePrecision))}</span>
+      <span class="album">${entry.album ? `<span title="${escapeHtml(entry.album)}">${highlight(entry.album, state.searchQuery)}</span>` : ""}</span>
+      <span class="quality col-optional">${entry.metadata.quality ? qualityBadge(entry) : `<span class="badge">${escapeHtml(entry.video.type)}</span>`}</span>
+      <span class="col-optional">${locationCell(entry)}</span>
+      <span class="num">${lengthCell(entry)}</span>
     `;
 
     attachOpen(node, entry);
@@ -559,7 +554,9 @@ export function initUI() {
     if (entry.album) {
       badges.push(`<span class="badge" data-album="${escapeHtml(entry.album)}" title="${escapeHtml(entry.album)}">${escapeHtml(entry.album)}</span>`);
     }
-    return badges.length ? `<div class="card-tags">${badges.join("")}</div>` : "";
+    // A span, not a div: the badge row sits inside the card's <button>, which
+    // may only contain phrasing content.
+    return badges.length ? `<span class="card-tags">${badges.join("")}</span>` : "";
   }
 
   function locationCell(entry) {
@@ -688,6 +685,9 @@ export function initUI() {
     dom.sidebar.classList.toggle("collapsed", !state.settings.sidebarOpen);
     dom.sidebarToggle.setAttribute("aria-pressed", String(state.settings.sidebarOpen));
     dom.sidebarToggle.setAttribute("aria-label", state.settings.sidebarOpen ? "Hide filters" : "Show filters");
+    // CSS keeps the scrim display:none on desktop, so the attribute is the only
+    // state sync needed here.
+    dom.scrim.hidden = !state.settings.sidebarOpen;
   }
 
   function updateCounts(count, animate) {
@@ -1090,6 +1090,10 @@ export function initUI() {
 
   dom.sidebarToggle.addEventListener("click", () => setSetting("sidebarOpen", !state.settings.sidebarOpen));
 
+  // On small screens the drawer is an overlay, so tapping the content behind it
+  // has to be a dismiss rather than a click on the grid.
+  dom.scrim.addEventListener("click", () => setSetting("sidebarOpen", false));
+
   // Filter interactions are delegated: the sidebar is re-rendered on every
   // change, so per-node listeners would be thrown away each time.
   dom.filters.addEventListener("change", (e) => {
@@ -1212,6 +1216,10 @@ export function initUI() {
   /* ---------- start ---------- */
 
   async function start() {
+    // Below the drawer breakpoint a restored `sidebarOpen: true` would cover the
+    // grid on first paint. Mutating in memory (not setSetting) keeps the stored
+    // preference intact for desktop, and any later toggle this session sticks.
+    if (window.matchMedia("(max-width: 900px)").matches) state.settings.sidebarOpen = false;
     syncControls();
     try {
       const { entries, problems, skipped = 0, sync } = await loadCatalog();

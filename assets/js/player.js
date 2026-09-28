@@ -129,6 +129,7 @@ export const isTypingTarget = (node) =>
 
 const SAVE_INTERVAL = 5000;
 const RESUME_TAIL_THRESHOLD = 15; // don't offer "resume" in the last 15s
+const EMBED_LOAD_TIMEOUT = 10000; // an embed that has not painted by now is stuck
 
 /* ---------- controller ---------- */
 
@@ -162,6 +163,8 @@ export function createPlayer(root) {
   let source = null;
   let hls = null;
   let embedEl = null;
+  let embedTimer = null;
+  let embedProvider = "";
   let saveTimer = null;
   let idleTimer = null;
   let scrubbing = false;
@@ -185,6 +188,9 @@ export function createPlayer(root) {
   const hideMessage = () => {
     el.message.hidden = true;
     el.message.innerHTML = "";
+    // Drop the kind too: a hidden node still reads as "loading" to anything
+    // branching on it, which is a state the user never saw.
+    delete el.message.dataset.kind;
   };
 
   const showControls = () => {
@@ -211,6 +217,7 @@ export function createPlayer(root) {
       hls = null;
     }
     if (embedEl) {
+      clearEmbedWatch();
       embedEl.remove();
       embedEl = null;
     }
@@ -223,7 +230,17 @@ export function createPlayer(root) {
     el.bigPlay.hidden = true;
     el.scrub.parentElement.hidden = true;
     el.chapters.hidden = true;
+    hideMessage();
     fullscreenActive = false;
+  }
+
+  /** Drop the embed's load listener and its stuck-loader timer, if either is armed. */
+  function clearEmbedWatch() {
+    if (embedTimer) {
+      clearTimeout(embedTimer);
+      embedTimer = null;
+    }
+    if (embedEl) embedEl.removeEventListener("load", onEmbedReady);
   }
 
   function flushPosition() {
@@ -272,10 +289,10 @@ export function createPlayer(root) {
     el.scrub.parentElement.hidden = true;
     el.chapters.hidden = true;
     el.bigPlay.hidden = true;
-    hideMessage();
 
     embedEl = document.createElement("iframe");
     embedUrl = src.embedUrl;
+    embedProvider = src.provider;
     if (!autoplay) {
       embedUrl = embedUrl.replace(/[?&]autoplay=1/, "");
     }
@@ -283,6 +300,12 @@ export function createPlayer(root) {
     embedEl.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     embedEl.allowFullscreen = true;
     embedEl.setAttribute("title", `${nextEntry.artist} — ${nextEntry.song}`);
+    // The embed's document is cross-origin, so no playback event ever reaches
+    // us; the iframe's own `load` is the only cross-origin signal that the
+    // player document is up. The timer is the safety net for a blocked embed
+    // or an offline network, where `load` simply never arrives.
+    embedEl.addEventListener("load", onEmbedReady);
+    embedTimer = setTimeout(onEmbedTimeout, EMBED_LOAD_TIMEOUT);
     el.stage.appendChild(embedEl);
 
     // Iframes own their own transport; disable the controls that would not work.
@@ -291,6 +314,21 @@ export function createPlayer(root) {
     }
     el.full.hidden = false; // iframe has its own fullscreen; leave it alone
     return Promise.resolve();
+  }
+
+  function onEmbedReady() {
+    clearEmbedWatch();
+    hideMessage();
+  }
+
+  function onEmbedTimeout() {
+    // Stay subscribed: a cold or throttled embed often lands well after this,
+    // and a late `load` should clear the warning.
+    embedTimer = null;
+    showMessage(
+      `Still loading the ${embedProvider} stream — check your connection or try another source.`,
+      "error"
+    );
   }
 
   function mountVideo(src, nextEntry, autoplay) {

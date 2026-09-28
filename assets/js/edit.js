@@ -12,6 +12,10 @@ import { reconcileShows, writeShows, withWriteLock } from "./sync.js";
 
 let editMode = false;
 let dirty = false;
+/* Supplied by app.js: the grid must be re-rendered when the mode flips, because
+ * the editable title is chosen at render time rather than toggled in place. */
+let rerender = () => {};
+
 let pendingWrites = 0;
 let totalEntries = 0;
 
@@ -20,7 +24,8 @@ export const editState = {
   isDirty: () => dirty,
 };
 
-export function initEdit() {
+export function initEdit({ rerender: onRerender } = {}) {
+  if (onRerender) rerender = onRerender;
   const dom = {
     toggle: document.querySelector("[data-edit-toggle]"),
     bar: document.querySelector("[data-edit-bar]"),
@@ -67,6 +72,9 @@ function toggleEdit() {
       updateEditProgress();
       toast("Click any song title to edit it. Press E or Esc to exit.", "info");
     }
+    // Re-render last: leaving edit mode has to strip the contenteditable spans
+    // back out again, not just hide the bar.
+    rerender();
   }
 
 function updateEditProgress() {
@@ -151,6 +159,7 @@ function cancelEdit() {
   const bar = document.querySelector("[data-edit-bar]");
   if (bar) bar.hidden = true;
   updateEditProgress();
+  rerender();
 }
 
 function toast(message, kind = "info", ms = 3200) {

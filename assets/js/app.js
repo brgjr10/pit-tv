@@ -17,7 +17,10 @@ function boot() {
   setReducedMotion(state.settings.reducedMotion);
 
   const ui = initUI();
-  const edit = initEdit();
+  // Edit mode swaps each rendered title for a contenteditable span, so the grid
+  // has to be re-rendered when the mode flips — otherwise entering edit mode
+  // looks like it did nothing until some unrelated re-render happened to land.
+  const edit = initEdit({ rerender: () => ui.render({ animate: false }) });
 
   // Scroll position survives a refresh, per the persistence requirements.
   restoreScroll();

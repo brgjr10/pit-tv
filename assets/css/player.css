@@ -131,15 +131,24 @@ body.player-fullscreen .modal-close {
   background-position: center;
 }
 
+/* The status line is an overlay, not a flow sibling: in normal flow the embed
+   iframe (position: absolute) and the control bar both paint over it, so the
+   loading text was never actually seen. z-index 4 keeps it above the iframe
+   and the big-play button (3) while the controls (5) stay on top. */
 .stage-message {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--sp-2);
   padding: var(--sp-6);
   text-align: center;
   color: var(--text-muted);
   font-size: var(--fs-sm);
+  pointer-events: none;
 }
 
 .stage-message .spinner {
