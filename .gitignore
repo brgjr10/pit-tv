@@ -25,3 +25,8 @@ covers/
 .DS_Store
 Thumbs.db
 *.swp
+
+# Bug Testing
+e2e_test.md
+QA_REPORT.md
+instructions.md
