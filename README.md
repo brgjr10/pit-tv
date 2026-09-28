@@ -8,6 +8,8 @@ Zero build step, zero framework, zero runtime dependencies beyond two vendored
 libraries. Plain ES modules, CSS custom properties, and `anime.js` doing the
 motion.
 
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/01c6dc70-818a-47ac-96bf-b598612a4db4" />
+
 ---
 
 ## Run it
