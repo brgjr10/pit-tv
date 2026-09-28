@@ -6,6 +6,7 @@
 data/catalog.json
 data/shows.json
 data/*.backup.json
+data/catalog.concerts.json
 data/*.tmp
 videos/
 

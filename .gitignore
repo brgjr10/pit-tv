@@ -2,31 +2,21 @@
 videos/*
 !videos/README.md
 
-# User data - catalog and shows are personal, regenerated from source
+# User data: catalog and shows JSON are personal / regenerated.
+# The demo catalog (catalog.demo.json) is committed so the repo is usable.
 data/catalog.json
 data/shows.json
 data/*.backup.json
+data/catalog.concerts.json
 data/*.tmp
 
-# Cover art - personal/regenerated
-covers/
-
-# Playwright MCP artifacts
+# Playwright MCP debug artifacts (logs, screenshots, page snapshots)
 .playwright-mcp/
 
-# Dot folders (hidden config/state)
-.kilo/
-.vscode/
-.idea/
-.playwright-mcp/
+# Docker CLI config (NOT the Dockerfile or .dockerignore)
 .docker/
 
 # OS / editor noise
 .DS_Store
 Thumbs.db
 *.swp
-
-# Bug Testing
-e2e_test.md
-QA_REPORT.md
-instructions.md

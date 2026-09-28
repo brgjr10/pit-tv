@@ -33,6 +33,27 @@ local video files, and it refuses to serve anything outside the project folder.
 
 ---
 
+## Docker
+
+A multi-stage `Dockerfile` and `docker-compose.yml` are included. The container
+runs the same zero-dependency server and ships the demo catalog, so it works out
+of the box:
+
+```bash
+docker compose up --build
+```
+
+Then open <http://localhost:3000/>.
+
+`docker-compose.yml` mounts `./videos` as a volume — drop your video files into
+`videos/` on the host and they're served by the container. To use your own
+`data/catalog.json` / `data/shows.json` instead of the demo, uncomment the
+`./data` volume line in `docker-compose.yml`.
+
+The image runs as a non-root user and exposes port `3000` (override with `PORT`).
+
+---
+
 ## The catalog
 
 Everything the app shows comes from **`data/catalog.json`** — a plain JSON array.
@@ -286,6 +307,9 @@ pit-tv/
 └── tools/
     ├── serve.js               zero-dependency dev server
     └── make-covers.mjs        regenerates the sample covers
+├── Dockerfile                 multi-stage container image
+├── docker-compose.yml         local dev / runtime compose
+└── .dockerignore              trims build context (videos, git, docs)
 ```
 
 `store.js` and `pwa.js` are not in the original layout in `instructions.md`.
