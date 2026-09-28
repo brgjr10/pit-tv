@@ -17,6 +17,7 @@ COPY lib/ ./lib/
 # covers/ are gitignored (personal/regenerated); the runtime stage
 # creates an empty directory, users can mount their own via compose.
 COPY tools/ ./tools/
+COPY covers/ ./covers/
 
 # Ship the real catalog.json so the container serves actual shows.
 # Users can mount their own data/ to override via compose.
