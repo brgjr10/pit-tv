@@ -22,6 +22,7 @@ COPY covers/ ./covers/
 # Ship the real catalog.json so the container serves actual shows.
 # Users can mount their own data/ to override via compose.
 COPY data/catalog.json ./data/catalog.json
+COPY data/shows.json ./data/shows.json
 
 # ---- Runtime stage ----
 FROM node:22-alpine AS runtime
