@@ -8,13 +8,20 @@ data/shows.json
 data/*.backup.json
 data/*.tmp
 
+# Cover art - personal/regenerated
+covers/
+
 # Playwright MCP artifacts
 .playwright-mcp/
+
+# Dot folders (hidden config/state)
+.kilo/
+.vscode/
+.idea/
+.playwright-mcp/
+.docker/
 
 # OS / editor noise
 .DS_Store
 Thumbs.db
 *.swp
-
-# Docker
-.docker/
