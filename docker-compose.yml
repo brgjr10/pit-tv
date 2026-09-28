@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  pit-tv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pit-tv
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount user data so catalog/shows persist and can be edited
+      - ./data:/app/data
+      - ./videos:/app/videos
+      # Mount covers if you want to add custom art
+      - ./covers:/app/covers
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

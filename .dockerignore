@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# User data (large, personal, regenerated)
+data/catalog.json
+data/shows.json
+data/*.backup.json
+data/*.tmp
+videos/
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Editor/OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Documentation (not needed in container)
+README.md
+QA_REPORT.md
+e2e_test.md
+instructions.md
+
+# Docker config (not needed in container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Kilo agent config
+.kilo/

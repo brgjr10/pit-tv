@@ -2,7 +2,19 @@
 videos/*
 !videos/README.md
 
+# User data - catalog and shows are personal, regenerated from source
+data/catalog.json
+data/shows.json
+data/*.backup.json
+data/*.tmp
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
 # OS / editor noise
 .DS_Store
 Thumbs.db
 *.swp
+
+# Docker
+.docker/
