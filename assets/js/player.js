@@ -928,6 +928,7 @@ export function createPlayer(root) {
   }
 
   return {
+    el,
     open,
     close: detachSource,
     togglePlay,

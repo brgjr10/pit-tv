@@ -66,6 +66,16 @@ export function initUI() {
   assertDOM(dom);
   const player = createPlayer(dom.modal);
 
+  /* When a clip group is open, advance to the next clip automatically when the
+   * current one ends. The player is always handed a real clip, so the queue
+   * here is the group's rows and the index tracks which one is playing. */
+  player.el.video.addEventListener("ended", () => {
+    if (!openGroup || groupClipIndex >= groupClipQueue.length - 1) return;
+    groupClipIndex += 1;
+    const nextRow = groupClipQueue[groupClipIndex];
+    playRow(nextRow.song, nextRow);
+  });
+
   /* ---------- boot ---------- */
 
   function grabDOM() {
@@ -863,6 +873,8 @@ export function initUI() {
    * clip, never the synthetic group, so the group is kept here for the modal
    * facts and the queue panel's clip list and reorder controls. */
   let openGroup = null;
+  let groupClipQueue = [];
+  let groupClipIndex = 0;
   /* Reorder mode is a panel-local toggle, not a preference: it is a way of
    * interacting with the clips that are on screen right now. */
   let reorderClips = false;
@@ -871,6 +883,16 @@ export function initUI() {
     openCard = sourceNode;
     openGroup = entry.isGroup ? entry : null;
     reorderClips = false;
+
+    if (openGroup) {
+      groupClipQueue = groupRowsFor(openGroup);
+      const row = rowsFor(entry)[initialRowIndex(entry)];
+      groupClipIndex = groupClipQueue.findIndex((r) => r.id === row.id);
+      if (groupClipIndex === -1) groupClipIndex = 0;
+    } else {
+      groupClipQueue = [];
+      groupClipIndex = 0;
+    }
 
     // A show with a setlist opens on the video you last watched, so reopening a
     // concert picks up where you left off instead of restarting the bill.
@@ -1050,6 +1072,9 @@ export function initUI() {
         // modal facts and the theme pointed at what is on screen.
         const clip = entry.isGroup ? entry.clips.find((c) => c.id === row.id) : null;
         playRow(clip || entry, row);
+        if (entry.isGroup) {
+          groupClipIndex = groupClipQueue.findIndex((r) => r.id === row.id);
+        }
       });
     }
 
@@ -1125,6 +1150,11 @@ export function initUI() {
     const section = dom.queue.querySelector("[data-clip-group]");
     section?.replaceWith(clipGroupNode(group, rows, activeId));
     wireClipGroupControls(group, rows, activeId);
+    if (openGroup && group.id === openGroup.id) {
+      groupClipQueue = rows;
+      groupClipIndex = rows.findIndex((r) => r.id === activeId);
+      if (groupClipIndex === -1) groupClipIndex = 0;
+    }
   }
 
   function wireClipGroupControls(group, rows, activeId) {
