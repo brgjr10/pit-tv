@@ -434,23 +434,44 @@ function setSummary(message, kind) {
 
 /* ---------- helpers ---------- */
 
+/**
+ * Populate a select from an allowlist, with a blank leading option.
+ *
+ * The blank default matters: without it the first allowlist value is selected
+ * by default, and every clip would silently be filed as 4K / pro-shot. An
+ * unset field is omitted from the entry, which is honest; a wrong one is not.
+ */
 function fillSelect(select, values) {
   if (!select) return;
   select.textContent = "";
-  for (const value of values) {
+  for (const value of ["", ...values]) {
     const option = document.createElement("option");
     option.value = value;
-    option.textContent = value;
+    option.textContent = value || "—";
     select.appendChild(option);
   }
 }
 
+/**
+ * Facet suggestions for the artist and album inputs.
+ *
+ * buildFacets returns { value, count } objects, not strings — the counts are
+ * what make the list useful, and the sidebar already renders them. The count
+ * goes in the option's label so the browser's dropdown shows it alongside the
+ * value without it becoming part of what gets typed into the field.
+ */
 function fillDatalist(list, values) {
   if (!list) return;
   list.textContent = "";
-  for (const value of values || []) {
+  for (const item of values || []) {
+    if (!item) continue;
+    const value = typeof item === "string" ? item : item.value;
+    if (!value) continue;
     const option = document.createElement("option");
     option.value = value;
+    if (typeof item === "object" && item.count) {
+      option.label = `${item.count} clip${item.count === 1 ? "" : "s"}`;
+    }
     list.appendChild(option);
   }
 }
