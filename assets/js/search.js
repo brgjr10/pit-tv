@@ -7,9 +7,36 @@
  * mid-word one so "radi" surfaces "Radiohead" near the top.
  */
 
-import { entrySearchText } from "./catalog.js";
-
 const haystackCache = new WeakMap();
+
+/**
+ * Every field a query can match against, lower-cased. Lives here rather than in
+ * the catalog because deciding what is searchable is a query concern, and it
+ * keeps this module free of imports — the catalog builds on top of it, never
+ * the other way round.
+ *
+ * Quality, source and video type are included because the cards render them as
+ * badges and Quality is a first-class facet: a field the user can see and
+ * filter by but not type is the one combination that reliably reads as broken.
+ */
+function entrySearchText(entry) {
+  const songs = (entry.songs || []).map((s) => s.title);
+  return [
+    entry.artist,
+    entry.song,
+    entry.album,
+    entry.venue,
+    entry.location,
+    ...entry.tags,
+    ...songs,
+    entry.metadata?.quality,
+    entry.metadata?.source,
+    entry.video?.type,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
 
 function haystackFor(entry) {
   let h = haystackCache.get(entry);
@@ -106,6 +133,59 @@ function passesFilters(entry, filters) {
   if (filters.dateTo && (!entry.date || entry.date > filters.dateTo)) return false;
 
   return true;
+}
+
+/* ---------- facet counts ---------- */
+
+/**
+ * An empty selection for every filter key. Facet counting always applies a
+ * complete filter set, and a missing key would be read as an undefined
+ * selection rather than as "nothing selected".
+ */
+const NO_SELECTION = {
+  artist: [],
+  venue: [],
+  album: [],
+  quality: [],
+  source: [],
+  type: [],
+  dateFrom: "",
+  dateTo: "",
+};
+
+/**
+ * Count each dimension's values over the entries that match the search and
+ * every filter *except that dimension's own selection*.
+ *
+ * The exclusion is what makes a count mean something: a count has to answer
+ * "how many results would I get if I ticked this?". Counting a dimension
+ * against its own selection would make an already-ticked value satisfy itself
+ * at the cost of every alternative, so its whole list would collapse to zero
+ * and the option the user is trying to untick would look unavailable.
+ *
+ * @param {Array} entries the whole catalog
+ * @param {Array<{key: string, get: Function}>} dimensions the faceted dimensions
+ * @returns {Map<string, Map<string, number>>} dimension key -> value -> count
+ */
+export function countFacets(entries, dimensions, { filters, searchQuery = "" } = {}) {
+  const counts = new Map();
+
+  for (const { key, get, multi } of dimensions) {
+    const context = { ...NO_SELECTION, ...filters, [key]: NO_SELECTION[key] };
+    const tally = new Map();
+    for (const entry of entries) {
+      if (!passesFilters(entry, context)) continue;
+      if (!matchQuery(entry, searchQuery).matched) continue;
+      // Empty values are tallied too: deciding which values are worth showing
+      // belongs to whoever asked for the counts, not to the counting.
+      for (const value of multi ? get(entry) : [get(entry)]) {
+        tally.set(value, (tally.get(value) || 0) + 1);
+      }
+    }
+    counts.set(key, tally);
+  }
+
+  return counts;
 }
 
 /* ---------- sorting ---------- */

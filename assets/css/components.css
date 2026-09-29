@@ -1,5 +1,30 @@
 /* components.css — cards, rows, filter sidebar, chips, badges, skeletons */
 
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--theme-primary);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-lg);
+  white-space: nowrap;
+  transition: top var(--dur-fast) var(--ease-out-expo);
+}
+
+.skip-link:focus {
+  top: var(--sp-3);
+  outline: 3px solid var(--theme-primary);
+  outline-offset: 3px;
+}
+
 /* ---------- Glass card (grid + artist views) ---------- */
 
 .video-card {
@@ -235,6 +260,16 @@
   transition: background var(--dur), border-color var(--dur);
 }
 
+@media (max-width: 900px) {
+  /* Must live here: components.css loads after layout.css, so this rule
+     wins the cascade over the base .row template above. The same breakpoint
+     in layout.css was dead code for .row (same specificity, earlier source),
+     leaving rows on an 8-track grid while the header collapsed to 5. */
+  .row {
+    grid-template-columns: 38px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
+  }
+}
+
 .row:hover,
 .row:focus-visible {
   background: var(--card);
@@ -454,6 +489,17 @@
 .filter-option:hover {
   background: var(--card);
   color: var(--text);
+}
+
+/* No matches in the current context: shown, dimmed, and not clickable. */
+.filter-option[data-unavailable="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.filter-option[data-unavailable="true"]:hover {
+  background: none;
+  color: var(--text-muted);
 }
 
 .filter-option input {

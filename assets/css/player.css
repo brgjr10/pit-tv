@@ -109,6 +109,13 @@ body.player-fullscreen .modal-close {
   display: grid;
   place-items: center;
   overflow: hidden;
+  /* updateAspect() only reaches the stage once <video> reports real dimensions,
+     which never happens when the source 404s or is still loading — and with
+     nothing to size it the grid stage collapses to a square. 16:9 is the
+     shape of the media this app archives, and it holds before any JS runs.
+     The inline aspect-ratio updateAspect sets always wins over this, and the
+     tall and fullscreen rules below out-specify it. */
+  aspect-ratio: 16 / 9;
 }
 
 .stage video,

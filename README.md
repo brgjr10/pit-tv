@@ -205,14 +205,15 @@ path is easy to see.
 - **Artist** — grouped into collapsible per-artist sections
 - **Timeline** — chronological, with sticky year rails
 
-**Filters** (all combinable): artist, venue, tags (match-any or match-all),
-quality, source, video type, and a date range. Every active filter is shown as a
-removable chip.
+**Filters** (all combinable): artist, venue, album, quality, source, video type,
+and a date range. Every active filter is shown as a removable chip.
 
-**Search** across artist, song, album, venue, location, tags **and setlist song
-titles**. Whitespace separated tokens must all match; matches are scored so a
-prefix hit outranks a mid-word one and highlights are drawn inline. Short queries
-also try subsequence matching, so `rdhd` finds Radiohead in the demo catalog and
+**Search** across artist, song, album, venue, location, tags, setlist song
+titles, and the quality/source/video-type badges shown on each card. So `480p`
+and `local` both return results, as well as `akron` for a location.
+Whitespace separated tokens must all match; matches are scored so a prefix hit
+outranks a mid-word one and highlights are drawn inline. Short queries also try
+subsequence matching, so `rdhd` finds Radiohead in the demo catalog and
 `kesha scissor` finds Kesha's 2025 show in the concert list.
 
 **Setlists.** A card with a `songs` array reports its song count, and opening it
@@ -264,7 +265,7 @@ being skipped.
 | `↑` `↓` `←` `→` | Move between videos |
 | `Home` `End` | First / last video |
 | `Enter` `Space` | Open the focused video |
-| `Esc` | Close player → clear search → reset filters |
+| `Esc` | Close player → close shortcuts → close the mobile drawer → clear search |
 | `?` | Shortcut panel |
 | `Space` `K` | Play / pause (in player) |
 | `←` `→` | Seek ∓10s (in player) |
@@ -328,9 +329,17 @@ No bundler, no build step, no CDN at runtime. `lib/` is committed.
 
 ## Browser support
 
-Chrome/Edge 100+, Firefox 98+, Safari 15.4+. Requires CSS custom properties and
+Chrome/Edge 111+, Firefox 121+, Safari 16.2+. Requires CSS custom properties and
 ES modules. Picture-in-Picture and the File System Access API are used when
 present and ignored when not.
+
+The floor is set by two CSS features rather than by ES modules: `:has()` in the
+filter checkboxes (`components.css`) needs Firefox 121+, and `color-mix()` in the
+edit-mode title field (`edit.css`) needs Chrome 111+, Firefox 113+ and Safari
+16.2+. Below these the relevant declarations are dropped rather than breaking the
+page, so `:has()` loses the checked-filter styling and `color-mix()` loses the
+field tint and focus ring. Everything else in the app works on much older
+browsers; these two are what the stated floor is paying for.
 
 ---
 

@@ -11,10 +11,19 @@ import { initUI } from "./ui.js";
 import { initEdit } from "./edit.js";
 import { setReducedMotion } from "./anime-helpers.js";
 import { registerServiceWorker } from "./pwa.js";
+import { resetTheme } from "./theme.js";
 
 function boot() {
   restore();
   setReducedMotion(state.settings.reducedMotion);
+
+  // Restore the persisted base theme before any UI is rendered. resetTheme()
+  // delegates to themeFromEntry(null, …), which builds the neutral palette in the
+  // stored light/dark variant and applies it through applyTheme. Because this is
+  // the first call currentThemeKey is null, so applyTheme takes the instant
+  // (non-animated) path — no morph from a stale cover, no first-paint flash of
+  // the wrong variant.
+  resetTheme({ light: state.settings.theme === "light", animate: "init" });
 
   const ui = initUI();
   // Edit mode swaps each rendered title for a contenteditable span, so the grid

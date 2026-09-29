@@ -311,9 +311,15 @@ function finishDarkTheme(theme, hue) {
   const text = "#e6edf3";
   const muted = "#8b949e";
 
-  // Nudge the primary until it clears 4.5:1 on the card surface; if it cannot,
-  // fall back to raising its lightness rather than shipping unreadable accents.
+  // Nudge each accent until it clears 4.5:1 on the card surface; if it cannot,
+  // fall back to a fixed lightness rather than shipping unreadable accents.
+  // secondary and accent get the same treatment as primary: the README promises
+  // the derived colours are contrast-checked, and secondary is already painted
+  // into the header gradient, so leaving either unguarded made that a false
+  // claim the moment a token was wired to a surface.
   theme.primary = ensureContrast(theme.primary, card, 4.5, { h: hue, s: 0.8, l: 0.72 });
+  theme.secondary = ensureContrast(theme.secondary, card, 4.5, { h: hue, s: 0.55, l: 0.66 });
+  theme.accent = ensureContrast(theme.accent, card, 4.5, { h: hue, s: 0.9, l: 0.6 });
 
   return {
     ...theme,
@@ -335,6 +341,8 @@ function finishLightTheme(theme, hue) {
   const text = "#1f2328";
 
   theme.primary = ensureContrast(theme.primary, card, 4.5, { h: hue, s: 0.7, l: 0.32 });
+  theme.secondary = ensureContrast(theme.secondary, card, 4.5, { h: hue, s: 0.5, l: 0.28 });
+  theme.accent = ensureContrast(theme.accent, card, 4.5, { h: hue, s: 0.85, l: 0.26 });
 
   return {
     ...theme,

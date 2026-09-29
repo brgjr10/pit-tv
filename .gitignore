@@ -9,6 +9,10 @@ data/shows.json
 data/*.backup.json
 data/catalog.concerts.json
 data/*.tmp
+# tools/atomic-json.mjs writes a temp file per write, named .tmp-<hex>-<ts>.json,
+# and renames it over the target on success. A failed rename (e.g. EPERM over
+# SMB) leaves the temp behind, so ignore the exact names the tool produces.
+data/.tmp-*.json
 
 # Playwright MCP debug artifacts (logs, screenshots, page snapshots)
 .playwright-mcp/
