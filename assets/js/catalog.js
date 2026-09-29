@@ -43,6 +43,8 @@ const RAW_ENTRY_KEYS = [
   "id",
   "artist",
   "song",
+  "songId",
+  "clipIndex",
   "album",
   "venue",
   "date",

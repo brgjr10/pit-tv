@@ -169,10 +169,9 @@ async function saveCatalog() {
       return;
     }
 
-    // The server re-reads the file, so re-seed state from what it now serves.
-    // A reorder save or another tab's edit must not be silently reverted.
-    const fresh = await loadCatalog();
-    setCatalog(fresh.entries);
+    // loadCatalog re-seeds state from the server's re-read of the file, so a
+    // reorder save or another tab's edit is not silently reverted.
+    await loadCatalog();
 
     dirty = false;
     pendingWrites = 0;
