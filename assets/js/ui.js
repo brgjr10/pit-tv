@@ -371,7 +371,7 @@ export function initUI() {
   }
 
   function sumDurations(clips) {
-    return (clips || []).reduce((acc, c) => acc + (c.video?.duration || 0), acc);
+    return (clips || []).reduce((acc, c) => acc + (c.video?.duration || 0), 0);
   }
 
   /** The right-hand column of a list row: a clip count, a song count, or a duration. */
