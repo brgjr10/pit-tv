@@ -263,7 +263,6 @@
 }
 
 @media (max-width: 900px) {
-
   /* Must live here: components.css loads after layout.css, so this rule
      wins the cascade over the base .row template above. The same breakpoint
      in layout.css was dead code for .row (same specificity, earlier source),
