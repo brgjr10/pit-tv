@@ -446,6 +446,12 @@ function apiUploadPlan(body) {
   const folder = sanitizeSegment(b.performance) || sanitizeSegment(artist);
   if (!folder) return { ok: false, error: "performance is empty and there is no artist to fall back to" };
 
+  // Checked here as well as at commit: the date is a form field, and finding
+  // out it is unusable after a multi-gigabyte transfer is the worst possible
+  // time. The client validates first, but it cannot be the only guard.
+  const dateResult = normalizeShowDate(b.date);
+  if (dateResult.error) return { ok: false, error: dateResult.error };
+
   const dir = join(VIDEOS_DIR, "catalog", folder);
   const filename = uniqueFilename(dir, `${safeBase}${ext}`);
   const src = `videos/catalog/${folder}/${filename}`;
@@ -484,6 +490,7 @@ function apiUploadPlan(body) {
     artist,
     song,
     album: String(b.album ?? "").trim(),
+    date: dateResult.date,
     duration: Number.isFinite(duration) && duration > 0 ? Math.floor(duration) : 0,
     quality,
     source,
