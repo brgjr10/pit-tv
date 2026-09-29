@@ -33,6 +33,24 @@ const toInt = (v, fallback = 0) => {
 const isDigits = (s) => /^\d+$/.test(s);
 
 /**
+ * A persisted clipIndex, or null when the field is absent or unusable.
+ *
+ * Only a finite, non-negative whole number is accepted: a negative or fractional
+ * value would order a clip before the start of its group or between two whole
+ * indexes, and a non-number means the field was hand-edited into something the
+ * ordering cannot use. Falling back to the derived index is always better than
+ * rendering an order the user never chose.
+ */
+const toClipIndex = (v) => {
+  // Number(null) and Number("") are both 0, so the absent cases are excluded
+  // explicitly — otherwise every entry missing the field would sort to the front
+  // of its group.
+  if (v === null || v === undefined || v === "") return null;
+  const n = Number(v);
+  return Number.isInteger(n) && n >= 0 ? n : null;
+};
+
+/**
  * The on-disk field set for a catalog entry.
  *
  * normaliseEntry adds keys the file does not carry — datePrecision (derived),
@@ -200,17 +218,29 @@ export function normaliseEntry(raw, index, seenIds) {
   seenIds.add(id);
 
   // songId and clipIndex are the clip-grouping keys. They are derived here so
-  // every entry carries them in memory, but they are only persisted when the
-  // user reorders a group (Feature A) or re-saves the entry (Feature C) — the
-  // existing 198-entry catalog groups correctly with zero edits because the
-  // ids were already built as <showKey>-<NN>.
+  // every entry carries them in memory, and they are persisted when the user
+  // reorders a group (Feature A) or re-saves the entry (Feature C) — the
+  // existing 198-entry catalog groups correctly with zero edits because the ids
+  // were already built as <showKey>-<NN>.
   const showKey = showKeyFor(id);
-  const songId = isNonEmptyString(raw.song) ? `${showKey}-${slugify(raw.song, "song")}` : "";
-  // The clip number is the -N suffix of the id ("mgk-xmas-2017-04" -> 3);
-  // when there is no suffix the entry is a singleton and falls back to its
-  // index in the file, which is what an unnumbered entry would have been.
+  // A songId already on disk wins over the derived one, for the same reason
+  // clipIndex does: the upload commit writes it (Feature B) and toRawEntry
+  // carries it on every write (Feature C), so ignoring it would make a field the
+  // app writes a field it never reads. The derived value is the fallback for the
+  // 198 existing entries, which predate the field and carry none.
+  const songId = isNonEmptyString(raw.songId)
+    ? raw.songId.trim()
+    : isNonEmptyString(raw.song) ? `${showKey}-${slugify(raw.song, "song")}` : "";
+  // The clip number is the -N suffix of the id ("mgk-xmas-2017-04" -> 3); when
+  // there is no suffix the entry is a singleton and falls back to its index in
+  // the file, which is what an unnumbered entry would have been.
   const suffix = id.match(/-(\d+)$/);
-  const clipIndex = suffix ? parseInt(suffix[1], 10) - 1 : index;
+  // A clipIndex already on disk wins over the derived one. It only exists
+  // because the user reordered a group (Feature A), and the derived value is
+  // the order the file happens to be in — so preferring it would silently undo
+  // the reorder on the very next load, which is the failure that feature exists
+  // to prevent.
+  const clipIndex = toClipIndex(raw.clipIndex) ?? (suffix ? parseInt(suffix[1], 10) - 1 : index);
 
   // A show is playable either as one video or as a setlist of them, so a missing
   // "video" is only fatal when there are no songs to fall back on.
@@ -443,21 +473,31 @@ async function fetchJson(url) {
   return res.json();
 }
 
-export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL } = {}) {
-  let raw;
-  let usedUrl = url;
-  try {
-    raw = await fetchJson(url);
-  } catch (primaryErr) {
-    if (fallback && fallback !== url) {
-      try {
-        raw = await fetchJson(fallback);
-        usedUrl = fallback;
-      } catch {
+/**
+ * Fetch, normalise and publish the catalog.
+ *
+ * `raw` short-circuits the fetch: POST /api/catalog answers with the file as it
+ * now stands, so a save can re-seed from that instead of asking for the same
+ * bytes again. Nothing else changes — the injected document still goes through
+ * the same normalisation, show join and facade as a fetched one.
+ */
+export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL, raw: injected } = {}) {
+  let raw = injected;
+  let usedUrl = injected ? "the save response" : url;
+  if (!raw) {
+    try {
+      raw = await fetchJson(url);
+    } catch (primaryErr) {
+      if (fallback && fallback !== url) {
+        try {
+          raw = await fetchJson(fallback);
+          usedUrl = fallback;
+        } catch {
+          throw primaryErr;
+        }
+      } else {
         throw primaryErr;
       }
-    } else {
-      throw primaryErr;
     }
   }
 

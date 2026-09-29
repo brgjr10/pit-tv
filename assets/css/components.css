@@ -118,6 +118,97 @@
   color: var(--theme-primary);
 }
 
+/* A clip count is the same idea — a word in place of a runtime — but it wins
+   over a setlist count: an entry never has both, and when it somehow does, the
+   clips are what the card is standing for. */
+.card-duration[data-clips]:not([data-clips="0"]) {
+  font-family: var(--font);
+  color: var(--theme-primary);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- clip groups ---------- */
+
+/* The badge in a row or a timeline item, where there is no scrim to sit on. */
+.badge[data-clips]:not([data-clips="0"]) {
+  color: var(--theme-primary);
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+/* ---------- clip reorder ---------- */
+
+/* The toggle lives in the section heading, so it has to look like chrome
+   rather than a row — small, quiet, and clearly secondary to the clips. */
+.clip-reorder-toggle {
+  margin-left: auto;
+  padding: 2px 8px;
+  font-family: var(--font);
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: color var(--dur), border-color var(--dur), background var(--dur);
+}
+
+.clip-reorder-toggle:hover {
+  color: var(--text);
+  border-color: var(--theme-primary);
+}
+
+.clip-reorder-toggle[aria-pressed="true"] {
+  color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  background: var(--theme-glow);
+}
+
+/* The list row is a <button> and the arrows are siblings of it, not children —
+   a button may not contain interactive content. */
+.clip-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.clip-row .setlist-item {
+  flex: 1;
+  min-width: 0;
+}
+
+.clip-moves {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.clip-move {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--text-dim);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: color var(--dur), border-color var(--dur), background var(--dur);
+}
+
+.clip-move:hover:not(:disabled) {
+  color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  background: var(--theme-glow);
+}
+
+/* Disabled rather than removed: the first clip has nothing above it, and a
+   control that appears and disappears moves every row under the pointer. */
+.clip-move:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .card-play {
   position: absolute;
   left: 50%;

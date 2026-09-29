@@ -15,7 +15,7 @@
  *     one thing a naive cache does worse than the network.
  */
 
-const VERSION = "pittv-v17";
+const VERSION = "pittv-v18";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const ART_CACHE = `${VERSION}-art`;
@@ -41,6 +41,7 @@ const SHELL_ASSETS = [
   "./assets/js/theme.js",
   "./assets/js/anime-helpers.js",
   "./assets/js/edit.js",
+  "./assets/js/grouping.js",
   "./assets/js/upload.js",
   "./assets/js/sync.js",
   "./assets/js/pwa.js",

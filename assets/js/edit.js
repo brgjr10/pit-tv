@@ -125,15 +125,43 @@ function buildPatch() {
   return { changes };
 }
 
-async function saveCatalog() {
+/**
+ * Write the pending patch to /api/catalog and re-seed state from the file.
+ *
+ * `allowDownload` is false for a clip reorder: the static-host fallback hands
+ * the user a whole catalog.json to drop over the real one, which is the right
+ * answer for a deliberate title edit and the wrong one for a press of an arrow
+ * key. Those callers get a refusal message instead.
+ *
+ * Resolves true when the write landed and the catalog was re-read.
+ */
+export async function saveCatalog({ allowDownload = true } = {}) {
   return withWriteLock(async () => {
     const patch = buildPatch();
     const hasPatch = Object.keys(patch.changes).length > 0;
 
     if (!hasPatch) {
       toast("Nothing to save — no titles were changed.", "info");
-      return;
+      return false;
     }
+
+    // A reorder has no sensible static-host fallback (handing the user a whole
+    // catalog.json to drop over the real one because they pressed an arrow key
+    // is not a feature), so these callers get a refusal that names the actual
+    // cause. PITTV_WRITE is only suggested when the cause could plausibly be
+    // the write gate — an EPERM from the atomic rename is the filesystem, and
+    // telling the user to set an env var would send them the wrong way.
+    const refuseDownload = (err) => {
+      const gated = err?.status === 403 || err?.name === "TypeError";
+      toast(
+        gated
+          ? `Not saved: ${err.message} The server may not accept writes — set process.env.PITTV_WRITE='1'.`
+          : `Not saved: ${err.message}`,
+        "warn",
+        8000
+      );
+      return false;
+    };
 
     let res;
     try {
@@ -145,39 +173,48 @@ async function saveCatalog() {
     } catch (err) {
       // A static host has no /api/catalog. Fall back to the old download and
       // say so plainly — the user must replace the file by hand.
+      if (!allowDownload) return refuseDownload(err);
       return fallbackDownload(patch, err);
     }
 
     if (res.status === 403) {
       toast("Writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/catalog.", "warn", 6000);
-      return;
+      return false;
     }
 
     let result;
     try {
       result = await res.json();
     } catch {
+      if (!allowDownload) return refuseDownload(new Error("the server answered but the body was not JSON"));
       return fallbackDownload(patch, new Error("the server answered but the body was not JSON"));
     }
 
     if (!res.ok || result.error) {
+      if (!allowDownload) return refuseDownload(new Error(result.error || `HTTP ${res.status}`));
       return fallbackDownload(patch, new Error(result.error || `HTTP ${res.status}`));
     }
 
     if (result.conflicts?.length) {
       toast(`Not saved: ${result.conflicts.length} entr${result.conflicts.length === 1 ? "y" : "ies"} no longer exist on disk (${result.conflicts.slice(0, 4).join(", ")}${result.conflicts.length > 4 ? ", …" : ""}). Reopen the catalog and try again.`, "warn", 8000);
-      return;
+      return false;
     }
 
-    // loadCatalog re-seeds state from the server's re-read of the file, so a
-    // reorder save or another tab's edit is not silently reverted.
-    await loadCatalog();
+    // Re-seed from the catalog the server just wrote, not from a second fetch of
+    // data/catalog.json. The response body is the file as it stands after this
+    // write (and after the server re-derived shows.json), so state matches disk
+    // exactly — which is what a clip reorder depends on: the order on screen must
+    // be the order that was persisted, or ↑/↓ appear to work and revert on
+    // reload. A re-fetch could also be served from a cache the write did not
+    // invalidate. The fallback matters only for a server that omits `catalog`.
+    await loadCatalog(Array.isArray(result.catalog) && result.catalog.length ? { raw: result.catalog } : {});
 
     dirty = false;
     pendingWrites = 0;
     pendingChanges.clear();
     updateEditProgress();
     toast("Catalog saved to disk", "success");
+    return true;
   });
 }
 

@@ -239,16 +239,80 @@ Every entry may carry two optional, additive fields that drive clip grouping:
 
 | Field | Purpose |
 |---|---|
-| `songId` | Stable group key within a show, `${showKey}-${slugify(song)}`. Absent when `song` is blank — the entry is then a singleton and never groups. |
-| `clipIndex` | 0-based position within the group. Derived from the `-N` suffix of the id (`mgk-xmas-2017-04` → `3`), or the entry's file index when there is no suffix. |
+| `songId` | Stable group key within a show, `${showKey}-${slugify(song)}`. Taken from the field when present, else derived from the song title. Blank when the `song` is blank — the entry is then a singleton and never groups. |
+| `clipIndex` | 0-based position within the group. Taken from the field when present, else derived from the `-N` suffix of the id (`mgk-xmas-2017-04` → `3`), or the entry's file index when there is no suffix. |
 
 They are derived on load and live in memory; they are only persisted when a
-clip is reordered or an entry is re-saved. The existing catalog groups
-correctly with zero edits because its ids were already built this way.
+clip is reordered, an entry is re-saved, or a clip is uploaded. The existing
+catalog groups correctly with zero edits because its ids were already built this
+way. A persisted value wins over the derived one on load — otherwise a reorder
+would be undone the next time the page opened.
 
 `date`, `venue` and `location` belong in `shows.json`, not on the entries —
 saving an edit that carries them is a regression, and the write path projects
 every entry through `toRawEntry` so they cannot come back.
+
+### Clip groups
+
+Two entries are one card when they share a show key **and** a non-empty
+`songId`. Everything else stays a singleton:
+
+- A group of one renders exactly as it did before — no count badge, no reorder
+  panel, no synthetic id.
+- A clip with a blank `song` never groups. Two untitled clips of one show are far
+  more likely to be two different songs than two takes of one; the user groups
+  them by giving them a title, and the grouping follows.
+- A clip that also declares a `songs` setlist is contradictory (it has a full
+  show *and* its own clips). Every clip in the bucket renders ungrouped and a
+  `console.warn` names the offending id — collapsing to the setlist alone would
+  drop the other clips off the screen entirely. *Any* clip in the bucket
+  carrying a setlist disqualifies it, not just the first, so a bucket whose
+  setlist sits on a later clip cannot be collapsed by accident.
+
+Grouping runs at the render boundary only (`toGroups` in `assets/js/grouping.js`).
+Search, filtering, sorting, scoring and the facet counts still run per entry, so
+matching any clip surfaces its group and the relevance order is untouched — only
+the render list and the result counter become groups.
+
+A group is a synthetic entry: every field the views read is promoted from the
+first clip in user order, plus `clips` and `clipCount`. That is why no renderer
+needed rewriting. Its progress bar is `Σ positions / Σ durations` across the
+clips, since a group has no single runtime.
+
+Editing a grouped title writes it to **every** clip in the group — the title is
+promoted from one clip, so a single write would rename that clip only and the
+group would fall apart on the next render.
+
+### Ordering clips
+
+Reordering lives in the player queue panel, not on the card: a card is a
+`<button>` and may not contain interactive children.
+
+**Reorder clips** in the panel header reveals ↑/↓ per row (`aria-label="Move clip
+2 earlier"`). They are the primary mechanism rather than drag-and-drop because
+they are keyboard accessible, work on touch and need no dependency. Moving a
+clip swaps the `clipIndex` of the two affected entries and POSTs them to
+`/api/catalog` as `{"changes": {"<id>": {"clipIndex": n}}}` — `clipIndex` is the
+only field a reorder moves. Swapping rather than renumbering means two users
+reordering concurrently converge instead of clobbering each other.
+
+Ordering is a normal user action, not an edit-mode action: the arrows work and
+save whether or not titles are being edited. The order on screen is only kept
+when the write landed — on a failure (writes disabled, a rejected write, a
+locked file) the swap is rolled back and the patch corrected, because a panel
+that looks reordered but is not on disk is the exact failure this feature
+exists to prevent. A reorder never falls back to handing the user a
+`catalog.json` to drop over the real one; that is the right answer for a
+deliberate title edit and the wrong one for a press of an arrow key, so the
+reorder path reports the refusal instead.
+
+When the write does land, the client re-seeds itself from the `catalog` the
+response carries — the file as it now stands — rather than re-fetching
+`data/catalog.json`. What the panel shows is then by construction what is on
+disk, and a second read that a stale cache could answer differently cannot
+unmake the order. `node tools/check-catalog.mjs` reports the grouping and the
+persisted order a file produces, which is the quickest way to confirm a
+reorder actually stuck.
 
 ### Uploads
 
@@ -290,6 +354,12 @@ Whitespace separated tokens must all match; matches are scored so a prefix hit
 outranks a mid-word one and highlights are drawn inline. Short queries also try
 subsequence matching, so `rdhd` finds Radiohead in the demo catalog and
 `kesha scissor` finds Kesha's 2025 show in the concert list.
+
+**Clip groups.** Several takes of one song are one card. A `N clips` badge
+replaces the runtime (the summed length stays on the badge's tooltip), and the
+row, card and timeline variants all show it. Opening one lists the clips under
+the stage in your order, with ↑/↓ buttons to rearrange them. See
+[Clip groups](#clip-groups) and [Ordering clips](#ordering-clips).
 
 **Setlists.** A card with a `songs` array reports its song count, and opening it
 lists the bill under the stage — each row labelled with its song title, the

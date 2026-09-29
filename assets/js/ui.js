@@ -24,9 +24,10 @@ import {
 } from "./store.js";
 import { loadCatalog, buildFacets, formatDate, formatDuration, playableEntry, setlistFor } from "./catalog.js";
 import { queryCatalog, highlight, escapeHtml, activeFilterSummary, SORT_FIELDS } from "./search.js";
+import { toGroups, groupRowsFor } from "./grouping.js";
 import { createPlayer, isTypingTarget } from "./player.js?v=2026-09-29-a11y-focus-v5";
 import { themeFromEntry, resetTheme } from "./theme.js";
-import { editState, recordChange } from "./edit.js";
+import { editState, recordChange, saveCatalog } from "./edit.js";
 import {
   staggerIn,
   crossFade,
@@ -147,26 +148,34 @@ export function initUI() {
     // results the current search and filters cannot deliver.
     setFacets(buildFacets(state.catalog, { filters: state.filters, searchQuery: state.searchQuery }));
 
+    // One step between the query pipeline and the renderers. Everything above
+    // still ran per entry — search, filters, sorting and the facet counts — so
+    // matching any clip surfaces its group and the relevance order is intact.
+    const groups = toGroups(entries);
+
     const container = activeViewEl();
     const previous = animate ? snapshotRects(container) : null;
 
     clearView(container);
 
     let nodes = [];
-    if (entries.length) {
-      nodes = renderEntries(entries, container);
+    if (groups.length) {
+      nodes = renderEntries(groups, container);
     } else {
       const target = container === dom.list ? listBody() : container;
       target.innerHTML = emptyStateMarkup();
     }
-    setFiltered(entries);
+    // The store holds what is on screen, so up-next and the roving focus walk
+    // group by group rather than stopping on a clip that is not rendered.
+    setFiltered(groups);
 
     renderChips();
     syncControls();
-    updateCounts(entries.length, animate);
-    announce(`${entries.length} ${entries.length === 1 ? "result" : "results"}`);
+    // The counter reports what the user can see, which is groups.
+    updateCounts(groups.length, animate);
+    announce(`${groups.length} ${groups.length === 1 ? "result" : "results"}`);
 
-    if (!animate || !entries.length) return;
+    if (!animate || !groups.length) return;
 
     animateReconcile(container, nodes, previous);
   }
@@ -306,14 +315,24 @@ export function initUI() {
     node.dataset.entry = entry.id;
 
     const duration = entry.video.duration;
-    const position = readPosition(entry.id);
     const songCount = (entry.songs || []).length;
+    const clipCount = entry.clipCount || 0;
+    // A group has no single runtime, so the badge counts clips and the summed
+    // runtime lives on the title attribute rather than being thrown away. The
+    // attribute is omitted entirely for anything else, so no card grows a blank
+    // tooltip the browser would still surface as an empty hover target.
+    const length = clipCount > 1
+      ? `${clipCount} clips`
+      : songCount ? `${songCount} songs` : duration ? formatDuration(duration) : "--:--";
+    const lengthTitle = clipCount > 1
+      ? ` title="${escapeHtml(`${clipCount} clips · ${formatDuration(sumDurations(entry.clips))} total`)}"`
+      : "";
 
     node.innerHTML = `
       <span class="card-art" data-missing="${!entry.albumArt}" data-fallback="${escapeHtml(initials(entry.artist))}">
         ${entry.albumArt ? artImg(entry) : ""}
         <span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <span class="card-duration" data-songs="${songCount}">${songCount ? `${songCount} songs` : duration ? formatDuration(duration) : "--:--"}</span>
+        <span class="card-duration" data-songs="${songCount}" data-clips="${clipCount}"${lengthTitle}>${length}</span>
       </span>
       <span class="card-body">
         <span class="card-song">${editableTitle(entry)}</span>
@@ -325,7 +344,7 @@ export function initUI() {
         </span>
         ${tagBadges(entry)}
       </span>
-      ${position && duration ? `<span class="card-progress" style="transform:scaleX(${position / duration})"></span>` : ""}
+      ${cardProgress(entry)}
     `;
 
     attachOpen(node, entry);
@@ -333,15 +352,41 @@ export function initUI() {
     return node;
   }
 
-  /** The right-hand column of a list row: a song count, or a duration. */
+  /**
+   * The progress bar under a card.
+   *
+   * A group has no single runtime, so the bar is the ratio of watched seconds to
+   * total seconds across its clips: partially-watched multi-clip groups show a
+   * truthful bar instead of the representative clip's own fraction.
+   */
+  function cardProgress(entry) {
+    const clips = entry.clipCount > 1 ? entry.clips : [entry];
+    let watched = 0;
+    let total = 0;
+    for (const clip of clips) {
+      watched += readPosition(clip.id);
+      total += clip.video?.duration || 0;
+    }
+    return watched && total ? `<span class="card-progress" style="transform:scaleX(${Math.min(1, watched / total)})"></span>` : "";
+  }
+
+  function sumDurations(clips) {
+    return (clips || []).reduce((acc, c) => acc + (c.video?.duration || 0), acc);
+  }
+
+  /** The right-hand column of a list row: a clip count, a song count, or a duration. */
   function lengthCell(entry) {
+    const clips = entry.clipCount || 0;
+    if (clips > 1) return `<span class="badge" data-clips="${clips}">${clips} clips</span>`;
     const count = (entry.songs || []).length;
     if (count) return `<span class="badge" data-songs="${count}">${count} songs</span>`;
     return entry.video.duration ? formatDuration(entry.video.duration) : "--:--";
   }
 
-  /** Timeline rows stay narrow, so a setlist collapses to a count. */
+  /** Timeline rows stay narrow, so a setlist or a clip group collapses to a count. */
   function timelineBadge(entry) {
+    const clips = entry.clipCount || 0;
+    if (clips > 1) return `${clips} clips`;
     const count = (entry.songs || []).length;
     if (count) return `${count} songs`;
     return escapeHtml(entry.metadata.quality || entry.video.type);
@@ -478,7 +523,7 @@ export function initUI() {
           <span class="s">${highlight(entry.artist, state.searchQuery)}</span>
         </span>
         <span class="tl-venue">${highlight(entry.venue, state.searchQuery)}</span>
-        <span class="badge" data-songs="${(entry.songs || []).length}">${timelineBadge(entry)}</span>
+        <span class="badge" data-songs="${(entry.songs || []).length}" data-clips="${entry.clipCount || 0}">${timelineBadge(entry)}</span>
       `;
       attachOpen(item, entry);
       rail.appendChild(item);
@@ -536,6 +581,34 @@ export function initUI() {
       const field = el.dataset.field;
       const value = el.textContent.trim();
       if (!entryId || !field) return;
+
+      // A group is a synthetic entry: its id is not in state.catalog, and its
+      // title is promoted from one clip. Writing a single clip would rename that
+      // clip only and the group would fall apart on the next render, so a group
+      // title is written to every clip in the group.
+      const group = state.filtered.find((item) => item.id === entryId);
+      if (group?.isGroup) {
+        let changed = 0;
+        for (const clip of group.clips) {
+          if ((clip[field] || "") === value) continue;
+          clip[field] = value;
+          recordChange(clip.id, field, value);
+          changed += 1;
+        }
+        if (changed) {
+          // The clips were mutated in place, so render() rebuilds the groups from
+          // them and the card reflects the new title without a second write.
+          const row = currentRowId();
+          render({ animate: false });
+          // The queue panel is not part of that render, so a group that is open
+          // would still list the old title on every row. openGroup held the
+          // pre-render object, so it is re-resolved from the fresh list first.
+          const fresh = openGroup && state.filtered.find((e) => e.id === openGroup.id);
+          if (fresh) renderQueuePanel((openGroup = fresh), row);
+        }
+        return;
+      }
+
       const entry = state.catalog.find((e) => e.id === entryId);
       if (!entry) return;
       const old = entry[field] || "";
@@ -786,14 +859,31 @@ export function initUI() {
 
   let openCard = null;
   let shortcutsPreviousFocus = null;
+  /* The clip group currently open, if any. The player is always handed a real
+   * clip, never the synthetic group, so the group is kept here for the modal
+   * facts and the queue panel's clip list and reorder controls. */
+  let openGroup = null;
+  /* Reorder mode is a panel-local toggle, not a preference: it is a way of
+   * interacting with the clips that are on screen right now. */
+  let reorderClips = false;
 
   async function openEntry(entry, sourceNode) {
     openCard = sourceNode;
+    openGroup = entry.isGroup ? entry : null;
+    reorderClips = false;
 
     // A show with a setlist opens on the video you last watched, so reopening a
     // concert picks up where you left off instead of restarting the bill.
-    const row = setlistFor(entry)[initialRowIndex(entry)];
-    renderModalInfo(entry, row.song);
+    const row = rowsFor(entry)[initialRowIndex(entry)];
+
+    // A group opens on a real clip, never on the synthetic group: everything the
+    // player does then runs against an entry that is in state.catalog, so the
+    // group id never has to survive into a resume position or a theme lookup. The
+    // clip is resolved from the row, so it is the one the user last watched and
+    // not merely the first in order.
+    const show = entry.isGroup ? entry.clips.find((c) => c.id === row.id) || entry.clips[0] : entry;
+
+    renderModalInfo(show, row.song);
     renderQueuePanel(entry, row.id);
 
     dom.modal.hidden = false;
@@ -805,12 +895,24 @@ export function initUI() {
       window.anime({ targets: dom.modalBackdrop, opacity: [0, 1], duration: 200, easing: "easeInOutQuad" });
     }
 
-    await playRow(entry, row);
+    await playRow(show, row);
+  }
+
+  /**
+   * The playable rows of whatever is open.
+   *
+   * A clip group is not a setlist, so its rows come from grouping.js in the
+   * user's clip order; everything else keeps the show's own setlist. The rows
+   * share a shape with setlistFor, so the player, the resume positions, the
+   * chapter rail and the "Song n of m" facts need no change.
+   */
+  function rowsFor(entry) {
+    return entry.isGroup ? groupRowsFor(entry) : setlistFor(entry);
   }
 
   /** Index of the row to open: the first one already watched, else the first. */
   function initialRowIndex(entry) {
-    const rows = setlistFor(entry);
+    const rows = rowsFor(entry);
     const watched = rows.findIndex((r) => readPosition(r.id) > 2);
     return watched === -1 ? 0 : watched;
   }
@@ -855,12 +957,19 @@ export function initUI() {
     const songCount = (entry.songs || []).length;
     const songNumber = song ? entry.songs.indexOf(song) + 1 : 0;
 
+    // A clip group is not a setlist, so its position reads as a clip count. The
+    // group is not the entry the player was handed (that is clips[0]), so the
+    // open group is tracked separately.
+    const group = openGroup;
+    const clipNumber = group && song ? group.clips.findIndex((c) => c.id === song.id) + 1 : 0;
+
     const facts = [
       entry.album && { k: "Album", v: entry.album },
       { k: "Venue", v: entry.venue },
       { k: "Date", v: formatDate(entry.date, entry.datePrecision) },
       entry.location && { k: "Location", v: entry.location },
       songCount && { k: "Song", v: song ? `${songNumber} of ${songCount}` : `${songCount} in setlist` },
+      clipNumber && { k: "Clip", v: `${clipNumber} of ${group.clipCount}` },
       entry.metadata.quality && { k: "Quality", v: entry.metadata.quality },
       entry.metadata.source && { k: "Source", v: entry.metadata.source },
       entry.metadata.audio && { k: "Audio", v: entry.metadata.audio },
@@ -882,15 +991,18 @@ export function initUI() {
   }
 
   /**
-   * The panel under the stage: the show's setlist when it has one, then the
-   * next shows in the current view. A show with no setlist is just "Up next".
+   * The panel under the stage: the clip list for a group, the setlist for a show
+   * with one, then the next shows in the current view. A single video is just
+   * "Up next".
    */
   function renderQueuePanel(entry, activeId) {
     const songs = entry.songs || [];
-    const rows = setlistFor(entry);
+    const rows = rowsFor(entry);
     const sections = [];
 
-    if (songs.length) {
+    if (entry.isGroup) {
+      sections.push(clipGroupSection(entry, rows, activeId));
+    } else if (songs.length) {
       const items = rows
         .map(
           (row) => `<li>
@@ -930,21 +1042,207 @@ export function initUI() {
     for (const btn of dom.queue.querySelectorAll("[data-row-id]")) {
       btn.addEventListener("click", () => {
         const row = rows.find((r) => r.id === btn.dataset.rowId);
-        if (row) playRow(entry, row);
+        if (!row) return;
+        // A group's rows are its clips, so the clicked row names the clip to play
+        // — the row the user pressed, not whichever one happens to sort first.
+        // playableEntry takes the id, video and chapters from row.song, so this
+        // resolves the same entry either way; naming the actual clip keeps the
+        // modal facts and the theme pointed at what is on screen.
+        const clip = entry.isGroup ? entry.clips.find((c) => c.id === row.id) : null;
+        playRow(clip || entry, row);
       });
     }
 
+    // Reorder controls are re-wired after every rebuild of the section, so they
+    // are attached by one helper rather than twice here.
+    wireClipGroupControls(entry, rows, activeId);
+
     for (const btn of dom.queue.querySelectorAll("[data-queue-id]")) {
       btn.addEventListener("click", () => {
-        const next = state.catalog.find((e) => e.id === btn.dataset.queueId);
+        // The list on screen holds groups, so the target is looked up there
+        // first; a group id is not in state.catalog.
+        const next = state.filtered.find((e) => e.id === btn.dataset.queueId)
+          || state.catalog.find((e) => e.id === btn.dataset.queueId);
         if (next) openEntry(next, openCard);
       });
     }
   }
 
+  /**
+   * The clips branch of the queue panel.
+   *
+   * Reordering lives here and not on the card because a card is a <button> and
+   * may not contain interactive children. ↑/↓ buttons are the primary mechanism
+   * rather than drag-and-drop: they are keyboard accessible, they work on touch
+   * and they need no dependency.
+   */
+  function clipGroupSection(entry, rows, activeId) {
+    const total = entry.clipCount;
+    const items = rows
+      .map((row, i) => {
+        const clip = entry.clips[i];
+        const position = i + 1;
+        const moves = reorderClips
+          ? `<span class="clip-moves">
+              <button type="button" class="clip-move" data-clip-move="-1" data-clip-index="${i}" aria-label="Move clip ${position} earlier"${i === 0 ? " disabled" : ""}>↑</button>
+              <button type="button" class="clip-move" data-clip-move="1" data-clip-index="${i}" aria-label="Move clip ${position} later"${i === total - 1 ? " disabled" : ""}>↓</button>
+            </span>`
+          : "";
+        return `<li class="clip-row" data-reorderable="${reorderClips}">
+          <button class="setlist-item" type="button" data-row-id="${escapeHtml(row.id)}" aria-current="${row.id === activeId}">
+            <span class="sl-num">${position}</span>
+            <span class="sl-title">${highlight(row.title, state.searchQuery)}</span>
+            <span class="sl-dur">${formatDuration(clip.video?.duration)}</span>
+          </button>
+          ${moves}
+        </li>`;
+      })
+      .join("");
+
+    return `<section class="setlist" data-clip-group>
+      <h3>Clips <span class="sl-count">${total} ${total === 1 ? "clip" : "clips"}</span>
+        <button type="button" class="clip-reorder-toggle" data-reorder-clips aria-pressed="${reorderClips}">${reorderClips ? "Done" : "Reorder clips"}</button>
+      </h3>
+      <ol class="setlist-list" data-clips>${items}</ol>
+    </section>`;
+  }
+
+  /**
+   * The clips section as a node.
+   *
+   * replaceWith() takes nodes, not markup — handing it a string inserts a text
+   * node, which would silently empty the panel. The template is also how the
+   * section gets its ids, so this is the only place the markup is parsed.
+   */
+  function clipGroupNode(group, rows, activeId) {
+    const template = document.createElement("template");
+    template.innerHTML = clipGroupSection(group, rows, activeId).trim();
+    return template.content.firstElementChild;
+  }
+
+  /** Rebuild the clips section in place, from the current order. */
+  function refreshClipGroup(group, rows, activeId) {
+    const section = dom.queue.querySelector("[data-clip-group]");
+    section?.replaceWith(clipGroupNode(group, rows, activeId));
+    wireClipGroupControls(group, rows, activeId);
+  }
+
+  function wireClipGroupControls(group, rows, activeId) {
+    for (const btn of dom.queue.querySelectorAll("[data-reorder-clips]")) {
+      btn.addEventListener("click", () => {
+        // Toggle, then rebuild the section: mutating the rows in place would
+        // leave the next renderModalInfo disagreeing with what is on screen.
+        reorderClips = !reorderClips;
+        refreshClipGroup(group, rows, activeId);
+      });
+    }
+    for (const btn of dom.queue.querySelectorAll("[data-clip-move]")) {
+      btn.addEventListener("click", () => moveClip(group, Number(btn.dataset.clipIndex), Number(btn.dataset.clipMove)));
+    }
+  }
+
+  /**
+   * Move a clip one place up or down and persist the new order.
+   *
+   * Swapping the two entries' clipIndex values is the whole change: it is the
+   * only field a reorder moves, and swapping rather than renumbering means two
+   * users reordering concurrently converge instead of clobbering each other's
+   * numbering. The panel is rebuilt from the new order rather than moved in
+   * place, so what is on screen always matches what will be written.
+   *
+   * This is a normal user action, not an edit-mode one, so it works (and saves)
+   * whether or not titles are being edited.
+   */
+  async function moveClip(group, from, delta) {
+    const to = from + delta;
+    if (to < 0 || to >= group.clips.length) return;
+    const a = group.clips[from];
+    const b = group.clips[to];
+    if (!a || !b) return;
+
+    const aIndex = a.clipIndex;
+    const bIndex = b.clipIndex;
+    a.clipIndex = bIndex;
+    b.clipIndex = aIndex;
+    recordChange(a.id, "clipIndex", bIndex);
+    recordChange(b.id, "clipIndex", aIndex);
+    swapClips(group, from, to);
+
+    const saved = await saveClipOrder(group);
+    if (saved) return;
+
+    // The write did not land, so the swap is rolled back rather than left on
+    // screen. A panel showing an order the server rejected is the exact failure
+    // this feature exists to prevent, and a user who then saves their titles
+    // would write the reverted order back as if it were theirs.
+    a.clipIndex = aIndex;
+    b.clipIndex = bIndex;
+    swapClips(group, from, to);
+    // The patch still holds the rejected values, so it is corrected too — a
+    // later save must not resurrect an order that was never persisted.
+    recordChange(a.id, "clipIndex", aIndex);
+    recordChange(b.id, "clipIndex", bIndex);
+    refreshClipGroup(group, rowsFor(group), currentRowId());
+  }
+
+  /** Swap two positions in a group's clip list. */
+  function swapClips(group, from, to) {
+    const next = [...group.clips];
+    [next[from], next[to]] = [next[to], next[from]];
+    group.clips = next;
+  }
+
+  /** The clip the panel is currently highlighting. */
+  function currentRowId() {
+    return dom.queue.querySelector("[data-row-id][aria-current='true']")?.dataset.rowId || "";
+  }
+
+  /**
+   * Push the pending reorder to /api/catalog and re-seed from the response.
+   *
+   * The re-seed matters: a panel that looks reordered but is not on disk is the
+   * exact failure this feature exists to prevent, so the order on screen is only
+   * kept when the write landed. saveCatalog runs behind the shared write lock and
+   * re-seeds from the catalog the response carries, so what is left in state is
+   * the file as it now stands.
+   *
+   * Resolves true when the order is on disk.
+   */
+  async function saveClipOrder(group) {
+    // allowDownload: false — a press of an arrow key must not hand the user a
+    // whole catalog.json to drop over the real one.
+    try {
+      const saved = await saveCatalog({ allowDownload: false });
+      if (!saved) return false;
+      // The re-seed replaced every entry with a new object, so the group this
+      // panel is describing is stale. It is re-resolved from the freshly rendered
+      // list, or the panel would keep showing an order that no longer matches the
+      // entries behind it.
+      if (group) {
+        const fresh = state.filtered.find((e) => e.id === group.id);
+        if (fresh) {
+          openGroup = fresh;
+          renderQueuePanel(fresh, currentRowId());
+        }
+      }
+      return true;
+    } catch (err) {
+      toast(`Clip order could not be saved: ${err.message}`, "error", 6000);
+      return false;
+    }
+  }
+
+  /**
+   * The next three things in the current view.
+   *
+   * The list holds groups, so the position of what is open is found by group id.
+   * The player is handed a real clip rather than the group, so the clip id is
+   * matched too — without that a group opened from a row click would land on
+   * index -1 and offer whatever happened to be first in the view.
+   */
   function upNextEntries(entry) {
     const list = state.filtered.length ? state.filtered : state.catalog;
-    const index = list.findIndex((e) => e.id === entry.id);
+    const index = list.findIndex((e) => e.id === entry.id || e.clips?.some((c) => c.id === entry.id));
     return [list[index + 1], list[index + 2], list[index + 3]].filter(Boolean);
   }
 
