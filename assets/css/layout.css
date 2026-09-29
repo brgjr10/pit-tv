@@ -33,7 +33,10 @@
 .header {
   flex: 0 0 auto;
   padding: var(--sp-4) var(--sp-5) 0;
-  background: linear-gradient(180deg, rgba(13, 17, 23, 0.92), rgba(13, 17, 23, 0.55));
+  /* Washes come from tokens rather than literals so the band follows the active
+     palette. The alpha ramp plus the backdrop blur below are what produce the
+     frosted look, and both still let the page read through in either theme. */
+  background: linear-gradient(180deg, var(--header-wash-top), var(--header-wash-bottom));
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid var(--theme-border);
@@ -247,7 +250,10 @@ kbd {
   overscroll-behavior: contain;
   padding: var(--sp-4) var(--sp-3) var(--sp-6) var(--sp-5);
   border-right: 1px solid var(--theme-border);
-  background: rgba(13, 17, 23, 0.35);
+  /* A translucent wash of the same themed surface the <= 900px drawer paints
+     opaque, so the sidebar remaps with the palette at every width rather than
+     only below the breakpoint. */
+  background: var(--sidebar-wash);
   transition: transform var(--dur) var(--ease-out-expo), width var(--dur) var(--ease-out-expo),
     padding var(--dur) var(--ease-out-expo), border-color var(--dur-slow) var(--ease-out-expo),
     visibility 0s;
@@ -323,7 +329,7 @@ kbd {
 
 .list-head {
   display: grid;
-  grid-template-columns: 46px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
+  grid-template-columns: 42px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
   gap: var(--sp-3);
   align-items: center;
   padding: 0 var(--sp-3) var(--sp-2);
@@ -341,10 +347,6 @@ kbd {
   letter-spacing: inherit;
   text-transform: inherit;
   color: var(--text-dim);
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: transparent;
   transition: color var(--dur);
 }
 
@@ -651,11 +653,7 @@ kbd {
   }
 
   .list-head {
-    grid-template-columns: 46px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
-  }
-
-  .row {
-    grid-template-columns: 46px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
+    grid-template-columns: 38px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
   }
 
   .list-head .col-optional,
