@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="assets/css/player.css?v=2026-09-28-stage-aspect-v4">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/edit.css">
+    <link rel="stylesheet" href="assets/css/upload.css">
 
     <script src="lib/anime.min.js"></script>
     <script src="lib/hls.min.js"></script>
@@ -85,6 +86,10 @@
                 </button>
                 <button class="icon-btn" type="button" data-edit-toggle aria-pressed="false" title="Edit song titles (E)">
                     Edit
+                </button>
+                <button class="icon-btn" type="button" data-upload-open aria-haspopup="dialog" aria-expanded="false"
+                        title="Add clips from this computer">
+                    Upload
                 </button>
                 <button class="icon-btn" type="button" data-show-shortcuts title="Keyboard shortcuts (?)">
                     Keys
@@ -165,6 +170,97 @@
                     <section class="view view-timeline" data-view-timeline aria-label="Timeline view"></section>
                 </div>
             </main>
+        </div>
+    </div>
+
+    <!-- ================= Add clips (Feature B) ================= -->
+    <!--
+        The panel is a plain <form>: show metadata is typed once and the whole
+        queue of chosen files is pushed through it in sequence, which is the
+        real case — fourteen phone clips of one show. Everything inside is
+        driven by assets/js/upload.js; the markup is here so the inputs are in
+        the initial HTML rather than built after boot.
+    -->
+    <div class="upload-overlay" data-upload-panel hidden>
+        <div class="upload-backdrop" data-upload-backdrop></div>
+        <div class="upload-panel" role="dialog" aria-modal="true" aria-labelledby="uploadPanelTitle">
+            <div class="upload-head">
+                <h2 id="uploadPanelTitle">Add clips</h2>
+                <span class="upload-hint">Clips are filed under videos/catalog/&lt;Performance&gt;/</span>
+                <button class="upload-close" type="button" data-upload-close aria-label="Close (Esc)">&times;</button>
+            </div>
+
+            <form class="upload-form" data-upload-form novalidate>
+                <div class="upload-body">
+                    <div class="upload-field">
+                        <label for="uploadArtist">Artist <span class="upload-note">required</span></label>
+                        <input type="text" id="uploadArtist" data-upload-artist list="uploadArtists" autocomplete="off" spellcheck="false">
+                    </div>
+                    <datalist id="uploadArtists" data-upload-artists></datalist>
+
+                    <div class="upload-field">
+                        <label for="uploadSong">Song <span class="upload-note">may be blank</span></label>
+                        <input type="text" id="uploadSong" data-upload-song autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadAlbum">Album <span class="upload-note">optional</span></label>
+                        <input type="text" id="uploadAlbum" data-upload-album list="uploadAlbums" autocomplete="off" spellcheck="false">
+                    </div>
+                    <datalist id="uploadAlbums" data-upload-albums></datalist>
+
+                    <div class="upload-field">
+                        <label for="uploadPerformance">Performance
+                            <span class="upload-note">the folder name; falls back to the artist</span>
+                        </label>
+                        <input type="text" id="uploadPerformance" data-upload-performance autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadDate">Date <span class="upload-note">YYYY-MM-DD or YYYY — goes to shows.json</span></label>
+                        <input type="text" id="uploadDate" data-upload-date placeholder="2023-06-18" autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadVenue">Venue <span class="upload-note">goes to shows.json</span></label>
+                        <input type="text" id="uploadVenue" data-upload-venue autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadLocation">Location <span class="upload-note">goes to shows.json</span></label>
+                        <input type="text" id="uploadLocation" data-upload-location autocomplete="off" spellcheck="false">
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadQuality">Quality</label>
+                        <select class="select" id="uploadQuality" data-upload-quality></select>
+                    </div>
+
+                    <div class="upload-field">
+                        <label for="uploadSource">Source</label>
+                        <select class="select" id="uploadSource" data-upload-source></select>
+                    </div>
+
+                    <!--
+                        One input, several files: the show metadata above is typed once and
+                        the whole queue is uploaded against it in sequence.
+                    -->
+                    <input type="file" class="upload-files" id="uploadFiles" data-upload-files multiple
+                           accept="video/*" aria-label="Choose the video files to add — several at once">
+
+                    <p class="upload-summary" data-upload-summary hidden></p>
+                    <div class="upload-rows" data-upload-rows></div>
+                </div>
+
+                <div class="upload-foot">
+                    <p class="upload-foot-note">
+                        Duration is read from the file, not asked for. An existing file of the same name is kept —
+                        the new one is saved alongside as <code>name-2</code>.
+                    </p>
+                    <button class="btn btn-ghost" type="button" data-upload-close>Cancel</button>
+                    <button class="btn btn-primary" type="submit" data-upload-start>Upload</button>
+                </div>
+            </form>
         </div>
     </div>
 

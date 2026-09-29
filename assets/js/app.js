@@ -9,6 +9,7 @@
 import { state, restore, subscribe } from "./store.js";
 import { initUI } from "./ui.js";
 import { initEdit } from "./edit.js";
+import { initUpload } from "./upload.js";
 import { setReducedMotion } from "./anime-helpers.js";
 import { registerServiceWorker } from "./pwa.js";
 import { resetTheme } from "./theme.js";
@@ -30,6 +31,11 @@ function boot() {
   // has to be re-rendered when the mode flips — otherwise entering edit mode
   // looks like it did nothing until some unrelated re-render happened to land.
   const edit = initEdit({ rerender: () => ui.render({ animate: false }) });
+
+  // A committed upload reloads the page rather than splicing the new record
+  // into state.catalog: an entry has to pass through normaliseEntry before it is
+  // renderable, and loadCatalog is the only code that does that.
+  const upload = initUpload({ onCommitted: () => location.reload() });
 
   // Scroll position survives a refresh, per the persistence requirements.
   restoreScroll();
@@ -53,7 +59,7 @@ function boot() {
   warnAboutMissingVendorLibs();
 
   // Handy for poking at state from the console; not used by the app itself.
-  window.pittv = { state, ui, edit };
+  window.pittv = { state, ui, edit, upload };
 }
 
 function restoreScroll() {

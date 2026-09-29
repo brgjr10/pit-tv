@@ -17,8 +17,11 @@ const SHOWS_URL = "data/shows.json";
 
 /* ---------- validation ---------- */
 
-const QUALITY_ORDER = ["4K", "1080p", "720p", "480p"];
-const SOURCE_VALUES = ["pro-shot", "audience", "broadcast", "soundboard", "archive"];
+// The allowlists for metadata.quality and metadata.source. normaliseEntry drops
+// anything outside them, so the upload form populates its selects from these
+// rather than keeping a second copy that could drift.
+export const QUALITY_ORDER = ["4K", "1080p", "720p", "480p"];
+export const SOURCE_VALUES = ["pro-shot", "audience", "broadcast", "soundboard", "archive"];
 
 const isNonEmptyString = (v) => typeof v === "string" && v.trim().length > 0;
 
