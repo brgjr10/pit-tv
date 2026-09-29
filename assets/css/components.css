@@ -222,7 +222,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 42px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
+  grid-template-columns: 46px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
   gap: var(--sp-3);
   align-items: center;
   /* Same UA-button reset as the card: keep the columns left-aligned. */
@@ -230,6 +230,8 @@
   padding: 7px var(--sp-3);
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
+  background: transparent;
+  width: 100%;
   cursor: pointer;
   will-change: transform, opacity;
   transition: background var(--dur), border-color var(--dur);

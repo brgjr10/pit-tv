@@ -323,7 +323,7 @@ kbd {
 
 .list-head {
   display: grid;
-  grid-template-columns: 42px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
+  grid-template-columns: 46px minmax(0, 2.4fr) minmax(0, 1.2fr) 96px minmax(0, 1.5fr) 70px 78px 66px;
   gap: var(--sp-3);
   align-items: center;
   padding: 0 var(--sp-3) var(--sp-2);
@@ -341,6 +341,10 @@ kbd {
   letter-spacing: inherit;
   text-transform: inherit;
   color: var(--text-dim);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
   transition: color var(--dur);
 }
 
@@ -647,11 +651,11 @@ kbd {
   }
 
   .list-head {
-    grid-template-columns: 38px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
+    grid-template-columns: 46px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
   }
 
   .row {
-    grid-template-columns: 38px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
+    grid-template-columns: 46px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
   }
 
   .list-head .col-optional,
