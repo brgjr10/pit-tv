@@ -34,11 +34,12 @@ const ACCEPT = ".mp4,.mov,.m4v,.webm,.mkv";
  * is told before fourteen files are transferred, not after the first commit. */
 const DATE_RE = /^\d{4}(-\d{2}-\d{2})?$/;
 
-/* The write routes live on tools/serve.js behind PITTV_WRITE. A 403 here is not
- * a bug to be worked around — say so, because the alternative the user will
- * reach for is dropping files into videos/ by hand and editing catalog.json. */
+/* The write routes live on tools/serve.js behind PITTV_WRITE, which is on unless
+ * PITTV_WRITE=0. A 403 here is not a bug to be worked around — say so, because
+ * the alternative the user will reach for is dropping files into videos/ by hand
+ * and editing catalog.json. */
 const WRITE_DISABLED_HINT =
-  "uploads are disabled on this server — start it with PITTV_WRITE=1, or copy the files into videos/catalog/ and add the catalog entry by hand";
+  "uploads are disabled on this server — it was started with PITTV_WRITE=0, or copy the files into videos/catalog/ and add the catalog entry by hand";
 
 /* Reload is delayed just long enough to read the summary toast. The toast lives
  * in the DOM, so an instant reload would throw it away unread. */
@@ -280,7 +281,7 @@ function readMeta(dom) {
  * POST JSON and surface the server's own error text.
  *
  * 403 is separated out because it is the one failure with a specific fix
- * (restart the server with PITTV_WRITE=1) and is not the user's fault.
+ * (the server was started with PITTV_WRITE=0) and is not the user's fault.
  */
 async function postJson(url, body) {
   let res;

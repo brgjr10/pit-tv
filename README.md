@@ -55,10 +55,13 @@ Then open <http://localhost:3000/>.
 survive a rebuild; edit the catalog from the UI and the change is on disk, not
 inside the container. To use custom album art, uncomment the `./covers` line.
 
-The mutating routes (`/api/catalog`, `/api/upload/*`) are gated behind
-`PITTV_WRITE`, which `docker-compose.yml` sets to `1` for local use. The
-server binds to `127.0.0.1` by default, so the published port is not remotely
-writable unless both are misconfigured.
+The mutating routes (`/api/catalog`, `/api/upload/*`) are **on by default**, so
+editing and uploading work from a bare `node tools/serve.js`. The boundary is
+`HOST`, which defaults to `127.0.0.1` — writes are live but the port is
+loopback-only. Set `PITTV_WRITE=0` to lock writes down, and note that
+`HOST=0.0.0.0 PITTV_WRITE=0` is what you want if you ever publish the port and
+do not want it remotely writable. The server warns at boot if it sees writes on
+together with `HOST=0.0.0.0`.
 
 The image runs as a non-root user and exposes port `3000` (override with `PORT`).
 
@@ -229,8 +232,9 @@ A `changes` entry whose id is no longer present is reported in `conflicts`
 rather than silently dropped.
 
 This route is only served by `tools/serve.js`, and only when
-`process.env.PITTV_WRITE === "1"`. A static-file build answers `403` and the
-app falls back to downloading the patched catalog for you to drop over
+`process.env.PITTV_WRITE !== "0"` (writes are on by default). A static-file
+build, or a server started with `PITTV_WRITE=0`, answers `403` and the app
+falls back to downloading the patched catalog for you to drop over
 `data/catalog.json`.
 
 ### The two new fields
@@ -331,7 +335,8 @@ Validation is server-side: an extension allowlist (`mp4`, `mov`, `m4v`, `webm`,
 separators. Date, venue and location go to `shows.json`; the new catalog entry
 does not carry them. Duration is read from the file client-side before upload.
 
-Uploads require `PITTV_WRITE=1` like every other mutating route.
+Uploads follow the same rule as every other mutating route: on unless
+`PITTV_WRITE=0`.
 
 ---
 

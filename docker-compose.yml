@@ -15,7 +15,8 @@ services:
       # - ./covers:/app/covers
     environment:
       - PORT=3000
-      # Enable mutating routes (/api/catalog, /api/upload/*). Off by default so
-      # the published port is not remotely writable.
+      # Mutating routes (/api/catalog, /api/upload/*) are on by default; this
+      # line is only here so flipping the default later is a one-line change.
+      # Set to 0 to make the published port read-only.
       - PITTV_WRITE=1
     restart: unless-stopped

@@ -155,7 +155,7 @@ export async function saveCatalog({ allowDownload = true } = {}) {
       const gated = err?.status === 403 || err?.name === "TypeError";
       toast(
         gated
-          ? `Not saved: ${err.message} The server may not accept writes — set process.env.PITTV_WRITE='1'.`
+          ? `Not saved: ${err.message} The server may not accept writes — writes are on by default, so check PITTV_WRITE=0.`
           : `Not saved: ${err.message}`,
         "warn",
         8000
@@ -178,7 +178,7 @@ export async function saveCatalog({ allowDownload = true } = {}) {
     }
 
     if (res.status === 403) {
-      toast("Writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/catalog.", "warn", 6000);
+      toast("Writes are disabled: this server was started with PITTV_WRITE=0.", "warn", 6000);
       return false;
     }
 

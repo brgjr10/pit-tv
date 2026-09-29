@@ -32,10 +32,15 @@ const MAX_UPLOAD_BYTES = Number(process.env.PITTV_MAX_UPLOAD_MB || 40960) * 1024
 const UPLOAD_EXTENSIONS = new Set([".mp4", ".mov", ".m4v", ".webm", ".mkv"]);
 
 // Mutating routes (writes to catalog.json, shows.json, or the videos/ tree)
-// are only served when the operator explicitly opts in. A static-file build
-// never sets this, so uploads and catalog saves are refused rather than
-// silently 404ing — the client falls back to its download path and says so.
-const WRITE_ENABLED = process.env.PITTV_WRITE === "1";
+// are ON by default: this archive is a single-user local tool, and making the
+// write path opt-in meant the app silently served a read-only experience on a
+// bare `node tools/serve.js`. Set PITTV_WRITE=0 to lock it back down.
+//
+// The real boundary is HOST, not this flag. Binding to 127.0.0.1 keeps the
+// archive unwritable from the network, so "writes on" stays a local-only
+// affordance. If you publish the port AND want writes off, set both:
+//   HOST=0.0.0.0 PITTV_WRITE=0
+const WRITE_ENABLED = process.env.PITTV_WRITE !== "0";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -693,7 +698,7 @@ const server = createServer(async (req, res) => {
   if (pathname === "/api/catalog" && req.method === "POST") {
     if (!WRITE_ENABLED) {
       res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: "writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/catalog" }));
+      res.end(JSON.stringify({ ok: false, error: "writes are disabled: set process.env.PITTV_WRITE='1' (writes are on unless PITTV_WRITE=0) to enable /api/catalog" }));
       return;
     }
     try {
@@ -722,7 +727,7 @@ const server = createServer(async (req, res) => {
       res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
       res.end(JSON.stringify({
         ok: false,
-        error: "writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/upload",
+        error: "writes are disabled: set process.env.PITTV_WRITE='1' (writes are on unless PITTV_WRITE=0) to enable /api/upload",
       }));
       return;
     }
@@ -844,10 +849,18 @@ const server = createServer(async (req, res) => {
 server.listen(PORT, HOST, async () => {
   console.log(`PIT TV serving ${ROOT}`);
   console.log(`  http://localhost:${PORT}/`);
-  if (!WRITE_ENABLED) {
-    // Say it once, at boot, in the same tone as the startup sync line: the app
-    // still loads and browses, but every mutating route answers 403. The client
-    // falls back to its download path and tells the user why.
+  if (WRITE_ENABLED) {
+    // Writes are the normal case here, so say only what the operator needs to
+    // know to change it: the routes are live, and PITTV_WRITE=0 turns them off.
+    // The exposure is bounded by HOST, so name that too — binding 0.0.0.0 with
+    // writes on makes the archive remotely writable.
+    console.log(`  [write] mutating routes (/api/catalog, /api/upload/*) are ON — set PITTV_WRITE=0 to disable`);
+    if (HOST === "0.0.0.0") {
+      console.log("  [write] WARNING: HOST=0.0.0.0 with writes on — this port is remotely writable. Set PITTV_WRITE=0 to lock it down.");
+    }
+  } else {
+    // The app still loads and browses, but every mutating route answers 403. The
+    // client falls back to its download path and tells the user why.
     console.log("  [write] mutating routes (/api/catalog, /api/upload/*) are OFF — set PITTV_WRITE=1 to enable");
   }
 

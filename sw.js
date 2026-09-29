@@ -15,7 +15,7 @@
  *     one thing a naive cache does worse than the network.
  */
 
-const VERSION = "pittv-v18";
+const VERSION = "pittv-v19";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const ART_CACHE = `${VERSION}-art`;
