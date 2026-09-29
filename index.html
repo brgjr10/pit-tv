@@ -8,6 +8,20 @@
     <title>PIT TV — Concert Video Archive</title>
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- Home Screen icon for iOS Safari and macOS Safari "Add to Dock".
+         Safari masks this itself, so the PNG is square, fully opaque, and
+         carries no rounded corners or transparent margin. 180x180 is the size
+         every current device scales from. -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="assets/icons/icon-167.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icon-180.png">
+    <!-- Label Safari pre-fills when the user names the Home Screen shortcut.
+         Must be short enough not to truncate under the icon. -->
+    <meta name="apple-mobile-web-app-title" content="PIT TV">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

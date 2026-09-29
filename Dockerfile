@@ -11,7 +11,7 @@ WORKDIR /app
 RUN echo '{"type":"module","private":true}' > package.json
 
 # Copy only what the app needs to run (build context trimmed by .dockerignore)
-COPY index.html sw.js manifest.webmanifest favicon.svg ./
+COPY index.html sw.js manifest.webmanifest favicon.svg apple-touch-icon.png ./
 COPY assets/ ./assets/
 COPY lib/ ./lib/
 # covers/ are gitignored (personal/regenerated); the runtime stage

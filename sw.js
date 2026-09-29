@@ -17,7 +17,7 @@
  *     one thing a naive cache does worse than the network.
  */
 
-const VERSION = "pittv-v20";
+const VERSION = "pittv-v21";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const ART_CACHE = `${VERSION}-art`;
@@ -26,6 +26,18 @@ const MAX_ART_ENTRIES = 300;
 const SHELL_ASSETS = [
   "./",
   "./index.html",
+  "./manifest.webmanifest",
+  "./favicon.svg",
+  // Home Screen / Dock icons. Safari reads apple-touch-icon.png straight off
+  // the network during Add-to-Home-Screen, so it must not depend on a cache
+  // warm-up that has not happened yet on a first visit.
+  "./apple-touch-icon.png",
+  "./assets/icons/icon-152.png",
+  "./assets/icons/icon-167.png",
+  "./assets/icons/icon-180.png",
+  "./assets/icons/icon-192.png",
+  "./assets/icons/icon-512.png",
+  "./assets/icons/icon.svg",
   "./assets/css/variables.css",
   "./assets/css/reset.css",
   "./assets/css/layout.css",

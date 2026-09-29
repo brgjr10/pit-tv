@@ -20,6 +20,10 @@ data/.tmp-*.json
 # Cover art - personal images / regenerated placeholders
 covers/
 
+# Original photos the Home Screen icons were generated from. Only the
+# derived apple-touch-icon.png / assets/icons/*.png are tracked.
+IMG_*.png
+
 # Docker CLI config (NOT the Dockerfile or .dockerignore)
 .docker/
 

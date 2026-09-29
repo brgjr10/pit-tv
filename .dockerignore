@@ -20,6 +20,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Source photos for the icons (only the derived PNGs ship)
+IMG_*.png
+
 # Documentation (not needed in container)
 README.md
 QA_REPORT.md
