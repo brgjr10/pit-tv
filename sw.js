@@ -2,8 +2,10 @@
  * sw.js — offline shell + catalog cache.
  *
  * Strategy:
- *   - App shell (HTML, CSS, JS, vendored libs): cache-first, refreshed in the
- *     background, so a cold offline start still renders the full UI.
+ *   - App shell (HTML, CSS, JS, vendored libs): network-first, falling back to
+ *     the cache when offline. Shell entries are code, so a stale copy is a
+ *     running bug rather than a stale pixel; offline still gets the full UI
+ *     from the last good copy.
  *   - catalog.json and shows.json: network-first, falling back to the cache when
  *     offline. Both are hand-edited on disk — the catalog when clips are added,
  *     shows.json when a venue or date is corrected — so the copy on the server is
@@ -15,7 +17,7 @@
  *     one thing a naive cache does worse than the network.
  */
 
-const VERSION = "pittv-v19";
+const VERSION = "pittv-v20";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const ART_CACHE = `${VERSION}-art`;
@@ -106,7 +108,13 @@ self.addEventListener("fetch", (event) => {
   }
 
   if (SHELL_ASSETS.some((a) => url.pathname.endsWith(a.replace("./", ""))) || url.pathname === "/" || url.pathname.endsWith(".html")) {
-    event.respondWith(cacheFirst(request, SHELL_CACHE));
+    // Network-first, not cache-first. The shell is code, and code is the one
+    // thing a returning visitor must never be served a stale copy of: a fix
+    // pushed to ui.js would otherwise be unreachable until VERSION was bumped
+    // by hand, so the browser kept running the bug it was supposed to have
+    // lost. Offline still works — networkFirst falls back to the cache — and
+    // the round trip is one small request against a local/static origin.
+    event.respondWith(networkFirst(request, SHELL_CACHE));
     return;
   }
 
