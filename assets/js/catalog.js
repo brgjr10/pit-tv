@@ -7,8 +7,8 @@
  * page.
  */
 
-import { setStatus, setCatalog, setFacets, state } from "./store.js";
-import { reconcileShows, writeShows, withWriteLock } from "./sync.js";
+import { setStatus, setCatalog, setFacets, state, setRawCatalog } from "./store.js";
+import { reconcileShows } from "./sync.js";
 import { countFacets } from "./search.js";
 
 const CATALOG_URL = "data/catalog.json";
@@ -28,6 +28,54 @@ const toInt = (v, fallback = 0) => {
 };
 
 const isDigits = (s) => /^\d+$/.test(s);
+
+/**
+ * The on-disk field set for a catalog entry.
+ *
+ * normaliseEntry adds keys the file does not carry — datePrecision (derived),
+ * dateRaw (a copy of the raw input), a defaulted "Unknown venue", an empty
+ * songs array. Writing those back would bake normalised defaults into every
+ * entry and re-introduce the date/venue/location copies the shows.json split
+ * was built to remove. This list is the inverse: the fields a raw record is
+ * allowed to hold. Anything else is dropped when projecting an edit back.
+ */
+const RAW_ENTRY_KEYS = [
+  "id",
+  "artist",
+  "song",
+  "album",
+  "venue",
+  "date",
+  "location",
+  "video",
+  "songs",
+  "albumArt",
+  "tags",
+  "metadata",
+  "chapters",
+  "note",
+];
+
+/**
+ * Project a normalised entry back onto the on-disk field set.
+ *
+ * Used by edit.js to build the `changes` patch for /api/catalog: only the
+ * fields the user actually touched are sent, and only the ones the file is
+ * allowed to carry. `datePrecision` is always dropped (it is derived from
+ * `date`), and `songs` is dropped when empty so a save never writes an
+ * empty array onto an entry that had none.
+ */
+export function toRawEntry(entry) {
+  if (!entry || typeof entry !== "object") return null;
+  const out = {};
+  for (const key of RAW_ENTRY_KEYS) {
+    if (!(key in entry)) continue;
+    const value = entry[key];
+    if (key === "songs" && (!Array.isArray(value) || !value.length)) continue;
+    out[key] = value;
+  }
+  return out;
+}
 
 /** Accepts "3:45", "1:02:03" or a number of seconds. */
 export function parseDuration(value) {
@@ -146,6 +194,19 @@ export function normaliseEntry(raw, index, seenIds) {
   }
   seenIds.add(id);
 
+  // songId and clipIndex are the clip-grouping keys. They are derived here so
+  // every entry carries them in memory, but they are only persisted when the
+  // user reorders a group (Feature A) or re-saves the entry (Feature C) — the
+  // existing 198-entry catalog groups correctly with zero edits because the
+  // ids were already built as <showKey>-<NN>.
+  const showKey = showKeyFor(id);
+  const songId = isNonEmptyString(raw.song) ? `${showKey}-${slugify(raw.song, "song")}` : "";
+  // The clip number is the -N suffix of the id ("mgk-xmas-2017-04" -> 3);
+  // when there is no suffix the entry is a singleton and falls back to its
+  // index in the file, which is what an unnumbered entry would have been.
+  const suffix = id.match(/-(\d+)$/);
+  const clipIndex = suffix ? parseInt(suffix[1], 10) - 1 : index;
+
   // A show is playable either as one video or as a setlist of them, so a missing
   // "video" is only fatal when there are no songs to fall back on.
   const { songs, problems } = normaliseSongs(raw.songs, id);
@@ -163,6 +224,9 @@ export function normaliseEntry(raw, index, seenIds) {
     problems,
     entry: {
       id,
+      showKey,
+      songId,
+      clipIndex,
       artist: raw.artist.trim(),
       song: raw.song.trim(),
       album: isNonEmptyString(raw.album) ? raw.album.trim() : "",
@@ -396,6 +460,13 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL }
     throw new Error(`${usedUrl} must contain a JSON array of entries`);
   }
 
+  // Stash the untouched parsed document alongside the normalised entries. Edits
+  // mutate the normalised entry for rendering and are projected back onto the
+  // raw record by id at save time through toRawEntry, so a save can never bake
+  // normalised defaults (datePrecision, an empty songs array, "Unknown venue")
+  // back into entries that never had them.
+  setRawCatalog(raw);
+
   const seenIds = new Set();
   const entries = [];
   const problems = [];
@@ -437,17 +508,11 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL }
     // catalog, then join the (possibly updated) rows onto the entries.
     syncResult = reconcileShows(entries, rawShows);
     if (syncResult.changed) {
-      // The reconciled doc is always applied to the entries, but writing it back
-      // is fire-and-forget: showSaveFilePicker blocks for user input and must not
-      // stall the page load. A failure is reported, not fatal.
+      // The reconciled doc is always applied to the entries. Writing shows.json
+      // is the server's job now (/api/catalog and /api/sync-shows both run
+      // set-locations.mjs), so the browser never writes it — a download here
+      // would only hand the user a file to drop, and the real one stays stale.
       rawShows = syncResult.doc;
-      withWriteLock(() => writeShows(syncResult.doc))
-        .then((method) => {
-          if (method === "download") {
-            console.warn(`${SHOWS_URL} was out of sync — a replacement was downloaded; drop it over the real file to keep shows current`);
-          }
-        })
-        .catch((err) => console.warn("[sync] could not write shows.json", err));
     }
     problems.push(...applyShows(entries, rawShows));
   }

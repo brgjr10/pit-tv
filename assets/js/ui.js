@@ -26,7 +26,7 @@ import { loadCatalog, buildFacets, formatDate, formatDuration, playableEntry, se
 import { queryCatalog, highlight, escapeHtml, activeFilterSummary, SORT_FIELDS } from "./search.js";
 import { createPlayer, isTypingTarget } from "./player.js?v=2026-09-29-a11y-focus-v5";
 import { themeFromEntry, resetTheme } from "./theme.js";
-import { editState, markDirty } from "./edit.js";
+import { editState, recordChange } from "./edit.js";
 import {
   staggerIn,
   crossFade,
@@ -541,7 +541,7 @@ export function initUI() {
       const old = entry[field] || "";
       if (value !== old) {
         entry[field] = value;
-        markDirty();
+        recordChange(entryId, field, value);
       }
     });
     container.addEventListener("keydown", (e) => {

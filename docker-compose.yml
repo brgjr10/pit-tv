@@ -7,10 +7,15 @@ services:
     volumes:
       # Mount your local video files so the catalog can find them
       - ./videos:/app/videos
-      # Uncomment to serve your own catalog.json / shows.json instead of the demo:
-      # - ./data:/app/data
+      # Mount your own catalog.json / shows.json so edits and uploads land on
+      # the host and survive a container rebuild. Without this the catalog lives
+      # inside the container and is destroyed on rebuild.
+      - ./data:/app/data
       # Uncomment to use custom album art:
       # - ./covers:/app/covers
     environment:
       - PORT=3000
+      # Enable mutating routes (/api/catalog, /api/upload/*). Off by default so
+      # the published port is not remotely writable.
+      - PITTV_WRITE=1
     restart: unless-stopped

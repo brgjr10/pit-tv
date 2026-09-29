@@ -9,14 +9,25 @@
  */
 
 import { createServer } from "node:http";
-import { createReadStream, statSync, readFileSync } from "node:fs";
-import { extname, join, normalize, resolve, sep } from "node:path";
+import { createReadStream, createWriteStream, statSync, readFileSync, writeFileSync, renameSync, unlinkSync, existsSync, mkdirSync } from "node:fs";
+import { extname, join, normalize, resolve, sep, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
+import { randomBytes } from "node:crypto";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const PORT = Number(process.argv[2] || process.env.PORT || 3000);
-const HOST = process.env.HOST || "0.0.0.0";
+// Loopback by default: every /api/* route that mutates files is gated behind
+// PITTV_WRITE anyway, but binding to 127.0.0.1 means a misconfiguration cannot
+// turn the archive into a remotely writable service even if the gate is skipped.
+const HOST = process.env.HOST || "127.0.0.1";
+const CATALOG_PATH = join(ROOT, "data", "catalog.json");
+
+// Mutating routes (writes to catalog.json, shows.json, or the videos/ tree)
+// are only served when the operator explicitly opts in. A static-file build
+// never sets this, so uploads and catalog saves are refused rather than
+// silently 404ing — the client falls back to its download path and says so.
+const WRITE_ENABLED = process.env.PITTV_WRITE === "1";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -101,6 +112,139 @@ function apiFetchStatus(catalog) {
 }
 
 /**
+ * Read a JSON file, tolerating a byte-order mark.
+ *
+ * Copied from tools/set-locations.mjs:69-71 rather than imported, because that
+ * tool is a sibling script with its own ROOT and importing it would drag in
+ * its argument parsing. A BOM is legal in JSON per RFC 8259, and shows.json /
+ * catalog.json are both files people open in Notepad and re-save by hand.
+ */
+function readJsonFile(path) {
+  return JSON.parse(readFileSync(path, "utf8").replace(/^﻿/, ""));
+}
+
+/**
+ * Resolve id collisions on append, the same way normaliseEntry does at
+ * catalog.js:140-145. Two uploads landing in the same show must not fight
+ * over an id; the first one wins the bare id and later ones get -2, -3, …
+ */
+function resolveIdCollisions(entries) {
+  const seen = new Set(entries.map((e) => e.id).filter(Boolean));
+  const conflicts = [];
+  for (const entry of entries) {
+    if (!entry.id) continue;
+    if (!seen.has(entry.id)) {
+      seen.add(entry.id);
+      continue;
+    }
+    const base = entry.id;
+    let n = 2;
+    while (seen.has(`${base}-${n}`)) n += 1;
+    entry.id = `${base}-${n}`;
+    seen.add(entry.id);
+  }
+  return conflicts;
+}
+
+/**
+ * POST /api/catalog — patch-merge the catalog from the browser.
+ *
+ * The client sends a *patch*, never a document:
+ *   { changes: { "<id>": { field: value, … } }, appends: [ … ], removes: [ "<id>", … ] }
+ *
+ * On every call the handler:
+ *   1. re-reads data/catalog.json from disk with a BOM-tolerant reader — another
+ *      process (fetch-album-art.mjs) rewrites this file in the background, so a
+ *      blind overwrite would silently clobber cover art the user waited for;
+ *   2. applies removes, then appends, then changes (by entry id);
+ *   3. resolves id collisions on append with the -2/-3 repair normaliseEntry uses;
+ *   4. writes with writeJsonAtomic so a failure leaves the old file intact;
+ *   5. runs tools/set-locations.mjs so shows.json is re-derived in the same
+ *      request — exactly what /api/sync-shows already does.
+ *
+ * A `changes` entry whose id is no longer present is reported in `conflicts`
+ * rather than silently dropped, and the UI surfaces the ids.
+ */
+async function apiCatalogPatch(body) {
+  const patch = body || {};
+  const changes = patch.changes && typeof patch.changes === "object" ? patch.changes : {};
+  const appends = Array.isArray(patch.appends) ? patch.appends : [];
+  const removes = Array.isArray(patch.removes) ? patch.removes : [];
+
+  let catalog;
+  try {
+    catalog = readJsonFile(CATALOG_PATH);
+  } catch (err) {
+    return { ok: false, error: `could not re-read ${CATALOG_PATH}: ${err.message}` };
+  }
+  if (!Array.isArray(catalog)) {
+    return { ok: false, error: `${CATALOG_PATH} must contain a JSON array of entries` };
+  }
+
+  const byId = new Map(catalog.map((e) => [e.id, e]));
+  const conflicts = [];
+
+  // 1. Removes first so an id that is being replaced is gone before appends.
+  let removed = 0;
+  for (const id of removes) {
+    if (byId.has(id)) {
+      byId.delete(id);
+      removed += 1;
+    }
+  }
+
+  // 2. Appends, with id collision repair.
+  const safeAppends = appends
+    .filter((e) => e && typeof e === "object" && !Array.isArray(e))
+    .map((e) => ({ ...e }));
+  resolveIdCollisions(safeAppends);
+  for (const entry of safeAppends) {
+    byId.set(entry.id, entry);
+  }
+
+  // 3. Changes by id. A stale id is a conflict, not a silent miss.
+  let changed = 0;
+  for (const [id, fields] of Object.entries(changes)) {
+    const target = byId.get(id);
+    if (!target) {
+      conflicts.push(id);
+      continue;
+    }
+    if (fields && typeof fields === "object") {
+      for (const [key, value] of Object.entries(fields)) {
+        target[key] = value;
+      }
+      changed += 1;
+    }
+  }
+
+  const next = [...byId.values()];
+  let writeError = null;
+  try {
+    const { writeJsonAtomic } = await import("./atomic-json.mjs");
+    writeJsonAtomic(CATALOG_PATH, next, { trailingNewline: true });
+  } catch (err) {
+    writeError = err.message;
+  }
+
+  if (writeError) {
+    return { ok: false, error: `write failed: ${writeError}` };
+  }
+
+  // 5. Re-derive shows.json in the same request so the file the app serves is
+  // current before the client re-seeds its state.
+  const sync = await spawnChild(["tools/set-locations.mjs"]);
+
+  return {
+    ok: true,
+    changed: changed + removed + safeAppends.length,
+    conflicts,
+    catalog: next,
+    sync: { ok: sync.ok, stdout: sync.stdout, stderr: sync.stderr },
+  };
+}
+
+/**
  * POST /api/set-show?show=...&date=...&venue=...&location=...[&clear=1]
  *
  * Runs tools/set-locations.mjs with the given arguments and rewrites
@@ -131,6 +275,25 @@ const server = createServer(async (req, res) => {
     const result = await apiSyncShows();
     res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
     res.end(JSON.stringify(result));
+    return;
+  }
+  if (pathname === "/api/catalog" && req.method === "POST") {
+    if (!WRITE_ENABLED) {
+      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: "writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/catalog" }));
+      return;
+    }
+    try {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const body = Buffer.concat(chunks).toString("utf8") || "{}";
+      const result = await apiCatalogPatch(JSON.parse(body));
+      res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: `bad request body: ${err.message}` }));
+    }
     return;
   }
   if (pathname === "/api/set-show" && req.method === "POST") {
@@ -225,6 +388,12 @@ const server = createServer(async (req, res) => {
 server.listen(PORT, HOST, async () => {
   console.log(`PIT TV serving ${ROOT}`);
   console.log(`  http://localhost:${PORT}/`);
+  if (!WRITE_ENABLED) {
+    // Say it once, at boot, in the same tone as the startup sync line: the app
+    // still loads and browses, but every mutating route answers 403. The client
+    // falls back to its download path and tells the user why.
+    console.log("  [write] mutating routes (/api/catalog, /api/upload/*) are OFF — set PITTV_WRITE=1 to enable");
+  }
 
   // Re-derive shows.json from the catalog on startup so the file the app
   // serves is always current, even if the catalog was edited while the server

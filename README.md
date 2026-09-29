@@ -50,10 +50,15 @@ docker compose up --build
 Then open <http://localhost:3000/>.
 
 `docker-compose.yml` mounts `./videos` as a volume — drop your video files into
-`videos/` on the host and they're served by the container. To use your own
-`data/catalog.json` / `data/shows.json` instead of the demo, or to add custom
-album art, uncomment the `./data` and `./covers` volume lines in
-`docker-compose.yml`.
+`videos/` on the host and they're served by the container. It also mounts
+`./data` so `catalog.json` / `shows.json` and any uploads live on the host and
+survive a rebuild; edit the catalog from the UI and the change is on disk, not
+inside the container. To use custom album art, uncomment the `./covers` line.
+
+The mutating routes (`/api/catalog`, `/api/upload/*`) are gated behind
+`PITTV_WRITE`, which `docker-compose.yml` sets to `1` for local use. The
+server binds to `127.0.0.1` by default, so the published port is not remotely
+writable unless both are misconfigured.
 
 The image runs as a non-root user and exposes port `3000` (override with `PORT`).
 
@@ -193,6 +198,76 @@ The concert catalog uses the `local` form throughout; `data/catalog.demo.json`
 mixes all of the above. Local entries point at `videos/` files you are expected
 to supply — see [`videos/README.md`](videos/README.md) — so the missing-file
 path is easy to see.
+
+---
+
+## Editing the catalog
+
+`data/catalog.json` is user data, not build output, and the app now writes it
+back directly instead of asking you to download a replacement. In **Edit**
+mode (button in the header, or press `E`) every song title becomes an
+contenteditable field; **Save to disk** sends a patch to the server.
+
+### The write path
+
+`POST /api/catalog` takes a *patch*, never a document:
+
+```json
+{
+  "changes": { "mgk-xmas-2017-04": { "song": "Lilac" } },
+  "appends": [],
+  "removes": []
+}
+```
+
+On every call the handler re-reads `data/catalog.json` from disk (so a cover
+fetch running in the background cannot be clobbered), applies removes, then
+appends, then changes by entry id, resolves id collisions with the same `-2`
+repair the client uses, writes atomically, and runs
+`tools/set-locations.mjs` so `shows.json` is re-derived in the same request.
+A `changes` entry whose id is no longer present is reported in `conflicts`
+rather than silently dropped.
+
+This route is only served by `tools/serve.js`, and only when
+`process.env.PITTV_WRITE === "1"`. A static-file build answers `403` and the
+app falls back to downloading the patched catalog for you to drop over
+`data/catalog.json`.
+
+### The two new fields
+
+Every entry may carry two optional, additive fields that drive clip grouping:
+
+| Field | Purpose |
+|---|---|
+| `songId` | Stable group key within a show, `${showKey}-${slugify(song)}`. Absent when `song` is blank — the entry is then a singleton and never groups. |
+| `clipIndex` | 0-based position within the group. Derived from the `-N` suffix of the id (`mgk-xmas-2017-04` → `3`), or the entry's file index when there is no suffix. |
+
+They are derived on load and live in memory; they are only persisted when a
+clip is reordered or an entry is re-saved. The existing catalog groups
+correctly with zero edits because its ids were already built this way.
+
+`date`, `venue` and `location` belong in `shows.json`, not on the entries —
+saving an edit that carries them is a regression, and the write path projects
+every entry through `toRawEntry` so they cannot come back.
+
+### Uploads
+
+**Upload** (button in the header) pushes clips from the UI into the archive:
+
+- `POST /api/upload/plan` — the server computes the destination
+  (`videos/catalog/<Performance>/<filename>`) and returns the id it will write.
+- `PUT /api/upload?path=<…>` — raw file bytes streamed to a `.<ext>.part` temp
+  file, renamed into place only after the last byte, so an interrupted upload
+  leaves no truncated file.
+- `POST /api/upload/commit` — runs the same re-read-merge-write as
+  `/api/catalog`, then `set-locations.mjs`, then returns the new entry.
+
+Validation is server-side: an extension allowlist (`mp4`, `mov`, `m4v`, `webm`,
+`mkv`), a size cap, and a containment check that rejects `..` and path
+separators. Date, venue and location go to `shows.json`; the new catalog entry
+does not carry them. Duration is read from the file client-side before upload.
+
+Uploads require `PITTV_WRITE=1` like every other mutating route.
 
 ---
 

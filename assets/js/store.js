@@ -204,6 +204,25 @@ export function setCatalog(entries) {
   emit("catalog", entries);
 }
 
+/**
+ * The untouched parsed document behind state.catalog.
+ *
+ * normaliseEntry adds keys the file on disk does not have (datePrecision,
+ * dateRaw, a defaulted venue, an empty songs array), so the normalised entries
+ * cannot be written back blindly. This holds the raw array so edit.js can diff
+ * against it and project changes onto the on-disk field set.
+ */
+let rawCatalog = [];
+
+export function setRawCatalog(entries) {
+  rawCatalog = Array.isArray(entries) ? entries : [];
+  emit("rawCatalog", rawCatalog);
+}
+
+export function getRawCatalog() {
+  return rawCatalog;
+}
+
 export function setFiltered(entries) {
   state.filtered = entries;
   emit("filtered", entries);

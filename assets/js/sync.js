@@ -102,43 +102,7 @@ function findMissingArt(catalog) {
 }
 
 /**
- * Write the reconciled shows.json back to disk.
- *
- * Prefers the File System Access API (writes to the real file). Falls back to
- * a download the user can drop over the real file — same shape either way.
- */
-export async function writeShows(doc) {
-  const json = JSON.stringify(doc, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
-
-  if (window.showSaveFilePicker) {
-    try {
-      const handle = await window.showSaveFilePicker({
-        suggestedName: "shows.json",
-        types: [{ description: "JSON", accept: { "application/json": [".json"] } }],
-      });
-      const writable = await handle.createWritable();
-      await writable.write(blob);
-      await writable.close();
-      return { method: "filesystem" };
-    } catch (err) {
-      if (err.name === "AbortError") return { method: "cancelled" };
-      console.warn("[sync] File System Access API failed, falling back to download", err);
-    }
-  }
-
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "shows.json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  return { method: "download" };
-}
-
-/** Read the on-disk shows.json; returns null if it cannot be read. */
+ * Read the on-disk shows.json; returns null if it cannot be read. */
 export async function readShows() {
   try {
     const res = await fetch(SHOWS_URL, { cache: "no-store" });
@@ -150,9 +114,9 @@ export async function readShows() {
 }
 
 /**
- * Lock so a catalog save and the shows re-sync cannot both call
- * showSaveFilePicker at the same time — two concurrent pickers are rejected
- * with "File picker already active".
+ * Lock so a catalog save and a clip-reorder save cannot race. Both POST to
+ * /api/catalog, and the server re-reads the file on every call, so a save that
+ * lands first is never silently reverted by one that started first.
  */
 let writeLock = Promise.resolve();
 export function withWriteLock(fn) {

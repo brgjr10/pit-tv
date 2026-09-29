@@ -2,13 +2,15 @@
  * edit.js — inline song title editing with write-back to catalog.json.
  *
  * Toggles edit mode on the list view so every song title becomes an
- * editable input. Changes are tracked in memory; "Save to disk" writes the
- * full catalog back to data/catalog.json using the File System Access API
- * (when available) with a download fallback.
+ * editable input. Changes are tracked in memory as a patch by entry id;
+ * "Save to disk" POSTs that patch to /api/catalog, which merges it onto the
+ * raw file server-side. A plain static host falls back to downloading the
+ * patched catalog for the user to drop over data/catalog.json.
  */
 
-import { state, subscribe } from "./store.js";
-import { reconcileShows, writeShows, withWriteLock } from "./sync.js";
+import { getRawCatalog } from "./store.js";
+import { withWriteLock } from "./sync.js";
+import { loadCatalog, toRawEntry } from "./catalog.js";
 
 let editMode = false;
 let dirty = false;
@@ -17,12 +19,30 @@ let dirty = false;
 let rerender = () => {};
 
 let pendingWrites = 0;
-let totalEntries = 0;
+
+/**
+ * The fields the user has actually changed, by entry id. Only these are sent to
+ * /api/catalog — the server merges them onto the raw file, so a save can never
+ * bake normalised defaults (datePrecision, an empty songs array, "Unknown venue")
+ * back into entries that never had them.
+ */
+const pendingChanges = new Map();
 
 export const editState = {
   isEditing: () => editMode,
   isDirty: () => dirty,
 };
+
+/** Record a field edit so saveCatalog can build a minimal patch. */
+export function recordChange(entryId, field, value) {
+  let fields = pendingChanges.get(entryId);
+  if (!fields) {
+    fields = {};
+    pendingChanges.set(entryId, fields);
+  }
+  fields[field] = value;
+  markDirty();
+}
 
 export function initEdit({ rerender: onRerender } = {}) {
   if (onRerender) rerender = onRerender;
@@ -30,7 +50,6 @@ export function initEdit({ rerender: onRerender } = {}) {
     toggle: document.querySelector("[data-edit-toggle]"),
     bar: document.querySelector("[data-edit-bar]"),
     done: document.querySelector("[data-edit-done]"),
-    total: document.querySelector("[data-edit-total]"),
     saveBtn: document.querySelector("[data-save-catalog]"),
     cancelBtn: document.querySelector("[data-cancel-edit]"),
   };
@@ -67,7 +86,6 @@ function toggleEdit() {
     const bar = document.querySelector("[data-edit-bar]");
     if (bar) bar.hidden = !editMode;
     if (editMode) {
-      totalEntries = state.catalog.length;
       pendingWrites = 0;
       updateEditProgress();
       toast("Click any song title to edit it. Press E or Esc to exit.", "info");
@@ -79,71 +97,113 @@ function toggleEdit() {
 
 function updateEditProgress() {
   const done = document.querySelector("[data-edit-done]");
-  const total = document.querySelector("[data-edit-total]");
   if (done) done.textContent = String(pendingWrites);
-  if (total) total.textContent = String(totalEntries);
 }
 
 export function markDirty() {
   dirty = true;
-  pendingWrites++;
+  pendingWrites += 1;
   updateEditProgress();
 }
 
 export function isEditing() { return editMode; }
 
+/**
+ * Build the patch for /api/catalog from the pending field edits.
+ *
+ * Each entry is projected through toRawEntry so only the on-disk field set
+ * (id, artist, song, album, video, songs, albumArt, tags, metadata,
+ * chapters) is sent — never datePrecision, dateRaw, a defaulted venue or an
+ * empty songs array. Entries that were never edited are omitted entirely.
+ */
+function buildPatch() {
+  const changes = {};
+  for (const [id, fields] of pendingChanges) {
+    const raw = toRawEntry(fields);
+    if (raw && Object.keys(raw).length) changes[id] = raw;
+  }
+  return { changes };
+}
+
 async function saveCatalog() {
   return withWriteLock(async () => {
-    const json = JSON.stringify(state.catalog, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const filename = "data/catalog.json";
+    const patch = buildPatch();
+    const hasPatch = Object.keys(patch.changes).length > 0;
 
-    // Try File System Access API first
-    let wrote = false;
+    if (!hasPatch) {
+      toast("Nothing to save — no titles were changed.", "info");
+      return;
+    }
+
+    let res;
     try {
-      if (window.showSaveFilePicker) {
-        const handle = await window.showSaveFilePicker({
-          suggestedName: "catalog.json",
-          types: [{ description: "JSON", accept: { "application/json": [".json"] } }],
-        });
-        const writable = await handle.createWritable();
-        await writable.write(blob);
-        await writable.close();
-        wrote = true;
-      }
+      res = await fetch("/api/catalog", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patch),
+      });
     } catch (err) {
-      if (err.name === "AbortError") return; // user cancelled
-      console.warn("[edit] File System Access API failed, falling back to download", err);
+      // A static host has no /api/catalog. Fall back to the old download and
+      // say so plainly — the user must replace the file by hand.
+      return fallbackDownload(patch, err);
     }
 
-    if (!wrote) {
-      // Fallback: trigger a download
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      toast("Catalog downloaded — replace data/catalog.json manually", "warn", 5000);
+    if (res.status === 403) {
+      toast("Writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/catalog.", "warn", 6000);
+      return;
     }
 
-    // The catalog is the source of truth for shows.json: clip counts and artist
-    // rosters are derived, so a catalog save is also a shows save.
+    let result;
     try {
-      const existing = await (await fetch("data/shows.json", { cache: "no-store" })).json();
-      const { doc, changed } = reconcileShows(state.catalog, existing);
-      if (changed) await writeShows(doc);
-    } catch (err) {
-      console.warn("[edit] shows.json was not re-synced after save", err);
+      result = await res.json();
+    } catch {
+      return fallbackDownload(patch, new Error("the server answered but the body was not JSON"));
     }
+
+    if (!res.ok || result.error) {
+      return fallbackDownload(patch, new Error(result.error || `HTTP ${res.status}`));
+    }
+
+    if (result.conflicts?.length) {
+      toast(`Not saved: ${result.conflicts.length} entr${result.conflicts.length === 1 ? "y" : "ies"} no longer exist on disk (${result.conflicts.slice(0, 4).join(", ")}${result.conflicts.length > 4 ? ", …" : ""}). Reopen the catalog and try again.`, "warn", 8000);
+      return;
+    }
+
+    // The server re-reads the file, so re-seed state from what it now serves.
+    // A reorder save or another tab's edit must not be silently reverted.
+    const fresh = await loadCatalog();
+    setCatalog(fresh.entries);
 
     dirty = false;
     pendingWrites = 0;
+    pendingChanges.clear();
     updateEditProgress();
     toast("Catalog saved to disk", "success");
   });
+}
+
+/**
+ * The static-host fallback. /api/catalog is only served by tools/serve.js, so
+ * a plain file server cannot accept the write — offer the download the old
+ * code path did, and say exactly what the user has to do with it.
+ */
+function fallbackDownload(patch, err) {
+  const raw = getRawCatalog();
+  const next = raw.map((e) => {
+    const fields = patch.changes[e.id];
+    return fields ? { ...e, ...fields } : e;
+  });
+  const json = JSON.stringify(next, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "data/catalog.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast(`Could not write to the server (${err.message}) — downloaded catalog.json instead; drop it over data/catalog.json to apply the changes.`, "warn", 8000);
 }
 
 function cancelEdit() {
@@ -153,6 +213,7 @@ function cancelEdit() {
   editMode = false;
   dirty = false;
   pendingWrites = 0;
+  pendingChanges.clear();
   document.body.classList.remove("edit-mode");
   const btn = document.querySelector("[data-edit-toggle]");
   if (btn) btn.setAttribute("aria-pressed", "false");

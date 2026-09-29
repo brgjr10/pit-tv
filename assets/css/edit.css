@@ -61,10 +61,6 @@ body.edit-mode .edit-title:focus {
   color: var(--theme-primary);
 }
 
-.edit-bar .edit-progress .total {
-  color: var(--text-dim);
-}
-
 .edit-bar button {
   margin-left: 4px;
 }

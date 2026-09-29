@@ -37,8 +37,26 @@ function renameWithRetry(from, to, attempts = 5) {
   }
 }
 
-export function writeJsonAtomic(path, value, replacer = null, space = 2) {
-  const json = JSON.stringify(value, replacer, space);
+/**
+ * Write a JSON file atomically: serialise to a temp file in the same directory,
+ * then rename it over the target so the target is either the old file or the new
+ * one — never a half-written one.
+ *
+ * The third argument is an options object, not a replacer. The old signature
+ * (path, value, replacer, space) let set-locations.mjs pass `{ trailingNewline: true }`
+ * straight into the replacer slot, where JSON.stringify silently ignores it — no
+ * trailing newline was ever written and the call looked successful. Every caller
+ * now passes options; the replacer and space defaults keep working for anyone
+ * calling the old shape positionally.
+ */
+export function writeJsonAtomic(path, value, options = {}) {
+  const {
+    replacer = null,
+    space = 2,
+    trailingNewline = false,
+  } = options && typeof options === "object" && !Array.isArray(options) ? options : {};
+  let json = JSON.stringify(value, replacer, space);
+  if (trailingNewline) json += "\n";
   const tmp = join(dirname(path), `.tmp-${randomBytes(4).toString("hex")}-${Date.now()}.json`);
   writeFileSync(tmp, json, "utf8");
   try {
