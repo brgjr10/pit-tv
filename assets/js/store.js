@@ -10,6 +10,87 @@ const PREF_KEY = "pittv:prefs:v1";
 
 export const VIEWS = ["grid", "list", "artist", "timeline"];
 
+/* ---------- restore-time validation ---------- */
+
+/*
+ * A stored payload can be hand-edited, rolled back from a newer build, or left
+ * half-written, and restore() used to Object.assign it straight into state. A
+ * single bad value then reached the query and render layers, which assume
+ * arrays, and the app fell through to showFatal with a diagnostic that blamed
+ * catalog.json — a dead end the user cannot escape. So each key is validated
+ * here and falls back independently: one bad key must not cost the user the
+ * rest of their settings.
+ */
+
+/** Filter keys and the shape each accepts. Date bounds are strings, not lists. */
+const FILTER_KEYS = [
+  "artist",
+  "venue",
+  "album",
+  "quality",
+  "source",
+  "type",
+  "dateFrom",
+  "dateTo",
+];
+
+const isStringArray = (value) => Array.isArray(value) && value.every((v) => typeof v === "string");
+
+function sanitizeFilters(savedFilters) {
+  const clean = {};
+  for (const key of FILTER_KEYS) {
+    if (!(key in savedFilters)) continue;
+    const value = savedFilters[key];
+    if (key === "dateFrom" || key === "dateTo") {
+      clean[key] = typeof value === "string" ? value : "";
+    } else {
+      clean[key] = isStringArray(value) ? value : [];
+    }
+  }
+  return clean;
+}
+
+function sanitizeSort(savedSort) {
+  // An unrecognised field is not a crash vector — the query layer falls through
+  // to date order — so only the type is enforced here.
+  return {
+    field: typeof savedSort?.field === "string" && savedSort.field.length > 0 ? savedSort.field : "date",
+    dir: savedSort?.dir === "asc" || savedSort?.dir === "desc" ? savedSort.dir : "desc",
+  };
+}
+
+function sanitizeSettings(savedSettings) {
+  const clean = { ...defaultState().settings };
+  if (!savedSettings || typeof savedSettings !== "object") return clean;
+  if (savedSettings.reducedMotion === null || typeof savedSettings.reducedMotion === "boolean") {
+    clean.reducedMotion = savedSettings.reducedMotion;
+  }
+  if (typeof savedSettings.autoPlay === "boolean") clean.autoPlay = savedSettings.autoPlay;
+  if (savedSettings.theme === "dark" || savedSettings.theme === "light") clean.theme = savedSettings.theme;
+  if (typeof savedSettings.sidebarOpen === "boolean") clean.sidebarOpen = savedSettings.sidebarOpen;
+  return clean;
+}
+
+function sanitizeArtistGroups(savedGroups) {
+  if (!savedGroups || typeof savedGroups !== "object") return {};
+  const clean = {};
+  for (const [artist, open] of Object.entries(savedGroups)) {
+    if (typeof open === "boolean") clean[artist] = open;
+  }
+  return clean;
+}
+
+function sanitizePlaybackPositions(savedPositions) {
+  if (!savedPositions || typeof savedPositions !== "object") return {};
+  const clean = {};
+  for (const [id, pos] of Object.entries(savedPositions)) {
+    // A negative position would reach the progress bar as a negative scaleX and
+    // mirror it, so only finite non-negative offsets are kept.
+    if (typeof pos === "number" && Number.isFinite(pos) && pos >= 0) clean[id] = pos;
+  }
+  return clean;
+}
+
 const defaultState = () => ({
   catalog: [],
   filtered: [],
@@ -35,6 +116,7 @@ const defaultState = () => ({
     theme: "dark", // dark | light
     sidebarOpen: true,
   },
+  artistGroups: {},
   status: "idle", // idle | loading | ready | error
   error: null,
   facets: { artist: [], venue: [], album: [], quality: [], source: [], type: [] },
@@ -73,6 +155,7 @@ export function persist() {
       sort: state.sort,
       settings: state.settings,
       playbackPositions: state.playbackPositions,
+      artistGroups: state.artistGroups,
     };
     localStorage.setItem(PREF_KEY, JSON.stringify(slice));
   } catch (err) {
@@ -87,10 +170,11 @@ export function restore() {
     if (!raw) return;
     const saved = JSON.parse(raw);
     if (VIEWS.includes(saved.view)) state.view = saved.view;
-    if (saved.filters) Object.assign(state.filters, saved.filters);
-    if (saved.sort) Object.assign(state.sort, saved.sort);
-    if (saved.settings) Object.assign(state.settings, saved.settings);
-    if (saved.playbackPositions) state.playbackPositions = saved.playbackPositions;
+    if (saved.filters) Object.assign(state.filters, sanitizeFilters(saved.filters));
+    if (saved.sort) Object.assign(state.sort, sanitizeSort(saved.sort));
+    if (saved.settings) Object.assign(state.settings, sanitizeSettings(saved.settings));
+    if (saved.playbackPositions) state.playbackPositions = sanitizePlaybackPositions(saved.playbackPositions);
+    if (saved.artistGroups) state.artistGroups = sanitizeArtistGroups(saved.artistGroups);
   } catch (err) {
     console.warn("[store] could not restore preferences", err);
   }
@@ -172,6 +256,16 @@ export function setSetting(key, value) {
   state.settings[key] = value;
   persist();
   emit("setting", { key, value });
+}
+
+export function setArtistGroupOpen(artist, open) {
+  state.artistGroups = { ...state.artistGroups, [artist]: open };
+  persist();
+  emit("artistGroups", state.artistGroups);
+}
+
+export function getArtistGroupOpen(artist) {
+  return state.artistGroups[artist] !== false;
 }
 
 export function setFacets(facets) {

@@ -14,14 +14,17 @@ import {
   setSearchQuery,
   setFilter,
   setFiltered,
+  setFacets,
   toggleFilter,
   clearFilters,
   setSetting,
   readPosition,
+  setArtistGroupOpen,
+  getArtistGroupOpen,
 } from "./store.js";
-import { loadCatalog, formatDate, formatDuration, playableEntry, setlistFor } from "./catalog.js";
+import { loadCatalog, buildFacets, formatDate, formatDuration, playableEntry, setlistFor } from "./catalog.js";
 import { queryCatalog, highlight, escapeHtml, activeFilterSummary, SORT_FIELDS } from "./search.js";
-import { createPlayer, isTypingTarget } from "./player.js?v=2026-09-27-fullscreen-fix-v4";
+import { createPlayer, isTypingTarget } from "./player.js?v=2026-09-29-a11y-focus-v5";
 import { themeFromEntry, resetTheme } from "./theme.js";
 import { editState, markDirty } from "./edit.js";
 import {
@@ -54,6 +57,7 @@ const FILTER_LABELS = {
   album: "Album",
   quality: "Quality",
   source: "Source",
+  type: "Type",
 };
 
 export function initUI() {
@@ -137,6 +141,11 @@ export function initUI() {
       searchQuery: state.searchQuery,
       sort: state.sort,
     });
+
+    // Facet counts are context-dependent, so they are recounted on every render
+    // rather than once per catalog load — otherwise the sidebar keeps promising
+    // results the current search and filters cannot deliver.
+    setFacets(buildFacets(state.catalog, { filters: state.filters, searchQuery: state.searchQuery }));
 
     const container = activeViewEl();
     const previous = animate ? snapshotRects(container) : null;
@@ -387,9 +396,9 @@ export function initUI() {
       // "2019" reads better than "2019–2019" for a single year.
       const span = !first ? "" : first === last ? first : `${first}–${last}`;
 
-      section.dataset.open = "true";
+      section.dataset.open = String(getArtistGroupOpen(artist));
       section.innerHTML = `
-        <button class="artist-head" type="button" aria-expanded="true">
+        <button class="artist-head" type="button" aria-expanded="${getArtistGroupOpen(artist)}">
           <span class="artist-caret">▼</span>
           <span class="artist-name">${highlight(artist, state.searchQuery)}</span>
           <span class="artist-stats">${list.length} ${list.length === 1 ? "video" : "videos"}${span ? ` · ${span}` : ""}</span>
@@ -403,8 +412,10 @@ export function initUI() {
 
       section.querySelector(".artist-head").addEventListener("click", () => {
         const open = section.dataset.open !== "false";
-        section.dataset.open = String(!open);
-        section.querySelector(".artist-head").setAttribute("aria-expanded", String(!open));
+        const nextOpen = !open;
+        section.dataset.open = String(nextOpen);
+        section.querySelector(".artist-head").setAttribute("aria-expanded", String(nextOpen));
+        setArtistGroupOpen(artist, nextOpen);
         if (window.anime && !reducedMotion()) {
           const grid = section.querySelector(".artist-grid");
           window.anime({
@@ -616,15 +627,27 @@ export function initUI() {
       .map(([key, values]) => {
         const selected = state.filters[key] || [];
         const options = values
-          .map(
-            ({ value, count }) => `
-        <label class="filter-option">
-          <input type="checkbox" data-filter-key="${key}" value="${escapeHtml(value)}" ${selected.includes(value) ? "checked" : ""}>
+          .map(({ value, count }) => {
+            const isSelected = selected.includes(value);
+            // A count of zero means ticking this returns nothing, so the option
+            // is marked unavailable rather than left to fail silently. A ticked
+            // value is never marked: the context that zeroed it is the user's own
+            // doing, and unticking it is the only way back.
+            //
+            // aria-disabled, not the disabled attribute: a disabled checkbox
+            // leaves the tab order entirely, so a keyboard user could no longer
+            // reach an option to discover that it is unavailable. The change
+            // handler refuses the toggle instead — the control stays focusable
+            // and announced as dimmed.
+            const unavailable = count === 0 && !isSelected;
+            return `
+        <label class="filter-option" data-unavailable="${unavailable}">
+          <input type="checkbox" data-filter-key="${key}" value="${escapeHtml(value)}" ${isSelected ? "checked" : ""}${unavailable ? ' aria-disabled="true"' : ""}>
           <span class="filter-box"></span>
           <span class="filter-label">${highlight(value, state.searchQuery)}</span>
           <span class="filter-n">${count}</span>
-        </label>`
-          )
+        </label>`;
+          })
           .join("");
         return `<details class="filter-group" open>
           <summary>${FILTER_LABELS[key] || key}<span class="count">${selected.length || ""}</span></summary>
@@ -644,7 +667,33 @@ export function initUI() {
       </div>
     </details>`;
 
+    /*
+     * The sidebar is rebuilt wholesale because the facet counts depend on the
+     * live query — the right call for the counts, but it also throws away the
+     * scroll position and drops focus to the document. So a user part-way down
+     * the facets who types a search gets yanked back to the top mid-interaction,
+     * and a keyboard user loses the checkbox they were on. Capture both across
+     * the swap and put them back.
+     */
+    const active = document.activeElement;
+    const refocus =
+      active && dom.filters.contains(active) && active.dataset?.filterKey
+        ? { key: active.dataset.filterKey, value: active.type === "checkbox" ? active.value : null }
+        : null;
+    const scrollTop = dom.filters.scrollTop;
+
     dom.filters.innerHTML = dateGroup + groups;
+
+    dom.filters.scrollTop = scrollTop;
+    if (refocus) {
+      // Checkboxes are only unique by key *and* value — there are dozens per
+      // group. The two date inputs are unique by key alone.
+      const selector =
+        refocus.value === null
+          ? `[data-filter-key="${refocus.key}"]`
+          : `[data-filter-key="${refocus.key}"][value="${CSS.escape(refocus.value)}"]`;
+      dom.filters.querySelector(selector)?.focus({ preventScroll: true });
+    }
   }
 
   function renderChips() {
@@ -736,6 +785,7 @@ export function initUI() {
   }
 
   let openCard = null;
+  let shortcutsPreviousFocus = null;
 
   async function openEntry(entry, sourceNode) {
     openCard = sourceNode;
@@ -784,6 +834,12 @@ export function initUI() {
     const finish = () => {
       dom.modal.hidden = true;
       dom.modalBackdrop.style.opacity = "";
+      // Player is closing: drop the entry's art-derived palette and restore the
+      // neutral base theme in the persisted light/dark variant. Settings promises
+      // the accent "always" comes from the open video's art, so with nothing open
+      // the page must go back to the base palette. This runs after the close
+      // animation so the morph blends from the last frame.
+      resetTheme({ light: state.settings.theme === "light" });
       if (restoreFocus) openCard?.focus?.({ preventScroll: true });
     };
     if (window.anime && !reducedMotion()) closeModal(dom.modal, dom.modalBackdrop).finished.then(finish);
@@ -952,10 +1008,15 @@ export function initUI() {
       return;
     }
 
-    if (!dom.shortcuts.hidden && e.key === "Escape") {
-      e.preventDefault();
-      toggleShortcuts(false);
-      return;
+    // Shortcuts panel is open — suppress all single-letter app shortcuts
+    // (G, L, A, T, S, /, ?) but allow Escape to close it and Tab to move within.
+    if (!dom.shortcuts.hidden) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        toggleShortcuts(false);
+      }
+      // Allow Tab for focus movement within the panel, block everything else
+      if (e.key !== "Tab") return;
     }
 
     if (isTypingTarget(e.target)) {
@@ -1028,19 +1089,25 @@ export function initUI() {
         toggleShortcuts();
         break;
       case "Escape":
-        // An open drawer is an overlay below the drawer breakpoint, so Escape has
-        // to dismiss it first — otherwise pressing it to close the overlay also
-        // wipes the active search or every filter the user has set.
+        // Escape is a dismissal key, so it unwinds one layer at a time: the
+        // player, the shortcut panel, the mobile drawer, then the search text.
+        //
+        // It deliberately does NOT reset every filter. Above the drawer
+        // breakpoint there is no overlay for the first press to absorb, so a
+        // stray Escape wiped the whole filter set with no undo — the one
+        // irreversible thing this app's keyboard can do. The sidebar's "Clear
+        // all" chip is the explicit way to do that, and it is reversible by
+        // re-ticking. This also makes desktop and mobile agree: on both, the
+        // first Escape closes the sidebar and only the next one touches state.
         if (state.settings.sidebarOpen && isDrawerOverlay()) {
           e.preventDefault();
           setSetting("sidebarOpen", false);
           break;
         }
         if (state.searchQuery) {
+          e.preventDefault();
           dom.search.value = "";
           setSearchQuery("");
-        } else {
-          clearFilters();
         }
         break;
       case "s":
@@ -1055,11 +1122,18 @@ export function initUI() {
   function toggleShortcuts(force) {
     const show = force === undefined ? dom.shortcuts.hidden : force;
     if (show) {
+      shortcutsPreviousFocus = document.activeElement;
       dom.shortcuts.hidden = false;
       popIn(dom.shortcutsPanel);
+      // Move focus into the panel - focus the close button
+      const closeBtn = dom.shortcutsPanel.querySelector("[data-close-shortcuts]");
+      closeBtn?.focus({ preventScroll: true });
     } else {
       popOut(dom.shortcutsPanel, () => {
         dom.shortcuts.hidden = true;
+        // Restore focus to what had it before (the Keys button or wherever)
+        shortcutsPreviousFocus?.focus?.({ preventScroll: true });
+        shortcutsPreviousFocus = null;
       });
     }
   }
@@ -1113,8 +1187,16 @@ export function initUI() {
     const input = e.target;
     const key = input.dataset.filterKey;
     if (!key) return;
-    if (input.type === "checkbox") toggleFilter(key, input.value);
-    else setFilter(key, input.value);
+    // An option with no matches in the current context is aria-disabled rather
+    // than disabled, so it stays reachable by keyboard. Undo the tick here
+    // instead: the browser has already flipped the box by the time this fires.
+    if (input.type === "checkbox") {
+      if (input.getAttribute("aria-disabled") === "true") {
+        input.checked = false;
+        return;
+      }
+      toggleFilter(key, input.value);
+    } else setFilter(key, input.value);
   });
 
   dom.chips.addEventListener("click", (e) => {
@@ -1157,13 +1239,16 @@ export function initUI() {
 
   dom.settingsBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    dom.settings.hidden = !dom.settings.hidden;
+    const isHidden = dom.settings.hidden;
+    dom.settings.hidden = !isHidden;
+    dom.settingsBtn.setAttribute("aria-expanded", String(!isHidden));
     if (!dom.settings.hidden) popIn(dom.settings);
   });
   document.addEventListener("click", (e) => {
     if (dom.settings.hidden) return;
     if (dom.settings.contains(e.target) || dom.settingsBtn.contains(e.target)) return;
     dom.settings.hidden = true;
+    dom.settingsBtn.setAttribute("aria-expanded", "false");
   });
 
   dom.reducedToggle.checked = reducedMotion();
@@ -1234,38 +1319,47 @@ export function initUI() {
     // preference intact for desktop, and any later toggle this session sticks.
     if (isDrawerOverlay()) state.settings.sidebarOpen = false;
     syncControls();
+    // The catch is scoped to the catalog fetch and nothing else. render() used to
+    // sit inside it, so a render-time fault was reported as "the catalog could
+    // not be loaded" and told the user to check a perfectly good
+    // data/catalog.json — with a Retry button that reloaded into the same fault.
+    // Keeping the block narrow keeps showFatal's diagnosis honest.
+    let loaded;
     try {
-      const { entries, problems, skipped = 0, sync } = await loadCatalog();
-      if (problems.length) {
-        console.warn("[catalog] data notes", problems);
-        // Most of these are shows missing a date or venue, which still render —
-        // calling them skipped entries would be wrong and alarming.
-        toast(
-          skipped
-            ? `Skipped ${skipped} invalid ${skipped === 1 ? "entry" : "entries"}`
-            : `${problems.length} show${problems.length === 1 ? " needs" : "s need"} a date, venue or location`,
-          "warn",
-          5000
-        );
-      }
-      if (sync?.missingArt?.length) {
-        const sample = sync.missingArt
-          .slice(0, 3)
-          .map((m) => `${m.artist} — ${m.song}`)
-          .join("; ");
-        toast(
-          `${sync.missingArt.length} ${sync.missingArt.length === 1 ? "clip has" : "clips have"} no album art: ${sample}${sync.missingArt.length > 3 ? "…" : ""}`,
-          "info",
-          8000
-        );
-      }
-      render({ animate: true });
-      announce(`Catalog loaded: ${entries.length} entries`);
-      attachEditableListeners();
+      loaded = await loadCatalog();
     } catch (err) {
       console.error("[catalog] load failed", err);
       showFatal(err);
+      return;
     }
+
+    const { entries, problems, skipped = 0, sync } = loaded;
+    if (problems.length) {
+      console.warn("[catalog] data notes", problems);
+      // Most of these are shows missing a date or venue, which still render —
+      // calling them skipped entries would be wrong and alarming.
+      toast(
+        skipped
+          ? `Skipped ${skipped} invalid ${skipped === 1 ? "entry" : "entries"}`
+          : `${problems.length} show${problems.length === 1 ? " needs" : "s need"} a date, venue or location`,
+        "warn",
+        5000
+      );
+    }
+    if (sync?.missingArt?.length) {
+      const sample = sync.missingArt
+        .slice(0, 3)
+        .map((m) => `${m.artist} — ${m.song}`)
+        .join("; ");
+      toast(
+        `${sync.missingArt.length} ${sync.missingArt.length === 1 ? "clip has" : "clips have"} no album art: ${sample}${sync.missingArt.length > 3 ? "…" : ""}`,
+        "info",
+        8000
+      );
+    }
+    render({ animate: true });
+    announce(`Catalog loaded: ${entries.length} entries`);
+    attachEditableListeners();
   }
 
   start();

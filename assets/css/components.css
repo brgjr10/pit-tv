@@ -1,5 +1,30 @@
 /* components.css — cards, rows, filter sidebar, chips, badges, skeletons */
 
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--theme-primary);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-lg);
+  white-space: nowrap;
+  transition: top var(--dur-fast) var(--ease-out-expo);
+}
+
+.skip-link:focus {
+  top: var(--sp-3);
+  outline: 3px solid var(--theme-primary);
+  outline-offset: 3px;
+}
+
 /* ---------- Glass card (grid + artist views) ---------- */
 
 .video-card {
@@ -237,6 +262,17 @@
   transition: background var(--dur), border-color var(--dur);
 }
 
+@media (max-width: 900px) {
+
+  /* Must live here: components.css loads after layout.css, so this rule
+     wins the cascade over the base .row template above. The same breakpoint
+     in layout.css was dead code for .row (same specificity, earlier source),
+     leaving rows on an 8-track grid while the header collapsed to 5. */
+  .row {
+    grid-template-columns: 46px minmax(0, 2.2fr) 88px minmax(0, 1.4fr) 58px;
+  }
+}
+
 .row:hover,
 .row:focus-visible {
   background: var(--card);
@@ -388,7 +424,7 @@
   border-bottom: none;
 }
 
-.filter-group > summary {
+.filter-group>summary {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
@@ -402,25 +438,25 @@
   user-select: none;
 }
 
-.filter-group > summary::-webkit-details-marker {
+.filter-group>summary::-webkit-details-marker {
   display: none;
 }
 
-.filter-group > summary::before {
+.filter-group>summary::before {
   content: "▾";
   font-size: 9px;
   transition: transform var(--dur) var(--ease-out-expo);
 }
 
-.filter-group[open] > summary::before {
+.filter-group[open]>summary::before {
   transform: rotate(0deg);
 }
 
-.filter-group:not([open]) > summary::before {
+.filter-group:not([open])>summary::before {
   transform: rotate(-90deg);
 }
 
-.filter-group > summary:hover {
+.filter-group>summary:hover {
   color: var(--text);
 }
 
@@ -458,6 +494,17 @@
   color: var(--text);
 }
 
+/* No matches in the current context: shown, dimmed, and not clickable. */
+.filter-option[data-unavailable="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.filter-option[data-unavailable="true"]:hover {
+  background: none;
+  color: var(--text-muted);
+}
+
 .filter-option input {
   position: absolute;
   opacity: 0;
@@ -475,12 +522,12 @@
   transition: background var(--dur), border-color var(--dur);
 }
 
-.filter-option input:checked + .filter-box {
+.filter-option input:checked+.filter-box {
   background: var(--theme-primary);
   border-color: var(--theme-primary);
 }
 
-.filter-option input:checked + .filter-box::after {
+.filter-option input:checked+.filter-box::after {
   content: "";
   width: 4px;
   height: 8px;
@@ -508,7 +555,7 @@
   color: var(--text-dim);
 }
 
-.filter-option input:focus-visible + .filter-box {
+.filter-option input:focus-visible+.filter-box {
   outline: 2px solid var(--theme-primary);
   outline-offset: 2px;
 }
@@ -687,10 +734,10 @@
   pointer-events: none;
 }
 
-.switch-row input:checked + .switch {
+.switch-row input:checked+.switch {
   background: var(--theme-primary);
 }
 
-.switch-row input:checked + .switch::after {
+.switch-row input:checked+.switch::after {
   transform: translateX(15px);
 }

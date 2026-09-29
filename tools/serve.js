@@ -93,12 +93,11 @@ async function apiFetchCovers() {
  * to bother kicking off a fetch at all.
  */
 function apiFetchStatus(catalog) {
-  const missing = catalog.filter((e) => !e.albumArt).map((e) => ({
-    id: e.id,
-    artist: e.artist,
-    album: e.album,
-  }));
-  return { total: catalog.length, missing: missing.length, missing };
+  // `missing` is a count, not a list: the client branches on it and interpolates
+  // it into a log line, so it needs to be a number. (The old literal wrote the
+  // key twice — once as a count, once as an array — and the array silently won.)
+  const missing = catalog.filter((e) => !e.albumArt).length;
+  return { total: catalog.length, missing };
 }
 
 /**

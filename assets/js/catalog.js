@@ -7,8 +7,9 @@
  * page.
  */
 
-import { setStatus, setCatalog, setFacets } from "./store.js";
+import { setStatus, setCatalog, setFacets, state } from "./store.js";
 import { reconcileShows, writeShows, withWriteLock } from "./sync.js";
+import { countFacets } from "./search.js";
 
 const CATALOG_URL = "data/catalog.json";
 const FALLBACK_URL = "catalog.json";
@@ -467,7 +468,9 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL }
 
   setStatus("ready");
   setCatalog(entries);
-  setFacets(buildFacets(entries));
+  // Restored preferences are already in state by now, so the first sidebar
+  // render has to be counted against them rather than against the bare catalog.
+  setFacets(buildFacets(entries, { filters: state.filters, searchQuery: state.searchQuery }));
   return { entries, problems, skipped, url: usedUrl, sync: syncResult };
 }
 
@@ -524,8 +527,12 @@ async function triggerCoverFetch() {
     const res = await fetch("/api/fetch-status");
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const status = await res.json();
+    // `missing` is a count (see tools/serve.js), so coerce it once rather than
+    // trusting the field directly: the guard needs a number to be falsy when
+    // nothing is missing, and the log line needs a number to interpolate.
+    const missingCount = Number(status?.missing) || 0;
 
-    if (!status || !status.missing) {
+    if (!missingCount) {
       // No missing covers — nothing to do, and don't retry the check.
       coverFetchSucceeded = true;
       return;
@@ -535,7 +542,7 @@ async function triggerCoverFetch() {
     if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
     const result = await res2.json();
     if (result.ok) {
-      console.info(`[covers] background fetch started for ${status.missing} entr${status.missing === 1 ? "y" : "ies"}`);
+      console.info(`[covers] background fetch started for ${missingCount} entr${missingCount === 1 ? "y" : "ies"}`);
       coverFetchSucceeded = true;
     } else {
       console.warn(`[covers] /api/fetch-covers responded ${res2.status} but reported an issue:`, (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
@@ -557,22 +564,51 @@ const facetConfig = [
   { key: "album", get: (e) => e.album },
   { key: "quality", get: (e) => e.metadata.quality },
   { key: "source", get: (e) => e.metadata.source },
+  { key: "type", get: (e) => e.video.type },
 ];
 
-export function buildFacets(entries) {
+/**
+ * The sidebar's option lists, in display order, each value carrying the count
+ * it has in the current context.
+ *
+ * Two tallies per dimension: the whole catalog decides which values exist and
+ * in what order, so the list does not reshuffle as the user types and a value
+ * they already picked stays on screen to untick; the context decides the number
+ * beside it. Called with no context the two are the same tally, which is the
+ * unfiltered sidebar.
+ */
+const catalogCountsCache = new WeakMap();
+
+/**
+ * The context-free tally, memoised on the entries array.
+ *
+ * It depends only on `entries`, so unlike the context tally it does not need
+ * recomputing when the user types or changes a filter. buildFacets runs on
+ * every render, and the context pass alone is already 6 dimensions over the
+ * whole catalog, so recomputing an invariant pass on every keystroke is pure
+ * waste. A WeakMap matches the haystackCache idiom in search.js and frees with
+ * the catalog it describes.
+ */
+function catalogCountsFor(entries) {
+  let counts = catalogCountsCache.get(entries);
+  if (!counts) {
+    counts = countFacets(entries, facetConfig);
+    catalogCountsCache.set(entries, counts);
+  }
+  return counts;
+}
+
+export function buildFacets(entries, context = {}) {
   const facets = { artist: [], venue: [], album: [], quality: [], source: [], type: [] };
 
-  for (const { key, get, multi } of facetConfig) {
-    const counts = new Map();
-    for (const entry of entries) {
-      const values = multi ? get(entry) : [get(entry)];
-      for (const value of values) {
-        if (!isNonEmptyString(value)) continue;
-        counts.set(value, (counts.get(value) || 0) + 1);
-      }
-    }
-    facets[key] = [...counts.entries()]
-      .map(([value, count]) => ({ value, count }))
+  const catalogCounts = catalogCountsFor(entries);
+  const contextCounts = countFacets(entries, facetConfig, context);
+
+  for (const { key } of facetConfig) {
+    const counts = contextCounts.get(key);
+    facets[key] = [...catalogCounts.get(key).keys()]
+      .filter(isNonEmptyString)
+      .map((value) => ({ value, count: counts.get(value) || 0 }))
       .sort((a, b) => (a.value === b.value ? 0 : a.value.localeCompare(b.value)));
   }
 
@@ -584,14 +620,4 @@ export function buildFacets(entries) {
   facets.quality.sort((a, b) => qRank(a) - qRank(b));
 
   return facets;
-}
-
-/* ---------- misc helpers shared by the views ---------- */
-
-export function entrySearchText(entry) {
-  const songs = (entry.songs || []).map((s) => s.title);
-  return [entry.artist, entry.song, entry.album, entry.venue, entry.location, ...entry.tags, ...songs]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
 }

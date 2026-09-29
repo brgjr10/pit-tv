@@ -25,6 +25,7 @@ README.md
 QA_REPORT.md
 e2e_test.md
 instructions.md
+new.md
 
 # Docker config (not needed in container)
 Dockerfile

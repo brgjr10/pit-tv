@@ -13,11 +13,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <script>
+      /*
+       * Critical theme guard — runs before CSS so the first paint uses the user's
+       * persisted variant instead of the hardcoded dark default. The full custom-
+       * property palette (and the rest of theme.js) runs later at boot; this only
+       * flips the [data-theme] selector that gates :root[data-theme="light"].
+       *
+       * The key ("pittv:prefs:v1") and the prefs.settings.theme path are duplicated
+       * from store.js on purpose: an inline script cannot import a module, so there
+       * is no way to reference PREF_KEY here. Changing either in store.js requires
+       * changing this script in lockstep, or light mode will silently fail to
+       * survive a reload.
+       */
+      (function () {
+        try {
+          var raw = localStorage.getItem("pittv:prefs:v1");
+          if (raw) {
+            var prefs = JSON.parse(raw);
+            if (prefs.settings && prefs.settings.theme === "light") {
+              document.documentElement.dataset.theme = "light";
+            }
+          }
+        } catch (e) {
+          // localStorage may be unavailable (private mode); the default dark
+          // palette from the HTML attribute is acceptable.
+        }
+      })();
+    </script>
+
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/player.css?v=2026-09-27-fullscreen-fix-v3">
+    <link rel="stylesheet" href="assets/css/player.css?v=2026-09-28-stage-aspect-v4">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/edit.css">
 
@@ -25,6 +54,7 @@
     <script src="lib/hls.min.js"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="bg-gradient" aria-hidden="true"></div>
     <div class="bg-grain" aria-hidden="true"></div>
 
@@ -112,7 +142,7 @@
             <aside class="sidebar" data-sidebar data-filters aria-label="Filters"></aside>
             <div class="sidebar-scrim" data-sidebar-scrim hidden aria-hidden="true"></div>
 
-            <main class="main" tabindex="-1">
+            <main class="main" id="main-content" tabindex="-1">
                 <div class="main-inner">
                     <section class="view view-grid active" data-view-grid aria-label="Grid view"></section>
 
@@ -214,7 +244,7 @@
     <div class="sr-live" data-live aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"></div>
 
     <div class="shortcut-overlay" data-shortcuts hidden>
-        <div class="shortcut-panel" data-shortcuts-panel role="dialog" aria-label="Keyboard shortcuts">
+        <div class="shortcut-panel" data-shortcuts-panel role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
             <h2>Keyboard shortcuts</h2>
             <dl class="shortcut-list">
                 <dt><kbd>/</kbd></dt><dd>Focus search</dd>
@@ -238,6 +268,6 @@
         </div>
     </div>
 
-    <script type="module" src="assets/js/app.js?v=2026-09-27-fullscreen-fix-v3"></script>
+    <script type="module" src="assets/js/app.js?v=2026-09-28-theme-restore-v1"></script>
 </body>
 </html>

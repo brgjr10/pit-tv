@@ -842,11 +842,53 @@ export function createPlayer(root) {
     }
   });
 
+/**
+   * Get all focusable elements within the modal.
+   * Used for focus trapping when the player modal is open.
+   */
+  function getModalFocusableElements() {
+    return [...root.querySelectorAll(
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"]), [contenteditable="true"]'
+    )].filter((el) => {
+      const style = window.getComputedStyle(el);
+      return style.display !== "none" && style.visibility !== "hidden" && el.offsetParent !== null;
+    });
+  }
+
+  /**
+   * Trap focus within the modal on Tab / Shift+Tab.
+   * Called from the global keydown handler when the modal is open.
+   */
+  function handleModalTab(e) {
+    if (e.key !== "Tab") return;
+    const focusable = getModalFocusableElements();
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (e.shiftKey) {
+      if (active === first) {
+        e.preventDefault();
+        last.focus({ preventScroll: true });
+      }
+    } else {
+      if (active === last) {
+        e.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    }
+  }
+
   document.addEventListener("keydown", (e) => {
     // Only claim keys while the player is actually on screen, otherwise the
     // browser-level grid navigation in ui.js would never see an arrow key.
     if (root.dataset.open !== "true") return;
     if (isTypingTarget(e.target)) return;
+
+    // Trap Tab/Shift+Tab within the modal
+    handleModalTab(e);
 
     if (!e.key) return;
     const lower = e.key.toLowerCase();
