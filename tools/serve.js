@@ -10,7 +10,7 @@
 
 import { createServer } from "node:http";
 import { createReadStream, createWriteStream, statSync, readFileSync, writeFileSync, renameSync, unlinkSync, existsSync, mkdirSync } from "node:fs";
-import { extname, join, normalize, resolve, sep, dirname } from "node:path";
+import { basename, extname, join, normalize, relative, resolve, sep, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
@@ -22,6 +22,14 @@ const PORT = Number(process.argv[2] || process.env.PORT || 3000);
 // turn the archive into a remotely writable service even if the gate is skipped.
 const HOST = process.env.HOST || "127.0.0.1";
 const CATALOG_PATH = join(ROOT, "data", "catalog.json");
+const VIDEOS_DIR = join(ROOT, "videos");
+
+// Upload limits. Concert video is multi-gigabyte, so the cap is generous and
+// configurable rather than a token 100 MB: PITTV_MAX_UPLOAD_MB overrides it.
+const MAX_UPLOAD_BYTES = Number(process.env.PITTV_MAX_UPLOAD_MB || 40960) * 1024 * 1024;
+// Extensions the browser can actually play (see videos/README.md "Formats").
+// Anything else is refused at plan time rather than after a long transfer.
+const UPLOAD_EXTENSIONS = new Set([".mp4", ".mov", ".m4v", ".webm", ".mkv"]);
 
 // Mutating routes (writes to catalog.json, shows.json, or the videos/ tree)
 // are only served when the operator explicitly opts in. A static-file build
@@ -266,6 +274,404 @@ async function apiSetShow(searchParams) {
   return spawnChild(["tools/set-locations.mjs", ...args]);
 }
 
+/* ---------- upload (Feature B) ---------- */
+
+/**
+ * Make one path segment safe to put on disk.
+ *
+ * The destination is videos/catalog/<Performance>/<filename>, and "performance"
+ * is typed by a human into a free-text field, so it arrives containing "/" from
+ * a pasted folder name, a colon from a drive letter, or 300 characters of a
+ * tour title. Windows additionally reserves /\:*?"<>| and rejects trailing dots
+ * and spaces, so those are stripped rather than left to fail at write time.
+ *
+ * Returns "" when the segment reduces to nothing — the caller rejects rather
+ * than inventing a folder name.
+ */
+function sanitizeSegment(value) {
+  return String(value ?? "")
+    .replace(/[\u0000-\u001f\u007f]/g, "")
+    .replace(/[\\/:*?"<>|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/[. ]+$/, "")
+    .trim()
+    .slice(0, 120)
+    .trim();
+}
+
+/**
+ * Lowercase, non-alphanumerics to "-", matching catalog.js:159-165 and
+ * set-locations.mjs's showKeyFor consumers. The id has to survive
+ * showKeyFor(id) === showId, which is what joins the entry to shows.json.
+ */
+function slugify(value, fallback) {
+  const s = String(value ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return s || fallback;
+}
+
+/**
+ * Accept only the two date forms set-locations.mjs understands: a full ISO
+ * day, or a bare year. A bare year is expanded to Jan 1 for shows.json, which
+ * is the only place the tool will accept a value at all.
+ */
+function normalizeShowDate(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return { date: "" };
+  const year = raw.match(/^(\d{4})$/);
+  if (year) return { date: `${year[1]}-01-01` };
+  const day = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!day) return { error: `date "${raw}" must be YYYY-MM-DD or YYYY` };
+  const [y, m, d] = [+day[1], +day[2], +day[3]];
+  const round = new Date(Date.UTC(y, m - 1, d));
+  if (round.getUTCFullYear() !== y || round.getUTCMonth() !== m - 1 || round.getUTCDate() !== d) {
+    return { error: `date "${raw}" is not a real calendar date` };
+  }
+  return { date: raw };
+}
+
+/**
+ * Next free clip number for a show, as a zero-padded two-digit string.
+ *
+ * The existing ids are "<showKey>-<NN>" (mgk-xmas-2017-04), and showKeyFor
+ * strips the trailing number, so a new clip of an existing show has to take the
+ * next NN in that same series. Zero-padded to match what is already on disk;
+ * the padding is cosmetic — the join is by suffix removal, not by width.
+ */
+function nextClipNumber(catalog, showId) {
+  const re = new RegExp(`^${showId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}-(\\d+)$`);
+  let max = 0;
+  for (const entry of catalog) {
+    if (!entry || typeof entry.id !== "string") continue;
+    const m = entry.id.match(re);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  }
+  let n = max + 1;
+  while (catalog.some((e) => e && e.id === `${showId}-${String(n).padStart(2, "0")}`)) n += 1;
+  return String(n).padStart(2, "0");
+}
+
+/**
+ * Pick a filename that does not exist yet, appending -2, -3 before the
+ * extension. Overwriting is never acceptable here: the existing file is a
+ * multi-gigabyte clip that is already in the catalog under its own id.
+ */
+function uniqueFilename(dir, filename) {
+  const ext = extname(filename);
+  const base = basename(filename, ext);
+  let candidate = filename;
+  let n = 2;
+  while (existsSync(join(dir, candidate))) {
+    candidate = `${base}-${n}${ext}`;
+    n += 1;
+  }
+  return candidate;
+}
+
+/**
+ * Resolve a client-supplied relative path to an absolute one inside videos/.
+ *
+ * The plan route is the only thing that computes a destination, but the PUT
+ * takes the path back from the client, so it is validated again: no "..", no
+ * separators smuggled through, and the resolved file must still be under
+ * videos/. The containment check mirrors the static handler's at the bottom of
+ * this file.
+ */
+function resolveUploadPath(relativePath) {
+  const raw = String(relativePath ?? "");
+  if (!raw) return { error: "path is required" };
+  if (raw.includes("\0")) return { error: "path contains a null byte" };
+  if (raw.includes("..")) return { error: 'path may not contain ".."' };
+  if (/^[a-zA-Z]:/.test(raw) || raw.startsWith("/") || raw.startsWith("\\")) {
+    return { error: "path must be relative to videos/" };
+  }
+  const full = resolve(VIDEOS_DIR, normalize(raw));
+  if (full !== VIDEOS_DIR && !full.startsWith(VIDEOS_DIR + sep)) {
+    return { error: "path resolves outside videos/" };
+  }
+  const ext = extname(full).toLowerCase();
+  if (!UPLOAD_EXTENSIONS.has(ext)) {
+    return { error: `${ext || "that file"} is not an accepted video format (${[...UPLOAD_EXTENSIONS].join(", ")})` };
+  }
+  return { full, ext, dir: dirname(full) };
+}
+
+/**
+ * POST /api/upload/plan — decide where a file will land, before any bytes move.
+ *
+ * The path computation is server-side on purpose: the client cannot ask for a
+ * destination outside videos/, and the id returned here is the id that will
+ * actually be written, so the commit step does not have to re-derive it (and
+ * cannot disagree with it).
+ *
+ * Body: { artist, song, album, performance, quality, source, duration,
+ *         date, venue, location, filename, size, extension }
+ * Returns: { ok, folder, filename, src, id, showId, songId, clipIndex, … }
+ */
+function apiUploadPlan(body) {
+  const b = body || {};
+
+  const artist = String(b.artist ?? "").trim();
+  if (!artist) return { ok: false, error: "artist is required" };
+
+  const filenameRaw = String(b.filename ?? "").trim();
+  if (!filenameRaw) return { ok: false, error: "filename is required" };
+  if (filenameRaw.includes("/") || filenameRaw.includes("\\")) {
+    return { ok: false, error: "filename may not contain a path separator" };
+  }
+  if (filenameRaw.includes("..")) return { ok: false, error: 'filename may not contain ".."' };
+
+  // Validate on the extension of the name the user actually chose, but write it
+  // back with its original case: the existing tree mixes .MOV and .MP4, and
+  // case-folding would break video.src references elsewhere.
+  const ext = extname(filenameRaw);
+  if (!UPLOAD_EXTENSIONS.has(ext.toLowerCase())) {
+    return { ok: false, error: `${ext || "that file"} is not an accepted video format (${[...UPLOAD_EXTENSIONS].join(", ")})` };
+  }
+  const base = basename(filenameRaw, ext);
+  const safeBase = sanitizeSegment(base);
+  if (!safeBase) return { ok: false, error: "filename has no usable characters left" };
+
+  const size = Number(b.size);
+  if (!Number.isFinite(size) || size <= 0) return { ok: false, error: "size must be a positive number of bytes" };
+  if (size > MAX_UPLOAD_BYTES) {
+    return { ok: false, error: `file is ${formatBytes(size)}, over the ${formatBytes(MAX_UPLOAD_BYTES)} cap — raise PITTV_MAX_UPLOAD_MB on the server to allow it` };
+  }
+
+  // Performance is the folder name; a blank one falls back to the artist so the
+  // clip still lands somewhere sensible.
+  const folder = sanitizeSegment(b.performance) || sanitizeSegment(artist);
+  if (!folder) return { ok: false, error: "performance is empty and there is no artist to fall back to" };
+
+  const dir = join(VIDEOS_DIR, "catalog", folder);
+  const filename = uniqueFilename(dir, `${safeBase}${ext}`);
+  const src = `videos/catalog/${folder}/${filename}`;
+
+  let catalog = [];
+  try {
+    catalog = readJsonFile(CATALOG_PATH);
+    if (!Array.isArray(catalog)) catalog = [];
+  } catch {
+    // A missing or unreadable catalog is not fatal for planning: the commit
+    // step is what writes, and it re-reads and reports its own failure.
+    catalog = [];
+  }
+
+  const showId = slugify(folder, "unknown-show");
+  const clip = nextClipNumber(catalog, showId);
+  const id = `${showId}-${clip}`;
+  const song = String(b.song ?? "").trim();
+  const songId = song ? `${showId}-${slugify(song, "song")}` : "";
+
+  const duration = Number(b.duration);
+  const quality = String(b.quality ?? "").trim();
+  const source = String(b.source ?? "").trim();
+
+  return {
+    ok: true,
+    folder,
+    filename,
+    // What the client PUTs to, relative to videos/.
+    path: `catalog/${folder}/${filename}`,
+    src,
+    id,
+    showId,
+    songId,
+    clipIndex: parseInt(clip, 10) - 1,
+    artist,
+    song,
+    album: String(b.album ?? "").trim(),
+    duration: Number.isFinite(duration) && duration > 0 ? Math.floor(duration) : 0,
+    quality,
+    source,
+  };
+}
+
+/**
+ * PUT /api/upload?path=<relative path under videos/> — receive the bytes.
+ *
+ * The body is the raw file, not multipart: fetch() cannot report progress on a
+ * File, and a multipart parser would be a lot of code for one endpoint. The
+ * client uses XMLHttpRequest for that reason.
+ *
+ * Bytes go to a "<name>.<ext>.part" sibling and are renamed into place only
+ * after the last one arrives, so an interrupted multi-gigabyte transfer leaves
+ * a temp file rather than a truncated video the catalog would point at.
+ */
+function handleUploadPut(req, res, url) {
+  const { error, full, ext, dir } = resolveUploadPath(url.searchParams.get("path"));
+  if (error) {
+    res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error }));
+    return;
+  }
+
+  const declared = Number(req.headers["content-length"]);
+  if (Number.isFinite(declared) && declared > MAX_UPLOAD_BYTES) {
+    res.writeHead(413, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error: `file is over the ${formatBytes(MAX_UPLOAD_BYTES)} cap` }));
+    return;
+  }
+
+  const partPath = `${full}.${ext.slice(1)}.part`;
+  let received = 0;
+  let settled = false;
+
+  const fail = (status, message) => {
+    if (settled) return;
+    settled = true;
+    try { unlinkSync(partPath); } catch { /* nothing written yet */ }
+    if (!res.headersSent) res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error: message }));
+  };
+
+  try {
+    mkdirSync(dir, { recursive: true });
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error: `could not create ${dir}: ${err.message}` }));
+    return;
+  }
+
+  const out = createWriteStream(partPath);
+
+  req.on("data", (chunk) => {
+    received += chunk.length;
+    // Enforce the cap on the stream as well as the header: a chunked request
+    // has no content-length to check, and the declared one is only a claim.
+    if (received > MAX_UPLOAD_BYTES) {
+      req.destroy();
+      out.destroy();
+      fail(413, `upload exceeded the ${formatBytes(MAX_UPLOAD_BYTES)} cap`);
+    }
+  });
+  out.on("error", (err) => fail(500, `write failed: ${err.message}`));
+  req.on("error", (err) => {
+    out.destroy();
+    fail(400, `transfer interrupted after ${formatBytes(received)}: ${err.message}`);
+  });
+  out.on("close", () => {
+    if (settled) return;
+    settled = true;
+    try {
+      renameSync(partPath, full);
+    } catch (err) {
+      try { unlinkSync(partPath); } catch { /* best effort */ }
+      res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: `could not move the upload into place: ${err.message}` }));
+      return;
+    }
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: true, path: relative(VIDEOS_DIR, full).split(sep).join("/"), bytes: received }));
+  });
+
+  req.pipe(out);
+}
+
+function formatBytes(n) {
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let value = Number(n) || 0;
+  let i = 0;
+  while (value >= 1024 && i < units.length - 1) {
+    value /= 1024;
+    i += 1;
+  }
+  return `${value >= 10 || i === 0 ? Math.round(value) : value.toFixed(1)} ${units[i]}`;
+}
+
+/**
+ * POST /api/upload/commit — record the uploaded file in the catalog.
+ *
+ * Same discipline as /api/catalog: re-read data/catalog.json from disk (the
+ * fetch-album-art tool rewrites it in the background), append, resolve id
+ * collisions, write atomically, then re-derive shows.json. A date, venue or
+ * location typed in the upload form goes to shows.json via set-locations.mjs,
+ * never onto the entry — tools/set-locations.mjs:201-214 reports that as a bug.
+ *
+ * Body: the plan result plus any fields the user edited after planning.
+ */
+async function apiUploadCommit(body) {
+  const b = body || {};
+  if (!b.id || !b.src || !b.artist) {
+    return { ok: false, error: "commit needs the plan result (id, src, artist)" };
+  }
+
+  const dateResult = normalizeShowDate(b.date);
+  if (dateResult.error) return { ok: false, error: dateResult.error };
+
+  let catalog;
+  try {
+    catalog = readJsonFile(CATALOG_PATH);
+  } catch (err) {
+    return { ok: false, error: `could not re-read ${CATALOG_PATH}: ${err.message}` };
+  }
+  if (!Array.isArray(catalog)) {
+    return { ok: false, error: `${CATALOG_PATH} must contain a JSON array of entries` };
+  }
+
+  const entry = {
+    id: String(b.id),
+    artist: String(b.artist).trim(),
+    song: String(b.song ?? "").trim(),
+    songId: String(b.songId ?? ""),
+    clipIndex: Number.isFinite(Number(b.clipIndex)) ? Number(b.clipIndex) : 0,
+    video: {
+      type: "local",
+      src: String(b.src),
+      duration: Number(b.duration) > 0 ? Math.floor(Number(b.duration)) : 0,
+    },
+  };
+  if (b.songId) entry.songId = String(b.songId);
+  const album = String(b.album ?? "").trim();
+  if (album) entry.album = album;
+  const metadata = {};
+  if (b.quality) metadata.quality = String(b.quality);
+  if (b.source) metadata.source = String(b.source);
+  if (Object.keys(metadata).length) entry.metadata = metadata;
+
+  // The id came from the plan, but the plan may be minutes old: another tab
+  // could have taken it. Re-run the same -2/-3 repair the rest of the file uses.
+  if (catalog.some((e) => e && e.id === entry.id)) {
+    const base = entry.id;
+    let n = 2;
+    while (catalog.some((e) => e && e.id === `${base}-${n}`)) n += 1;
+    entry.id = `${base}-${n}`;
+  }
+
+  const next = [...catalog, entry];
+
+  let writeError = null;
+  try {
+    const { writeJsonAtomic } = await import("./atomic-json.mjs");
+    writeJsonAtomic(CATALOG_PATH, next, { trailingNewline: true });
+  } catch (err) {
+    writeError = err.message;
+  }
+  if (writeError) {
+    return { ok: false, error: `catalog write failed: ${writeError} — the video is on disk but not catalogued` };
+  }
+
+  // Show-level fields go to shows.json, keyed by the show half of the id.
+  const showId = String(b.showId ?? String(entry.id).replace(/-\d+$/, ""));
+  const sync = await spawnChild([
+    "tools/set-locations.mjs",
+    `--show=${showId}`,
+    `--date=${dateResult.date}`,
+    `--venue=${String(b.venue ?? "").trim()}`,
+    `--location=${String(b.location ?? "").trim()}`,
+  ]);
+
+  return {
+    ok: true,
+    entry,
+    show: { id: showId, ...dateResult, venue: b.venue ?? "", location: b.location ?? "" },
+    sync: { ok: sync.ok, stdout: sync.stdout, stderr: sync.stderr },
+  };
+}
+
 const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   let pathname = decodeURIComponent(url.pathname);
@@ -300,6 +706,49 @@ const server = createServer(async (req, res) => {
     const result = await apiSetShow(new URLSearchParams(url.search));
     res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
     res.end(JSON.stringify(result));
+    return;
+  }
+
+  // ---- upload: plan → PUT bytes → commit, all behind the same write gate ----
+  if (pathname.startsWith("/api/upload")) {
+    if (!WRITE_ENABLED) {
+      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({
+        ok: false,
+        error: "writes are disabled: set process.env.PITTV_WRITE='1' to enable /api/upload",
+      }));
+      return;
+    }
+    try {
+      if (pathname === "/api/upload" && req.method === "PUT") {
+        handleUploadPut(req, res, url);
+        return;
+      }
+      if (pathname === "/api/upload/plan" && req.method === "POST") {
+        const chunks = [];
+        for await (const chunk of req) chunks.push(chunk);
+        const body = Buffer.concat(chunks).toString("utf8") || "{}";
+        const result = apiUploadPlan(JSON.parse(body));
+        res.writeHead(result.ok ? 200 : 400, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify(result));
+        return;
+      }
+      if (pathname === "/api/upload/commit" && req.method === "POST") {
+        const chunks = [];
+        for await (const chunk of req) chunks.push(chunk);
+        const body = Buffer.concat(chunks).toString("utf8") || "{}";
+        const result = await apiUploadCommit(JSON.parse(body));
+        res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify(result));
+        return;
+      }
+    } catch (err) {
+      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({ ok: false, error: `bad request: ${err.message}` }));
+      return;
+    }
+    res.writeHead(404, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error: `no such route: ${req.method} ${pathname}` }));
     return;
   }
   if (pathname === "/api/fetch-covers" && req.method === "POST") {
