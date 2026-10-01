@@ -48,6 +48,7 @@ const SHELL_ASSETS = [
   "./assets/css/upload.css",
   "./assets/js/app.js",
   "./assets/js/store.js",
+  "./assets/js/api.js",
   "./assets/js/ui.js",
   "./assets/js/catalog.js",
   "./assets/js/search.js",
@@ -61,9 +62,17 @@ const SHELL_ASSETS = [
   "./assets/js/pwa.js",
   "./lib/anime.min.js",
   "./lib/hls.min.js",
-  "./data/catalog.json",
+  "./data/catalog.demo.json",
   "./data/shows.json",
+  "./offline.html",
 ];
+
+// Absolute pathnames for the shell assets, matched by exact path. The old
+// check was `url.pathname.endsWith(a.replace("./", ""))`, and "./" reduced to the
+// empty string — which every string ends with, so the test was unconditionally
+// true. The catch-all below was therefore dead code and every same-origin GET,
+// including /api/*, was written into the shell cache with no allow-list.
+const SHELL_PATHS = new Set(SHELL_ASSETS.map((a) => new URL(a, self.registration.scope).pathname));
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -86,8 +95,15 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
+      const owned = new Set([SHELL_CACHE, DATA_CACHE, ART_CACHE]);
       const keys = await caches.keys();
-      await Promise.all(keys.filter((k) => !k.startsWith(VERSION)).map((k) => caches.delete(k)));
+      // Rotating this worker's own versions is the point; deleting everything
+      // else on the origin is not. caches is scoped to the origin, not to this
+      // scope, so behind a reverse proxy that also serves another PWA the old
+      // filter wiped that app's caches on every deploy of this one.
+      await Promise.all(
+        keys.filter((k) => k.startsWith("pittv-") && !owned.has(k)).map((k) => caches.delete(k))
+      );
       await self.clients.claim();
     })()
   );
@@ -104,13 +120,44 @@ self.addEventListener("fetch", (event) => {
 
   if (/\.(?:mp4|webm|m4v|mov|mkv|m3u8|mpd|ts)$/i.test(url.pathname)) return;
 
-  // The catalog is the one file that changes on disk while the app is running
-  // (clips added, titles edited), so it is network-first: a refresh shows the
-  // current list rather than a cached one. shows.json is a static join table
-  // that only changes when the catalog does, so it is served from the shell
-  // cache below — no network round-trip on every load.
-  if (/(?:^|\/)(?:data\/)?catalog(?:\.demo)?\.json$/.test(url.pathname)) {
+  // A navigation that cannot reach the network gets the app shell rather than
+  // the browser's own error page, which loses the theme and the way back. The
+  // shell is the most useful offline response here because the app already
+  // degrades to cached catalog data; offline.html is the last resort for when
+  // even the shell is not in the cache.
+  if (request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          return await fetch(request);
+        } catch {
+          return (
+            (await caches.match("./index.html", { cacheName: SHELL_CACHE })) ||
+            (await caches.match("./offline.html", { cacheName: SHELL_CACHE })) ||
+            (await caches.match("./index.html")) ||
+            (await caches.match("./offline.html")) ||
+            new Response("Offline.", { status: 503, headers: { "Content-Type": "text/plain" } })
+          );
+        }
+      })()
+    );
+    return;
+  }
+
+  // The live catalog is the one file that changes on disk while the app is
+  // running (clips added, titles edited), so it is network-first: a refresh
+  // shows the current list rather than a cached one.
+  if (/(?:^|\/)catalog\.json$/.test(url.pathname)) {
     event.respondWith(networkFirst(request, DATA_CACHE));
+    return;
+  }
+
+  // catalog.demo.json and shows.json are committed documents that only change
+  // when the repository is updated, so they are served from the shell cache
+  // with no network round-trip on every load. (The comment above this rule
+  // used to promise exactly that for shows.json, and no rule existed.)
+  if (/(?:^|\/)(?:catalog\.demo|shows)\.json$/.test(url.pathname)) {
+    event.respondWith(cacheFirst(request, SHELL_CACHE));
     return;
   }
 
@@ -119,7 +166,11 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (SHELL_ASSETS.some((a) => url.pathname.endsWith(a.replace("./", ""))) || url.pathname === "/" || url.pathname.endsWith(".html")) {
+  // The API is never intercepted: caching it would persist whatever a future
+  // credentialed or session-bearing GET returns, with no allow-list and no cap.
+  if (url.pathname.startsWith("/api/")) return;
+
+  if (SHELL_PATHS.has(url.pathname) || url.pathname.endsWith(".html")) {
     // Network-first, not cache-first. The shell is code, and code is the one
     // thing a returning visitor must never be served a stale copy of: a fix
     // pushed to ui.js would otherwise be unreachable until VERSION was bumped

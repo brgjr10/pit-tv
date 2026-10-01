@@ -13,7 +13,7 @@ import { createReadStream, createWriteStream, statSync, readFileSync, writeFileS
 import { basename, extname, join, normalize, relative, resolve, sep, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
-import { randomBytes } from "node:crypto";
+import { randomBytes, timingSafeEqual } from "node:crypto";
 
 const ROOT = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const PORT = Number(process.argv[2] || process.env.PORT || 3000);
@@ -27,20 +27,113 @@ const VIDEOS_DIR = join(ROOT, "videos");
 // Upload limits. Concert video is multi-gigabyte, so the cap is generous and
 // configurable rather than a token 100 MB: PITTV_MAX_UPLOAD_MB overrides it.
 const MAX_UPLOAD_BYTES = Number(process.env.PITTV_MAX_UPLOAD_MB || 40960) * 1024 * 1024;
+// The JSON routes are the other unbounded read: each request buffered the whole
+// body and Buffer.concat then allocated a second copy, so a multi-GB POST was
+// an OOM kill on a container with no memory limit. 4 MB is far above any
+// legitimate catalog patch.
+const MAX_JSON_BYTES = Number(process.env.PITTV_MAX_JSON_MB || 4) * 1024 * 1024;
 // Extensions the browser can actually play (see videos/README.md "Formats").
 // Anything else is refused at plan time rather than after a long transfer.
 const UPLOAD_EXTENSIONS = new Set([".mp4", ".mov", ".m4v", ".webm", ".mkv"]);
 
-// Mutating routes (writes to catalog.json, shows.json, or the videos/ tree)
-// are ON by default: this archive is a single-user local tool, and making the
-// write path opt-in meant the app silently served a read-only experience on a
-// bare `node tools/serve.js`. Set PITTV_WRITE=0 to lock it back down.
+// Mutating routes (writes to catalog.json, shows.json, or the videos/ tree).
+// The gate and the auth check are applied to this list in one place, up front,
+// so a route added later cannot forget either one.
+const MUTATING_ROUTES = new Set([
+  "/api/sync-shows",
+  "/api/catalog",
+  "/api/set-show",
+  "/api/fetch-covers",
+  "/api/upload",
+]);
+
+// Mutating routes are ON by default for local use: this archive is a
+// single-user tool, and making the write path opt-in meant the app silently
+// served a read-only experience on a bare `node tools/serve.js`. Set
+// PITTV_WRITE=0 to lock it down.
 //
-// The real boundary is HOST, not this flag. Binding to 127.0.0.1 keeps the
-// archive unwritable from the network, so "writes on" stays a local-only
-// affordance. If you publish the port AND want writes off, set both:
-//   HOST=0.0.0.0 PITTV_WRITE=0
+// Two boundaries, and both have to hold before a write route is safe to
+// publish: HOST keeps the server off the network, and PITTV_TOKEN makes the
+// mutating routes refuse anyone who has not been given the token. The compose
+// file now ships with writes off, because `docker compose up` publishes the
+// port to the LAN.
+//   HOST=0.0.0.0 PITTV_WRITE=0                 read-only on the LAN
+//   HOST=0.0.0.0 PITTV_WRITE=1 PITTV_TOKEN=…   writable with the token
 const WRITE_ENABLED = process.env.PITTV_WRITE !== "0";
+const WRITE_TOKEN = process.env.PITTV_TOKEN || "";
+
+/**
+ * Is this request allowed to mutate the archive?
+ *
+ * With no PITTV_TOKEN set the server is assumed to be loopback-only, which is
+ * the default and matches the bare `node tools/serve.js` workflow. Once a token
+ * is configured, or the server is bound to a non-loopback interface, the token
+ * is required — an empty/absent header must never be treated as a match.
+ */
+function isAuthorised(req) {
+  if (!WRITE_TOKEN && HOST === "127.0.0.1") return true;
+  if (!WRITE_TOKEN) return false;
+  const header = req.headers.authorization || "";
+  const presented = header.startsWith("Bearer ") ? header.slice(7) : (req.headers["x-pittv-token"] || "");
+  const a = Buffer.from(String(presented));
+  const b = Buffer.from(WRITE_TOKEN);
+  // timingSafeEqual throws on a length mismatch, and the length itself is not a
+  // secret, so compare lengths first and then constant-time the contents.
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+/**
+ * Read and parse a JSON body, capped at MAX_JSON_BYTES.
+ *
+ * Answers 413 or 400 itself and returns undefined when it does, so the caller
+ * can simply `return` — three routes had their own unbounded copy of this.
+ */
+async function readJsonBody(req, res) {
+  const chunks = [];
+  let size = 0;
+  let over = false;
+  await new Promise((resolve, reject) => {
+    req.on("data", (chunk) => {
+      size += chunk.length;
+      if (size > MAX_JSON_BYTES) {
+        // Stop reading and answer rather than buffering the rest. `pause` rather
+        // than destroying the request: destroying it would reset the socket, and
+        // the response would race the reset on the client's keep-alive pool.
+        over = true;
+        req.pause();
+        resolve();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on("end", resolve);
+    req.on("error", reject);
+  });
+
+  if (over) {
+    res.writeHead(413, {
+      "Content-Type": "application/json; charset=utf-8",
+      Connection: "close",
+    });
+    res.end(JSON.stringify({ ok: false, error: `request body is over the ${MAX_JSON_BYTES} byte cap` }));
+    return undefined;
+  }
+
+  const body = Buffer.concat(chunks).toString("utf8") || "{}";
+  try {
+    return JSON.parse(body);
+  } catch (err) {
+    res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify({ ok: false, error: `bad request body: ${err.message}` }));
+    return undefined;
+  }
+}
+
+// Children spawned by the tool routes, so shutdown can take them with us.
+const children = new Set();
+// One cover fetch at a time: concurrent runs race on catalog.json.
+let coverFetch = null;
+
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -74,15 +167,35 @@ const MIME = {
  * characters survive intact. The working directory is the project root, so
  * relative tool paths and relative data paths inside the tools both resolve.
  */
-function spawnChild(args) {
+function spawnChild(args, { timeout = 300000 } = {}) {
   return new Promise((resolve) => {
-    const child = spawn("node", args, { cwd: ROOT, shell: false });
+    const child = spawn("node", args, {
+      cwd: ROOT,
+      shell: false,
+      // A cover fetch fans out to many HTTP requests and can legitimately take
+      // minutes, but it must not be able to run forever: past the timeout it is
+      // asked to stop rather than accumulating output and rewriting the catalog
+      // while the operator has given up waiting for it.
+      timeout,
+      killSignal: "SIGTERM",
+    });
+    children.add(child);
     let out = "";
     let err = "";
-    child.stdout.on("data", (d) => (out += d.toString()));
-    child.stderr.on("data", (d) => (err += d.toString()));
-    child.on("error", (err2) => resolve({ ok: false, code: null, stdout: "", stderr: err2.message }));
-    child.on("close", (code) => resolve({ ok: code === 0, code, stdout: out, stderr: err }));
+    // Capped: a runaway child that printed without bound used to be an
+    // unbounded-memory path on a route anyone could hit.
+    const append = (acc, d) => (acc.length < 64_000 ? acc + d.toString() : acc);
+    child.stdout.on("data", (d) => (out = append(out, d)));
+    child.stderr.on("data", (d) => (err = append(err, d)));
+    const done = (result) => {
+      children.delete(child);
+      resolve(result);
+    };
+    child.on("error", (err2) => done({ ok: false, code: null, stdout: "", stderr: err2.message }));
+    child.on("close", (code, signal) =>
+      done(signal === "SIGTERM"
+        ? { ok: false, code, stdout: out, stderr: `${err.trim()}\nstopped: exceeded the ${timeout}ms budget`.trim() }
+        : { ok: code === 0, code, stdout: out, stderr: err }));
   });
 }
 
@@ -107,7 +220,16 @@ async function apiSyncShows() {
  * `--force` is not sent: a reload should only fill what is missing.
  */
 async function apiFetchCovers() {
-  return spawnChild(["tools/fetch-album-art.mjs"]);
+  // One run at a time. Two concurrent fetches each rewrite catalog.json and
+  // artist-ids.json, so they race and the last one wins — including losing the
+  // cover work the other run had already downloaded.
+  if (coverFetch) return { ok: false, code: null, stdout: "", stderr: "a cover fetch is already running — wait for it to finish" };
+  coverFetch = spawnChild(["tools/fetch-album-art.mjs"]);
+  try {
+    return await coverFetch;
+  } finally {
+    coverFetch = null;
+  }
 }
 
 /**
@@ -140,10 +262,15 @@ function readJsonFile(path) {
  * Resolve id collisions on append, the same way normaliseEntry does at
  * catalog.js:140-145. Two uploads landing in the same show must not fight
  * over an id; the first one wins the bare id and later ones get -2, -3, …
+ *
+ * Returns the ids it had to renumber. apiCatalogPatch folds them into the same
+ * `conflicts` array it reports stale `changes` ids in, so a client that
+ * catalogues the id it sent back learns that the id actually used differs.
+ * The array used to be declared and never written to, so renames were silent.
  */
 function resolveIdCollisions(entries) {
   const seen = new Set(entries.map((e) => e.id).filter(Boolean));
-  const conflicts = [];
+  const renames = [];
   for (const entry of entries) {
     if (!entry.id) continue;
     if (!seen.has(entry.id)) {
@@ -155,8 +282,9 @@ function resolveIdCollisions(entries) {
     while (seen.has(`${base}-${n}`)) n += 1;
     entry.id = `${base}-${n}`;
     seen.add(entry.id);
+    renames.push({ requested: base, assigned: entry.id });
   }
-  return conflicts;
+  return renames;
 }
 
 /**
@@ -210,7 +338,7 @@ async function apiCatalogPatch(body) {
   const safeAppends = appends
     .filter((e) => e && typeof e === "object" && !Array.isArray(e))
     .map((e) => ({ ...e }));
-  resolveIdCollisions(safeAppends);
+  const renames = resolveIdCollisions(safeAppends);
   for (const entry of safeAppends) {
     byId.set(entry.id, entry);
   }
@@ -252,6 +380,9 @@ async function apiCatalogPatch(body) {
     ok: true,
     changed: changed + removed + safeAppends.length,
     conflicts,
+    // Appends whose id had to be renumbered, so a client that cached an id is
+    // told the id it will actually find on disk.
+    renames,
     catalog: next,
     sync: { ok: sync.ok, stdout: sync.stdout, stderr: sync.stderr },
   };
@@ -297,6 +428,11 @@ function sanitizeSegment(value) {
   return String(value ?? "")
     .replace(/[\u0000-\u001f\u007f]/g, "")
     .replace(/[\\/:*?"<>|]/g, " ")
+    // Dot runs are collapsed rather than kept: resolveUploadPath rejects any
+    // path containing "..", so a performance name like "MGK Day 1..5" used to
+    // plan cleanly and then fail at the PUT with an error that named neither
+    // the field nor the cause — after the slowest part of the flow.
+    .replace(/\.{2,}/g, ".")
     .replace(/\s+/g, " ")
     .trim()
     .replace(/[. ]+$/, "")
@@ -460,6 +596,16 @@ function apiUploadPlan(body) {
   const dir = join(VIDEOS_DIR, "catalog", folder);
   const filename = uniqueFilename(dir, `${safeBase}${ext}`);
   const src = `videos/catalog/${folder}/${filename}`;
+  const planPath = `catalog/${folder}/${filename}`;
+
+  // The plan must hand back a path the PUT will accept: a 200 here promises the
+  // transfer can proceed, so verify it now rather than after a multi-gigabyte
+  // transfer. This is the single place a future divergence in either
+  // sanitizer shows up as a 400 instead.
+  const planCheck = resolveUploadPath(planPath);
+  if (planCheck.error) {
+    return { ok: false, error: `the chosen destination cannot be stored: ${planCheck.error}` };
+  }
 
   let catalog = [];
   try {
@@ -486,7 +632,7 @@ function apiUploadPlan(body) {
     folder,
     filename,
     // What the client PUTs to, relative to videos/.
-    path: `catalog/${folder}/${filename}`,
+    path: planPath,
     src,
     id,
     showId,
@@ -514,12 +660,24 @@ function apiUploadPlan(body) {
  * a temp file rather than a truncated video the catalog would point at.
  */
 function handleUploadPut(req, res, url) {
-  const { error, full, ext, dir } = resolveUploadPath(url.searchParams.get("path"));
+  const { error, full: requested, ext, dir } = resolveUploadPath(url.searchParams.get("path"));
   if (error) {
     res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
     res.end(JSON.stringify({ ok: false, error }));
     return;
   }
+
+  // Re-resolve the filename at commit time, not just at plan time. The plan may
+  // be minutes old, and the PUT is reachable on its own, so the .part-then-
+  // rename was overwriting an existing catalogued clip in place with no backup —
+  // exactly what uniqueFilename's own comment says must never happen. The
+  // response reports the path actually written, so the client catalogues what
+  // is really on disk.
+  const filename = uniqueFilename(dir, basename(requested));
+  const full = join(dir, filename);
+  // The .part path must derive from `full`, not from the requested path, or the
+  // two disagree and the rename fails.
+  const partPath = `${full}.${ext.slice(1)}.part`;
 
   const declared = Number(req.headers["content-length"]);
   if (Number.isFinite(declared) && declared > MAX_UPLOAD_BYTES) {
@@ -528,7 +686,6 @@ function handleUploadPut(req, res, url) {
     return;
   }
 
-  const partPath = `${full}.${ext.slice(1)}.part`;
   let received = 0;
   let settled = false;
 
@@ -684,9 +841,91 @@ async function apiUploadCommit(body) {
   };
 }
 
-const server = createServer(async (req, res) => {
+/**
+ * Parse a single-range `Range: bytes=…` header against a known file size.
+ *
+ * Returns { start, end } for a satisfiable range, or null for anything that is
+ * not one well-formed numeric range (malformed, multi-range, inverted, or
+ * past the end of the file). Callers answer 416 for null.
+ *
+ * The old parser was `range.replace(/bytes=/, "").split("-")` with no
+ * validation: "bytes=abc-def" gave end=NaN, and createReadStream then threw
+ * inside the async request handler, which became an unhandled rejection and
+ * killed the process on a single unauthenticated request. The same parser also
+ * read "bytes=-20" as 0-20 and served the head of the file instead of the
+ * tail. RFC 7233 allows exactly the two forms handled here; multi-range is
+ * refused rather than guessed at, because guessing is what caused the crash.
+ */
+function parseRange(header, size) {
+  const m = /^bytes=(\d*)-(\d*)$/.exec(String(header).trim());
+  if (!m) return null;
+  const fromRaw = m[1];
+  const toRaw = m[2];
+  if (fromRaw === "" && toRaw === "") return null;
+
+  let start;
+  let end;
+  if (fromRaw === "") {
+    // Suffix form: the last N bytes. A suffix longer than the file is the whole
+    // file, per RFC 7233 — the start clamps at 0 rather than going negative.
+    const suffix = Number(toRaw);
+    if (!Number.isInteger(suffix)) return null;
+    start = Math.max(0, size - suffix);
+    end = size - 1;
+  } else {
+    start = Number(fromRaw);
+    end = toRaw === "" ? size - 1 : Number(toRaw);
+  }
+  if (!Number.isInteger(start) || !Number.isInteger(end)) return null;
+  if (start < 0 || end > size - 1) end = Math.min(end, size - 1);
+  if (start < 0 || start > end || start >= size) return null;
+  return { start, end };
+}
+
+const server = createServer((req, res) => {
+  handle(req, res).catch((err) => {
+    // Nothing in the request path is allowed to take the process down, so the
+    // handler's promise is always observed and a failure becomes a 500.
+    console.error(`[serve] ${req.method} ${req.url} failed: ${err.stack || err.message}`);
+    if (!res.headersSent) res.writeHead(500, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Internal Server Error");
+  });
+});
+
+async function handle(req, res) {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   let pathname = decodeURIComponent(url.pathname);
+
+  // ---- write gate and auth, checked once for every mutating route ----
+  // Hoisted to the top of the handler because the per-route gate missed the
+  // two routes that spawn a child process, so PITTV_WRITE=0 did not stop them
+  // rewriting shows.json and catalog.json. A route added now cannot forget.
+  if (MUTATING_ROUTES.has(pathname) || pathname.startsWith("/api/upload/")) {
+    if (!WRITE_ENABLED) {
+      // resume() first: answering without consuming the body leaves unread
+      // bytes in the socket, and the next keep-alive request on that connection
+      // is parsed as the tail of this one.
+      req.resume();
+      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify({
+        ok: false,
+        error: `writes are disabled: set process.env.PITTV_WRITE='1' (writes are on unless PITTV_WRITE=0) to enable ${pathname}`,
+      }));
+      return;
+    }
+    if (!isAuthorised(req)) {
+      req.resume();
+      res.writeHead(401, {
+        "Content-Type": "application/json; charset=utf-8",
+        "WWW-Authenticate": 'Bearer realm="pit-tv"',
+      });
+      res.end(JSON.stringify({
+        ok: false,
+        error: "unauthenticated: this port can rewrite the catalog and the video library. Set process.env.PITTV_TOKEN, or bind HOST=127.0.0.1.",
+      }));
+      return;
+    }
+  }
 
   // ---- admin API, before any file resolution ----
   if (pathname === "/api/sync-shows" && req.method === "POST") {
@@ -696,22 +935,11 @@ const server = createServer(async (req, res) => {
     return;
   }
   if (pathname === "/api/catalog" && req.method === "POST") {
-    if (!WRITE_ENABLED) {
-      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: "writes are disabled: set process.env.PITTV_WRITE='1' (writes are on unless PITTV_WRITE=0) to enable /api/catalog" }));
-      return;
-    }
-    try {
-      const chunks = [];
-      for await (const chunk of req) chunks.push(chunk);
-      const body = Buffer.concat(chunks).toString("utf8") || "{}";
-      const result = await apiCatalogPatch(JSON.parse(body));
-      res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify(result));
-    } catch (err) {
-      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: `bad request body: ${err.message}` }));
-    }
+    const body = await readJsonBody(req, res);
+    if (body === undefined) return;
+    const result = await apiCatalogPatch(body);
+    res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
+    res.end(JSON.stringify(result));
     return;
   }
   if (pathname === "/api/set-show" && req.method === "POST") {
@@ -721,42 +949,26 @@ const server = createServer(async (req, res) => {
     return;
   }
 
-  // ---- upload: plan → PUT bytes → commit, all behind the same write gate ----
+  // ---- upload: plan → PUT bytes → commit ----
   if (pathname.startsWith("/api/upload")) {
-    if (!WRITE_ENABLED) {
-      res.writeHead(403, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({
-        ok: false,
-        error: "writes are disabled: set process.env.PITTV_WRITE='1' (writes are on unless PITTV_WRITE=0) to enable /api/upload",
-      }));
+    if (pathname === "/api/upload" && req.method === "PUT") {
+      handleUploadPut(req, res, url);
       return;
     }
-    try {
-      if (pathname === "/api/upload" && req.method === "PUT") {
-        handleUploadPut(req, res, url);
-        return;
-      }
-      if (pathname === "/api/upload/plan" && req.method === "POST") {
-        const chunks = [];
-        for await (const chunk of req) chunks.push(chunk);
-        const body = Buffer.concat(chunks).toString("utf8") || "{}";
-        const result = apiUploadPlan(JSON.parse(body));
-        res.writeHead(result.ok ? 200 : 400, { "Content-Type": "application/json; charset=utf-8" });
-        res.end(JSON.stringify(result));
-        return;
-      }
-      if (pathname === "/api/upload/commit" && req.method === "POST") {
-        const chunks = [];
-        for await (const chunk of req) chunks.push(chunk);
-        const body = Buffer.concat(chunks).toString("utf8") || "{}";
-        const result = await apiUploadCommit(JSON.parse(body));
-        res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
-        res.end(JSON.stringify(result));
-        return;
-      }
-    } catch (err) {
-      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ ok: false, error: `bad request: ${err.message}` }));
+    if (pathname === "/api/upload/plan" && req.method === "POST") {
+      const body = await readJsonBody(req, res);
+      if (body === undefined) return;
+      const result = apiUploadPlan(body);
+      res.writeHead(result.ok ? 200 : 400, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify(result));
+      return;
+    }
+    if (pathname === "/api/upload/commit" && req.method === "POST") {
+      const body = await readJsonBody(req, res);
+      if (body === undefined) return;
+      const result = await apiUploadCommit(body);
+      res.writeHead(result.ok ? 200 : 500, { "Content-Type": "application/json; charset=utf-8" });
+      res.end(JSON.stringify(result));
       return;
     }
     res.writeHead(404, { "Content-Type": "application/json; charset=utf-8" });
@@ -771,8 +983,11 @@ const server = createServer(async (req, res) => {
   }
   if (pathname === "/api/fetch-status" && req.method === "GET") {
     try {
-      const catalog = JSON.parse(readFileSync(join(ROOT, "data", "catalog.json"), "utf8"));
-      const status = apiFetchStatus(catalog);
+      // readJsonFile, not a bare JSON.parse: a catalog.json saved by Notepad
+      // carries a BOM, which is legal in JSON per RFC 8259 and which every
+      // other reader in this codebase already tolerates.
+      const catalog = readJsonFile(CATALOG_PATH);
+      const status = apiFetchStatus(Array.isArray(catalog) ? catalog : []);
       res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
       res.end(JSON.stringify(status));
     } catch (err) {
@@ -804,13 +1019,46 @@ const server = createServer(async (req, res) => {
   }
 
   const type = MIME[extname(filePath).toLowerCase()] || "application/octet-stream";
+  // An ETag from mtime+size gives `no-cache` something to revalidate against,
+  // which is what turns a seek on a multi-GB clip into a 304 instead of a
+  // re-transfer of the same bytes.
+  const etag = `"${stats.size.toString(16)}-${Math.floor(stats.mtimeMs).toString(16)}"`;
   const headers = {
     "Content-Type": type,
     "Content-Length": stats.size,
     // The service worker must be allowed to update while developing.
     "Cache-Control": "no-cache",
+    "ETag": etag,
+    "Last-Modified": stats.mtime.toUTCString(),
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "no-referrer",
+    // The app serves user-authored JSON from this same origin, so a CSP that
+    // pins scripts and styles to self is the backstop for any escaping mistake.
+    // `unsafe-inline` is still needed for the inline bootstrap script and the
+    // inline onerror handler in index.html / ui.js.
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: blob:; media-src 'self' https: blob:; " +
+      "script-src 'self' 'unsafe-inline' https://www.youtube.com https://player.vimeo.com; " +
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; " +
+      "connect-src 'self'; frame-src https://www.youtube.com https://player.vimeo.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
   };
   if (filePath.endsWith("sw.js")) headers["Service-Worker-Allowed"] = "/";
+
+  if (req.method !== "GET" && req.method !== "HEAD") {
+    // Anything else answered 200 with the real Content-Length and an empty body,
+    // which desynchronises a keep-alive connection and tells clients a DELETE
+    // succeeded when nothing was touched.
+    req.resume();
+    res.writeHead(405, { "Content-Type": "text/plain; charset=utf-8", Allow: "GET, HEAD" });
+    res.end("Method Not Allowed");
+    return;
+  }
+
+  if (req.headers["if-none-match"] === etag && !req.headers.range) {
+    res.writeHead(304, { ETag: etag, "Cache-Control": "no-cache" });
+    res.end();
+    return;
+  }
 
   if (req.method === "HEAD") {
     res.writeHead(200, headers);
@@ -821,47 +1069,80 @@ const server = createServer(async (req, res) => {
   // Range support so <video> can seek local files.
   const range = req.headers.range;
   if (range) {
-    const [startRaw, endRaw] = range.replace(/bytes=/, "").split("-");
-    const start = Number(startRaw) || 0;
-    const end = endRaw ? Math.min(Number(endRaw), stats.size - 1) : stats.size - 1;
-
-    if (start >= stats.size) {
+    const parsed = parseRange(range, stats.size);
+    if (!parsed) {
       res.writeHead(416, { "Content-Range": `bytes */${stats.size}` });
       res.end();
       return;
     }
-
+    const { start, end } = parsed;
     res.writeHead(206, {
       ...headers,
       "Content-Range": `bytes ${start}-${end}/${stats.size}`,
       "Content-Length": end - start + 1,
       "Accept-Ranges": "bytes",
     });
-    createReadStream(filePath, { start, end }).pipe(res);
+    pipeFile(filePath, { start, end }, res);
     return;
   }
 
   res.writeHead(200, { ...headers, "Accept-Ranges": "bytes" });
-  if (req.method === "GET") createReadStream(filePath).pipe(res);
-  else res.end();
+  pipeFile(filePath, {}, res);
+}
+
+/**
+ * Stream a file to the response without letting a mid-read failure take the
+ * process down. Once the headers are out the status cannot change, so the
+ * only honest thing left is to cut the connection and log what happened.
+ */
+function pipeFile(filePath, options, res) {
+  let stream;
+  try {
+    stream = createReadStream(filePath, options);
+  } catch (err) {
+    console.error(`[serve] open ${filePath} failed: ${err.message}`);
+    res.destroy();
+    return;
+  }
+  stream.on("error", (err) => {
+    console.error(`[serve] read ${filePath} failed: ${err.message}`);
+    res.destroy();
+  });
+  stream.pipe(res);
+}
+
+// A crash here is a bug in this server, not a reason to take the archive
+// offline for everyone on the LAN. Log it loudly and keep serving: the
+// alternative is a single-request denial of service (which is exactly how the
+// malformed-Range bug presented).
+process.on("unhandledRejection", (err) => {
+  console.error(`[serve] unhandled rejection: ${(err && err.stack) || err}`);
+});
+process.on("uncaughtException", (err) => {
+  console.error(`[serve] uncaught exception: ${(err && err.stack) || err}`);
 });
 
 server.listen(PORT, HOST, async () => {
   console.log(`PIT TV serving ${ROOT}`);
   console.log(`  http://localhost:${PORT}/`);
+  const MUTATING_LABEL = "/api/sync-shows, /api/catalog, /api/set-show, /api/fetch-covers, /api/upload/*";
   if (WRITE_ENABLED) {
-    // Writes are the normal case here, so say only what the operator needs to
-    // know to change it: the routes are live, and PITTV_WRITE=0 turns them off.
-    // The exposure is bounded by HOST, so name that too — binding 0.0.0.0 with
-    // writes on makes the archive remotely writable.
-    console.log(`  [write] mutating routes (/api/catalog, /api/upload/*) are ON — set PITTV_WRITE=0 to disable`);
+    // Writes are the normal case locally, so say only what the operator needs
+    // to change it: the routes are live, PITTV_WRITE=0 turns them off, and the
+    // auth story depends on whether a token is configured.
+    console.log(`  [write] mutating routes (${MUTATING_LABEL}) are ON — set PITTV_WRITE=0 to disable`);
     if (HOST === "0.0.0.0") {
-      console.log("  [write] WARNING: HOST=0.0.0.0 with writes on — this port is remotely writable. Set PITTV_WRITE=0 to lock it down.");
+      if (!WRITE_TOKEN) {
+        console.log("  [write] WARNING: HOST=0.0.0.0 with writes on and no PITTV_TOKEN — anyone who can reach this port can rewrite the catalog and the video library.");
+        console.log("  [write]          Set PITTV_WRITE=0 for a read-only server, or PITTV_TOKEN=<secret> and send `Authorization: Bearer <secret>`.");
+      } else {
+        console.log("  [write] HOST=0.0.0.0 — writes require the PITTV_TOKEN bearer token.");
+      }
     }
   } else {
     // The app still loads and browses, but every mutating route answers 403. The
     // client falls back to its download path and tells the user why.
-    console.log("  [write] mutating routes (/api/catalog, /api/upload/*) are OFF — set PITTV_WRITE=1 to enable");
+    console.log(`  [write] mutating routes (${MUTATING_LABEL}) are OFF — set PITTV_WRITE=1 to enable`);
   }
 
   // Re-derive shows.json from the catalog on startup so the file the app
@@ -879,3 +1160,22 @@ server.listen(PORT, HOST, async () => {
     console.warn("  [sync] startup sync threw:", err.message);
   }
 });
+
+/**
+ * Stop accepting connections, let in-flight requests finish, then take the
+ * tool children down with us. Without this a `docker compose stop` during an
+ * upload or a cover fetch orphans the child and leaves it writing files after
+ * the server it belongs to is gone.
+ */
+function shutdown() {
+  console.log("\n[serve] shutting down");
+  server.close(() => {
+    for (const child of children) {
+      try { child.kill("SIGTERM"); } catch { /* already gone */ }
+    }
+    process.exit(0);
+  });
+  setTimeout(() => process.exit(1), 5000).unref();
+}
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);

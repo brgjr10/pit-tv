@@ -11,6 +11,7 @@
 import { getRawCatalog } from "./store.js";
 import { withWriteLock } from "./sync.js";
 import { loadCatalog, toRawEntry } from "./catalog.js";
+import { apiFetch, setApiToken } from "./api.js";
 
 let editMode = false;
 let dirty = false;
@@ -112,9 +113,10 @@ export function isEditing() { return editMode; }
  * Build the patch for /api/catalog from the pending field edits.
  *
  * Each entry is projected through toRawEntry so only the on-disk field set
- * (id, artist, song, album, video, songs, albumArt, tags, metadata,
- * chapters) is sent — never datePrecision, dateRaw, a defaulted venue or an
- * empty songs array. Entries that were never edited are omitted entirely.
+ * (id, artist, song, songId, clipIndex, album, video, songs, albumArt, tags,
+ * metadata, chapters, note) is sent — never datePrecision, dateRaw, a
+ * defaulted venue, an empty songs array, or the show-level date/venue/location
+ * that live in shows.json (PIT-TV-018). Entries that were never edited are omitted entirely.
  */
 function buildPatch() {
   const changes = {};
@@ -165,7 +167,7 @@ export async function saveCatalog({ allowDownload = true } = {}) {
 
     let res;
     try {
-      res = await fetch("/api/catalog", {
+      res = await apiFetch("/api/catalog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(patch),
@@ -179,6 +181,19 @@ export async function saveCatalog({ allowDownload = true } = {}) {
 
     if (res.status === 403) {
       toast("Writes are disabled: this server was started with PITTV_WRITE=0.", "warn", 6000);
+      return false;
+    }
+
+    if (res.status === 401) {
+      // A published server refuses writes without the operator's token. Say how
+      // to supply it rather than leaving a bare 401 the user cannot act on.
+      const token = window.prompt("This server requires a write token.\nEnter PITTV_TOKEN to edit the catalog (stored in this browser only):", "");
+      if (token) {
+        setApiToken(token.trim());
+        toast("Token saved. Try the edit again.", "ok", 4000);
+      } else {
+        toast("Write token required — nothing was changed.", "warn", 6000);
+      }
       return false;
     }
 

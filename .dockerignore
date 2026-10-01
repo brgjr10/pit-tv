@@ -3,12 +3,28 @@
 .gitignore
 
 # User data (large, personal, regenerated)
-# data/catalog.json  (commented: real catalog is shipped in image)
-# data/shows.json  (commented: real shows are shipped in image)
+# The live catalog.json / shows.json are gitignored and are supplied by mounting
+# ./data; the image bakes in the tracked data/catalog.demo.json instead, so a
+# clean clone builds.
 data/*.backup.json
 data/catalog.concerts.json
 data/*.tmp
+data/catalog.json
+data/shows.json
 videos/
+# ~30 MB of personal album art and a stray covers/albums/Thumbs.db would
+# otherwise be baked into an image layer that can never be cleaned.
+covers/
+
+# Test and QA artifacts
+.qa-tmp/
+node_modules/
+
+# Local secrets. The Dockerfile copies named paths rather than the repo root, so
+# a root .env is not copied today; this keeps that true if a COPY . . is ever added.
+.env
+.env.*
+!.env.example
 
 # Playwright MCP artifacts
 .playwright-mcp/

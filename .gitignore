@@ -27,6 +27,12 @@ IMG_*.png
 # Docker CLI config (NOT the Dockerfile or .dockerignore)
 .docker/
 
+# Local secrets. tools/serve.js reads PITTV_TOKEN, so a .env here would be a
+# committed credential. The negation keeps the blanked example tracked.
+.env
+.env.*
+!.env.example
+
 # OS / editor noise
 .DS_Store
 Thumbs.db
@@ -36,6 +42,13 @@ Thumbs.db
 e2e_test.md
 QA_REPORT.md
 instructions.md
+
+# QA / test agent scratch, the same reason .playwright-mcp/ is ignored: a tester
+# should not have to remember to clean up before `git add`.
+.qa-tmp/
+
+# Node
+node_modules/
 
 # Kilo agent config
 .kilo/

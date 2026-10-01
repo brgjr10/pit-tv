@@ -3,7 +3,8 @@
  *
  * date, venue and location describe a show, not each of the clips in it, so they
  * live once per show here and the app joins them in by show id at load time
- * (see applyShows in assets/js/catalog.js). This tool never writes catalog.json.
+ * (see applyShows in assets/js/catalog.js). This tool writes only shows.json,
+ * unless --prune-show-fields is given (one-shot migration, see PIT-TV-018).
  *
  * The catalog is the only place the list of shows comes from, so every run
  * rebuilds the rows from it: a show added to the catalog appears here by itself,
@@ -12,6 +13,7 @@
  *   node tools/set-locations.mjs                  # sync the file and report gaps
  *   node tools/set-locations.mjs --dry-run        # same, writing nothing
  *   node tools/set-locations.mjs --list           # print the shows and exit
+ *   node tools/set-locations.mjs --prune-show-fields  # strip date/venue/location from the catalog
  *
  *   # set values for one show, a glob, or every show
  *   node tools/set-locations.mjs --show='mgk-*' --date='2018-12-22' \
@@ -297,6 +299,34 @@ if (SELECTOR && (named.length || CLEAR)) {
   }
   save();
   if (!DRY_RUN) console.log(`\nWrote ${CONFIG}`);
+  reportGaps();
+  reportOrphans();
+  process.exit(0);
+}
+
+/* ---- otherwise: sync the file and report what is missing ---- */
+
+const PRUNE = has("prune-show-fields");
+
+if (PRUNE) {
+  // One-shot migration: strip the show-level fields that PIT-TV-018 reports as
+  // duplicated, so each fact lives only in shows.json once the code's toRawEntry
+  // has stopped writing them back. Writes catalog.json atomically.
+  let stripped = 0;
+  const pruned = catalog.map((e) => {
+    let hit = false;
+    for (const f of DUPLICATED) {
+      if (f in e) { delete e[f]; hit = true; }
+    }
+    if (hit) stripped += 1;
+    return e;
+  });
+  if (DRY_RUN) {
+    console.log(`Would prune ${stripped} of ${catalog.length} entries — dry run, no changes written.`);
+  } else {
+    writeJsonAtomic(CATALOG, pruned, { trailingNewline: true });
+    console.log(`Pruned ${stripped} of ${catalog.length} entries — date/venue/location now come from shows.json.`);
+  }
   reportGaps();
   reportOrphans();
   process.exit(0);

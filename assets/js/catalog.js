@@ -10,9 +10,14 @@
 import { setStatus, setCatalog, setFacets, state, setRawCatalog } from "./store.js";
 import { reconcileShows } from "./sync.js";
 import { countFacets } from "./search.js";
+import { apiFetch } from "./api.js";
 
 const CATALOG_URL = "data/catalog.json";
-const FALLBACK_URL = "catalog.json";
+// The demo catalog is the one data file that is committed, so it is also the only
+// thing a fresh clone can actually load. The fallback used to point at a bare
+// "catalog.json" at the repo root, which does not exist and is not the demo
+// file — so a fresh clone got the fatal error screen instead of 13 rows.
+const FALLBACK_URL = "data/catalog.demo.json";
 const SHOWS_URL = "data/shows.json";
 
 /* ---------- validation ---------- */
@@ -59,6 +64,10 @@ const toClipIndex = (v) => {
  * entry and re-introduce the date/venue/location copies the shows.json split
  * was built to remove. This list is the inverse: the fields a raw record is
  * allowed to hold. Anything else is dropped when projecting an edit back.
+ *
+ * venue, date and location are deliberately excluded: they live in
+ * shows.json (see applyShows) and writing them back onto entries is exactly
+ * the duplication PIT-TV-018 reports. A save now self-heals the drift.
  */
 const RAW_ENTRY_KEYS = [
   "id",
@@ -67,9 +76,6 @@ const RAW_ENTRY_KEYS = [
   "songId",
   "clipIndex",
   "album",
-  "venue",
-  "date",
-  "location",
   "video",
   "songs",
   "albumArt",
@@ -493,7 +499,9 @@ export async function loadCatalog({ url = CATALOG_URL, fallback = FALLBACK_URL, 
           raw = await fetchJson(fallback);
           usedUrl = fallback;
         } catch {
-          throw primaryErr;
+          // Name both files: "404 for data/catalog.json" reads as though a good
+          // catalog is broken, when on a fresh clone there simply is not one.
+          throw new Error(`${primaryErr.message} — and the demo catalog (${fallback}) could not be read either`);
         }
       } else {
         throw primaryErr;
@@ -603,7 +611,7 @@ async function triggerServerSync() {
   if (syncInFlight || syncSucceeded) return;
   syncInFlight = true;
   try {
-    const res = await fetch("/api/sync-shows", { method: "POST" });
+    const res = await apiFetch("/api/sync-shows", { method: "POST" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const result = await res.json();
     if (result.ok && result.stdout) {
@@ -648,7 +656,7 @@ async function triggerCoverFetch() {
       return;
     }
 
-    const res2 = await fetch("/api/fetch-covers", { method: "POST" });
+    const res2 = await apiFetch("/api/fetch-covers", { method: "POST" });
     if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
     const result = await res2.json();
     if (result.ok) {

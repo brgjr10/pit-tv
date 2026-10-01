@@ -7,6 +7,8 @@
  */
 
 const PREF_KEY = "pittv:prefs:v1";
+const PREF_VERSION = 1;
+const PREF_TTL_MS = 90 * 24 * 60 * 60 * 1000; // 90 days
 
 export const VIEWS = ["grid", "list", "artist", "timeline"];
 
@@ -150,6 +152,8 @@ export function emit(event, payload) {
 export function persist() {
   try {
     const slice = {
+      version: PREF_VERSION,
+      savedAt: Date.now(),
       view: state.view,
       filters: state.filters,
       sort: state.sort,
@@ -169,6 +173,21 @@ export function restore() {
     const raw = localStorage.getItem(PREF_KEY);
     if (!raw) return;
     const saved = JSON.parse(raw);
+
+    // TTL check: ignore prefs older than PREF_TTL_MS. This prevents stale
+    // settings from a long-ago session from silently overriding current
+    // defaults after a redesign or schema change.
+    if (typeof saved.savedAt === "number" && Date.now() - saved.savedAt > PREF_TTL_MS) {
+      console.info("[store] preferences expired (older than 90 days), starting fresh");
+      return;
+    }
+
+    // Version migration: if the saved version doesn't match, drop it rather
+    // than trying to patch — the sanitizers already handle missing keys.
+    if (saved.version !== PREF_VERSION) {
+      console.info("[store] preference version mismatch, migrating to current schema");
+    }
+
     if (VIEWS.includes(saved.view)) state.view = saved.view;
     if (saved.filters) Object.assign(state.filters, sanitizeFilters(saved.filters));
     if (saved.sort) Object.assign(state.sort, sanitizeSort(saved.sort));

@@ -148,6 +148,7 @@ export function createPlayer(root) {
     full: root.querySelector("[data-full]"),
     rate: root.querySelector("[data-rate]"),
     rateMenu: root.querySelector("[data-rate-menu]"),
+    ccBtn: root.querySelector("[data-cc]"),
     chapters: root.querySelector("[data-chapters]"),
     scrub: root.querySelector("[data-scrub]"),
     played: root.querySelector("[data-played]"),
@@ -344,6 +345,9 @@ export function createPlayer(root) {
     video.crossOrigin = "anonymous";
     video.playsInline = true;
 
+    // Remove any existing track elements from a previous source.
+    video.querySelectorAll("track").forEach((t) => t.remove());
+
     if (src.kind === "hls" && !src.native) {
       if (!window.Hls || !window.Hls.isSupported()) {
         showMessage("HLS stream needs hls.js, which failed to load.", "error");
@@ -354,6 +358,7 @@ export function createPlayer(root) {
       hls.loadSource(src.src);
       hls.attachMedia(video);
       hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+        loadCaptions(nextEntry);
         onMetadata();
         hideMessage();
       });
@@ -378,14 +383,58 @@ export function createPlayer(root) {
     if (video.src === absoluteUrl(src.src)) {
       // Same file reopened: the metadata events will not fire again, so drive
       // the same setup by hand.
+      loadCaptions(nextEntry);
       onMetadata();
       if (autoplay) attemptPlay();
       return Promise.resolve();
     }
 
     video.src = src.src;
+    loadCaptions(nextEntry);
     saveTimer = setInterval(flushPosition, SAVE_INTERVAL);
     return preflightLocal(src, nextEntry);
+  }
+
+  /**
+   * Load a VTT caption track for the current entry if one is available.
+   *
+   * Priority:
+   * 1. An explicit `entry.video.track` or `entry.video.captions` URL.
+   * 2. A same-name .vtt file next to the video (convention over config).
+   *
+   * The track is added as a <track kind="captions"> element. If it fails to
+   * load, the element is removed so the UI doesn't show a broken "CC" button.
+   */
+  function loadCaptions(nextEntry) {
+    const video = el.video;
+    const explicit = nextEntry.video?.track || nextEntry.video?.captions;
+    let trackUrl = explicit;
+
+    if (!trackUrl && nextEntry.video?.src) {
+      // Convention: video.mp4 -> video.vtt
+      trackUrl = nextEntry.video.src.replace(/\.[^.]+$/, ".vtt");
+    }
+
+    if (!trackUrl) return;
+
+    const track = document.createElement("track");
+    track.kind = "captions";
+    track.label = "English";
+    track.srclang = "en";
+    track.src = trackUrl;
+    track.default = true;
+
+    track.addEventListener("error", () => {
+      console.warn("[player] caption track failed to load:", trackUrl);
+      track.remove();
+    });
+    track.addEventListener("load", () => {
+      console.info("[player] caption track loaded:", trackUrl);
+    });
+
+    video.appendChild(track);
+    // For HLS, the track is added before the source is attached, which works.
+    // For direct src, the track is added after src is set; the browser will load it.
   }
 
   /**
@@ -788,8 +837,32 @@ export function createPlayer(root) {
   el.scrub.addEventListener("pointerup", endScrub);
   el.scrub.addEventListener("pointercancel", endScrub);
   el.scrub.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") nudge(-5);
-    if (e.key === "ArrowRight") nudge(5);
+    // The scrub is a <div role="slider">, so isTypingTarget() in the document
+    // handler below does not exclude it and both listeners fired on one key
+    // press: -5 then -10, i.e. ±15 s for what the shortcuts dialog documents as
+    // 10 s. stopPropagation is the load-bearing part — the element claims the
+    // keys it handles. Steps follow the WAI-ARIA slider pattern (a percentage
+    // of the clip, with Home/End), so a long setlist clip and a short one are
+    // both usable from the keyboard.
+    const duration = Number.isFinite(el.video?.duration) ? el.video.duration : 0;
+    const step = duration ? duration / 20 : 5;
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+      e.preventDefault();
+      e.stopPropagation();
+      nudge(-step);
+    } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+      e.preventDefault();
+      e.stopPropagation();
+      nudge(step);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      e.stopPropagation();
+      seekTo(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      e.stopPropagation();
+      seekTo(duration);
+    }
   });
 
   el.rate.addEventListener("click", () => {
@@ -807,6 +880,48 @@ export function createPlayer(root) {
       el.rateMenu.hidden = true;
     }
   });
+
+  // Captions toggle — only shown when a track is available.
+  function updateCaptionsButton() {
+    if (!el.ccBtn) return;
+    const tracks = el.video?.textTracks;
+    const hasCaptions = tracks && Array.from(tracks).some((t) => t.kind === "captions" || t.kind === "subtitles");
+    el.ccBtn.hidden = !hasCaptions;
+    if (hasCaptions) {
+      const active = tracks && Array.from(tracks).some((t) => (t.kind === "captions" || t.kind === "subtitles") && t.mode === "showing");
+      el.ccBtn.setAttribute("aria-pressed", String(active));
+    }
+  }
+
+  function toggleCaptions() {
+    if (!el.video || !el.ccBtn) return;
+    const tracks = el.video.textTracks;
+    if (!tracks) return;
+    let anyShown = false;
+    for (const track of tracks) {
+      if (track.kind === "captions" || track.kind === "subtitles") {
+        if (track.mode === "showing") {
+          track.mode = "hidden";
+        } else {
+          track.mode = "showing";
+          anyShown = true;
+        }
+      }
+    }
+    el.ccBtn.setAttribute("aria-pressed", String(anyShown));
+  }
+
+  el.ccBtn?.addEventListener("click", toggleCaptions);
+
+  // Watch for track load/state changes to update the button.
+  el.video?.addEventListener("loadedmetadata", updateCaptionsButton);
+  // textTracks don't fire a single "change" event, so we also check on timeupdate
+  // (throttled by the existing handler) and when the track list might have grown.
+  const origOnTimeUpdate = onTimeUpdate;
+  onTimeUpdate = () => {
+    origOnTimeUpdate();
+    updateCaptionsButton();
+  };
 
   // Auto-hide the cursor alongside the controls so the stage feels like a player.
   [el.stage, el.controls].forEach((node) => {

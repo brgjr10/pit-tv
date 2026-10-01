@@ -11,18 +11,20 @@ WORKDIR /app
 RUN echo '{"type":"module","private":true}' > package.json
 
 # Copy only what the app needs to run (build context trimmed by .dockerignore)
-COPY index.html sw.js manifest.webmanifest favicon.svg apple-touch-icon.png ./
+COPY index.html sw.js manifest.webmanifest favicon.svg apple-touch-icon.png offline.html ./
 COPY assets/ ./assets/
 COPY lib/ ./lib/
-# covers/ are gitignored (personal/regenerated); the runtime stage
-# creates an empty directory, users can mount their own via compose.
 COPY tools/ ./tools/
-COPY covers/ ./covers/
 
-# Ship the real catalog.json so the container serves actual shows.
-# Users can mount their own data/ to override via compose.
-COPY data/catalog.json ./data/catalog.json
-COPY data/shows.json ./data/shows.json
+# covers/ and the live catalog.json / shows.json are gitignored — they are the
+# developer's personal data, not repository content — so copying them made the
+# build work only from their working tree. The demo catalog is the one data file
+# that is tracked, and it is what a clean clone can serve until ./data is
+# mounted over it (docker-compose.yml mounts ./data:/app/data).
+COPY data/catalog.demo.json ./data/catalog.demo.json
+RUN mkdir -p data videos covers && \
+    cp data/catalog.demo.json data/catalog.json && \
+    printf '{"_comment":"Placeholder — mount ./data over /app/data to supply the real shows.json.","shows":{}}' > data/shows.json
 
 # ---- Runtime stage ----
 FROM node:22-alpine AS runtime

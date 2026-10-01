@@ -24,6 +24,7 @@
 
 import { state } from "./store.js";
 import { QUALITY_ORDER, SOURCE_VALUES } from "./catalog.js";
+import { apiFetch, apiHeaders } from "./api.js";
 
 // Mirrors the server's allowlist. It is repeated deliberately: rejecting a
 // .avi before a multi-gigabyte transfer is far better UX than a plan request
@@ -40,6 +41,10 @@ const DATE_RE = /^\d{4}(-\d{2}-\d{2})?$/;
  * and editing catalog.json. */
 const WRITE_DISABLED_HINT =
   "uploads are disabled on this server — it was started with PITTV_WRITE=0, or copy the files into videos/catalog/ and add the catalog entry by hand";
+
+/** A published server refuses writes without a token; say how to supply one. */
+const WRITE_TOKEN_HINT =
+  "this server requires a write token. Edit the catalog once from a browser on the server's own host, or set the token in localStorage under \"pittv:token\"";
 
 /* Reload is delayed just long enough to read the summary toast. The toast lives
  * in the DOM, so an instant reload would throw it away unread. */
@@ -239,18 +244,19 @@ export function initUpload({ onCommitted } = {}) {
     });
 
     row.setStatus("busy", "Uploading…");
-    await putBytes(plan.path, file, row, active);
+    const put = await putBytes(plan.path, file, row, active);
+    const src = put?.path ? `videos/${put.path}` : plan.src;
 
     row.setStatus("busy", "Adding to the catalog…");
-    const committed = await postJson("/api/upload/commit", { ...plan, ...meta }, (r) => r);
+    const committed = await postJson("/api/upload/commit", { ...plan, ...meta, src }, (r) => r);
 
     if (committed.sync && committed.sync.ok === false) {
       throw new Error(
-        `the video is on disk at ${plan.src} and the catalog entry was written, but shows.json was not updated (${firstLine(committed.sync.stderr || committed.sync.stdout)}). Run: node tools/set-locations.mjs --show=${plan.showId}`
+        `the video is on disk at ${src} and the catalog entry was written, but shows.json was not updated (${firstLine(committed.sync.stderr || committed.sync.stdout)}). Run: node tools/set-locations.mjs --show=${plan.showId}`
       );
     }
 
-    row.setStatus("done", `Saved as ${committed.entry.id} → ${plan.src}`);
+    row.setStatus("done", `Saved as ${committed.entry.id} → ${src}`);
   }
 }
 
@@ -286,7 +292,7 @@ function readMeta(dom) {
 async function postJson(url, body) {
   let res;
   try {
-    res = await fetch(url, {
+    res = await apiFetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -296,6 +302,7 @@ async function postJson(url, body) {
   }
 
   if (res.status === 403) throw new Error(WRITE_DISABLED_HINT);
+  if (res.status === 401) throw new Error(WRITE_TOKEN_HINT);
 
   let result = null;
   try {
@@ -320,7 +327,9 @@ function putBytes(path, file, row, active) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", `/api/upload?path=${encodeURIComponent(path)}`);
-    xhr.setRequestHeader("Content-Type", "application/octet-stream");
+    for (const [name, value] of Object.entries(apiHeaders({ "Content-Type": "application/octet-stream" }))) {
+      xhr.setRequestHeader(name, value);
+    }
 
     xhr.upload.onprogress = (e) => {
       if (e.lengthComputable) row.setProgress(e.loaded / e.total, formatBytes(e.loaded));
@@ -330,7 +339,15 @@ function putBytes(path, file, row, active) {
       active.delete(xhr);
       if (xhr.status >= 200 && xhr.status < 300) {
         row.setProgress(1, formatBytes(file.size));
-        resolve();
+        // The server resolves the final filename at PUT time too, so a name that
+        // was taken while the transfer was running lands as name-2.mp4. Report
+        // the path actually written rather than the one that was asked for, or
+        // the commit step would catalogue a file that is not there.
+        try {
+          resolve(JSON.parse(xhr.responseText));
+        } catch {
+          resolve({ ok: true, path });
+        }
         return;
       }
       let message = `HTTP ${xhr.status}`;
@@ -339,6 +356,8 @@ function putBytes(path, file, row, active) {
       } catch {
         /* a proxy or crash page, not our JSON */
       }
+      if (xhr.status === 401) message = WRITE_TOKEN_HINT;
+      if (xhr.status === 403) message = WRITE_DISABLED_HINT;
       reject(new Error(`${message} — nothing was written; the temporary file was removed, so retry the upload.`));
     };
 
