@@ -10,7 +10,7 @@
 import { setStatus, setCatalog, setFacets, state, setRawCatalog } from "./store.js";
 import { reconcileShows } from "./sync.js";
 import { countFacets } from "./search.js";
-import { apiFetch } from "./api.js";
+import { apiFetch, apiFetchAuthorized } from "./api.js";
 
 const CATALOG_URL = "data/catalog.json";
 // The demo catalog is the one data file that is committed, so it is also the only
@@ -603,6 +603,24 @@ let coverFetchInFlight = false;
 let coverFetchSucceeded = false;
 
 /**
+ * Read the failure body a tools/serve.js route wraps around its
+ * child tool's output: even when `ok` is false the response carries
+ * the tool's stdout/stderr, which says WHY (a crashed run, a run cut
+ * off by its time budget). Returns "" when the body is not that JSON
+ * shape — a plain static server answers 404/HTML, and the caller's
+ * own "static deployment is fine" path must stay reachable.
+ */
+async function readToolError(res) {
+  try {
+    const body = await res.json();
+    if (!body || typeof body !== "object") return "";
+    return [body.stderr, body.error, body.stdout].filter(Boolean).join(" ").trim();
+  } catch {
+    return "";
+  }
+}
+
+/**
  * Ask the server to re-run tools/set-locations.mjs so shows.json matches the
  * catalog on disk. The server reads the catalog itself, so this is the single
  * place that needs to know about the tool.
@@ -611,11 +629,30 @@ async function triggerServerSync() {
   if (syncInFlight || syncSucceeded) return;
   syncInFlight = true;
   try {
-    const res = await apiFetch("/api/sync-shows", { method: "POST" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await apiFetchAuthorized("/api/sync-shows", { method: "POST" });
+    if (res.status === 401) {
+      console.warn("[sync] /api/sync-shows needs the PITTV_TOKEN; shows.json on disk is used as-is until it is entered");
+      return;
+    }
+    if (!res.ok) {
+      const detail = await readToolError(res);
+      if (detail) {
+        console.warn(`[sync] /api/sync-shows failed (HTTP ${res.status}): ${detail.split("\n").slice(-2).join(" | ")}`);
+        return;
+      }
+      throw new Error(`HTTP ${res.status}`);
+    }
     const result = await res.json();
     if (result.ok && result.stdout) {
-      console.info("[sync] shows.json refreshed from catalog");
+      // Report what the tool actually did rather than a fixed "refreshed": a run
+      // that changed nothing is the common case, and it says so itself — along
+      // with how many clips the mirror moved, which is the other half of the sync.
+      const summary = String(result.stdout)
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line && !/^(\\\\|\/|[A-Za-z]:\\)/.test(line))
+        .join(" — ");
+      console.info(`[sync] ${summary || "shows.json re-derived from the catalog"}`);
       syncSucceeded = true;
     } else {
       console.warn(`[sync] /api/sync-shows responded ${res.status} but reported an issue:`, (result.stderr || result.stdout || "").trim().split("\n").slice(-2).join(" | "));
@@ -656,8 +693,28 @@ async function triggerCoverFetch() {
       return;
     }
 
-    const res2 = await apiFetch("/api/fetch-covers", { method: "POST" });
-    if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
+    const res2 = await apiFetchAuthorized("/api/fetch-covers", { method: "POST" });
+    if (res2.status === 401) {
+      console.warn("[covers] /api/fetch-covers needs the PITTV_TOKEN; missing album art stays missing until it is entered");
+      return;
+    }
+    if (!res2.ok) {
+      // A 500 here is the tool's report, not a dead endpoint: a run cut
+      // off by its time budget says "stopped: exceeded the …ms budget",
+      // and a reload while one is still running says "already running" —
+      // which is expected, not a failure, so it is info and the running
+      // fetch's results land on a later refresh.
+      const detail = await readToolError(res2);
+      if (/already running/i.test(detail)) {
+        console.info("[covers] a cover fetch is already running on the server — its results land on a later refresh");
+        return;
+      }
+      if (detail) {
+        console.warn(`[covers] /api/fetch-covers failed (HTTP ${res2.status}): ${detail.split("\n").slice(-2).join(" | ")}`);
+        return;
+      }
+      throw new Error(`HTTP ${res2.status}`);
+    }
     const result = await res2.json();
     if (result.ok) {
       console.info(`[covers] background fetch started for ${missingCount} entr${missingCount === 1 ? "y" : "ies"}`);

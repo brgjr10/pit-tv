@@ -11,16 +11,22 @@ services:
       # the host and survive a container rebuild. Without this the catalog lives
       # inside the container and is destroyed on rebuild.
       - ./data:/app/data
-      # Uncomment to use custom album art:
-      # - ./covers:/app/covers
+      # Album art, same reason as ./data. This one is NOT optional: covers/ is
+      # gitignored and the Dockerfile never copies it, so /app/covers is an empty
+      # directory in the image and every /covers/... request 404s until this is
+      # mounted. /api/fetch-covers also writes here, so unmounted it fills the
+      # container's own layer and the art is lost on the next rebuild.
+      - ./covers:/app/covers
     environment:
       - PORT=3000
       # Mutating routes (/api/sync-shows, /api/catalog, /api/set-show,
-      # /api/fetch-covers, /api/upload/*) are OFF here on purpose: compose
-      # publishes the port to the whole LAN, and this service can rewrite the
-      # catalog and the video library. Set PITTV_WRITE=1 *and* PITTV_TOKEN to
-      # re-enable them — the token is required once the server is not loopback.
-      - PITTV_WRITE=0
-      # - PITTV_WRITE=1
-      # - PITTV_TOKEN=change-me
+      # /api/fetch-covers, /api/upload/*) can rewrite the catalog and the video
+      # library, and this file publishes the port to the whole LAN — so the
+      # server refuses them without PITTV_TOKEN, which is set in .env next to
+      # this file (gitignored; see .env.example). Compose substitutes it here.
+      # The browser asks for it once and remembers it in localStorage, so
+      # syncing shows.json and fetching album art work from any device.
+      # Set PITTV_WRITE=0 for a read-only server on the LAN.
+      - PITTV_WRITE=1
+      - PITTV_TOKEN=${PITTV_TOKEN:-}
     restart: unless-stopped

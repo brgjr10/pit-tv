@@ -17,7 +17,7 @@
  *     one thing a naive cache does worse than the network.
  */
 
-const VERSION = "pittv-v21";
+const VERSION = "pittv-v22";
 const SHELL_CACHE = `${VERSION}-shell`;
 const DATA_CACHE = `${VERSION}-data`;
 const ART_CACHE = `${VERSION}-art`;
@@ -144,19 +144,25 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // The live catalog is the one file that changes on disk while the app is
-  // running (clips added, titles edited), so it is network-first: a refresh
-  // shows the current list rather than a cached one.
-  if (/(?:^|\/)catalog\.json$/.test(url.pathname)) {
+  // The live catalog and shows.json are the two files that change on disk while
+  // the app is running — clips added, titles edited, a venue or date corrected
+  // in shows.json — so both are network-first: a refresh shows the current state
+  // rather than a cached one.
+  //
+  // shows.json used to be cache-first here, on the premise that it only changes
+  // when the repository is updated. That is not true: the server rewrites it on
+  // boot, after every catalog write, on every set-show correction and on every
+  // upload, and it is the authoritative copy of the date, venue and location for
+  // every card on screen. Served from the shell cache, a correction reached the
+  // file and not the browser.
+  if (/(?:^|\/)(?:catalog|shows)\.json$/.test(url.pathname)) {
     event.respondWith(networkFirst(request, DATA_CACHE));
     return;
   }
 
-  // catalog.demo.json and shows.json are committed documents that only change
-  // when the repository is updated, so they are served from the shell cache
-  // with no network round-trip on every load. (The comment above this rule
-  // used to promise exactly that for shows.json, and no rule existed.)
-  if (/(?:^|\/)(?:catalog\.demo|shows)\.json$/.test(url.pathname)) {
+  // catalog.demo.json is committed and only changes when the repository is
+  // updated, so it is served from the shell cache with no network round-trip.
+  if (/(?:^|\/)catalog\.demo\.json$/.test(url.pathname)) {
     event.respondWith(cacheFirst(request, SHELL_CACHE));
     return;
   }

@@ -1,19 +1,32 @@
 /*
- * tools/set-locations.mjs — maintain data/shows.json, the home of show data.
+ * tools/set-locations.mjs â€” maintain data/shows.json, the home of show data.
  *
  * date, venue and location describe a show, not each of the clips in it, so they
  * live once per show here and the app joins them in by show id at load time
- * (see applyShows in assets/js/catalog.js). This tool writes only shows.json,
- * unless --prune-show-fields is given (one-shot migration, see PIT-TV-018).
+ * (see applyShows in assets/js/catalog.js). This tool writes shows.json on every
+ * run and, on the same pass, mirrors those three values back onto the clips of
+ * each show in the catalog (--prune-show-fields, which strips the copies
+ * instead, is the one-shot migration out of the other arrangement, see
+ * PIT-TV-018).
  *
- * The catalog is the only place the list of shows comes from, so every run
- * rebuilds the rows from it: a show added to the catalog appears here by itself,
- * and any value already typed is carried over.
+ * The sync runs both ways, because both files are read:
+ *
+ *   catalog -> shows   the list of shows, the clip counts and the artist rosters
+ *                      are derived from the catalog, so a show added to the
+ *                      catalog appears here by itself and any value already
+ *                      typed is carried over.
+ *   shows -> catalog   every clip of a show is brought in line with the row
+ *                      above it, because catalog.json is also read on its own â€”
+ *                      by tools/check-catalog.mjs, by fetch-album-art.mjs, and by
+ *                      anyone who opens the file. A one-way sync left 27 clips
+ *                      carrying a Philadelphia date for a show this file had
+ *                      already moved to Cincinnati, and nothing would correct
+ *                      them: the app renders shows.json either way.
  *
  *   node tools/set-locations.mjs                  # sync the file and report gaps
  *   node tools/set-locations.mjs --dry-run        # same, writing nothing
  *   node tools/set-locations.mjs --list           # print the shows and exit
- *   node tools/set-locations.mjs --prune-show-fields  # strip date/venue/location from the catalog
+ *   node tools/set-locations.mjs --prune-show-fields  # strip the copies from the catalog
  *
  *   # set values for one show, a glob, or every show
  *   node tools/set-locations.mjs --show='mgk-*' --date='2018-12-22' \
@@ -69,7 +82,7 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * file the user believes they saved correctly.
  */
 function readJsonFile(path) {
-  return JSON.parse(readFileSync(path, "utf8").replace(/^﻿/, ""));
+  return JSON.parse(readFileSync(path, "utf8").replace(/^ï»¿/, ""));
 }
 
 /** A show is a video folder, so the clip counter is the last part of the id. */
@@ -127,8 +140,8 @@ const scaffoldConfig = (shows, previous) => {
 /**
  * Config rows whose show is no longer in the catalog.
  *
- * A show disappears whenever its clips are renamed or refiled — a fixed typo, a
- * re-cut folder — and rebuilding the config from the catalog would quietly throw
+ * A show disappears whenever its clips are renamed or refiled â€” a fixed typo, a
+ * re-cut folder â€” and rebuilding the config from the catalog would quietly throw
  * away the venue and location that were typed for it. They are carried over
  * instead, so nothing is lost and the stale row is reported.
  */
@@ -173,7 +186,7 @@ const orphans = orphanedRows(shows, previous);
 for (const [key, row] of orphans) current.shows[key] = row;
 
 const serialise = (value) => JSON.stringify(value, null, 2) + "\n";
-const onDisk = existsSync(CONFIG) ? readFileSync(CONFIG, "utf8").replace(/^﻿/, "") : null;
+const onDisk = existsSync(CONFIG) ? readFileSync(CONFIG, "utf8").replace(/^ï»¿/, "") : null;
 let stale = onDisk === null || serialise(current) !== onDisk;
 
 function save() {
@@ -186,33 +199,68 @@ function reportOrphans() {
   if (!orphans.length) return;
   console.log(`${orphans.length} row(s) kept for shows that are not in the catalog:`);
   for (const [key, row] of orphans) {
-    console.log(`  ${key.padEnd(24)} ${row.date || "—"}  ${row.venue || "—"}  ${row.location || "—"}`);
+    console.log(`  ${key.padEnd(24)} ${row.date || "â€”"}  ${row.venue || "â€”"}  ${row.location || "â€”"}`);
   }
-  console.log("  (the show was renamed or removed — re-file the clips, or delete the row)");
+  console.log("  (the show was renamed or removed â€” re-file the clips, or delete the row)");
 }
 
-/**
- * Catalog entries that still carry their own date/venue/location.
- *
- * Show data lives in this file, so a copy on an entry is a stale duplicate that
- * will drift. The usual cause is saving catalog.json from an editor buffer that
- * was open before the values moved here, which puts them all back at once — so
- * this reports the count and where to look rather than editing the catalog
- * itself, which would be undone by the next save from that same buffer.
- */
 const DUPLICATED = ["date", "venue", "location"];
-function reportDuplicates() {
-  const stale = catalog.filter((e) => DUPLICATED.some((f) => f in e));
-  if (!stale.length) return;
-  const fields = new Set();
-  for (const e of stale) for (const f of DUPLICATED) if (f in e) fields.add(f);
-  console.log(
-    `\n${stale.length} of ${catalog.length} catalog entries still carry ${[...fields].sort().join("/")}. ` +
-      "Those belong here, not on the entries."
-  );
-  console.log(`  First: ${stale.slice(0, 3).map((e) => e.id).join(", ")}${stale.length > 3 ? ", ..." : ""}`);
-  console.log("  If data/catalog.json is open in an editor, that buffer is probably stale —");
-  console.log("  close and reopen it before saving, or the duplicate values will come back.");
+
+/**
+ * Push the resolved show values back onto the clips of that show.
+ *
+ * The mirror is the other half of the sync. The app renders shows.json (it joins
+ * the values onto every clip at load, see applyShows) and the edit path refuses
+ * to write these fields onto an entry (see toRawEntry), so nothing in the app
+ * corrects a stale copy on disk. Without this, a venue corrected here reached
+ * the screen but not catalog.json, and every tool that reads the catalog on its
+ * own kept working from the old value.
+ *
+ * A blank field in shows.json is skipped rather than written as "", matching
+ * applyShows: a half-filled row still renders, and blanking 22 clips because one
+ * field was never typed would lose data rather than tidy it.
+ *
+ * dateRaw is refreshed alongside date when an entry carries it. Nothing reads it
+ * (normaliseEntry derives it from date), but a catalog that says date 2026-09-25
+ * next to dateRaw 2026-10-01 is worse than useless to whoever opens the file.
+ *
+ * Returns the number of entries changed.
+ */
+function mirrorShowFields() {
+  let changed = 0;
+  for (const entry of catalog) {
+    if (!entry || typeof entry !== "object") continue;
+    const row = current.shows[showKeyFor(entry.id)];
+    if (!row) continue;
+    let hit = false;
+    for (const field of DUPLICATED) {
+      const value = typeof row[field] === "string" ? row[field].trim() : "";
+      if (!value) continue;
+      if (entry[field] !== value) {
+        entry[field] = value;
+        hit = true;
+      }
+      if (field === "date" && "dateRaw" in entry && entry.dateRaw !== value) {
+        entry.dateRaw = value;
+        hit = true;
+      }
+    }
+    if (hit) changed += 1;
+  }
+  return changed;
+}
+
+/** Mirror the show values onto the catalog, and say how many clips moved. */
+function mirrorAndReport() {
+  const changed = mirrorShowFields();
+  if (!changed) return 0;
+  if (DRY_RUN) {
+    console.log(`Would mirror show values onto ${changed} clip(s) in data/catalog.json.`);
+  } else {
+    writeJsonAtomic(CATALOG, catalog, { trailingNewline: true });
+    console.log(`Mirrored show values onto ${changed} clip(s) in data/catalog.json.`);
+  }
+  return changed;
 }
 
 /** Shows the file does not fully cover. Every show needs all three fields. */
@@ -223,7 +271,6 @@ function reportGaps() {
   });
   if (!gaps.length) {
     console.log(`\nAll ${shows.length} show(s) have a date, venue and location.`);
-    reportDuplicates();
     return;
   }
   console.log(`\n${gaps.length} show(s) still need a date, venue or location:`);
@@ -237,17 +284,16 @@ function reportGaps() {
         `needs ${missing}  (${show.artists.join(", ")})`
     );
   }
-  reportDuplicates();
 }
 
 function listShows() {
   for (const show of shows) {
     const row = current.shows[show.key] || {};
     const complete = row.date && row.venue && row.location;
-    const mark = complete ? "  " : "· ";
+    const mark = complete ? "  " : "Â· ";
     console.log(
       `${mark}${show.key.padEnd(24)} ${String(show.entries.length).padStart(3)} clips  ` +
-        `${row.date || "—"}  ${row.venue || "—"}  ${row.location || "—"}`
+        `${row.date || "â€”"}  ${row.venue || "â€”"}  ${row.location || "â€”"}`
     );
   }
 }
@@ -277,7 +323,7 @@ if (SELECTOR && (named.length || CLEAR)) {
     if (cliDate !== null) {
       if (CLEAR) row.date = "";
       else if (!cliDate) row.date = "";
-      else if (!ISO_DATE.test(cliDate)) console.warn(`! --date "${cliDate}" is not YYYY-MM-DD — ignored.`);
+      else if (!ISO_DATE.test(cliDate)) console.warn(`! --date "${cliDate}" is not YYYY-MM-DD â€” ignored.`);
       else row.date = cliDate;
     }
 
@@ -295,10 +341,14 @@ if (SELECTOR && (named.length || CLEAR)) {
   const verb = DRY_RUN ? "Would set" : "Set";
   for (const show of targets) {
     const row = current.shows[show.key];
-    console.log(`${verb} ${show.key}: ${row.date || "—"}  ${row.venue || "—"}  ${row.location || "—"}`);
+    console.log(`${verb} ${show.key}: ${row.date || "â€”"}  ${row.venue || "â€”"}  ${row.location || "â€”"}`);
   }
   save();
   if (!DRY_RUN) console.log(`\nWrote ${CONFIG}`);
+  // The value just typed has to reach the clips too, or catalog.json keeps the
+  // value it had before and every tool that reads the catalog on its own â€” and
+  // anyone who opens the file â€” is working from the old one.
+  mirrorAndReport();
   reportGaps();
   reportOrphans();
   process.exit(0);
@@ -309,9 +359,9 @@ if (SELECTOR && (named.length || CLEAR)) {
 const PRUNE = has("prune-show-fields");
 
 if (PRUNE) {
-  // One-shot migration: strip the show-level fields that PIT-TV-018 reports as
-  // duplicated, so each fact lives only in shows.json once the code's toRawEntry
-  // has stopped writing them back. Writes catalog.json atomically.
+  // One-shot migration into the arrangement the mirror maintains: strip the
+  // show-level fields from every entry, so each fact lives only in shows.json
+  // until the next run copies it back. Writes catalog.json atomically.
   let stripped = 0;
   const pruned = catalog.map((e) => {
     let hit = false;
@@ -322,10 +372,10 @@ if (PRUNE) {
     return e;
   });
   if (DRY_RUN) {
-    console.log(`Would prune ${stripped} of ${catalog.length} entries — dry run, no changes written.`);
+    console.log(`Would prune ${stripped} of ${catalog.length} entries â€” dry run, no changes written.`);
   } else {
     writeJsonAtomic(CATALOG, pruned, { trailingNewline: true });
-    console.log(`Pruned ${stripped} of ${catalog.length} entries — date/venue/location now come from shows.json.`);
+    console.log(`Pruned ${stripped} of ${catalog.length} entries â€” the next sync copies them back from shows.json.`);
   }
   reportGaps();
   reportOrphans();
@@ -336,12 +386,19 @@ if (PRUNE) {
 
 if (stale) {
   save();
-  console.log(`${DRY_RUN ? "Would sync" : "Synced"} ${CONFIG} — ${shows.length} show(s) from the catalog.`);
+  console.log(`${DRY_RUN ? "Would sync" : "Synced"} ${CONFIG} â€” ${shows.length} show(s) from the catalog.`);
 } else if (!LIST) {
   console.log(`${CONFIG} is already up to date.`);
 }
 
-if (LIST) listShows();
-else reportGaps();
+// This is the run the server makes on boot and after every catalog write, so it
+// is also where the reverse direction happens: shows.json has just been
+// re-derived from the catalog, and the values it holds go back onto the clips.
+if (LIST) {
+  listShows();
+} else {
+  mirrorAndReport();
+  reportGaps();
+}
 
 reportOrphans();

@@ -11,7 +11,7 @@
 import { getRawCatalog } from "./store.js";
 import { withWriteLock } from "./sync.js";
 import { loadCatalog, toRawEntry } from "./catalog.js";
-import { apiFetch, setApiToken } from "./api.js";
+import { apiFetch, requestApiToken } from "./api.js";
 
 let editMode = false;
 let dirty = false;
@@ -187,9 +187,7 @@ export async function saveCatalog({ allowDownload = true } = {}) {
     if (res.status === 401) {
       // A published server refuses writes without the operator's token. Say how
       // to supply it rather than leaving a bare 401 the user cannot act on.
-      const token = window.prompt("This server requires a write token.\nEnter PITTV_TOKEN to edit the catalog (stored in this browser only):", "");
-      if (token) {
-        setApiToken(token.trim());
+      if (requestApiToken()) {
         toast("Token saved. Try the edit again.", "ok", 4000);
       } else {
         toast("Write token required — nothing was changed.", "warn", 6000);

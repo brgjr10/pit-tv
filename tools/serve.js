@@ -212,6 +212,16 @@ async function apiSyncShows() {
   return spawnChild(["tools/set-locations.mjs"]);
 }
 
+// A cover fetch resolves every album and artist photo through two
+// throttled APIs: iTunes alone waits 3.5s between queries and backs
+// off for seconds on a 429, so a cold-cache run over a full archive
+// can legitimately take many minutes. The default 5-minute child
+// budget would cut such a run off mid-download and report a 500 for
+// work that was still in progress. The budget stays finite — SIGTERM
+// still ends a runaway — it is just roomier. PITTV_COVER_BUDGET_MS
+// overrides it (milliseconds).
+const COVER_FETCH_BUDGET_MS = Number(process.env.PITTV_COVER_BUDGET_MS || 600000);
+
 /**
  * POST /api/fetch-covers  — run tools/fetch-album-art.mjs and return its output.
  *
@@ -224,7 +234,7 @@ async function apiFetchCovers() {
   // artist-ids.json, so they race and the last one wins — including losing the
   // cover work the other run had already downloaded.
   if (coverFetch) return { ok: false, code: null, stdout: "", stderr: "a cover fetch is already running — wait for it to finish" };
-  coverFetch = spawnChild(["tools/fetch-album-art.mjs"]);
+  coverFetch = spawnChild(["tools/fetch-album-art.mjs"], { timeout: COVER_FETCH_BUDGET_MS });
   try {
     return await coverFetch;
   } finally {
@@ -757,8 +767,9 @@ function formatBytes(n) {
  * Same discipline as /api/catalog: re-read data/catalog.json from disk (the
  * fetch-album-art tool rewrites it in the background), append, resolve id
  * collisions, write atomically, then re-derive shows.json. A date, venue or
- * location typed in the upload form goes to shows.json via set-locations.mjs,
- * never onto the entry — tools/set-locations.mjs:201-214 reports that as a bug.
+ * location typed in the upload form goes to shows.json via set-locations.mjs, not
+ * onto the entry here — and that tool then mirrors it onto the new clip, which
+ * is what keeps the two files from drifting apart.
  *
  * Body: the plan result plus any fields the user edited after planning.
  */
@@ -823,7 +834,9 @@ async function apiUploadCommit(body) {
     return { ok: false, error: `catalog write failed: ${writeError} — the video is on disk but not catalogued` };
   }
 
-  // Show-level fields go to shows.json, keyed by the show half of the id.
+  // Show-level fields go to shows.json, keyed by the show half of the id. The
+  // tool mirrors them onto every clip of the show in the same run, so the new
+  // entry picks the values up as well.
   const showId = String(b.showId ?? String(entry.id).replace(/-\d+$/, ""));
   const sync = await spawnChild([
     "tools/set-locations.mjs",

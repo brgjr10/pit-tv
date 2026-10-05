@@ -138,19 +138,44 @@ for (const entry of entries) {
 }
 say(`entries whose video.src is not on disk ${missingFiles.length}${mediaPresent ? "" : " (no videos/catalog here — the media tree is gitignored)"}: ${sample(missingFiles)}`);
 
-/* ---------- 6. show-level fields must not come back onto entries ---------- */
+/* ---------- 6. the copies on each clip must agree with shows.json ---------- */
 
-// date, venue and location live in shows.json. set-locations.mjs derives them
-// from the catalog and reports entries that carry their own copy, so a regression
-// here means a write path is writing the show's fields onto its clips.
+// date, venue and location are authoritative in shows.json, and
+// tools/set-locations.mjs mirrors them onto every clip of the show on each run —
+// so a clip that carries a different value is drift something can act on: the
+// app renders shows.json either way, which means a wrong copy here is invisible
+// on screen and wrong for every tool that reads the catalog on its own.
 //
 // Checked against the raw records, not the normalised entries: applyShows joins
-// all three onto every entry in memory, so a normalised entry always has them
-// and would report the entire catalog as broken.
-const regressed = raw
-  .filter((r) => r && typeof r === "object" && (r.date || r.venue || r.location))
-  .map((r) => [r.id, r.date, r.venue, r.location].filter(Boolean).join("/"));
-say(`entries carrying show-level fields ${regressed.length}: ${sample(regressed)}`);
+// all three onto every entry in memory, so a normalised entry always agrees and
+// would report nothing.
+const showKey = (id) => String(id || "").replace(/-\d+$/, "") || String(id || "");
+
+let showRows = {};
+const SHOWS = join(ROOT, "data", "shows.json");
+if (existsSync(SHOWS)) {
+  try {
+    showRows = JSON.parse(readFileSync(SHOWS, "utf8").replace(/^﻿/, "")).shows || {};
+  } catch (err) {
+    say(`could not read ${SHOWS}: ${err.message} — clip copies cannot be checked against it`);
+  }
+}
+
+const drifted = [];
+for (const r of raw) {
+  if (!r || typeof r !== "object") continue;
+  const row = showRows[showKey(r.id)];
+  // A clip with no row is not drift: the app renders it from the values on the
+  // clip, and set-locations.mjs scaffolds a row for every show in the catalog.
+  if (!row) continue;
+  const fields = ["date", "venue", "location"].filter((f) => {
+    const want = typeof row[f] === "string" ? row[f].trim() : "";
+    return want && String(r[f] ?? "").trim() !== want;
+  });
+  if (fields.length) drifted.push(`${r.id} ${fields.join("/")} (${r.venue || "—"}, ${r.location || "—"})`);
+}
+say(`clips whose date/venue/location disagree with shows.json ${drifted.length}: ${sample(drifted)}`);
+if (drifted.length) say("  run `node tools/set-locations.mjs` to bring the copies back in line");
 
 /* ---------- summary ---------- */
 
@@ -159,7 +184,7 @@ say(`entries carrying show-level fields ${regressed.length}: ${sample(regressed)
 // A data problem means the checkout or the file disagrees with the layout the
 // rest of the project assumes. Only the first is something this feature broke.
 const grouping = disagreeing.length + duplicated.length;
-const data = missingFiles.length + regressed.length;
+const data = missingFiles.length + drifted.length;
 say(`grouping problems ${grouping}, data problems ${data}`);
 if (!grouping && multi.length) {
   say("order of the first group:", multi[0].clips.map((c) => `${c.clipIndex}:${c.id}`).join(" , "));

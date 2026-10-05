@@ -53,7 +53,10 @@ Then open <http://localhost:3000/>.
 `videos/` on the host and they're served by the container. It also mounts
 `./data` so `catalog.json` / `shows.json` and any uploads live on the host and
 survive a rebuild; edit the catalog from the UI and the change is on disk, not
-inside the container. To use custom album art, uncomment the `./covers` line.
+inside the container. `./covers` is mounted for the same two reasons, and it is
+not optional: `covers/` is gitignored and the `Dockerfile` never copies it, so
+unmounted `/app/covers` is an empty directory, every album-art request 404s, and
+anything `/api/fetch-covers` downloads is thrown away with the container.
 
 The mutating routes (`/api/catalog`, `/api/upload/*`) are **on by default**, so
 editing and uploading work from a bare `node tools/serve.js`. The boundary is
@@ -62,6 +65,14 @@ loopback-only. Set `PITTV_WRITE=0` to lock writes down, and note that
 `HOST=0.0.0.0 PITTV_WRITE=0` is what you want if you ever publish the port and
 do not want it remotely writable. The server warns at boot if it sees writes on
 together with `HOST=0.0.0.0`.
+
+Compose publishes the port to the LAN, so it ships `PITTV_TOKEN=${PITTV_TOKEN}`,
+read from a `.env` beside the compose file (`cp .env.example .env`, then fill in
+the token; `.env` is gitignored). Without it every mutating route — including
+`/api/sync-shows` and `/api/fetch-covers` — answers `401`, and a `401` is
+exactly what stops shows.json refreshing and album art downloading. The browser
+prompts for the token once, on the first such call, and keeps it in
+`localStorage` under `pittv:token`.
 
 The image runs as a non-root user and exposes port `3000` (override with `PORT`).
 
@@ -227,7 +238,8 @@ On every call the handler re-reads `data/catalog.json` from disk (so a cover
 fetch running in the background cannot be clobbered), applies removes, then
 appends, then changes by entry id, resolves id collisions with the same `-2`
 repair the client uses, writes atomically, and runs
-`tools/set-locations.mjs` so `shows.json` is re-derived in the same request.
+`tools/set-locations.mjs` so `shows.json` is re-derived — and the show values
+mirrored back onto the clips — in the same request.
 A `changes` entry whose id is no longer present is reported in `conflicts`
 rather than silently dropped.
 
@@ -255,6 +267,33 @@ would be undone the next time the page opened.
 `date`, `venue` and `location` belong in `shows.json`, not on the entries —
 saving an edit that carries them is a regression, and the write path projects
 every entry through `toRawEntry` so they cannot come back.
+
+They are still *mirrored* onto the clips, because `catalog.json` is also read on
+its own — by `tools/check-catalog.mjs`, by `fetch-album-art.mjs`, and by anyone
+who opens the file. `tools/set-locations.mjs` copies the three values back onto
+every clip of a show on each run, so the two files cannot drift apart in either
+direction:
+
+```
+catalog.json  ──▶  shows.json   which shows exist, clip counts, artist rosters
+shows.json    ──▶  catalog.json   date / venue / location on each clip
+```
+
+Every write path runs that tool, so both directions hold after a boot, an
+`/api/catalog` save, an `/api/set-show` correction, an upload, or a
+`node tools/set-locations.mjs` from the command line. A blank field in
+`shows.json` is skipped rather than written as `""`, matching how the app joins
+it at load, so a half-filled row never blanks the clips. The reverse run reports
+what it moved:
+
+```
+$ node tools/set-locations.mjs
+Synced data/shows.json — 20 show(s) from the catalog.
+Mirrored show values onto 27 clip(s) in data/catalog.json.
+```
+
+`--dry-run` reports both without writing either file, and
+`node tools/check-catalog.mjs` reports any clip whose copy still disagrees.
 
 ### Clip groups
 
